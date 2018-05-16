@@ -11,6 +11,7 @@
 		B33F9980C190371DE00BEC82 /* Pods_MercadoPagoSDKExampleSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D4A18A6686309911A8D1088 /* Pods_MercadoPagoSDKExampleSwift.framework */; };
 		DE24BB72235A366FC4BF6F16 /* Pods_MercadoPagoSDKExampleSwiftUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD49D417034981C2D04CD9F /* Pods_MercadoPagoSDKExampleSwiftUITests.framework */; };
 		FC157D4A209A2386009A2C3A /* IssuersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC157D49209A2386009A2C3A /* IssuersScreen.swift */; };
+		FC1C5FE620ACB21F007AAE48 /* PXFlows.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C5FE520ACB21F007AAE48 /* PXFlows.swift */; };
 		FC89F73F2088E2E40093B001 /* CheckoutOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89F73E2088E2E40093B001 /* CheckoutOptionsViewController.swift */; };
 		FC89F7532088F5540093B001 /* MainGroupScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89F74A2088F5530093B001 /* MainGroupScreen.swift */; };
 		FC89F7542088F5540093B001 /* CongratsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89F74B2088F5530093B001 /* CongratsScreen.swift */; };
@@ -58,6 +59,7 @@
 		8709AA5FADCD293AB62A3BAF /* Pods-MercadoPagoSDKExampleSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MercadoPagoSDKExampleSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-MercadoPagoSDKExampleSwift/Pods-MercadoPagoSDKExampleSwift.release.xcconfig"; sourceTree = "<group>"; };
 		98FA7D9706EC95FF438EEA6B /* Pods-MercadoPagoSDKExampleSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MercadoPagoSDKExampleSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MercadoPagoSDKExampleSwift/Pods-MercadoPagoSDKExampleSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		FC157D49209A2386009A2C3A /* IssuersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuersScreen.swift; sourceTree = "<group>"; };
+		FC1C5FE520ACB21F007AAE48 /* PXFlows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXFlows.swift; sourceTree = "<group>"; };
 		FC89F73E2088E2E40093B001 /* CheckoutOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutOptionsViewController.swift; sourceTree = "<group>"; };
 		FC89F74A2088F5530093B001 /* MainGroupScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainGroupScreen.swift; sourceTree = "<group>"; };
 		FC89F74B2088F5530093B001 /* CongratsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratsScreen.swift; sourceTree = "<group>"; };
@@ -132,9 +134,18 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		FC1C5FE420ACB20D007AAE48 /* PXFlows */ = {
+			isa = PBXGroup;
+			children = (
+				FC1C5FE520ACB21F007AAE48 /* PXFlows.swift */,
+			);
+			path = PXFlows;
+			sourceTree = "<group>";
+		};
 		FC89F7452088F4A90093B001 /* ScreenObject */ = {
 			isa = PBXGroup;
 			children = (
+				FC1C5FE420ACB20D007AAE48 /* PXFlows */,
 				FC89F74C2088F5530093B001 /* BaseScreen.swift */,
 				FC89F74D2088F5530093B001 /* CardScreen.swift */,
 				FC89F74B2088F5530093B001 /* CongratsScreen.swift */,
@@ -521,6 +532,7 @@
 				FC89F75A2088F5540093B001 /* PXFlowUITests.swift in Sources */,
 				FC89F7542088F5540093B001 /* CongratsScreen.swift in Sources */,
 				FC89F7562088F5540093B001 /* CardScreen.swift in Sources */,
+				FC1C5FE620ACB21F007AAE48 /* PXFlows.swift in Sources */,
 				FC89F7552088F5540093B001 /* BaseScreen.swift in Sources */,
 				FC89F7582088F5540093B001 /* MainPage.swift in Sources */,
 				FCCA0DA72088DE42009F77D4 /* MercadoPagoSDKExampleSwiftUITests.swift in Sources */,

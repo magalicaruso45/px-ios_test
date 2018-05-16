@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CongratsScreen: BaseScreen {
+public class CongratsScreen: BaseScreen {
     override func waitForElements() {
         
     }
