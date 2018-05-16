@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "MercadoPagoTestLib"
-  s.version          = "1.0.0"
+  s.version          = "1.0.1"
   s.summary          = "MercadoPago Test Library"
   s.homepage         = "https://www.mercadopago.com"
   s.license          = { :type => "MIT", :file => "LICENSE" }
@@ -13,5 +13,6 @@ Pod::Spec.new do |s|
   s.dependency 'MercadoPagoSDK', '4.0.0.beta.23'
 
   s.swift_version = '4.0'
+  s.frameworks = 'XCTest'
 
 end
