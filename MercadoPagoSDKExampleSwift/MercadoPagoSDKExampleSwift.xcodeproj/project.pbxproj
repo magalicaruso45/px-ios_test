@@ -132,7 +132,7 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		FC89F7452088F4A90093B001 /* Screen Object */ = {
+		FC89F7452088F4A90093B001 /* ScreenObject */ = {
 			isa = PBXGroup;
 			children = (
 				FC89F74C2088F5530093B001 /* BaseScreen.swift */,
@@ -146,7 +146,7 @@
 				FC89F7522088F5540093B001 /* ReviewScreen.swift */,
 				FC89F7512088F5540093B001 /* PXFlowUITests.swift */,
 			);
-			path = "Screen Object";
+			path = ScreenObject;
 			sourceTree = "<group>";
 		};
 		FCCA0D7A2088DE3F009F77D4 = {
@@ -196,7 +196,7 @@
 		FCCA0DA52088DE42009F77D4 /* MercadoPagoSDKExampleSwiftUITests */ = {
 			isa = PBXGroup;
 			children = (
-				FC89F7452088F4A90093B001 /* Screen Object */,
+				FC89F7452088F4A90093B001 /* ScreenObject */,
 				FCCA0DA62088DE42009F77D4 /* MercadoPagoSDKExampleSwiftUITests.swift */,
 				FCCA0DA82088DE42009F77D4 /* Info.plist */,
 			);

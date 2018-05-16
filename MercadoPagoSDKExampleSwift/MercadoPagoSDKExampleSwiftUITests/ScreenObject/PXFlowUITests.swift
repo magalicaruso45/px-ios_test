@@ -20,16 +20,12 @@ class PXFlowUITests: XCTestCase {
         super.tearDown()
     }
 
-    func test_REGRESSION_ETE1_1() { //Tarjeta MASTER con cuotas SIN INTERES
-        MainScreen()
-            .tapClearButton()
-            .fillPublicKey("APP_USR-648a260d-6fd9-4ad7-9284-90f22262c18d")
-            .fillPreferenceId("243966003-d0be0be0-6fd8-4769-bf2f-7f2d979655f5")
-            .tapCheckoutOption()
+    func test_REGRESSION_ETE1_1(card, payer) -> Congtosad { //Tarjeta MASTER con cuotas SIN INTERES
+        MainGroupScreen().
             .tapCardOption()
             .tapCreditCardOption()
-            .completeNumberAndContinue("5323 7937 3550 6106")
-            .completeNameAndContinue("APRO")
+            .completeNumberAndContinue(card.nun)
+            .completeNameAndContinue(ca.)
             .completeExpirationDateAndContinue("1225")
             .completeCVVAndContinue("123")
             .completeNumberAndContinueToIssuers("30666777")
