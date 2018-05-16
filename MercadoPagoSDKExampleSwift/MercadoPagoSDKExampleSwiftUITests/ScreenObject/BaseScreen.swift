@@ -18,18 +18,17 @@ class BaseScreen : BaseScreenProtocol {
     init() {
         waitForElements()
     }
-    
+
     func validate(validationAssets:((BaseScreen)->Void)) -> Self {
         validationAssets(self)
         return self
     }
 
     internal func waitForElements() {
-         fatalError("All Screens Must Override this Method")
+        fatalError("All Screens Must Override this Method")
     }
 
     func exist(element : XCUIElement) -> Bool{
-        let exists = NSPredicate(format: "exists = 1")
         return element.exists
     }
 }
@@ -46,7 +45,7 @@ extension BaseScreen {
             XCTFail("Condition was not satisfied during \(time) seconds")
         }
     }
-    
+
     func waitFor(element : XCUIElement){
         let exists = NSPredicate(format: "exists = 1")
         self.waitForExpectation(expectation: XCTNSPredicateExpectation(predicate: exists, object: element), time: TIME_OUT)
@@ -69,7 +68,7 @@ extension BaseScreen {
     }
     func cellNumber(_ row : Int)  -> XCUIElement{
         return  XCUIApplication().cells.allElementsBoundByIndex[row]
-        
+
     }
     func cellButton(_ text: String) -> XCUIElement {
         return button(text)
@@ -79,5 +78,23 @@ extension BaseScreen {
     }
     func element(_ text: String) -> XCUIElement {
         return XCUIApplication().staticTexts[text].firstMatch
+    }
+    func getBackButton() -> XCUIElement {
+        return XCUIApplication().navigationBars.buttons.element(boundBy: 0)
+    }
+}
+
+// MARK: UI Controls
+extension BaseScreen {
+    func swipeUp() {
+        let scrollViewsQuery = XCUIApplication().scrollViews
+        let elementQuery = scrollViewsQuery.otherElements.firstMatch
+        elementQuery.swipeUp()
+    }
+
+    func swipeDown() {
+        let scrollViewsQuery = XCUIApplication().scrollViews
+        let elementQuery = scrollViewsQuery.otherElements.firstMatch
+        elementQuery.swipeDown()
     }
 }

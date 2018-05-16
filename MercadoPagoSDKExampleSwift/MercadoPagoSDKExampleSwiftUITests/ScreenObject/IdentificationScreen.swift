@@ -12,11 +12,12 @@ class IdentificationScreen: BaseScreen {
 
     private lazy var numberTextField = textField("Número")
     private lazy var continueButton = toolbarButton("Continuar")
-    
+    private lazy var backButton = getBackButton()
+
     override func waitForElements() {
         waitFor(element: numberTextField)
     }
-    
+
     func completeNumberAndContinueToPayerCost(_ text: String) -> PayerCostScreen {
         numberTextField.typeText(text)
         continueButton.tap()
@@ -33,5 +34,10 @@ class IdentificationScreen: BaseScreen {
         numberTextField.typeText(text)
         continueButton.tap()
         return ReviewScreen()
+    }
+
+    func tapBackButtonToCardScreen() -> CardScreen {
+        backButton.tap()
+        return CardScreen()
     }
 }
