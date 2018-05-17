@@ -8,13 +8,13 @@
 
 import XCTest
 
-class IdentificationScreen: BaseScreen {
+public class IdentificationScreen: BaseScreen {
 
     private lazy var numberTextField = textField("Número")
     private lazy var continueButton = toolbarButton("Continuar")
     private lazy var backButton = getBackButton()
 
-    override func waitForElements() {
+    override open func waitForElements() {
         waitFor(element: numberTextField)
     }
 

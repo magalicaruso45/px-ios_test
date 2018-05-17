@@ -8,7 +8,7 @@
 
 import XCTest
 
-class MainScreen: BaseScreen {
+public class MainScreen: BaseScreen {
 
     private lazy var checkoutButton = button("Start Checkout")
     private lazy var clearButton = button("Clear fields")
@@ -50,7 +50,7 @@ class MainScreen: BaseScreen {
         return self
     }
     
-    override func waitForElements() {
+    override open func waitForElements() {
         waitFor(element: checkoutButton)
         waitFor(element: publicKeyField)
         waitFor(element: preferenceIdField)

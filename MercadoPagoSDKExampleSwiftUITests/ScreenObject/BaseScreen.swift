@@ -9,11 +9,11 @@
 import XCTest
 import UIKit
 
-protocol BaseScreenProtocol {
+public protocol BaseScreenProtocol {
     func waitForElements()
 }
 
-public class BaseScreen : BaseScreenProtocol {
+open class BaseScreen : BaseScreenProtocol {
     let TIME_OUT : Double = 5 // Seconds
     init() {
         waitForElements()
@@ -24,7 +24,7 @@ public class BaseScreen : BaseScreenProtocol {
         return self
     }
 
-    internal func waitForElements() {
+    open func waitForElements() {
         fatalError("All Screens Must Override this Method")
     }
 
@@ -34,7 +34,7 @@ public class BaseScreen : BaseScreenProtocol {
 }
 
 // MARK: Loading screen helpers
-extension BaseScreen {
+public extension BaseScreen {
     func waitForExpectation(expectation:XCTestExpectation,
                             time: Double,
                             safe: Bool = false) {
@@ -53,7 +53,7 @@ extension BaseScreen {
 }
 
 // MARK: Take elements from screen
-extension BaseScreen {
+public extension BaseScreen {
     func findAll(_ type: XCUIElement.ElementType) -> XCUIElementQuery {
         return XCUIApplication().descendants(matching: type)
     }
@@ -85,7 +85,7 @@ extension BaseScreen {
 }
 
 // MARK: UI Controls
-extension BaseScreen {
+public extension BaseScreen {
     func swipeUp() {
         let scrollViewsQuery = XCUIApplication().scrollViews
         let elementQuery = scrollViewsQuery.otherElements.firstMatch

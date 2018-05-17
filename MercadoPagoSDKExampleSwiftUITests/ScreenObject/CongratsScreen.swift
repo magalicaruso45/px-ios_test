@@ -9,7 +9,7 @@
 import UIKit
 
 public class CongratsScreen: BaseScreen {
-    override func waitForElements() {
+    override open func waitForElements() {
         
     }
 //
@@ -38,28 +38,28 @@ public class CongratsScreen: BaseScreen {
 //    }
 }
 
-class ApprovedScreen: CongratsScreen {
-    override func waitForElements() {
+public class ApprovedScreen: CongratsScreen {
+    override public func waitForElements() {
 
     }
 }
 
-class RejectedScreen: CongratsScreen {
+public class RejectedScreen: CongratsScreen {
     private lazy var subtitleLabel = element("Continuar")
-    override func waitForElements() {
+    override public func waitForElements() {
         waitFor(element: subtitleLabel)
     }
 }
 
-class PendingScreen: CongratsScreen {
-    override func waitForElements() {
+public class PendingScreen: CongratsScreen {
+    override public func waitForElements() {
 
     }
 }
 
-class InstructionsScreen: CongratsScreen {
+public class InstructionsScreen: CongratsScreen {
     private lazy var instructionsFooterButton = element("Continuar")
-    override func waitForElements() {
+    override public func waitForElements() {
         waitFor(element: instructionsFooterButton)
     }
 }

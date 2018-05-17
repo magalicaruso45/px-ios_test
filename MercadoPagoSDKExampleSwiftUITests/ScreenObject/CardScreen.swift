@@ -8,7 +8,7 @@
 
 import XCTest
 
-class CardScreen: BaseScreen {
+public class CardScreen: BaseScreen {
 
     private lazy var numberTextField = textField("Número de tarjeta")
     private lazy var nameTextField = textField("Nombre y apellido")
@@ -18,7 +18,7 @@ class CardScreen: BaseScreen {
     private lazy var invalidCardLabel = element("No puedes pagar con esta tarjeta")
     private lazy var availableCardsButton = element("MÁS INFO")
     
-    override func waitForElements() {
+    override open func waitForElements() {
         waitFor(element: numberTextField)
     }
     

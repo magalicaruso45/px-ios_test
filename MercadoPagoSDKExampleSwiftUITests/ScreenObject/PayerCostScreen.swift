@@ -8,12 +8,12 @@
 
 import UIKit
 
-class PayerCostScreen: BaseScreen {
+public class PayerCostScreen: BaseScreen {
 
     private lazy var headerCellCount = 2
     private lazy var backButton = getBackButton()
 
-    override func waitForElements() {
+    override open func waitForElements() {
         waitFor(element: cellNumber(3))
     }
 

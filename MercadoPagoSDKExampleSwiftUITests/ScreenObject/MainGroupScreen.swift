@@ -8,12 +8,12 @@
 
 import XCTest
 
-class MainGroupScreen: BaseScreen {
+public class MainGroupScreen: BaseScreen {
 
     lazy var cardButton = cell("Tarjetas")
     lazy var cashButton = cell("Pago en efectivo")
     
-    override func waitForElements() {
+    override open func waitForElements() {
         waitFor(element: cardButton)
     }
     func tapCardOption() -> CardsOptionsScreen {
