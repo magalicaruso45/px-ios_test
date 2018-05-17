@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "MercadoPagoTestLib"
-  s.version          = "0.0.5"
+  s.version          = "0.0.1"
   s.summary          = "MercadoPago Test Library"
   s.homepage         = "https://www.mercadopago.com"
   s.license          = { :type => "MIT", :file => "LICENSE" }
