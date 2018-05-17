@@ -15,7 +15,7 @@ public protocol BaseScreenProtocol {
 
 open class BaseScreen : BaseScreenProtocol {
     let TIME_OUT : Double = 5 // Seconds
-    init() {
+    public init() {
         waitForElements()
     }
 
