@@ -10,26 +10,25 @@ import XCTest
 
 public class CardScreen: BaseScreen {
 
-    private lazy var numberTextField = textField("Número de tarjeta")
-    private lazy var nameTextField = textField("Nombre y apellido")
-    private lazy var expirationDateTextField = textField("Fecha de expiración")
-    private lazy var cvvTextField = textField("Código de seguridad")
-    private lazy var continueButton = toolbarButton("Continuar")
+    private lazy var cardFormTextField = textField("card_form_text_field")
+    private lazy var continueToolbarButton = toolbarButton("Continuar")
+    private lazy var backToolbarButton = toolbarButton("Anterior")
     private lazy var invalidCardLabel = element("No puedes pagar con esta tarjeta")
     private lazy var availableCardsButton = element("MÁS INFO")
+
     
     override open func waitForElements() {
-        waitFor(element: numberTextField)
+        waitFor(element: cardFormTextField)
     }
     
     func completeNumberAndContinue(_ text: String) -> CardScreen{
-        numberTextField.typeText(text)
-        continueButton.tap()
+        cardFormTextField.typeText(text)
+        continueToolbarButton.tap()
         return self
     }
     
     func completeNumberAndExpectInvalidFieldError(_ text: String) -> CardScreen{
-        numberTextField.typeText(text)
+        cardFormTextField.typeText(text)
         waitFor(element: invalidCardLabel)
         return self
     }
@@ -41,21 +40,33 @@ public class CardScreen: BaseScreen {
     }
 
     func completeNameAndContinue(_ text: String) -> CardScreen{
-        nameTextField.typeText(text)
-        continueButton.tap()
+        cardFormTextField.typeText(text)
+        continueToolbarButton.tap()
         return self
     }
 
     func completeExpirationDateAndContinue(_ text: String) -> CardScreen{
-        expirationDateTextField.typeText(text)
-        continueButton.tap()
+        cardFormTextField.typeText(text)
+        continueToolbarButton.tap()
         return self
     }
     
     func completeCVVAndContinue(_ text: String) -> IdentificationScreen{
-        waitFor(element: cvvTextField)
-        cvvTextField.typeText(text)
-        continueButton.tap()
+        waitFor(element: cardFormTextField)
+        cardFormTextField.typeText(text)
+        continueToolbarButton.tap()
         return IdentificationScreen()
+    }
+
+    func pressPreviousButton() -> CardScreen {
+        backToolbarButton.tap()
+        return self
+    }
+
+    func validateTextField(with text: String) -> CardScreen {
+        let cardScreen = validate { (cardScreen) in
+            XCTAssert(cardScreen.textField(text).exists)
+        }
+        return cardScreen
     }
 }
