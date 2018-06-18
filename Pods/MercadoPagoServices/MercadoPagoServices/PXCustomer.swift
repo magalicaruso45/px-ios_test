@@ -67,8 +67,8 @@ open class PXCustomer: NSObject, Codable {
         let cards: [PXCard]? = try container.decodeIfPresent([PXCard].self, forKey: .cards)
         let defaultCard: String? = try container.decodeIfPresent(String.self, forKey: .defaultCard)
         let _description: String? = try container.decodeIfPresent(String.self, forKey: ._description)
-        let dateLastUpdatedString: String? = try container.decodeIfPresent(String.self, forKey: .dateLastUpdated)
-        let dateCreatedString: String? = try container.decodeIfPresent(String.self, forKey: .dateCreated)
+        let dateLastUpdated: Date? = try container.decodeDateFromStringIfPresent(forKey: .dateLastUpdated)
+        let dateCreated: Date? = try container.decodeDateFromStringIfPresent(forKey: .dateCreated)
         let email: String? = try container.decodeIfPresent(String.self, forKey: .email)
         let firstName: String? = try container.decodeIfPresent(String.self, forKey: .firstName)
         let id: String = try container.decode(String.self, forKey: .id)
@@ -77,11 +77,7 @@ open class PXCustomer: NSObject, Codable {
         let liveMode: Bool? = try container.decodeIfPresent(Bool.self, forKey: .liveMode)
         let metadata: [String: String]? = try container.decodeIfPresent([String: String].self, forKey: .metadata)
         let phone: PXPhone? = try container.decodeIfPresent(PXPhone.self, forKey: .phone)
-        let registrationDateString: String? = try container.decodeIfPresent(String.self, forKey: .registrationDate)
-
-        let dateLastUpdated = String.getDate(dateLastUpdatedString)
-        let dateCreated = String.getDate(dateCreatedString)
-        let registrationDate = String.getDate(registrationDateString)
+        let registrationDate: Date? = try container.decodeDateFromStringIfPresent(forKey: .registrationDate)
 
         self.init(address: address, cards: cards, defaultCard: defaultCard, description: _description, dateCreated: dateCreated, dateLastUpdated: dateLastUpdated, email: email, firstName: firstName, id: id, identification: identification, lastName: lastName, liveMode: liveMode, metadata: metadata, phone: phone, registrationDate: registrationDate)
     }

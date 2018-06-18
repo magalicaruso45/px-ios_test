@@ -52,8 +52,8 @@ open class PXBankDeal: NSObject, Codable {
     required public convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: PXBankDealKeys.self)
         let installments: [Int]? = try container.decodeIfPresent([Int].self, forKey: .installments)
-        let dateExpiredString: String? = try container.decodeIfPresent(String.self, forKey: .dateExpired)
-        let dateStartedString: String? = try container.decodeIfPresent(String.self, forKey: .dateStarted)
+        let dateExpired: Date? = try container.decodeDateFromStringIfPresent(forKey: .dateExpired)
+        let dateStarted: Date? = try container.decodeDateFromStringIfPresent(forKey: .dateStarted)
         let maxInstallments: Int? = try container.decodeIfPresent(Int.self, forKey: .maxInstallments)
         let paymentMethods: [PXPaymentMethod]? = try container.decodeIfPresent([PXPaymentMethod].self, forKey: .paymentMethods)
         let id: String = try container.decode(String.self, forKey: .id)
@@ -62,9 +62,6 @@ open class PXBankDeal: NSObject, Codable {
         let picture: PXPicture? = try container.decodeIfPresent(PXPicture.self, forKey: .picture)
         let recommendedMessage: String? = try container.decodeIfPresent(String.self, forKey: .recommendedMessage)
         let totalFinancialCost: Double? = try container.decodeIfPresent(Double.self, forKey: .totalFinancialCost)
-        
-        let dateExpired = String.getDate(dateExpiredString)
-        let dateStarted = String.getDate(dateStartedString)
 
         self.init(id: id, dateExpired: dateExpired, dateStarted: dateStarted, installments: installments, issuer: issuer, legals: legals, picture: picture, maxInstallments: maxInstallments, paymentMethods: paymentMethods, recommendedMessage: recommendedMessage, totalFinancialCost: totalFinancialCost)
     }

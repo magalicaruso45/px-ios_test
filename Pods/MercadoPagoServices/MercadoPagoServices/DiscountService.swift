@@ -52,19 +52,20 @@ open class DiscountService: MercadoPagoService {
     }
 
     open func getCampaigns(publicKey: String , success: @escaping (_ discount: [PXCampaign]) -> Void, failure: @escaping ((_ error: PXError) -> Void)) {
-         var params = "public_key=" + publicKey
+        let params = "public_key=" + publicKey
 
         self.request(uri: self.URI, params: params, body: nil, method: "GET", cache: false, success: { (data) -> Void in
             let jsonResult = try! JSONSerialization.jsonObject(with: data, options:JSONSerialization.ReadingOptions.allowFragments)
 
-            if let discount = jsonResult as? NSDictionary {
-                if let error = discount["error"] {
+            if let errorDic = jsonResult as? NSDictionary {
+                if let error = errorDic["error"] {
                     let apiException = try! PXApiException.fromJSON(data: data)
                     failure(PXError(domain: "mercadopago.sdk.DiscountService.getCampaigns", code: ErrorTypes.API_EXCEPTION_ERROR, userInfo: [NSLocalizedDescriptionKey: error], apiException: apiException))
-                } else {
-                    let campaign: [PXCampaign] = try! PXCampaign.fromJSON(data: data)
-                    success(campaign)
                 }
+            } else if ((jsonResult as? NSArray) != nil), let campaigns: [PXCampaign] = try? PXCampaign.fromJSON(data: data) {
+                success(campaigns)
+            } else {
+                success([])
             }
 
         }, failure: { (error) -> Void in

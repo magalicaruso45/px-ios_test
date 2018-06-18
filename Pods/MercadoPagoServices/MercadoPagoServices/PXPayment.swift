@@ -132,9 +132,9 @@ open class PXPayment: NSObject, Codable {
         let collectorId: Int? = try container.decodeIfPresent(Int.self, forKey: .collectorId)
         let couponAmount: Double? = try container.decodeIfPresent(Double.self, forKey: .couponAmount)
         let currencyId: String? = try container.decodeIfPresent(String.self, forKey: .currencyId)
-        let dateApprovedString: String? = try container.decodeIfPresent(String.self, forKey: .dateApproved)
-        let dateCreatedString: String? = try container.decodeIfPresent(String.self, forKey: .dateCreated)
-        let dateLastUpdatedString: String? = try container.decodeIfPresent(String.self, forKey: .dateLastUpdated)
+        let dateApproved: Date? = try container.decodeDateFromStringIfPresent(forKey: .dateApproved)
+        let dateCreated: Date? = try container.decodeDateFromStringIfPresent(forKey: .dateCreated)
+        let dateLastUpdated: Date? = try container.decodeDateFromStringIfPresent(forKey: .dateLastUpdated)
         let description: String? = try container.decodeIfPresent(String.self, forKey: .description)
         let differentialPricingId: Int64? = try container.decodeIfPresent(Int64.self, forKey: .differentialPricingId)
         let externalReference: String? = try container.decodeIfPresent(String.self, forKey: .externalReference)
@@ -144,7 +144,7 @@ open class PXPayment: NSObject, Codable {
         let issuerId: String? = try container.decodeIfPresent(String.self, forKey: .issuerId)
         let liveMode: Bool? = try container.decodeIfPresent(Bool.self, forKey: .liveMode)
         let metadata: [String: String]? = try container.decodeIfPresent([String: String].self, forKey: .metadata)
-        let moneyReleaseDateString: String? = try container.decodeIfPresent(String.self, forKey: .moneyReleaseDate)
+        let moneyReleaseDate: Date? = try container.decodeDateFromStringIfPresent(forKey: .moneyReleaseDate)
         let notificationUrl: String? = try container.decodeIfPresent(String.self, forKey: .notificationUrl)
         let operationType: String? = try container.decodeIfPresent(String.self, forKey: .operationType)
         let order: PXOrder? = try container.decodeIfPresent(PXOrder.self, forKey: .order)
@@ -159,11 +159,6 @@ open class PXPayment: NSObject, Codable {
         let transactionAmountRefunded: Double? = try container.decodeIfPresent(Double.self, forKey: .transactionAmountRefunded)
         let transactionDetails: PXTransactionDetails? = try container.decodeIfPresent(PXTransactionDetails.self, forKey: .transactionDetails)
         let tokenId: String? = try container.decodeIfPresent(String.self, forKey: .tokenId)
-
-        let dateApproved = String.getDate(dateApprovedString)
-        let dateCreated = String.getDate(dateCreatedString)
-        let dateLastUpdated = String.getDate(dateLastUpdatedString)
-        let moneyReleaseDate = String.getDate(moneyReleaseDateString)
 
         self.init(binaryMode: binaryMode, callForAuthorizeId: callForAuthorizeId, captured: captured, card: card, collectorId: collectorId, couponAmount: couponAmount, currencyId: currencyId, dateApproved: dateApproved, dateCreated: dateCreated, dateLastUpdated: dateLastUpdated, description: description, differentialPricingId: differentialPricingId, externalReference: externalReference, feeDetails: feeDetails, id: id, installments: installments, issuerId: issuerId, liveMode: liveMode, metadata: metadata, moneyReleaseDate: moneyReleaseDate, notificationUrl: notificationUrl, operationType: operationType, order: order, payer: payer, paymentMethodId: paymentMethodId, paymentTypeId: paymentTypeId, refunds: refunds, statementDescriptor: statementDescriptor, status: status, statusDetail: statusDetail, transactionAmount: transactionAmount, transactionAmountRefunded: transactionAmountRefunded, transactionDetails: transactionDetails, tokenId: tokenId)
     }

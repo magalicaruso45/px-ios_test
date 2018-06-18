@@ -44,7 +44,7 @@ open class PXPayer: NSObject, Codable {
         let container = try decoder.container(keyedBy: PXPayerKeys.self)
         let accessToken: String? = try container.decodeIfPresent(String.self, forKey: .accessToken)
         let type: String? = try container.decodeIfPresent(String.self, forKey: .type)
-        let email: String =  try container.decode (String.self, forKey: .email)
+        let email: String? =  try container.decodeIfPresent(String.self, forKey: .email)
         let id: String? = try container.decodeIfPresent(String.self, forKey: .id)
         let entityType: String? = try container.decodeIfPresent(String.self, forKey: .entityType)
         let firstName: String? = try container.decodeIfPresent(String.self, forKey: .firstName)

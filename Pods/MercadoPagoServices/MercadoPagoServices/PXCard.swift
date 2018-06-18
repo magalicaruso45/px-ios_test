@@ -56,8 +56,8 @@ open class PXCard: NSObject, Codable {
         let container = try decoder.container(keyedBy: PXCardKeys.self)
         let cardHolder: PXCardHolder? = try container.decodeIfPresent(PXCardHolder.self, forKey: .cardHolder)
         let customerId: String? = try container.decodeIfPresent(String.self, forKey: .customerId)
-        let dateCreatedString: String? = try container.decodeIfPresent(String.self, forKey: .dateCreated)
-        let dateLastUpdatedString: String? = try container.decodeIfPresent(String.self, forKey: .dateLastUpdated)
+        let dateCreated: Date? = try container.decodeDateFromStringIfPresent(forKey: .dateCreated)
+        let dateLastUpdated: Date? = try container.decodeDateFromStringIfPresent(forKey: .dateLastUpdated)
         let expirationMonth: Int? = try container.decodeIfPresent(Int.self, forKey: .expirationMonth)
         let expirationYear: Int? = try container.decodeIfPresent(Int.self, forKey: .expirationYear)
         let firstSixDigits: String? = try container.decodeIfPresent(String.self, forKey: .firstSixDigits)
@@ -66,9 +66,6 @@ open class PXCard: NSObject, Codable {
         let lastFourDigits: String? = try container.decodeIfPresent(String.self, forKey: .lastFourDigits)
         let paymentMethod: PXPaymentMethod? = try container.decodeIfPresent(PXPaymentMethod.self, forKey: .paymentMethod)
         let securityCode: PXSecurityCode? = try container.decodeIfPresent(PXSecurityCode.self, forKey: .securityCode)
-
-        let dateCreated = String.getDate(dateCreatedString)
-        let dateLastUpdated = String.getDate(dateLastUpdatedString)
 
         self.init(cardHolder: cardHolder, customerId: customerId, dateCreated: dateCreated, dateLastUpdated: dateLastUpdated, expirationMonth: expirationMonth, expirationYear: expirationYear, firstSixDigits: firstSixDigits, id: id, issuer: issuer, lastFourDigits: lastFourDigits, paymentMethod: paymentMethod, securityCode: securityCode)
     }

@@ -9,23 +9,23 @@
 import UIKit
 
 private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
+    switch (lhs, rhs) {
+    case let (l?, r?):
+        return l < r
+    case (nil, _?):
+        return true
+    default:
+        return false
+    }
 }
 
 private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
+    switch (lhs, rhs) {
+    case let (l?, r?):
+        return l > r
+    default:
+        return rhs < lhs
+    }
 }
 
 open class PaymentMethodSearchService: MercadoPagoService {
@@ -41,7 +41,7 @@ open class PaymentMethodSearchService: MercadoPagoService {
         super.init(baseURL: baseURL)
     }
 
-    open func getPaymentMethods(_ amount: Double, customerEmail: String? = nil, customerId: String? = nil, defaultPaymenMethodId: String?, excludedPaymentTypeIds: Set<String>?, excludedPaymentMethodIds: Set<String>?, site: PXSite, payer: PXPayer, language: String, success: @escaping (_ paymentMethodSearch: PXPaymentMethodSearch) -> Void, failure: @escaping ((_ error: PXError) -> Void)) {
+    open func getPaymentMethods(_ amount: Double, customerEmail: String? = nil, customerId: String? = nil, defaultPaymenMethodId: String?, excludedPaymentTypeIds: Set<String>?, excludedPaymentMethodIds: Set<String>?, cardsWithEsc: [String]?, supportedPlugins: [String]?, site: PXSite, payer: PXPayer, language: String, success: @escaping (_ paymentMethodSearch: PXPaymentMethodSearch) -> Void, failure: @escaping ((_ error: PXError) -> Void)) {
 
         var params =  MercadoPagoServices.getParamsPublicKey(merchantPublicKey)
 
@@ -69,12 +69,20 @@ open class PaymentMethodSearchService: MercadoPagoService {
         params.paramsAppend(key: ApiParams.API_VERSION, value : PXServicesURLConfigs.API_VERSION)
         params.paramsAppend(key: ApiParams.PROCESSING_MODE, value: processingMode)
 
+        if let cardsWithEscParams = cardsWithEsc?.map({$0}).joined(separator: ",") {
+            params.paramsAppend(key: "cards_esc", value: cardsWithEscParams)
+        }
+
+        if let supportedPluginsParams = supportedPlugins?.map({$0}).joined(separator: ",") {
+            params.paramsAppend(key: "support_plugins", value: supportedPluginsParams)
+        }
+
         let groupsPayerBody = try! payer.toJSONString()
 
         let headers = ["Accept-Language": language]
 
         self.request(uri: PXServicesURLConfigs.MP_SEARCH_PAYMENTS_URI, params: params, body: groupsPayerBody, method: "POST", headers: headers, cache: false, success: { (data) -> Void in
-             let jsonResult = try! JSONSerialization.jsonObject(with: data, options:JSONSerialization.ReadingOptions.allowFragments)
+            let jsonResult = try! JSONSerialization.jsonObject(with: data, options:JSONSerialization.ReadingOptions.allowFragments)
             if let paymentSearchDic = jsonResult as? NSDictionary {
                 if paymentSearchDic["error"] != nil {
                     let apiException = try! PXApiException.fromJSON(data: data)
@@ -82,17 +90,18 @@ open class PaymentMethodSearchService: MercadoPagoService {
                 } else {
 
                     if paymentSearchDic.allKeys.count > 0 {
-                            let paymentSearch = try! PXPaymentMethodSearch.fromJSON(data: data)
-                            success(paymentSearch)
+                        let paymentSearch = try! PXPaymentMethodSearch.fromJSON(data: data)
+                        success(paymentSearch)
                     } else {
                         failure(PXError(domain: "mercadopago.sdk.PaymentMethodSearchService.getPaymentMethods", code: ErrorTypes.API_UNKNOWN_ERROR, userInfo: [NSLocalizedDescriptionKey: "Hubo un error", NSLocalizedFailureReasonErrorKey: "No se ha podido obtener los métodos de pago"]))
                     }
                 }
             }
 
-            }, failure: { (error) -> Void in
-                failure(PXError(domain: "mercadopago.sdk.PaymentMethodSearchService.getPaymentMethods", code: ErrorTypes.NO_INTERNET_ERROR, userInfo: [NSLocalizedDescriptionKey: "Hubo un error", NSLocalizedFailureReasonErrorKey: "Verifique su conexión a internet e intente nuevamente"]))
+        }, failure: { (error) -> Void in
+            failure(PXError(domain: "mercadopago.sdk.PaymentMethodSearchService.getPaymentMethods", code: ErrorTypes.NO_INTERNET_ERROR, userInfo: [NSLocalizedDescriptionKey: "Hubo un error", NSLocalizedFailureReasonErrorKey: "Verifique su conexión a internet e intente nuevamente"]))
         })
     }
 
 }
+

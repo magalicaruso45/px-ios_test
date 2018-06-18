@@ -6,7 +6,7 @@ target 'MercadoPagoSDKExampleSwift' do
   use_frameworks!
 
   # Pods for MercadoPagoSDKExampleSwift
-  pod 'MercadoPagoSDK', '4.0.0.beta.23'
+  pod 'MercadoPagoSDK', :path => './../px-ios'
 
   target 'MercadoPagoSDKExampleSwiftTests' do
     inherit! :search_paths

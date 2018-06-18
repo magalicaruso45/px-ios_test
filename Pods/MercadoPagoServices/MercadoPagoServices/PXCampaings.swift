@@ -8,14 +8,19 @@
 
 import Foundation
 
+@objc
 open class PXCampaign: NSObject, Codable {
+
 
     open var id: Int64!
     open var code: String?
     open var name: String?
     open var discountType: String?
+    open var value: Double?
+    open var endDate: Date?
     open var minPaymentAmount: Double?
     open var maxPaymentAmount: Double?
+    open var maxCouponAmount: Double
     open var totalAmountLimit: Double?
     open var maxCoupons: Int64?
     open var maxCouponsByCode: Int?
@@ -24,6 +29,7 @@ open class PXCampaign: NSObject, Codable {
     open var marketplace: String?
     open var codeType: String?
     open var maxUserAmountPerCampaign: Double?
+    open var labels: [String]?
     open var paymentMethodsIds: [String]?
     open var paymentTypesIds: [String]?
     open var cardIssuersIds: [String]?
@@ -35,14 +41,24 @@ open class PXCampaign: NSObject, Codable {
     open var couponAmount: Double?
     open var collectors: [Int64]?
 
-    public init(id: Int64, code: String?, name: String?, discountType: String?, minPaymentAmount: Double?, maxPaymentAmount: Double?, totalAmountLimit: Double?, maxCoupons: Int64?, maxCouponsByCode: Int?, maxRedeemPerUser: Int?, siteId: String?, marketplace: String?, codeType: String?, maxUserAmountPerCampaign: Double?, paymentMethodsIds: [String]?, paymentTypesIds: [String]?, cardIssuersIds: [String]?, shippingModes: [String]?, clientId: Int64?, tags: [String]?, multipleCodeLimit: Int?, codeCount: Int?, couponAmount: Double?, collectors: [Int64]?) {
+    @objc
+    public init(id: Int64, code: String?, name: String?, maxCouponAmount: Double) {
+        self.id = id
+        self.code = code
+        self.name = name
+        self.maxCouponAmount = maxCouponAmount
+    }
+    public init(id: Int64, code: String?, name: String?, discountType: String?, value: Double?, endDate: Date?, minPaymentAmount: Double?, maxPaymentAmount: Double?, maxCouponAmount: Double?, totalAmountLimit: Double?, maxCoupons: Int64?, maxCouponsByCode: Int?, maxRedeemPerUser: Int?, siteId: String?, marketplace: String?, codeType: String?, maxUserAmountPerCampaign: Double?, labels: [String]?, paymentMethodsIds: [String]?, paymentTypesIds: [String]?, cardIssuersIds: [String]?, shippingModes: [String]?, clientId: Int64?, tags: [String]?, multipleCodeLimit: Int?, codeCount: Int?, couponAmount: Double?, collectors: [Int64]?) {
 
             self.id = id
             self.code = code
             self.name = name
             self.discountType = discountType
+            self.value = value
+            self.endDate = endDate
             self.minPaymentAmount = minPaymentAmount
             self.maxPaymentAmount = maxPaymentAmount
+            self.maxCouponAmount = maxCouponAmount!
             self.totalAmountLimit = totalAmountLimit
             self.maxCoupons = maxCoupons
             self.maxCouponsByCode = maxCouponsByCode
@@ -51,6 +67,7 @@ open class PXCampaign: NSObject, Codable {
             self.marketplace = marketplace
             self.codeType = codeType
             self.maxUserAmountPerCampaign = maxUserAmountPerCampaign
+            self.labels = labels
             self.paymentMethodsIds = paymentMethodsIds
             self.paymentTypesIds = paymentTypesIds
             self.cardIssuersIds = cardIssuersIds
@@ -68,8 +85,11 @@ open class PXCampaign: NSObject, Codable {
         case code
         case name
         case discountType = "discount_type"
+        case value
+        case endDate = "end_date"
         case minPaymentAmount = "min_payment_amount"
         case maxPaymentAmount = "max_payment_amount"
+        case maxCouponAmount = "max_coupon_amount"
         case totalAmountLimit = "total_amount_limit"
         case maxCoupons = "max_coupons"
         case maxCouponsByCode = "max_coupons_by_code"
@@ -78,6 +98,7 @@ open class PXCampaign: NSObject, Codable {
         case marketplace
         case codeType = "code_type"
         case maxUserAmountPerCampaign = "max_user_amount_per_campaign"
+        case labels
         case paymentMethodsIds = "payment_methods_ids"
         case paymentTypesIds = "payment_types_ids"
         case cardIssuersIds = "card_issuers_ids"
@@ -96,8 +117,11 @@ open class PXCampaign: NSObject, Codable {
         let code: String? = try container.decodeIfPresent(String.self, forKey: .code)
         let name: String? = try container.decodeIfPresent(String.self, forKey: .name)
         let discountType: String? = try container.decodeIfPresent(String.self, forKey: .discountType)
+        let value: Double? = try container.decodeIfPresent(Double.self, forKey: .value)
+        let endDate: Date?  = try container.decodeDateFromStringIfPresent(forKey: .endDate)
         let minPaymentAmount: Double? = try container.decodeIfPresent(Double.self, forKey: .minPaymentAmount)
         let maxPaymentAmount: Double? = try container.decodeIfPresent(Double.self, forKey: .maxPaymentAmount)
+        let maxCouponAmount: Double? = try container.decodeIfPresent(Double.self, forKey: .maxCouponAmount)
         let totalAmountLimit: Double? = try container.decodeIfPresent(Double.self, forKey: .totalAmountLimit)
         let maxCoupons: Int64? = try container.decodeIfPresent(Int64.self, forKey: .maxCoupons)
         let maxCouponsByCode: Int? = try container.decodeIfPresent(Int.self, forKey: .maxCouponsByCode)
@@ -106,6 +130,7 @@ open class PXCampaign: NSObject, Codable {
         let marketplace: String? = try container.decodeIfPresent(String.self, forKey: .marketplace)
         let codeType: String? = try container.decodeIfPresent(String.self, forKey: .codeType)
         let maxUserAmountPerCampaign: Double? = try container.decodeIfPresent(Double.self, forKey: .maxUserAmountPerCampaign)
+        let labels: [String]? = try container.decodeIfPresent([String].self, forKey: .labels)
         let paymentMethodsIds: [String]? = try container.decodeIfPresent([String].self, forKey: .paymentMethodsIds)
         let paymentTypesIds: [String]? = try container.decodeIfPresent([String].self, forKey: .paymentTypesIds)
         let cardIssuersIds: [String]? = try container.decodeIfPresent([String].self, forKey: .cardIssuersIds)
@@ -117,8 +142,7 @@ open class PXCampaign: NSObject, Codable {
         let couponAmount: Double? = try container.decodeIfPresent(Double.self, forKey: .couponAmount)
         let collectors: [Int64]? = try container.decodeIfPresent([Int64].self, forKey: .collectors)
 
-
-       self.init(id: id, code: code, name: name, discountType: discountType, minPaymentAmount: minPaymentAmount, maxPaymentAmount: maxPaymentAmount, totalAmountLimit: totalAmountLimit, maxCoupons: maxCoupons, maxCouponsByCode: maxCouponsByCode, maxRedeemPerUser: maxRedeemPerUser, siteId: siteId, marketplace: marketplace, codeType: codeType, maxUserAmountPerCampaign: maxUserAmountPerCampaign, paymentMethodsIds: paymentMethodsIds, paymentTypesIds: paymentTypesIds, cardIssuersIds: cardIssuersIds, shippingModes: shippingModes, clientId: clientId, tags: tags, multipleCodeLimit: multipleCodeLimit, codeCount: codeCount, couponAmount: couponAmount, collectors: collectors)
+       self.init(id: id, code: code, name: name, discountType: discountType, value: value, endDate: endDate, minPaymentAmount: minPaymentAmount, maxPaymentAmount: maxPaymentAmount, maxCouponAmount: maxCouponAmount, totalAmountLimit: totalAmountLimit, maxCoupons: maxCoupons, maxCouponsByCode: maxCouponsByCode, maxRedeemPerUser: maxRedeemPerUser, siteId: siteId, marketplace: marketplace, codeType: codeType, maxUserAmountPerCampaign: maxUserAmountPerCampaign, labels: labels, paymentMethodsIds: paymentMethodsIds, paymentTypesIds: paymentTypesIds, cardIssuersIds: cardIssuersIds, shippingModes: shippingModes, clientId: clientId, tags: tags, multipleCodeLimit: multipleCodeLimit, codeCount: codeCount, couponAmount: couponAmount, collectors: collectors)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -127,8 +151,11 @@ open class PXCampaign: NSObject, Codable {
         try container.encodeIfPresent(self, forKey: .code)
         try container.encodeIfPresent(self, forKey: .name)
         try container.encodeIfPresent(self, forKey: .discountType)
+        try container.encodeIfPresent(self, forKey: .value)
+        try container.encodeIfPresent(self, forKey: .endDate)
         try container.encodeIfPresent(self, forKey: .minPaymentAmount)
         try container.encodeIfPresent(self, forKey: .maxPaymentAmount)
+        try container.encodeIfPresent(self, forKey: .maxCouponAmount)
         try container.encodeIfPresent(self, forKey: .totalAmountLimit)
         try container.encodeIfPresent(self, forKey: .maxCoupons)
         try container.encodeIfPresent(self, forKey: .maxCouponsByCode)
@@ -137,6 +164,7 @@ open class PXCampaign: NSObject, Codable {
         try container.encodeIfPresent(self, forKey: .marketplace)
         try container.encodeIfPresent(self, forKey: .codeType)
         try container.encodeIfPresent(self, forKey: .maxUserAmountPerCampaign)
+        try container.encodeIfPresent(self, forKey: .labels)
         try container.encodeIfPresent(self, forKey: .paymentMethodsIds)
         try container.encodeIfPresent(self, forKey: .paymentTypesIds)
         try container.encodeIfPresent(self, forKey: .cardIssuersIds)
