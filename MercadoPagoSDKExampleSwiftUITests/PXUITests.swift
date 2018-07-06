@@ -263,9 +263,9 @@ class PXFlowUITests: XCTestCase {
             .completeExpirationDateAndContinue("1225")
             .completeCVVAndContinue("123")
             .completeNumberAndContinueToPayerCost("30666777")
-            .selectPayerCostOptionAtRow(3)
+            .selectPayerCostOptionAtRow(2)
             .validate { (reviewScreen) in
-                XCTAssert(reviewScreen.element("CFT 130,09%").exists)
+                XCTAssert(reviewScreen.element("CFT 120,42%").exists)
         }
     }
 
@@ -282,7 +282,7 @@ class PXFlowUITests: XCTestCase {
             .completeExpirationDateAndContinue("1225")
             .completeCVVAndContinue("123")
             .completeNumberAndContinueToPayerCost("30666777")
-            .selectPayerCostOptionAtRow(2)
+            .selectPayerCostOptionAtRow(1)
             .validate { (reviewScreen) in
                 XCTAssert(reviewScreen.element("CFT 0,00%").exists)
         }

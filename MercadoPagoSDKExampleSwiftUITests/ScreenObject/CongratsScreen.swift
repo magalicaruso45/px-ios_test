@@ -10,7 +10,7 @@ import UIKit
 
 public class CongratsScreen: BaseScreen {
     override open func waitForElements() {
-        let instructionsFooterButton = cellButton("Continuar")
+        let instructionsFooterButton = cellButton("Cancelar pago")
         waitFor(element: instructionsFooterButton)
     }
 //
