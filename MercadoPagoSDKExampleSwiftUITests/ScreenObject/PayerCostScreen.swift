@@ -10,7 +10,7 @@ import UIKit
 
 public class PayerCostScreen: BaseScreen {
 
-    private lazy var headerCellCount = 2
+    private lazy var headerCellCount = 1
     private lazy var backButton = getBackButton()
 
     override open func waitForElements() {

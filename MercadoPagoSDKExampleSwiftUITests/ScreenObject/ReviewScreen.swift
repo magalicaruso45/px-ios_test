@@ -9,8 +9,8 @@
 import UIKit
 
 public class ReviewScreen: BaseScreen {
-    private lazy var payButton = cellButton("Confirmar")
-    private lazy var changePaymentMethodButton = button("Cambiar medio de pago")
+    private lazy var payButton = element("Confirmar")
+    private lazy var changePaymentMethodButton = element("Cambiar medio de pago")
     private lazy var backButton = getBackButton()
 
     override open func waitForElements() {
