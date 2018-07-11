@@ -12,6 +12,7 @@ public class MainScreen: BaseScreen {
 
     private lazy var checkoutButton = button("Start Checkout")
     private lazy var clearButton = button("Clear fields")
+    private lazy var configurationButton = button("Add Configutations")
     private lazy var publicKeyField = textField("Public Key")
     private lazy var preferenceIdField = textField("Pref ID")
     private lazy var accessTokenField = textField("Access Token (Optional)")
@@ -49,9 +50,15 @@ public class MainScreen: BaseScreen {
         accessTokenField.typeText(text)
         return self
     }
+
+    func tapConfigurationsButton() -> ConfigurationScreen {
+        configurationButton.tap()
+        return ConfigurationScreen()
+    }
     
     override open func waitForElements() {
         waitFor(element: checkoutButton)
+        waitFor(element: configurationButton)
         waitFor(element: publicKeyField)
         waitFor(element: preferenceIdField)
         waitFor(element: accessTokenField)
