@@ -9,8 +9,10 @@
 import UIKit
 import MercadoPagoSDKV4
 
-class CheckoutOptionsViewController: UIViewController {
+class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
 
+    var configurations: Configurations?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -22,6 +24,9 @@ class CheckoutOptionsViewController: UIViewController {
         if let navigationController = self.navigationController {
             MercadoPagoCheckout.setLanguage(language: ._SPANISH)
             let mpCheckout = MercadoPagoCheckout(publicKey: publicKey, accessToken: at, checkoutPreference: checkoutPreference, discount: nil, navigationController: navigationController)
+            if configurations != nil {
+                applyConfigurations(checkout: mpCheckout)
+            }
             mpCheckout.start()
         }
     }
@@ -88,6 +93,25 @@ class CheckoutOptionsViewController: UIViewController {
         PXLayout.centerHorizontally(view: clearFieldsButton).isActive = true
         PXLayout.setHeight(owner: clearFieldsButton, height: 40).isActive = true
         PXLayout.setWidth(owner: clearFieldsButton, width: 200).isActive = true
+        
+        //Clear Fields Button
+        let additionalConfigButton: UIButton = {
+            let button = UIButton()
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.backgroundColor = .blue
+            button.setTitle("Add Configutations", for: .normal)
+            button.layer.cornerRadius = 20
+            button.setTitleColor(.white, for: .normal)
+            button.add(for: .touchUpInside, {
+                self.additionalConfigs()
+            })
+            return button
+        }()
+        self.view.addSubview(additionalConfigButton)
+        PXLayout.put(view: additionalConfigButton, onBottomOf: clearFieldsButton, withMargin: PXLayout.M_MARGIN).isActive = true
+        PXLayout.centerHorizontally(view: additionalConfigButton).isActive = true
+        PXLayout.setHeight(owner: additionalConfigButton, height: 40).isActive = true
+        PXLayout.setWidth(owner: additionalConfigButton, width: 200).isActive = true
 
         publicKeyField.text = "APP_USR-648a260d-6fd9-4ad7-9284-90f22262c18d"
         preferenceIDField.text = "243966003-d0be0be0-6fd8-4769-bf2f-7f2d979655f5"
@@ -109,4 +133,21 @@ class CheckoutOptionsViewController: UIViewController {
         PXLayout.matchWidth(ofView: textField, withPercentage: 80).isActive = true
         return textField
     }
+    
+    func additionalConfigs(){
+        let vc = ConfigurationsViewController()
+        vc.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal
+        self.navigationController?.present(vc, animated: true, completion: nil)
+    }
+    func setConfigurations(configs: Configurations) {
+        self.configurations = configs
+    }
+    func applyConfigurations(checkout: MercadoPagoCheckout){
+        
+    }
+}
+
+//MARK: Configurations --
+extension CheckoutOptionsViewController {
+    
 }
