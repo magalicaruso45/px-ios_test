@@ -76,6 +76,9 @@ public extension BaseScreen {
     func button(_ text: String) -> XCUIElement {
         return XCUIApplication().buttons[text].firstMatch
     }
+    func switchElement(_ text: String) -> XCUIElement {
+        return XCUIApplication().switches[text].firstMatch
+    }
     func element(_ text: String) -> XCUIElement {
         return XCUIApplication().staticTexts[text].firstMatch
     }

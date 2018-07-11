@@ -32,6 +32,7 @@
 		FC89F7582088F5540093B001 /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89F74F2088F5540093B001 /* MainPage.swift */; };
 		FC89F7592088F5540093B001 /* PayerCostScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89F7502088F5540093B001 /* PayerCostScreen.swift */; };
 		FC89F75B2088F5540093B001 /* ReviewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89F7522088F5540093B001 /* ReviewScreen.swift */; };
+		FCB9B13120F6754F0097F746 /* ConfigurationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB9B13020F6754F0097F746 /* ConfigurationScreen.swift */; };
 		FCCA0D872088DE3F009F77D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA0D862088DE3F009F77D4 /* AppDelegate.swift */; };
 		FCCA0D8E2088DE42009F77D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCCA0D8D2088DE42009F77D4 /* Assets.xcassets */; };
 		FCCA0D912088DE42009F77D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCCA0D8F2088DE42009F77D4 /* LaunchScreen.storyboard */; };
@@ -83,6 +84,7 @@
 		FC89F74F2088F5540093B001 /* MainPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
 		FC89F7502088F5540093B001 /* PayerCostScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayerCostScreen.swift; sourceTree = "<group>"; };
 		FC89F7522088F5540093B001 /* ReviewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewScreen.swift; sourceTree = "<group>"; };
+		FCB9B13020F6754F0097F746 /* ConfigurationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationScreen.swift; sourceTree = "<group>"; };
 		FCC23B714A9CE2DCED5D0930 /* Pods-MercadoPagoSDKExampleSwiftUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MercadoPagoSDKExampleSwiftUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MercadoPagoSDKExampleSwiftUITests/Pods-MercadoPagoSDKExampleSwiftUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		FCCA0D832088DE3F009F77D4 /* MercadoPagoSDKExampleSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MercadoPagoSDKExampleSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCCA0D862088DE3F009F77D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				FC89F74E2088F5530093B001 /* IdentificationScreen.swift */,
 				FC89F74A2088F5530093B001 /* MainGroupScreen.swift */,
 				FC89F74F2088F5540093B001 /* MainPage.swift */,
+				FCB9B13020F6754F0097F746 /* ConfigurationScreen.swift */,
 				FC89F7502088F5540093B001 /* PayerCostScreen.swift */,
 				FC157D49209A2386009A2C3A /* IssuersScreen.swift */,
 				FC89F7522088F5540093B001 /* ReviewScreen.swift */,
@@ -579,6 +582,7 @@
 				4BE78D3C20D818CA00F23CA5 /* PXUITests.swift in Sources */,
 				FC89F7592088F5540093B001 /* PayerCostScreen.swift in Sources */,
 				FC89F7542088F5540093B001 /* CongratsScreen.swift in Sources */,
+				FCB9B13120F6754F0097F746 /* ConfigurationScreen.swift in Sources */,
 				FC89F7562088F5540093B001 /* CardScreen.swift in Sources */,
 				FC7D2F5D20F64714001C97CF /* PXDiscountUITest.swift in Sources */,
 				FC1C5FE620ACB21F007AAE48 /* PXFlows.swift in Sources */,

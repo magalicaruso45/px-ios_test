@@ -31,6 +31,7 @@
                 </label>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="csf-l2-8Oc">
                     <rect key="frame" x="310" y="35" width="51" height="31"/>
+                    <accessibility key="accessibilityConfiguration" identifier="comisiones_switch"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="31" id="Zch-hK-Nke"/>
                         <constraint firstAttribute="width" constant="49" id="yzK-Sq-Y5O"/>
@@ -44,6 +45,7 @@
                 </label>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eRB-X4-oQv">
                     <rect key="frame" x="310" y="76" width="51" height="31"/>
+                    <accessibility key="accessibilityConfiguration" identifier="descuento_switch"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="49" id="2Rt-gN-Ttq"/>
                         <constraint firstAttribute="height" constant="31" id="tfp-wP-2wZ"/>
@@ -52,6 +54,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dkn-CY-kWJ">
                     <rect key="frame" x="11" y="602" width="348" height="45"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <accessibility key="accessibilityConfiguration" identifier="apply_configs_button"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="rqa-u5-Wqd"/>
                     </constraints>
@@ -70,6 +73,7 @@
                 </label>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dJR-gT-Oyn">
                     <rect key="frame" x="310" y="115" width="51" height="31"/>
+                    <accessibility key="accessibilityConfiguration" identifier="tope_switch"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="49" id="S5J-d1-XO4"/>
                         <constraint firstAttribute="height" constant="31" id="spF-DT-Pgw"/>
