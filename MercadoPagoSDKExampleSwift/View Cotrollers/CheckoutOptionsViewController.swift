@@ -143,11 +143,18 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
         self.configurations = configs
     }
     func applyConfigurations(checkout: MercadoPagoCheckout){
-        
+        if (configurations?.comisiones)! {
+            addComisions(checkout: checkout)
+        }
     }
 }
 
 //MARK: Configurations --
 extension CheckoutOptionsViewController {
-    
+    func addComisions(checkout: MercadoPagoCheckout){
+        let comision = PXPaymentTypeChargeRule(paymentMethdodId: "credit_card", amountCharge: 10.0)
+        var chargesArray = [PXPaymentTypeChargeRule]()
+        chargesArray.append(comision)
+        checkout.setChargeRules(chargeRules: chargesArray)
+    }
 }
