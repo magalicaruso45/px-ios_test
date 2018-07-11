@@ -8,6 +8,7 @@
 
 import UIKit
 import MercadoPagoSDKV4
+import MercadoPagoServicesV4
 
 class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
 
@@ -136,6 +137,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
     
     func additionalConfigs(){
         let vc = ConfigurationsViewController()
+        vc.delegate = self
         vc.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal
         self.navigationController?.present(vc, animated: true, completion: nil)
     }
@@ -143,11 +145,34 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
         self.configurations = configs
     }
     func applyConfigurations(checkout: MercadoPagoCheckout){
-        
+        applyDiscountConfigurations(checkout: checkout)
     }
 }
 
 //MARK: Configurations --
 extension CheckoutOptionsViewController {
-    
+    func applyDiscountConfigurations(checkout: MercadoPagoCheckout) {
+        guard let configs = configurations else {
+            return
+        }
+        if configs.descuento {
+            let paymentPlugin = PaymentPluginViewController(nibName: nil, bundle: nil)
+            checkout.setPaymentPlugin(paymentPlugin: paymentPlugin)
+
+            var maxCouponAmount: Double = 0
+            if configs.tope {
+                maxCouponAmount = 10
+            }
+
+            let discount = PXDiscount(id: "12344", name: "Descuento de prueba", percentOff: 0, amountOff: 10, couponAmount: 10, currencyId: "ARS")
+            let campaign = PXCampaign(id: 12344, code: "code", name: "Campaña de prueba", maxCouponAmount: maxCouponAmount)
+            checkout.setDiscount(discount, withCampaign: campaign)
+        }
+    }
+}
+
+class PaymentPluginViewController: UIViewController, PXPaymentPluginComponent {
+    func render(store: PXCheckoutStore, theme: PXTheme) -> UIView? {
+        return nil
+    }
 }
