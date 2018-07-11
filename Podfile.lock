@@ -1,18 +1,18 @@
 PODS:
   - FXBlurView (1.6.4)
   - JRSwizzle (1.0)
-  - MercadoPagoPXTracking (2.1.2)
-  - MercadoPagoSDK (4.0.0.beta.31):
-    - MercadoPagoPXTracking (= 2.1.2)
-    - MercadoPagoSDK/Default (= 4.0.0.beta.31)
-    - MercadoPagoServices (= 1.0.15)
+  - MercadoPagoPXTrackingV4 (2.1.3)
+  - MercadoPagoSDKV4 (4.0.0.beta.31):
+    - MercadoPagoPXTrackingV4 (= 2.1.3)
+    - MercadoPagoSDKV4/Default (= 4.0.0.beta.31)
+    - MercadoPagoServicesV4 (= 1.0.17)
     - MLUI (~> 4.0)
-  - MercadoPagoSDK/Default (4.0.0.beta.31):
-    - MercadoPagoPXTracking (= 2.1.2)
-    - MercadoPagoServices (= 1.0.15)
+  - MercadoPagoSDKV4/Default (4.0.0.beta.31):
+    - MercadoPagoPXTrackingV4 (= 2.1.3)
+    - MercadoPagoServicesV4 (= 1.0.17)
     - MLUI (~> 4.0)
-  - MercadoPagoServices (1.0.15):
-    - MercadoPagoPXTracking (= 2.1.2)
+  - MercadoPagoServicesV4 (1.0.17):
+    - MercadoPagoPXTrackingV4 (= 2.1.3)
   - MLUI (4.2.0):
     - MLUI/ActionButton (= 4.2.0)
     - MLUI/Core (= 4.2.0)
@@ -107,34 +107,26 @@ PODS:
   - MLUI/StyleSheet (4.2.0)
 
 DEPENDENCIES:
-  - MercadoPagoSDK (from `https://github.com/mercadopago/px-ios.git`, branch `release/4.0.0.beta.31`)
-
-SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - FXBlurView
-    - JRSwizzle
-    - MercadoPagoPXTracking
-    - MercadoPagoServices
-    - MLUI
+  - MercadoPagoSDKV4 (from `git@github.com:mercadopago/px-ios.git`, branch `release-4.0.0.beta.31-renamedv4`)
 
 EXTERNAL SOURCES:
-  MercadoPagoSDK:
-    :branch: release/4.0.0.beta.31
-    :git: https://github.com/mercadopago/px-ios.git
+  MercadoPagoSDKV4:
+    :branch: release-4.0.0.beta.31-renamedv4
+    :git: git@github.com:mercadopago/px-ios.git
 
 CHECKOUT OPTIONS:
-  MercadoPagoSDK:
-    :commit: 6179b5b787980dea5a9d5853a45e0f500c13d398
-    :git: https://github.com/mercadopago/px-ios.git
+  MercadoPagoSDKV4:
+    :commit: 67dcb9c7e8576f898415ffa74fa5ee04891f30c0
+    :git: git@github.com:mercadopago/px-ios.git
 
 SPEC CHECKSUMS:
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
   JRSwizzle: dd5ead5d913a0f29e7f558200165849f006bb1e3
-  MercadoPagoPXTracking: 844e3fa9a8b7cb9eedff4d2bf5f696a25b6b57d6
-  MercadoPagoSDK: 311b56c4a91bc57c4216d2fa425a5d7d1252cacf
-  MercadoPagoServices: 83bc21f8e59492bd2567e1e2ac044ca837c9b2a9
+  MercadoPagoPXTrackingV4: 3fe72dc32ef02f233ad460c4e8db8c2a39a05839
+  MercadoPagoSDKV4: 733be6a4ec7b0f48f0fb92403c888ba9539fdcb1
+  MercadoPagoServicesV4: 9d10c3a11a133e250b9133126e951e54f2dca86d
   MLUI: 789641a62286e59c088869be35eb81ace8aa871c
 
-PODFILE CHECKSUM: 29680d1b0dec1404e01d4ddc84e7b91ac5304136
+PODFILE CHECKSUM: d2539fe205229bf3707b735a964152f21ecd2dc5
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.4.0
