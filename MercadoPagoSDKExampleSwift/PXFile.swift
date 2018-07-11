@@ -16,7 +16,7 @@ import Foundation
 //
 
 import UIKit
-import MercadoPagoSDK
+import MercadoPagoSDKV4
 
 class PXLayout: NSObject {
     
