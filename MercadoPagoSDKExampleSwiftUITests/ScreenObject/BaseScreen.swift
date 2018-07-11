@@ -79,6 +79,9 @@ public extension BaseScreen {
     func element(_ text: String) -> XCUIElement {
         return XCUIApplication().staticTexts[text].firstMatch
     }
+    func imageView(_ text: String) -> XCUIElement {
+        return XCUIApplication().images[text].firstMatch
+    }
     func getBackButton() -> XCUIElement {
         return XCUIApplication().navigationBars.buttons.element(boundBy: 0)
     }

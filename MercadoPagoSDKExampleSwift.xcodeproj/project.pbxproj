@@ -14,6 +14,8 @@
 		DD7E618B9AD512F8126CF608 /* Pods_MercadoPagoSDKExampleSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C94F9EC3195C54EC2A259CC /* Pods_MercadoPagoSDKExampleSwift.framework */; };
 		FC157D4A209A2386009A2C3A /* IssuersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC157D49209A2386009A2C3A /* IssuersScreen.swift */; };
 		FC1C5FE620ACB21F007AAE48 /* PXFlows.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1C5FE520ACB21F007AAE48 /* PXFlows.swift */; };
+		FC7D2F5D20F64714001C97CF /* PXDiscountUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D2F5C20F64714001C97CF /* PXDiscountUITest.swift */; };
+		FC7D2F5F20F649A3001C97CF /* DiscountDetailModalScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D2F5E20F649A3001C97CF /* DiscountDetailModalScreen.swift */; };
 		FC89F73F2088E2E40093B001 /* CheckoutOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89F73E2088E2E40093B001 /* CheckoutOptionsViewController.swift */; };
 		FC89F7532088F5540093B001 /* MainGroupScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89F74A2088F5530093B001 /* MainGroupScreen.swift */; };
 		FC89F7542088F5540093B001 /* CongratsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC89F74B2088F5530093B001 /* CongratsScreen.swift */; };
@@ -60,6 +62,8 @@
 		E77F928BF343B621EAC57337 /* Pods-MercadoPagoSDKExampleSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MercadoPagoSDKExampleSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MercadoPagoSDKExampleSwift/Pods-MercadoPagoSDKExampleSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		FC157D49209A2386009A2C3A /* IssuersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuersScreen.swift; sourceTree = "<group>"; };
 		FC1C5FE520ACB21F007AAE48 /* PXFlows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXFlows.swift; sourceTree = "<group>"; };
+		FC7D2F5C20F64714001C97CF /* PXDiscountUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXDiscountUITest.swift; sourceTree = "<group>"; };
+		FC7D2F5E20F649A3001C97CF /* DiscountDetailModalScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountDetailModalScreen.swift; sourceTree = "<group>"; };
 		FC89F73E2088E2E40093B001 /* CheckoutOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutOptionsViewController.swift; sourceTree = "<group>"; };
 		FC89F74A2088F5530093B001 /* MainGroupScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainGroupScreen.swift; sourceTree = "<group>"; };
 		FC89F74B2088F5530093B001 /* CongratsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongratsScreen.swift; sourceTree = "<group>"; };
@@ -155,6 +159,7 @@
 				FC89F7502088F5540093B001 /* PayerCostScreen.swift */,
 				FC157D49209A2386009A2C3A /* IssuersScreen.swift */,
 				FC89F7522088F5540093B001 /* ReviewScreen.swift */,
+				FC7D2F5E20F649A3001C97CF /* DiscountDetailModalScreen.swift */,
 			);
 			path = ScreenObject;
 			sourceTree = "<group>";
@@ -210,6 +215,7 @@
 				FCCA0DA62088DE42009F77D4 /* MercadoPagoSDKExampleSwiftUITests.swift */,
 				FCCA0DA82088DE42009F77D4 /* Info.plist */,
 				4BE78D3B20D818CA00F23CA5 /* PXUITests.swift */,
+				FC7D2F5C20F64714001C97CF /* PXDiscountUITest.swift */,
 			);
 			path = MercadoPagoSDKExampleSwiftUITests;
 			sourceTree = "<group>";
@@ -533,11 +539,13 @@
 			files = (
 				FC89F7532088F5540093B001 /* MainGroupScreen.swift in Sources */,
 				FC157D4A209A2386009A2C3A /* IssuersScreen.swift in Sources */,
+				FC7D2F5F20F649A3001C97CF /* DiscountDetailModalScreen.swift in Sources */,
 				FC89F7572088F5540093B001 /* IdentificationScreen.swift in Sources */,
 				4BE78D3C20D818CA00F23CA5 /* PXUITests.swift in Sources */,
 				FC89F7592088F5540093B001 /* PayerCostScreen.swift in Sources */,
 				FC89F7542088F5540093B001 /* CongratsScreen.swift in Sources */,
 				FC89F7562088F5540093B001 /* CardScreen.swift in Sources */,
+				FC7D2F5D20F64714001C97CF /* PXDiscountUITest.swift in Sources */,
 				FC1C5FE620ACB21F007AAE48 /* PXFlows.swift in Sources */,
 				FC89F7552088F5540093B001 /* BaseScreen.swift in Sources */,
 				FC89F7582088F5540093B001 /* MainPage.swift in Sources */,
@@ -695,7 +703,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X8G6AP44UF;
 				INFOPLIST_FILE = MercadoPagoSDKExampleSwift/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.MercadoPago.MercadoPagoSDKExampleSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -711,7 +722,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X8G6AP44UF;
 				INFOPLIST_FILE = MercadoPagoSDKExampleSwift/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.MercadoPago.MercadoPagoSDKExampleSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -727,7 +741,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MercadoPagoSDKExampleSwiftTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.MercadoPago.MercadoPagoSDKExampleSwiftTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -744,7 +762,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MercadoPagoSDKExampleSwiftTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.MercadoPago.MercadoPagoSDKExampleSwiftTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -760,7 +782,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MercadoPagoSDKExampleSwiftUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.MercadoPago.MercadoPagoSDKExampleSwiftUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -776,7 +802,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MercadoPagoSDKExampleSwiftUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.MercadoPago.MercadoPagoSDKExampleSwiftUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
