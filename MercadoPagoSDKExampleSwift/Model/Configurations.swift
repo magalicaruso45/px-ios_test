@@ -12,4 +12,5 @@ struct Configurations {
     var comisiones: Bool
     var descuento: Bool
     var tope: Bool
+    var paymentPlugin: Bool
 }
