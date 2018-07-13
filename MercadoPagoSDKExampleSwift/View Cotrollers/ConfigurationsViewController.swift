@@ -16,6 +16,7 @@ class ConfigurationsViewController: UIViewController {
     @IBOutlet weak var comisionesSwitch: UISwitch!
     @IBOutlet weak var descuentoSwitch: UISwitch!
     @IBOutlet weak var topeSwitch: UISwitch!
+    @IBOutlet weak var paymentPluginSwitch: UISwitch!
     var delegate: ConfigurationManager?
     
     override func viewDidLoad() {
@@ -31,7 +32,7 @@ class ConfigurationsViewController: UIViewController {
     
 
     @IBAction func applyAndConfirm(_ sender: Any) {
-        let configs = Configurations(comisiones: comisionesSwitch.isOn, descuento: descuentoSwitch.isOn, tope: topeSwitch.isOn)
+        let configs = Configurations(comisiones: comisionesSwitch.isOn, descuento: descuentoSwitch.isOn, tope: topeSwitch.isOn, paymentPlugin: paymentPluginSwitch.isOn)
         if let delegate = delegate {
             delegate.setConfigurations(configs: configs)
         }

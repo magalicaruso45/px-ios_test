@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import MercadoPagoSDKV4
 
 class ChargesTest: XCTestCase {
 
@@ -21,6 +22,7 @@ class ChargesTest: XCTestCase {
     }
     
     func test_flujo_con_comision_para_creditcard(){
+        
         MainScreen()
             .tapConfigurationsButton()
             .changeComisionesSwitch()
@@ -40,5 +42,5 @@ class ChargesTest: XCTestCase {
             .selectPayerCostOptionAtRow(2)
             .tapPayButtonForAnyCongrats()
     }
-    
+
 }

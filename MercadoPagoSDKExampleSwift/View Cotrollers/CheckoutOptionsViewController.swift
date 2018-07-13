@@ -149,6 +149,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
             addComisions(checkout: checkout)
         }
         applyDiscountConfigurations(checkout: checkout)
+        applyPaymentPluginConfigurations(checkout: checkout)
     }
 }
 
@@ -162,14 +163,21 @@ extension CheckoutOptionsViewController {
         checkout.setChargeRules(chargeRules: chargesArray)
     }
 
+    func applyPaymentPluginConfigurations(checkout: MercadoPagoCheckout) {
+        guard let configs = configurations else {
+            return
+        }
+        if configs.paymentPlugin {
+            let paymentPlugin = PaymentPluginViewController(nibName: nil, bundle: nil)
+            checkout.setPaymentPlugin(paymentPlugin: paymentPlugin)
+        }
+    }
+
     func applyDiscountConfigurations(checkout: MercadoPagoCheckout) {
         guard let configs = configurations else {
             return
         }
         if configs.descuento {
-            let paymentPlugin = PaymentPluginViewController(nibName: nil, bundle: nil)
-            checkout.setPaymentPlugin(paymentPlugin: paymentPlugin)
-
             var maxCouponAmount: Double = 0
             if configs.tope {
                 maxCouponAmount = 10

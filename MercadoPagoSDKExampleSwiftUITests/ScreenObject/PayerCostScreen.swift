@@ -24,6 +24,11 @@ public class PayerCostScreen: BaseScreen {
         return ReviewScreen()
     }
 
+    func tapFloatingRowToPayerCost() -> PayerCostScreen {
+        floatingRow.tap()
+        return self
+    }
+
     func tapFloatingRowToDiscountDetail() -> DiscountDetailModalScreen {
         floatingRow.tap()
         return DiscountDetailModalScreen()
