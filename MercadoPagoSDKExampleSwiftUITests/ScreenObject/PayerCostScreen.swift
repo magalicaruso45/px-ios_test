@@ -12,6 +12,8 @@ public class PayerCostScreen: BaseScreen {
 
     private lazy var headerCellCount = 1
     private lazy var backButton = getBackButton()
+    private lazy var floatingRow = element("floating_row_main_value_label")
+
 
     override open func waitForElements() {
         waitFor(element: cellNumber(3))
@@ -20,6 +22,16 @@ public class PayerCostScreen: BaseScreen {
     func selectPayerCostOptionAtRow(_ rowNumber: Int) -> ReviewScreen {
         tapRow(number: rowNumber)
         return ReviewScreen()
+    }
+
+    func tapFloatingRowToPayerCost() -> PayerCostScreen {
+        floatingRow.tap()
+        return self
+    }
+
+    func tapFloatingRowToDiscountDetail() -> DiscountDetailModalScreen {
+        floatingRow.tap()
+        return DiscountDetailModalScreen()
     }
 
     func tapRow(number: Int) {

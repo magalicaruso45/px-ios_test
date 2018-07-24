@@ -10,12 +10,24 @@ import XCTest
 
 public class MainGroupScreen: BaseScreen {
 
-    lazy var cardButton = cell("Nueva tarjeta")
+    lazy var cardButton = cell("Tarjetas")
     lazy var cashButton = cell("Pago en efectivo")
+    lazy var floatingRow = element("floating_row_main_value_label")
     
     override open func waitForElements() {
         waitFor(element: cardButton)
     }
+
+    func tapFloatingRowToDiscountDetail() -> DiscountDetailModalScreen {
+        floatingRow.tap()
+        return DiscountDetailModalScreen()
+    }
+
+    func tapFloatingRowToGroupsScreen() -> MainGroupScreen {
+        floatingRow.tap()
+        return self
+    }
+
     func tapCardOption() -> CardsOptionsScreen {
         cardButton.tap()
         return CardsOptionsScreen()
@@ -28,8 +40,8 @@ public class MainGroupScreen: BaseScreen {
 }
 
 class CardsOptionsScreen: BaseScreen {
-    private lazy var creditCardButton = cell("Nueva tarjeta de \ncrédito")
-    private lazy var debitCardButton = cell("Nueva tarjeta de \ndébito")
+    private lazy var creditCardButton = cell("Tarjeta de crédito")
+    private lazy var debitCardButton = cell("Tarjeta de débito")
     
     func tapCreditCardOption() -> CardScreen{
         creditCardButton.tap()

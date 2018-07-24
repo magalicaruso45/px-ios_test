@@ -7,9 +7,12 @@
 //
 
 import UIKit
-import MercadoPagoSDK
+import MercadoPagoSDKV4
+import MercadoPagoServicesV4
 
-class CheckoutOptionsViewController: UIViewController {
+class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
+
+    var configurations: Configurations?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +25,9 @@ class CheckoutOptionsViewController: UIViewController {
         if let navigationController = self.navigationController {
             MercadoPagoCheckout.setLanguage(language: ._SPANISH)
             let mpCheckout = MercadoPagoCheckout(publicKey: publicKey, accessToken: at, checkoutPreference: checkoutPreference, discount: nil, navigationController: navigationController)
+            if configurations != nil {
+                applyConfigurations(checkout: mpCheckout)
+            }
             mpCheckout.start()
         }
     }
@@ -89,6 +95,25 @@ class CheckoutOptionsViewController: UIViewController {
         PXLayout.setHeight(owner: clearFieldsButton, height: 40).isActive = true
         PXLayout.setWidth(owner: clearFieldsButton, width: 200).isActive = true
 
+        //Clear Fields Button
+        let additionalConfigButton: UIButton = {
+            let button = UIButton()
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.backgroundColor = .blue
+            button.setTitle("Add Configutations", for: .normal)
+            button.layer.cornerRadius = 20
+            button.setTitleColor(.white, for: .normal)
+            button.add(for: .touchUpInside, {
+                self.additionalConfigs()
+            })
+            return button
+        }()
+        self.view.addSubview(additionalConfigButton)
+        PXLayout.put(view: additionalConfigButton, onBottomOf: clearFieldsButton, withMargin: PXLayout.M_MARGIN).isActive = true
+        PXLayout.centerHorizontally(view: additionalConfigButton).isActive = true
+        PXLayout.setHeight(owner: additionalConfigButton, height: 40).isActive = true
+        PXLayout.setWidth(owner: additionalConfigButton, width: 200).isActive = true
+
         publicKeyField.text = "APP_USR-648a260d-6fd9-4ad7-9284-90f22262c18d"
         preferenceIDField.text = "243966003-d0be0be0-6fd8-4769-bf2f-7f2d979655f5"
         accessTokenField.text = ""
@@ -108,5 +133,65 @@ class CheckoutOptionsViewController: UIViewController {
         PXLayout.setHeight(owner: textField, height: 40).isActive = true
         PXLayout.matchWidth(ofView: textField, withPercentage: 80).isActive = true
         return textField
+    }
+
+    func additionalConfigs(){
+        let vc = ConfigurationsViewController()
+        vc.delegate = self
+        vc.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal
+        self.navigationController?.present(vc, animated: true, completion: nil)
+    }
+    func setConfigurations(configs: Configurations) {
+        self.configurations = configs
+    }
+    func applyConfigurations(checkout: MercadoPagoCheckout){
+        if (configurations?.comisiones)! {
+            addComisions(checkout: checkout)
+        }
+        applyDiscountConfigurations(checkout: checkout)
+        applyPaymentPluginConfigurations(checkout: checkout)
+    }
+}
+
+//MARK: Configurations --
+extension CheckoutOptionsViewController {
+
+    func addComisions(checkout: MercadoPagoCheckout){
+        let comision = PXPaymentTypeChargeRule(paymentMethdodId: "credit_card", amountCharge: 10.0)
+        var chargesArray = [PXPaymentTypeChargeRule]()
+        chargesArray.append(comision)
+        checkout.setChargeRules(chargeRules: chargesArray)
+    }
+
+    func applyPaymentPluginConfigurations(checkout: MercadoPagoCheckout) {
+        guard let configs = configurations else {
+            return
+        }
+        if configs.paymentPlugin {
+            let paymentPlugin = PaymentPluginViewController(nibName: nil, bundle: nil)
+            checkout.setPaymentPlugin(paymentPlugin: paymentPlugin)
+        }
+    }
+
+    func applyDiscountConfigurations(checkout: MercadoPagoCheckout) {
+        guard let configs = configurations else {
+            return
+        }
+        if configs.descuento {
+            var maxCouponAmount: Double = 0
+            if configs.tope {
+                maxCouponAmount = 10
+            }
+
+            let discount = PXDiscount(id: "12344", name: "Descuento de prueba", percentOff: 0, amountOff: 10, couponAmount: 10, currencyId: "ARS")
+            let campaign = PXCampaign(id: 12344, code: "code", name: "Campaña de prueba", maxCouponAmount: maxCouponAmount)
+            checkout.setDiscount(discount, withCampaign: campaign)
+        }
+    }
+}
+
+class PaymentPluginViewController: UIViewController, PXPaymentPluginComponent {
+    func render(store: PXCheckoutStore, theme: PXTheme) -> UIView? {
+        return nil
     }
 }
