@@ -9,7 +9,7 @@
 import UIKit
 
 public class ReviewScreen: BaseScreen {
-    private lazy var payButton = element("Confirmar")
+    private lazy var payButton = button("Confirmar")
     private lazy var changePaymentMethodButton = element("Cambiar medio de pago")
     private lazy var backButton = getBackButton()
 

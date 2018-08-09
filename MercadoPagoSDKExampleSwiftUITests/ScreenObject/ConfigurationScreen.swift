@@ -14,6 +14,8 @@ public class ConfigurationScreen: BaseScreen {
     private lazy var topeDeDescuentoSwitch = switchElement("tope_switch")
     private lazy var comisionesSwitch = switchElement("comisiones_switch")
     private lazy var paymentPluginSwitch = switchElement("payment_plugin_switch")
+    private lazy var discountNotAvailableSwitch = switchElement("discount_not_available_switch")
+    private lazy var maxRedeemPerUserStepper = stepper("max_redeem_per_user_stepper")
     private lazy var applyConfigsButton = button("apply_configs_button")
 
     func tapApplyConfigurationsButton() -> MainScreen {
@@ -41,11 +43,32 @@ public class ConfigurationScreen: BaseScreen {
         return self
     }
 
+    func incrementMaxRedeemPerUserStepperBy(_ int: Int) -> ConfigurationScreen {
+        for _ in 1...int {
+            maxRedeemPerUserStepper.buttons["Increment"].tap()
+        }
+        return self
+    }
+
+    func decrementMaxRedeemPerUserStepperBy(_ int: Int) -> ConfigurationScreen {
+        for _ in 1...int {
+            maxRedeemPerUserStepper.buttons["Decrement"].tap()
+        }
+        return self
+    }
+
+    func changeDiscountNotAvailableSwitch() -> ConfigurationScreen {
+        discountNotAvailableSwitch.tap()
+        return self
+    }
+
     override open func waitForElements() {
         waitFor(element: descuentoSwitch)
         waitFor(element: topeDeDescuentoSwitch)
         waitFor(element: comisionesSwitch)
         waitFor(element: paymentPluginSwitch)
+        waitFor(element: discountNotAvailableSwitch)
         waitFor(element: applyConfigsButton)
+        waitFor(element: maxRedeemPerUserStepper)
     }
 }

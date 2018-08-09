@@ -13,4 +13,6 @@ struct Configurations {
     var descuento: Bool
     var tope: Bool
     var paymentPlugin: Bool
+    var discountNotAvailable: Bool
+    var maxRedeemPerUser: Double
 }

@@ -7,12 +7,13 @@
 //
 
 public class DiscountDetailModalScreen: BaseScreen {
-    private lazy var titleLabel = element("Mi descuento")
     private lazy var closeButton = button("MLModalClose")
+    private lazy var titleLabel = element("discount_detail_title_label")
+    private lazy var disclaimerLabel = element("discount_detail_disclaimer_label")
+    private lazy var descriptionLabel = element("discount_detail_description_label")
+    private lazy var footerLabel = element("discount_detail_footer_label")
 
-    override open func waitForElements() {
-        waitFor(element: titleLabel)
-    }
+    override open func waitForElements() {}
 
     func tapCloseButtonToGroupsScreen() -> MainGroupScreen {
         closeButton.tap()

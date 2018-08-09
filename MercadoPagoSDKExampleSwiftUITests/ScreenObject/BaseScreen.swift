@@ -28,7 +28,7 @@ open class BaseScreen : BaseScreenProtocol {
         fatalError("All Screens Must Override this Method")
     }
 
-    func exist(element : XCUIElement) -> Bool{
+    func exist(element: XCUIElement) -> Bool{
         return element.exists
     }
 }
@@ -46,7 +46,7 @@ public extension BaseScreen {
         }
     }
 
-    func waitFor(element : XCUIElement){
+    func waitFor(element: XCUIElement) {
         let exists = NSPredicate(format: "exists = 1")
         self.waitForExpectation(expectation: XCTNSPredicateExpectation(predicate: exists, object: element), time: TIME_OUT)
     }
@@ -87,6 +87,9 @@ public extension BaseScreen {
     }
     func getBackButton() -> XCUIElement {
         return XCUIApplication().navigationBars.buttons.element(boundBy: 0)
+    }
+    func stepper(_ text: String) -> XCUIElement {
+        return XCUIApplication().steppers[text].firstMatch
     }
 }
 
