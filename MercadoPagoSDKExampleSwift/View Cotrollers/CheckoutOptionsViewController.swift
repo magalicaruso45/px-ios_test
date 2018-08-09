@@ -185,7 +185,13 @@ extension CheckoutOptionsViewController {
 
             let discount = PXDiscount(id: "12344", name: "Descuento de prueba", percentOff: 0, amountOff: 10, couponAmount: 10, currencyId: "ARS")
             let campaign = PXCampaign(id: 12344, code: "code", name: "Campaña de prueba", maxCouponAmount: maxCouponAmount)
+            if let maxRedeemPerUser = Int(exactly: configs.maxRedeemPerUser)  {
+                campaign.maxRedeemPerUser = maxRedeemPerUser
+            }
             checkout.setDiscount(discount, withCampaign: campaign)
+        }
+        if configs.discountNotAvailable {
+            checkout.discountNotAvailable()
         }
     }
 }
