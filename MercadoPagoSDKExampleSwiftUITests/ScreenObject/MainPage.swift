@@ -29,7 +29,7 @@ public class MainScreen: BaseScreen {
         return CardScreen()
     }
 
-    func tapCheckoutOptionOnlySecCode() -> SecurityCodeScreen {
+    func tapCheckoutOptionWithCardSelected() -> SecurityCodeScreen {
         checkoutButton.tap()
         return SecurityCodeScreen()
     }
