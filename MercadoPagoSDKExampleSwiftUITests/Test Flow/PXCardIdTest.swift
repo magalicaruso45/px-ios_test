@@ -9,7 +9,7 @@
 import XCTest
 
 class PXCardIdTest: XCTestCase {
-        
+
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
@@ -32,6 +32,20 @@ class PXCardIdTest: XCTestCase {
             .completeCVVAndContinue("123")
             .completeNumberAndContinueToReview("30666777")
             .tapPayButtonForApproved()
+    }
+
+    func test_nueva_tarjeta_debito_rejected() {
+        let _ = MainScreen()
+            .tapClearButton()
+            .fillPublicKey("APP_USR-b8925182-e1bf-4c0e-bc38-1d893a19ab45")
+            .fillCardId("debit_card")
+            .tapCheckoutOptionOnlyCard()
+            .completeNumberAndContinue("6042 0130 7660 8231")
+            .completeNameAndContinue("FUND")
+            .completeExpirationDateAndContinue("1225")
+            .completeCVVAndContinue("123")
+            .completeNumberAndContinueToReview("30666777")
+            .tapChangePaymentMethodWithCardId()
     }
 
     func test_tarjeta_debito_guardada() {
