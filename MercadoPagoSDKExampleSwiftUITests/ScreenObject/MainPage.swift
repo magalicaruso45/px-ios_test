@@ -16,7 +16,8 @@ public class MainScreen: BaseScreen {
     private lazy var publicKeyField = textField("Public Key")
     private lazy var preferenceIdField = textField("Pref ID")
     private lazy var accessTokenField = textField("Access Token (Optional)")
-    
+    private lazy var cardIdField = textField("Card Id (Optional)")
+
     func tapCheckoutOption() -> MainGroupScreen {
         checkoutButton.tap()
         let mainGroupScreen = MainGroupScreen()
@@ -26,6 +27,11 @@ public class MainScreen: BaseScreen {
     func tapCheckoutOptionOnlyCard() -> CardScreen {
         checkoutButton.tap()
         return CardScreen()
+    }
+
+    func tapCheckoutOptionWithCardSelected() -> SecurityCodeScreen {
+        checkoutButton.tap()
+        return SecurityCodeScreen()
     }
 
     func tapClearButton() -> MainScreen {
@@ -51,11 +57,17 @@ public class MainScreen: BaseScreen {
         return self
     }
 
+    func fillCardId(_ text: String) -> MainScreen {
+        cardIdField.tap()
+        cardIdField.typeText(text)
+        return self
+    }
+
     func tapConfigurationsButton() -> ConfigurationScreen {
         configurationButton.tap()
         return ConfigurationScreen()
     }
-    
+
     override open func waitForElements() {
         waitFor(element: checkoutButton)
         waitFor(element: configurationButton)
@@ -63,6 +75,4 @@ public class MainScreen: BaseScreen {
         waitFor(element: preferenceIdField)
         waitFor(element: accessTokenField)
     }
-
-    
 }

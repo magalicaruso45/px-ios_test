@@ -48,6 +48,12 @@ public class ReviewScreen: BaseScreen {
         return MainGroupScreen()
     }
 
+    func tapChangePaymentMethodWithCardId() -> CardsOptionsScreen {
+        swipeUp()
+        changePaymentMethodButton.tap()
+        return CardsOptionsScreen()
+    }
+
     func tapBackButtonToPayerCostScreen() -> PayerCostScreen {
         backButton.tap()
         return PayerCostScreen()

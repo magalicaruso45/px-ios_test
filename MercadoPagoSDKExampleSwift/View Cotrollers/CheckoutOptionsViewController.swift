@@ -19,8 +19,8 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
         setupUI()
     }
 
-    func startCheckout(publicKey: String, prefId: String, accessToken: String? = nil) {
-        let checkoutPreference = CheckoutPreference(preferenceId: prefId)
+    func startCheckout(publicKey: String, prefId: String, accessToken: String? = nil, cardId: String? = nil) {
+        let checkoutPreference = self.createPreference(prefId: prefId, cardId: cardId)
         let at: String = accessToken != nil ? accessToken! : ""
         if let navigationController = self.navigationController {
             MercadoPagoCheckout.setLanguage(language: ._SPANISH)
@@ -53,6 +53,12 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
         PXLayout.put(view: accessTokenField, onBottomOf: preferenceIDField, withMargin: PXLayout.S_MARGIN).isActive = true
         PXLayout.centerHorizontally(view: accessTokenField).isActive = true
 
+        //Card ID Input
+        let cardIdField: UITextField = createInputTextField(placeholder: "Card Id (Optional)")
+        cardIdField.autocapitalizationType = .none
+        PXLayout.put(view: cardIdField, onBottomOf: accessTokenField, withMargin: PXLayout.S_MARGIN).isActive = true
+        PXLayout.centerHorizontally(view: cardIdField).isActive = true
+
         //Start Button
         let startButton: UIButton = {
             let button = UIButton()
@@ -63,13 +69,13 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
             button.setTitleColor(.white, for: .normal)
             button.add(for: .touchUpInside, {
                 if let publicKey = publicKeyField.text, let prefId = preferenceIDField.text {
-                    self.startCheckout(publicKey: publicKey, prefId: prefId, accessToken: accessTokenField.text)
+                    self.startCheckout(publicKey: publicKey, prefId: prefId, accessToken: accessTokenField.text, cardId: cardIdField.text)
                 }
             })
             return button
         }()
         self.view.addSubview(startButton)
-        PXLayout.put(view: startButton, onBottomOf: accessTokenField, withMargin: PXLayout.L_MARGIN).isActive = true
+        PXLayout.put(view: startButton, onBottomOf: cardIdField, withMargin: PXLayout.L_MARGIN).isActive = true
         PXLayout.centerHorizontally(view: startButton).isActive = true
         PXLayout.setHeight(owner: startButton, height: 40).isActive = true
         PXLayout.setWidth(owner: startButton, width: 200).isActive = true
@@ -150,6 +156,20 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
         }
         applyDiscountConfigurations(checkout: checkout)
         applyPaymentPluginConfigurations(checkout: checkout)
+    }
+    func createPreference(prefId: String, cardId: String? = nil) -> CheckoutPreference {
+
+        if cardId != nil {
+            let item = Item(itemId: "id", title: "Item Test", quantity: 1, unitPrice: 1, description: "Item test description", currencyId: "$")
+            let paymentPreference = PaymentPreference()
+            paymentPreference.excludedPaymentTypeIds = ["atm", "ticket", "account_money"]
+            paymentPreference.cardId = cardId
+            let checkoutPreference = CheckoutPreference(items: [item], payer: Payer(payerId: "test", email: "test@test.com", identification: nil, entityType: nil), paymentMethods: paymentPreference)
+            checkoutPreference.preferenceId = prefId
+            return checkoutPreference
+        }
+
+        return CheckoutPreference(preferenceId: prefId)
     }
 }
 

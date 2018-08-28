@@ -107,17 +107,25 @@ PODS:
   - MLUI/StyleSheet (5.0.1)
 
 DEPENDENCIES:
-  - MercadoPagoSDKV4 (from `git@github.com:mercadopago/px-ios.git`, branch `development`)
+  - "MercadoPagoSDKV4 (from `git@github.com:mercadopago/px-ios.git`, branch `development`)"
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - FXBlurView
+    - JRSwizzle
+    - MercadoPagoPXTrackingV4
+    - MercadoPagoServicesV4
+    - MLUI
 
 EXTERNAL SOURCES:
   MercadoPagoSDKV4:
     :branch: development
-    :git: git@github.com:mercadopago/px-ios.git
+    :git: "git@github.com:mercadopago/px-ios.git"
 
 CHECKOUT OPTIONS:
   MercadoPagoSDKV4:
     :commit: b2e1d389abf575455168938cf5a4af0c5d201ab4
-    :git: git@github.com:mercadopago/px-ios.git
+    :git: "git@github.com:mercadopago/px-ios.git"
 
 SPEC CHECKSUMS:
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
@@ -129,4 +137,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 71fbb0c3ac5e758e7fd1e6bd58887acd907cdfd8
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3
