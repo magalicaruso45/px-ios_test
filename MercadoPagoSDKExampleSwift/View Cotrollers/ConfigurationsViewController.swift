@@ -39,7 +39,7 @@ class ConfigurationsViewController: UIViewController {
     }
     
     @IBAction func stepperValueChanges(_ sender: Any) {
-        maxRedeemPerUserLabel.text = Int(exactly: maxRedeemPerUserStepper.value)?.stringValue
+        maxRedeemPerUserLabel.text = String(describing: Int(exactly: maxRedeemPerUserStepper.value))
     }
 
     @IBAction func applyAndConfirm(_ sender: Any) {

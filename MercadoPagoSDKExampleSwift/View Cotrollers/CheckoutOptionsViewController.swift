@@ -8,7 +8,6 @@
 
 import UIKit
 import MercadoPagoSDKV4
-import MercadoPagoServicesV4
 
 class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
 
@@ -20,16 +19,17 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
     }
 
     func startCheckout(publicKey: String, prefId: String, accessToken: String? = nil, cardId: String? = nil) {
-        let checkoutPreference = self.createPreference(prefId: prefId, cardId: cardId)
-        let at: String = accessToken != nil ? accessToken! : ""
-        if let navigationController = self.navigationController {
-            MercadoPagoCheckout.setLanguage(language: ._SPANISH)
-            let mpCheckout = MercadoPagoCheckout(publicKey: publicKey, accessToken: at, checkoutPreference: checkoutPreference, discount: nil, navigationController: navigationController)
-            if configurations != nil {
-                applyConfigurations(checkout: mpCheckout)
-            }
-            mpCheckout.start()
+        var paymentPref = PXPaymentConfiguration(paymentProcessor: PaymentPluginViewController())
+        if let discountConfig = getDiscountConfiguration() {
+            paymentPref.setDiscountConfiguration(config:discountConfig)
         }
+        if let comisiones = getComisions() {
+            paymentPref.addChargeRules(charges: comisiones)
+        }
+        var builder =  getBuilder(publicKey: publicKey, prefId: prefId, paymentConfig: paymentPref)
+
+        MercadoPagoCheckout.init(builder:builder).start(navigationController: self.navigationController!)
+        
     }
 
     func setupUI() {
@@ -150,15 +150,44 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
     func setConfigurations(configs: Configurations) {
         self.configurations = configs
     }
+    
+    func getBuilder(publicKey: String, prefId: String, paymentConfig: PXPaymentConfiguration?) -> MercadoPagoCheckoutBuilder {
+        var builder : MercadoPagoCheckoutBuilder
+        
+        if let payconf = paymentConfig {
+            builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, preferenceId: prefId, paymentConfiguration: payconf)
+        } else {
+            builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, preferenceId: prefId)
+        }
+        builder.setLanguage("MLA")
+        
+        guard let configs = configurations else {
+            return builder
+        }
+        if configs.descuento && configs.paymentPlugin {
+            var maxCouponAmount: Double = 0
+            if configs.tope {
+                maxCouponAmount = 10
+            }
+            
+            let discount = PXDiscount(id: "12344", name: "Descuento de prueba", percentOff: 0, amountOff: 10, couponAmount: 10, currencyId: "ARS")
+            let campaign = PXCampaign(id: 12344, code: "code", name: "Campaña de prueba", maxCouponAmount: maxCouponAmount)
+            if let maxRedeemPerUser = Int(exactly: configs.maxRedeemPerUser)  {
+                campaign.maxRedeemPerUser = maxRedeemPerUser
+            }
+        }
+            
+        return builder
+    }
     func applyConfigurations(checkout: MercadoPagoCheckout){
         if (configurations?.comisiones)! {
-            addComisions(checkout: checkout)
+           // getComisions(checkout: checkout)
         }
-        applyDiscountConfigurations(checkout: checkout)
-        applyPaymentPluginConfigurations(checkout: checkout)
+        //applyDiscountConfigurations(checkout: checkout)
+        //applyPaymentPluginConfigurations(checkout: checkout)
     }
-    func createPreference(prefId: String, cardId: String? = nil) -> CheckoutPreference {
-
+    func createPreference(prefId: String, cardId: String? = nil) -> PXCheckoutPreference {
+/*
         if cardId != nil {
             let item = Item(itemId: "id", title: "Item Test", quantity: 1, unitPrice: 1, description: "Item test description", currencyId: "$")
             let paymentPreference = PaymentPreference()
@@ -168,22 +197,31 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
             checkoutPreference.preferenceId = prefId
             return checkoutPreference
         }
-
         return CheckoutPreference(preferenceId: prefId)
+        */
+        return PXCheckoutPreference(preferenceId: prefId)
     }
 }
 
 //MARK: Configurations --
 extension CheckoutOptionsViewController {
 
-    func addComisions(checkout: MercadoPagoCheckout){
+    func getComisions() ->  [PXPaymentTypeChargeRule]? {
+
+        guard let configs = configurations else {
+            return nil
+        }
+        if !configs.comisiones || !configs.paymentPlugin{
+            return nil
+        }
         let comision = PXPaymentTypeChargeRule(paymentMethdodId: "credit_card", amountCharge: 10.0)
         var chargesArray = [PXPaymentTypeChargeRule]()
         chargesArray.append(comision)
-        checkout.setChargeRules(chargeRules: chargesArray)
+        return chargesArray
     }
 
     func applyPaymentPluginConfigurations(checkout: MercadoPagoCheckout) {
+        /*
         guard let configs = configurations else {
             return
         }
@@ -191,33 +229,57 @@ extension CheckoutOptionsViewController {
             let paymentPlugin = PaymentPluginViewController(nibName: nil, bundle: nil)
             checkout.setPaymentPlugin(paymentPlugin: paymentPlugin)
         }
+ */
     }
 
-    func applyDiscountConfigurations(checkout: MercadoPagoCheckout) {
-        guard let configs = configurations else {
-            return
-        }
-        if configs.descuento {
+
+}
+//MARK: Configurations --
+extension CheckoutOptionsViewController {
+    
+    func getDiscountConfiguration() -> PXDiscountConfiguration? {
+        
+         guard let configs = configurations else {
+            return nil
+         }
+         if configs.descuento {
             var maxCouponAmount: Double = 0
             if configs.tope {
                 maxCouponAmount = 10
             }
-
+         
             let discount = PXDiscount(id: "12344", name: "Descuento de prueba", percentOff: 0, amountOff: 10, couponAmount: 10, currencyId: "ARS")
             let campaign = PXCampaign(id: 12344, code: "code", name: "Campaña de prueba", maxCouponAmount: maxCouponAmount)
             if let maxRedeemPerUser = Int(exactly: configs.maxRedeemPerUser)  {
                 campaign.maxRedeemPerUser = maxRedeemPerUser
             }
-            checkout.setDiscount(discount, withCampaign: campaign)
-        }
-        if configs.discountNotAvailable {
-            checkout.discountNotAvailable()
-        }
+            return PXDiscountConfiguration(discount: discount, campaign: campaign)
+         }
+        //TODO
+         //if configs.discountNotAvailable {
+         //   checkout.discountNotAvailable()
+        // }
+        return nil
     }
 }
 
-class PaymentPluginViewController: UIViewController, PXPaymentPluginComponent {
-    func render(store: PXCheckoutStore, theme: PXTheme) -> UIView? {
+class PaymentPluginViewController: NSObject, PXPaymentProcessor {
+    func paymentProcessorViewController() -> UIViewController? {
         return nil
     }
+ 
+    func support() -> Bool {
+        return true
+    }
+    func didReceive(navigationHandler: PXPaymentProcessorNavigationHandler){
+        navigationHandler.next()
+    }
+    func didReceive(checkoutStore: PXCheckoutStore){
+        
+    }
+    func startPayment(checkoutStore: PXCheckoutStore, errorHandler: PXPaymentProcessorErrorHandler, successWithBusinessResult: @escaping ((PXBusinessResult) -> Void), successWithPaymentResult: @escaping  ((PXGenericPayment) -> Void)){
+        
+        successWithBusinessResult(PXBusinessResult(receiptId: "123", status: .APPROVED, title: "hola", subtitle: "nono", icon: nil, mainAction: nil, secondaryAction: nil, helpMessage: nil, showPaymentMethod: true, statementDescription: nil, imageUrl: nil, topCustomView: nil, bottomCustomView: nil, paymentStatus: "APPROVED", paymentStatusDetail: "OK"))
+    }
+    
 }

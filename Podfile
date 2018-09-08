@@ -6,7 +6,7 @@ target 'MercadoPagoSDKExampleSwift' do
   use_frameworks!
 
   # Pods for MercadoPagoSDKExampleSwift
-  pod 'MercadoPagoSDKV4', :git => 'git@github.com:mercadopago/px-ios.git', :branch => 'development'
+  pod 'MercadoPagoSDKV4', :git => 'git@github.com:mercadopago/px-ios.git', :branch => 'develop'
   target 'MercadoPagoSDKExampleSwiftTests' do
     inherit! :search_paths
     # Pods for testing

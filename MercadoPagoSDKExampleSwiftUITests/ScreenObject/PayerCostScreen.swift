@@ -16,7 +16,7 @@ public class PayerCostScreen: BaseScreen {
 
 
     override open func waitForElements() {
-        waitFor(element: cellNumber(3))
+        waitFor(element: cellNumber(1))
     }
 
     func selectPayerCostOptionAtRow(_ rowNumber: Int) -> ReviewScreen {
