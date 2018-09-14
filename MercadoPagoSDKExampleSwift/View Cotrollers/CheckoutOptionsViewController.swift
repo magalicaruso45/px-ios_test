@@ -17,21 +17,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
         super.viewDidLoad()
         setupUI()
     }
-
-    func startCheckout(publicKey: String, prefId: String, accessToken: String? = nil, cardId: String? = nil) {
-        var paymentPref = PXPaymentConfiguration(paymentProcessor: PaymentPluginViewController())
-        if let discountConfig = getDiscountConfiguration() {
-            paymentPref.setDiscountConfiguration(config:discountConfig)
-        }
-        if let comisiones = getComisions() {
-            paymentPref.addChargeRules(charges: comisiones)
-        }
-        var builder =  getBuilder(publicKey: publicKey, prefId: prefId, paymentConfig: paymentPref)
-
-        MercadoPagoCheckout.init(builder:builder).start(navigationController: self.navigationController!)
-        
-    }
-
+    
     func setupUI() {
         //View
         self.title = "Checkout Configuration"
@@ -140,22 +126,41 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
         PXLayout.matchWidth(ofView: textField, withPercentage: 80).isActive = true
         return textField
     }
-
+    
     func additionalConfigs(){
         let vc = ConfigurationsViewController()
         vc.delegate = self
         vc.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal
         self.navigationController?.present(vc, animated: true, completion: nil)
     }
+
     func setConfigurations(configs: Configurations) {
         self.configurations = configs
     }
     
-    func getBuilder(publicKey: String, prefId: String, paymentConfig: PXPaymentConfiguration?) -> MercadoPagoCheckoutBuilder {
+    //---- Configs
+    
+    func startCheckout(publicKey: String, prefId: String, accessToken: String? = nil, cardId: String? = nil) {
+        let paymentPref = PXPaymentConfiguration(paymentProcessor: PaymentPluginViewController())
+        if let discountConfig = getDiscountConfiguration() {
+            _ = paymentPref.setDiscountConfiguration(config:discountConfig)
+        }
+        if let comisiones = getComisions() {
+            _ = paymentPref.addChargeRules(charges: comisiones)
+        }
+        let builder =  getBuilder(publicKey: publicKey, prefId: prefId, accessToken:accessToken, cardId: cardId, paymentConfig: paymentPref)
+        
+        MercadoPagoCheckout.init(builder:builder).start(navigationController: self.navigationController!)
+        
+    }
+    
+    func getBuilder(publicKey: String, prefId: String, accessToken: String?,  cardId: String?, paymentConfig: PXPaymentConfiguration?) -> MercadoPagoCheckoutBuilder {
         var builder : MercadoPagoCheckoutBuilder
         
         if let payconf = paymentConfig {
-            builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, preferenceId: prefId, paymentConfiguration: payconf)
+            builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, checkoutPreference: createPreference(prefId: prefId, cardId:cardId), paymentConfiguration: payconf)
+            builder.setPrivateKey(key: accessToken!)
+            //builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, preferenceId: prefId, paymentConfiguration: payconf)
         } else {
             builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, preferenceId: prefId)
         }
@@ -187,19 +192,22 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
         //applyPaymentPluginConfigurations(checkout: checkout)
     }
     func createPreference(prefId: String, cardId: String? = nil) -> PXCheckoutPreference {
-/*
+
         if cardId != nil {
-            let item = Item(itemId: "id", title: "Item Test", quantity: 1, unitPrice: 1, description: "Item test description", currencyId: "$")
-            let paymentPreference = PaymentPreference()
-            paymentPreference.excludedPaymentTypeIds = ["atm", "ticket", "account_money"]
-            paymentPreference.cardId = cardId
-            let checkoutPreference = CheckoutPreference(items: [item], payer: Payer(payerId: "test", email: "test@test.com", identification: nil, entityType: nil), paymentMethods: paymentPreference)
-            checkoutPreference.preferenceId = prefId
+            let item = PXItem(title: "id", quantity: 1, unitPrice: 100)
+            //(itemId: "id", title: "Item Test", quantity: 1, unitPrice: 1, description: "Item test description", currencyId: "$")
+           // let paymentPreference = PXPaymentPreference()
+           // paymentPreference.excludedPaymentTypeIds = ["atm", "ticket", "account_money"]
+           // paymentPreference.cardId = cardId
+            let checkoutPreference = PXCheckoutPreference(siteId: "MLA", payerEmail: "sadsd@asd.com", items: [item])
+            //(items: [item], payer: PXPayer(email: "test@test.com"), paymentMethods: paymentPreference)
+           // checkoutPreference.preferenceId = prefId
+            checkoutPreference.setCardId(cardId: cardId!)
             return checkoutPreference
         }
-        return CheckoutPreference(preferenceId: prefId)
-        */
         return PXCheckoutPreference(preferenceId: prefId)
+        
+        //return PXCheckoutPreference(preferenceId: prefId)
     }
 }
 

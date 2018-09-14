@@ -64,11 +64,11 @@ public class ConfigurationScreen: BaseScreen {
 
     override open func waitForElements() {
         waitFor(element: descuentoSwitch)
-        waitFor(element: topeDeDescuentoSwitch)
-        waitFor(element: comisionesSwitch)
-        waitFor(element: paymentPluginSwitch)
-        waitFor(element: discountNotAvailableSwitch)
-        waitFor(element: applyConfigsButton)
-        waitFor(element: maxRedeemPerUserStepper)
+   //     waitFor(element: topeDeDescuentoSwitch)
+   //     waitFor(element: comisionesSwitch)
+    //    waitFor(element: paymentPluginSwitch)
+    //    waitFor(element: discountNotAvailableSwitch)
+    //    waitFor(element: applyConfigsButton)
+     //   waitFor(element: maxRedeemPerUserStepper)
     }
 }

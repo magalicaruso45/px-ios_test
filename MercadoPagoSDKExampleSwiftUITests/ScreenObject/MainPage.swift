@@ -70,9 +70,9 @@ public class MainScreen: BaseScreen {
 
     override open func waitForElements() {
         waitFor(element: checkoutButton)
-        waitFor(element: configurationButton)
-        waitFor(element: publicKeyField)
-        waitFor(element: preferenceIdField)
-        waitFor(element: accessTokenField)
+      //  waitFor(element: configurationButton)
+       // waitFor(element: publicKeyField)
+       // waitFor(element: preferenceIdField)
+       // waitFor(element: accessTokenField)
     }
 }

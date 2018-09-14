@@ -1,10 +1,10 @@
 PODS:
   - FXBlurView (1.6.4)
   - JRSwizzle (1.0)
-  - MercadoPagoSDKV4 (4.0.1):
-    - MercadoPagoSDKV4/Default (= 4.0.1)
+  - MercadoPagoSDKV4 (4.0.3):
+    - MercadoPagoSDKV4/Default (= 4.0.3)
     - MLUI (~> 5.0)
-  - MercadoPagoSDKV4/Default (4.0.1):
+  - MercadoPagoSDKV4/Default (4.0.3):
     - MLUI (~> 5.0)
   - MLUI (5.1.0):
     - MLUI/ActionButton (= 5.1.0)
@@ -109,13 +109,13 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   MercadoPagoSDKV4:
-    :commit: 54db92352a8bb9805a804ee0071981ae4fa4e91f
+    :commit: 44380d1b1fb9390b98d65612a5627f8cb02c9331
     :git: git@github.com:mercadopago/px-ios.git
 
 SPEC CHECKSUMS:
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
   JRSwizzle: dd5ead5d913a0f29e7f558200165849f006bb1e3
-  MercadoPagoSDKV4: 22dbce816dfec8a29e4d0f6cb9e31c0044a9c90d
+  MercadoPagoSDKV4: cdd9496aaed814fc73c0e10dbff81d1169b283a7
   MLUI: 4bc30710e102d8348eece6a57f15ca86060f36b2
 
 PODFILE CHECKSUM: c656a6f0845b516300d49d5775b575ed6a359c98

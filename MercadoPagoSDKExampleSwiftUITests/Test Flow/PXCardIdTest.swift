@@ -51,6 +51,9 @@ class PXCardIdTest: XCTestCase {
     func test_tarjeta_debito_guardada() {
         let _ = MainScreen()
             .tapClearButton()
+            .tapConfigurationsButton()
+            .changePaymentPluginSwitch()
+            .tapApplyConfigurationsButton()
             .fillPublicKey("APP_USR-04c0e3ac-d6f5-415a-8db1-5d555469d42e")
             .fillAccessToken("APP_USR-1505-080815-c6ea450de1bf828e39add499237d727f-312667294")
             .fillCardId("260077840")
