@@ -13,10 +13,13 @@ public class ConfigurationScreen: BaseScreen {
     private lazy var descuentoSwitch = switchElement("descuento_switch")
     private lazy var topeDeDescuentoSwitch = switchElement("tope_switch")
     private lazy var comisionesSwitch = switchElement("comisiones_switch")
+    private lazy var accountMoneySwitch = switchElement("account_money_switch")
+        private lazy var secondFactorSwitch = switchElement("second_factor_switch")
     private lazy var paymentPluginSwitch = switchElement("payment_plugin_switch")
     private lazy var discountNotAvailableSwitch = switchElement("discount_not_available_switch")
     private lazy var maxRedeemPerUserStepper = stepper("max_redeem_per_user_stepper")
     private lazy var applyConfigsButton = button("apply_configs_button")
+    private lazy var pluginViewController = switchElement("view_controller_switch")
 
     func tapApplyConfigurationsButton() -> MainScreen {
         applyConfigsButton.tap()
@@ -43,6 +46,20 @@ public class ConfigurationScreen: BaseScreen {
         return self
     }
 
+    func changeAccountMoneySwitch() -> ConfigurationScreen {
+        accountMoneySwitch.tap()
+        return self
+    }
+    
+    func changeSecondFactorSwitch() -> ConfigurationScreen {
+        secondFactorSwitch.tap()
+        return self
+    }
+    func changePluginViewControllerSwitch() -> ConfigurationScreen {
+        pluginViewController.tap()
+        return self
+    }
+    
     func incrementMaxRedeemPerUserStepperBy(_ int: Int) -> ConfigurationScreen {
         for _ in 1...int {
             maxRedeemPerUserStepper.buttons["Increment"].tap()
@@ -64,11 +81,11 @@ public class ConfigurationScreen: BaseScreen {
 
     override open func waitForElements() {
         waitFor(element: descuentoSwitch)
-        waitFor(element: topeDeDescuentoSwitch)
-        waitFor(element: comisionesSwitch)
-        waitFor(element: paymentPluginSwitch)
-        waitFor(element: discountNotAvailableSwitch)
-        waitFor(element: applyConfigsButton)
-        waitFor(element: maxRedeemPerUserStepper)
+   //     waitFor(element: topeDeDescuentoSwitch)
+   //     waitFor(element: comisionesSwitch)
+    //    waitFor(element: paymentPluginSwitch)
+    //    waitFor(element: discountNotAvailableSwitch)
+    //    waitFor(element: applyConfigsButton)
+     //   waitFor(element: maxRedeemPerUserStepper)
     }
 }

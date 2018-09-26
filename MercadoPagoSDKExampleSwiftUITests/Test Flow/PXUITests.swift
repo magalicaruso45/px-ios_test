@@ -265,7 +265,7 @@ class PXFlowUITests: XCTestCase {
             .completeNumberAndContinueToPayerCost("30666777")
             .selectPayerCostOptionAtRow(2)
             .validate { (reviewScreen) in
-                XCTAssert(reviewScreen.element("CFT 120,42%").exists)
+                XCTAssert(reviewScreen.element("CFT_label").exists)
         }
     }
 

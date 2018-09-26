@@ -9,14 +9,18 @@
 import UIKit
 
 public class CongratsScreen: BaseScreen {
+    
+    
+    
     override open func waitForElements() {
-        let instructionsFooterButton = element("Cancelar pago")
-        waitFor(element: instructionsFooterButton)
+       // let instructionsFooterButton = element("Cancelar pago")
+       // waitFor(element: instructionsFooterButton)
+        waitForAnyCongrats()
     }
 //
     func waitForAnyCongrats() -> CongratsScreen {
-        let instructionsFooterButton = element("Continuar")
-        waitFor(element: instructionsFooterButton)
+        let headerView = otherElement("result_header_view")
+        waitFor(element: headerView)
         return self
     }
 //
