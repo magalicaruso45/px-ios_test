@@ -38,8 +38,14 @@ public class ReviewScreen: BaseScreen {
     }
 
     func tapPayButtonForAnyCongrats() -> CongratsScreen {
+        swipeUp()
         payButton.tap()
         return CongratsScreen()
+    }
+    func tapPayButtonForPluginProcessorViewController() -> PluginViewControllerScreen {
+        swipeUp()
+        payButton.tap()
+        return PluginViewControllerScreen()
     }
 
     func tapChangePaymentMethod() -> MainGroupScreen {

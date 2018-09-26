@@ -1,11 +1,11 @@
 PODS:
   - FXBlurView (1.6.4)
   - JRSwizzle (1.0)
-  - MercadoPagoSDKV4 (4.0.3):
-    - MercadoPagoSDKV4/Default (= 4.0.3)
+  - MercadoPagoSDKV4 (4.0.6):
+    - MercadoPagoSDKV4/Default (= 4.0.6)
+  - MercadoPagoSDKV4/Default (4.0.6):
     - MLUI (~> 5.0)
-  - MercadoPagoSDKV4/Default (4.0.3):
-    - MLUI (~> 5.0)
+  - MLReachability (2.0.0)
   - MLUI (5.1.0):
     - MLUI/ActionButton (= 5.1.0)
     - MLUI/Core (= 5.1.0)
@@ -98,26 +98,36 @@ PODS:
     - MLUI/Helpers
     - MLUI/MLFonts
   - MLUI/StyleSheet (5.1.0)
+  - PureLayout (3.1.2)
+  - PXAccountMoneyPlugin (4.0.0):
+    - MercadoPagoSDKV4 (>= 4.0.0)
+    - MLReachability
+    - MLUI
+    - PureLayout
 
 DEPENDENCIES:
-  - MercadoPagoSDKV4 (from `git@github.com:mercadopago/px-ios.git`, branch `develop`)
+  - MercadoPagoSDKV4 (from `git@github.com:mercadopago/px-ios.git`, branch `alamofire`)
+  - PXAccountMoneyPlugin (= 4.0.0)
 
 EXTERNAL SOURCES:
   MercadoPagoSDKV4:
-    :branch: develop
+    :branch: alamofire
     :git: git@github.com:mercadopago/px-ios.git
 
 CHECKOUT OPTIONS:
   MercadoPagoSDKV4:
-    :commit: 44380d1b1fb9390b98d65612a5627f8cb02c9331
+    :commit: a22b4597d1c95695080c721ac38ca1f0aec77f57
     :git: git@github.com:mercadopago/px-ios.git
 
 SPEC CHECKSUMS:
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
   JRSwizzle: dd5ead5d913a0f29e7f558200165849f006bb1e3
-  MercadoPagoSDKV4: cdd9496aaed814fc73c0e10dbff81d1169b283a7
+  MercadoPagoSDKV4: 9cc67412cdbd7a387eb82ce88e810b0fbe1b0990
+  MLReachability: a1a3711102887df70cd5c7b3022c5c3567bee7b4
   MLUI: 4bc30710e102d8348eece6a57f15ca86060f36b2
+  PureLayout: 4634d0b61e3b5021166e8ec7c18e9e0ca0720c8b
+  PXAccountMoneyPlugin: 0afa07b0b2559561498bce67f094a536151615da
 
-PODFILE CHECKSUM: c656a6f0845b516300d49d5775b575ed6a359c98
+PODFILE CHECKSUM: 8a1fe6e97a103f2b4245ce28156e279ceb26fbee
 
 COCOAPODS: 1.4.0

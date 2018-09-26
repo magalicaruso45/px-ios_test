@@ -14,7 +14,7 @@ public protocol BaseScreenProtocol {
 }
 
 open class BaseScreen : BaseScreenProtocol {
-    let TIME_OUT : Double = 5 // Seconds
+    let TIME_OUT : Double = 10 // Seconds
     public init() {
         waitForElements()
     }
@@ -82,6 +82,9 @@ public extension BaseScreen {
     func element(_ text: String) -> XCUIElement {
         return XCUIApplication().staticTexts[text].firstMatch
     }
+    func otherElement(_ text: String) -> XCUIElement {
+        return XCUIApplication().otherElements[text].firstMatch
+    }
     func imageView(_ text: String) -> XCUIElement {
         return XCUIApplication().images[text].firstMatch
     }
@@ -90,6 +93,9 @@ public extension BaseScreen {
     }
     func stepper(_ text: String) -> XCUIElement {
         return XCUIApplication().steppers[text].firstMatch
+    }
+    func firstSecureTextField() -> XCUIElement {
+        return  XCUIApplication().secureTextFields.firstMatch
     }
 }
 

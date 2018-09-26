@@ -23,6 +23,9 @@ class PXCardIdTest: XCTestCase {
     func test_nueva_tarjeta_debito() {
         let _ = MainScreen()
             .tapClearButton()
+            .tapConfigurationsButton()
+            .changePaymentPluginSwitch()
+            .tapApplyConfigurationsButton()
             .fillPublicKey("APP_USR-b8925182-e1bf-4c0e-bc38-1d893a19ab45")
             .fillCardId("debit_card")
             .tapCheckoutOptionOnlyCard()
@@ -37,6 +40,9 @@ class PXCardIdTest: XCTestCase {
     func test_nueva_tarjeta_debito_rejected() {
         let _ = MainScreen()
             .tapClearButton()
+            .tapConfigurationsButton()
+            .changePaymentPluginSwitch()
+            .tapApplyConfigurationsButton()
             .fillPublicKey("APP_USR-b8925182-e1bf-4c0e-bc38-1d893a19ab45")
             .fillCardId("debit_card")
             .tapCheckoutOptionOnlyCard()

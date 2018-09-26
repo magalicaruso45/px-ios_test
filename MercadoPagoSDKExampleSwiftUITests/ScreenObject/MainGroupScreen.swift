@@ -37,6 +37,15 @@ public class MainGroupScreen: BaseScreen {
         cashButton.tap()
         return CashOptionsScreen()
     }
+    func tapAccountMoneyOptionForSecondFactor() -> SecondFactorScreen {
+        cellNumber(1).tap()
+        return SecondFactorScreen()
+    }
+    
+    func tapAccountMoneyOptionForReview() -> ReviewScreen {
+        cellNumber(1).tap()
+        return ReviewScreen()
+    }
 }
 
 class CardsOptionsScreen: BaseScreen {

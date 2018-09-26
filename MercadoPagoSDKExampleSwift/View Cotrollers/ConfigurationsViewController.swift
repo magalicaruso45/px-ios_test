@@ -19,6 +19,9 @@ class ConfigurationsViewController: UIViewController {
     @IBOutlet weak var paymentPluginSwitch: UISwitch!
     @IBOutlet weak var discountNotAvailableSwitch: UISwitch!
     @IBOutlet weak var maxRedeemPerUserStepper: UIStepper!
+    @IBOutlet weak var secondFactorSwitch: UISwitch!
+    @IBOutlet weak var accountMoneySwitch: UISwitch!
+    @IBOutlet weak var viewControllerSwitch: UISwitch!
     @IBOutlet weak var maxRedeemPerUserLabel: UILabel!
     var delegate: ConfigurationManager?
     
@@ -43,7 +46,7 @@ class ConfigurationsViewController: UIViewController {
     }
 
     @IBAction func applyAndConfirm(_ sender: Any) {
-        let configs = Configurations(comisiones: comisionesSwitch.isOn, descuento: descuentoSwitch.isOn, tope: topeSwitch.isOn, paymentPlugin: paymentPluginSwitch.isOn, discountNotAvailable: discountNotAvailableSwitch.isOn, maxRedeemPerUser: maxRedeemPerUserStepper.value)
+        let configs = Configurations(comisiones: comisionesSwitch.isOn, descuento: descuentoSwitch.isOn, tope: topeSwitch.isOn, paymentPlugin: paymentPluginSwitch.isOn, paymentPluginViewController: viewControllerSwitch.isOn, discountNotAvailable: discountNotAvailableSwitch.isOn, maxRedeemPerUser: maxRedeemPerUserStepper.value, accountMoney: accountMoneySwitch.isOn, secondFactor: secondFactorSwitch.isOn)
         if let delegate = delegate {
             delegate.setConfigurations(configs: configs)
         }
