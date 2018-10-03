@@ -40,4 +40,11 @@ public class IdentificationScreen: BaseScreen {
         backButton.tap()
         return CardScreen()
     }
+    
+    func completeNumberAndContinueToCongrats(_ text: String) -> CongratsScreen {
+        numberTextField.typeText(text)
+        continueButton.tap()
+        return CongratsScreen()
+    }
+    
 }

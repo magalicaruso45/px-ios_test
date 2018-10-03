@@ -11,6 +11,7 @@ import XCTest
 public class MainScreen: BaseScreen {
 
     private lazy var checkoutButton = button("Start Checkout")
+    private lazy var addCardButton = button("Start Card Flow")
     private lazy var clearButton = button("Clear fields")
     private lazy var configurationButton = button("Add Configutations")
     private lazy var publicKeyField = textField("Public Key")
@@ -66,6 +67,11 @@ public class MainScreen: BaseScreen {
     func tapConfigurationsButton() -> ConfigurationScreen {
         configurationButton.tap()
         return ConfigurationScreen()
+    }
+    
+    func tapAddCardButton() -> CardScreen{
+        addCardButton.tap()
+        return CardScreen()
     }
 
     override open func waitForElements() {
