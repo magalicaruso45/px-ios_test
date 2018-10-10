@@ -8,7 +8,7 @@ target 'MercadoPagoSDKExampleSwift' do
   use_frameworks!
 
   # Pods for MercadoPagoSDKExampleSwift
-  pod 'MercadoPagoSDKV4', :git => 'git@github.com:mercadopago/px-ios.git', :branch => 'alamofire'
+  pod 'MercadoPagoSDKV4', :git => 'git@github.com:mercadopago/px-ios.git', :branch => 'add_card_flow'
   pod 'PXAccountMoneyPlugin', '4.0.0'
 
   target 'MercadoPagoSDKExampleSwiftTests' do

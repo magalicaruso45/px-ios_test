@@ -57,6 +57,13 @@ public class CardScreen: BaseScreen {
         continueToolbarButton.tap()
         return IdentificationScreen()
     }
+    
+    func completeCVVAndContinueToCongrats(_ text: String) -> CongratsScreen{
+        waitFor(element: cardFormTextField)
+        cardFormTextField.typeText(text)
+        continueToolbarButton.tap()
+        return CongratsScreen()
+    }
 
     func pressPreviousButton() -> CardScreen {
         backToolbarButton.tap()

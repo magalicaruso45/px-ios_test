@@ -13,6 +13,8 @@ import PXAccountMoneyPlugin
 class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
 
     var configurations: Configurations = Configurations(comisiones: false,descuento: false,tope: false,paymentPlugin: false, paymentPluginViewController : false, discountNotAvailable: false,maxRedeemPerUser: 0,accountMoney: false, secondFactor: false)
+    
+    var addCardFlow : AddCardFlow?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +47,28 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
         cardIdField.autocapitalizationType = .none
         PXLayout.put(view: cardIdField, onBottomOf: accessTokenField, withMargin: PXLayout.S_MARGIN).isActive = true
         PXLayout.centerHorizontally(view: cardIdField).isActive = true
+        
+        //Add card flow button
+        
+        let addCardFlowButton: UIButton = {
+            let button = UIButton()
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.backgroundColor = .gray
+            button.setTitle("Start Card Flow", for: .normal)
+            button.layer.cornerRadius = 20
+            button.setTitleColor(.white, for: .normal)
+            button.add(for: .touchUpInside, {
+                if let accessToken = accessTokenField.text {
+                    self.startAddCardFlow(accessToken: accessToken)
+                }
+            })
+            return button
+        }()
+        self.view.addSubview(addCardFlowButton)
+        PXLayout.put(view: addCardFlowButton, onBottomOf: cardIdField, withMargin: PXLayout.L_MARGIN).isActive = true
+        PXLayout.centerHorizontally(view: addCardFlowButton).isActive = true
+        PXLayout.setHeight(owner: addCardFlowButton, height: 40).isActive = true
+        PXLayout.setWidth(owner: addCardFlowButton, width: 200).isActive = true
 
         //Start Button
         let startButton: UIButton = {
@@ -62,7 +86,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
             return button
         }()
         self.view.addSubview(startButton)
-        PXLayout.put(view: startButton, onBottomOf: cardIdField, withMargin: PXLayout.L_MARGIN).isActive = true
+        PXLayout.put(view: startButton, onBottomOf: addCardFlowButton, withMargin: PXLayout.L_MARGIN).isActive = true
         PXLayout.centerHorizontally(view: startButton).isActive = true
         PXLayout.setHeight(owner: startButton, height: 40).isActive = true
         PXLayout.setWidth(owner: startButton, width: 200).isActive = true
@@ -174,6 +198,14 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
         
         MercadoPagoCheckout.init(builder:builder).start(navigationController: self.navigationController!)
         
+    }
+    
+    func startAddCardFlow(accessToken: String) {
+        guard let navController = self.navigationController else {
+            return
+        }
+        self.addCardFlow = AddCardFlow(accessToken: accessToken, locale: "es", navigationController: navController)
+        self.addCardFlow?.start()
     }
     
     func getBuilder(publicKey: String, prefId: String, accessToken: String?,  cardId: String?, paymentConfig: PXPaymentConfiguration?) -> MercadoPagoCheckoutBuilder {
