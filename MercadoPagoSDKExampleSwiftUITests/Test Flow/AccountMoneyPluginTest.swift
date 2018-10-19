@@ -37,6 +37,7 @@ class AccountMoneyPluginTest: XCTestCase {
         .tapPayButtonForAnyCongrats()
     }
     
+    /*
     func test_account_money_without_second_factor() {
         MainScreen()
             .tapConfigurationsButton()
@@ -48,5 +49,5 @@ class AccountMoneyPluginTest: XCTestCase {
             .tapCheckoutOption()
             .tapAccountMoneyOptionForReview()
             .tapPayButtonForAnyCongrats()
-    }
+    }*/
 }
