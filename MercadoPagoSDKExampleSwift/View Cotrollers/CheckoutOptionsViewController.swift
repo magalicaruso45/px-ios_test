@@ -247,21 +247,16 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
     }
     func createPreference(prefId: String, cardId: String? = nil) -> PXCheckoutPreference {
 
-        if cardId != nil {
-            let item = PXItem(title: "id", quantity: 1, unitPrice: 100)
-            //(itemId: "id", title: "Item Test", quantity: 1, unitPrice: 1, description: "Item test description", currencyId: "$")
-           // let paymentPreference = PXPaymentPreference()
-           // paymentPreference.excludedPaymentTypeIds = ["atm", "ticket", "account_money"]
-           // paymentPreference.cardId = cardId
+        let item = PXItem(title: "id", quantity: 1, unitPrice: 100)
+
+        if cardId != nil && cardId != "" {
             let checkoutPreference = PXCheckoutPreference(siteId: "MLA", payerEmail: "sadsd@asd.com", items: [item])
-            //(items: [item], payer: PXPayer(email: "test@test.com"), paymentMethods: paymentPreference)
-           // checkoutPreference.preferenceId = prefId
+            checkoutPreference.setExcludedPaymentTypes(["credit_card", "atm", "prepaid_card", "account_money"])
             checkoutPreference.setCardId(cardId: cardId!)
+
             return checkoutPreference
         }
-        return PXCheckoutPreference(preferenceId: prefId)
-        
-        //return PXCheckoutPreference(preferenceId: prefId)
+        return PXCheckoutPreference(siteId: "MLA", payerEmail: "sadsd@asd.com", items: [item])
     }
 }
 
