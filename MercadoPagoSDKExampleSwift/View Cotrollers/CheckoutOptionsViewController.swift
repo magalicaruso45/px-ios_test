@@ -12,15 +12,15 @@ import PXAccountMoneyPlugin
 
 class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
 
-    var configurations: Configurations = Configurations(comisiones: false,descuento: false,tope: false,paymentPlugin: false, paymentPluginViewController : false, discountNotAvailable: false,maxRedeemPerUser: 0,accountMoney: false, secondFactor: false)
-    
+    var configurations: Configurations = Configurations(comisiones: false,descuento: false,tope: false,paymentPlugin: false, paymentPluginViewController : false, discountNotAvailable: false,maxRedeemPerUser: 0,accountMoney: false, secondFactor: false, payerInfo: false)
+
     var addCardFlow : AddCardFlow?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
-    
+
     func setupUI() {
         //View
         self.title = "Checkout Configuration"
@@ -47,9 +47,8 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
         cardIdField.autocapitalizationType = .none
         PXLayout.put(view: cardIdField, onBottomOf: accessTokenField, withMargin: PXLayout.S_MARGIN).isActive = true
         PXLayout.centerHorizontally(view: cardIdField).isActive = true
-        
+
         //Add card flow button
-        
         let addCardFlowButton: UIButton = {
             let button = UIButton()
             button.translatesAutoresizingMaskIntoConstraints = false
@@ -151,7 +150,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
         PXLayout.matchWidth(ofView: textField, withPercentage: 80).isActive = true
         return textField
     }
-    
+
     func additionalConfigs(){
         let vc = ConfigurationsViewController()
         vc.delegate = self
@@ -162,12 +161,11 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
     func setConfigurations(configs: Configurations) {
         self.configurations = configs
     }
-    
+
     //---- Configs
-    
     func startCheckout(publicKey: String, prefId: String, accessToken: String? = nil, cardId: String? = nil) {
         var paymentPref: PXPaymentConfiguration? = nil
-        var accountMoney = configurations.accountMoney
+        let accountMoney = configurations.accountMoney
         if configurations.paymentPlugin || getComisions() != nil || getDiscountConfiguration() != nil || accountMoney {
             if configurations.paymentPluginViewController {
                 paymentPref = PXPaymentConfiguration(paymentProcessor: PaymentPluginViewController())
@@ -189,17 +187,13 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
                 }
                 let accountMoneyPlugin = AccountMoneyPlugin(accessToken: accessToken, language: PXLanguages.SPANISH.rawValue)
                 paymentPref = paymentPref!.addPaymentMethodPlugin(plugin: accountMoneyPlugin)
-                
             }
-            
         }
-        let builder =  getBuilder(publicKey: publicKey, prefId: prefId, accessToken:accessToken, cardId: cardId, paymentConfig: paymentPref)
-        
-        
+
+        let builder =  getBuilder(publicKey: publicKey, prefId: prefId, accessToken:accessToken, cardId: cardId, paymentConfig: paymentPref, setPayer: configurations.payerInfo)
         MercadoPagoCheckout.init(builder:builder).start(navigationController: self.navigationController!)
-        
     }
-    
+
     func startAddCardFlow(accessToken: String) {
         guard let navController = self.navigationController else {
             return
@@ -207,17 +201,18 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
         self.addCardFlow = AddCardFlow(accessToken: accessToken, locale: "es", navigationController: navController)
         self.addCardFlow?.start()
     }
-    
-    func getBuilder(publicKey: String, prefId: String, accessToken: String?,  cardId: String?, paymentConfig: PXPaymentConfiguration?) -> MercadoPagoCheckoutBuilder {
+
+    func getBuilder(publicKey: String, prefId: String, accessToken: String?,  cardId: String?, paymentConfig: PXPaymentConfiguration?, setPayer: Bool) -> MercadoPagoCheckoutBuilder {
         var builder : MercadoPagoCheckoutBuilder
-        
+
         if let payconf = paymentConfig {
-            builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, checkoutPreference: createPreference(prefId: prefId, cardId:cardId), paymentConfiguration: payconf)
+            builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, checkoutPreference: createPreference(prefId: prefId, cardId: cardId, setPayer: setPayer), paymentConfiguration: payconf)
             builder.setPrivateKey(key: accessToken!)
             //builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, preferenceId: prefId, paymentConfiguration: payconf)
         } else {
             builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, preferenceId: prefId)
         }
+
         builder.setLanguage("MLA")
         
        // guard let configs = configurations else {
@@ -238,6 +233,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
             
         return builder
     }
+
     func applyConfigurations(checkout: MercadoPagoCheckout){
         if (configurations.comisiones) {
            // getComisions(checkout: checkout)
@@ -245,18 +241,21 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
         //applyDiscountConfigurations(checkout: checkout)
         //applyPaymentPluginConfigurations(checkout: checkout)
     }
-    func createPreference(prefId: String, cardId: String? = nil) -> PXCheckoutPreference {
+
+    func createPreference(prefId: String, cardId: String? = nil, setPayer: Bool) -> PXCheckoutPreference {
 
         let item = PXItem(title: "id", quantity: 1, unitPrice: 100)
+        let checkoutPreference = PXCheckoutPreference(siteId: "MLA", payerEmail: "sadsd@asd.com", items: [item])
 
+        if setPayer {
+            // Apply set Payer
+        }
         if cardId != nil && cardId != "" {
-            let checkoutPreference = PXCheckoutPreference(siteId: "MLA", payerEmail: "sadsd@asd.com", items: [item])
             checkoutPreference.setExcludedPaymentTypes(["credit_card", "atm", "prepaid_card", "account_money"])
             checkoutPreference.setCardId(cardId: cardId!)
-
             return checkoutPreference
         }
-        return PXCheckoutPreference(siteId: "MLA", payerEmail: "sadsd@asd.com", items: [item])
+        return checkoutPreference
     }
 }
 
@@ -275,18 +274,14 @@ extension CheckoutOptionsViewController {
     }
 
     func applyPaymentPluginConfigurations(checkout: MercadoPagoCheckout) {
-        /*
-        guard let configs = configurations else {
+        /*guard let configs = configurations else {
             return
         }
         if configs.paymentPlugin {
             let paymentPlugin = PaymentPluginViewController(nibName: nil, bundle: nil)
             checkout.setPaymentPlugin(paymentPlugin: paymentPlugin)
-        }
- */
+        }*/
     }
-
-
 }
 //MARK: Configurations --
 extension CheckoutOptionsViewController {
@@ -298,7 +293,7 @@ extension CheckoutOptionsViewController {
             if configurations.tope {
                 maxCouponAmount = 10
             }
-         
+
             if configurations.discountNotAvailable {
                 return PXDiscountConfiguration.initForNotAvailableDiscount()
             }
@@ -325,39 +320,44 @@ class PaymentPlugin: NSObject, PXPaymentProcessor {
     func support() -> Bool {
         return true
     }
+
     func didReceive(navigationHandler: PXPaymentProcessorNavigationHandler){
         navigationHandler.next()
     }
+
     func didReceive(checkoutStore: PXCheckoutStore){
         
     }
+
     func startPayment(checkoutStore: PXCheckoutStore, errorHandler: PXPaymentProcessorErrorHandler, successWithBusinessResult: @escaping ((PXBusinessResult) -> Void), successWithPaymentResult: @escaping  ((PXGenericPayment) -> Void)){
-        
+
         successWithBusinessResult(PXBusinessResult(receiptId: "123", status: .APPROVED, title: "hola", subtitle: "nono", icon: nil, mainAction: nil, secondaryAction: nil, helpMessage: nil, showPaymentMethod: true, statementDescription: nil, imageUrl: nil, topCustomView: nil, bottomCustomView: nil, paymentStatus: "APPROVED", paymentStatusDetail: "OK"))
     }
-    
 }
 
 class PaymentPluginViewController: NSObject, PXPaymentProcessor {
     var navigationHandler: PXPaymentProcessorNavigationHandler!
     let viewController = ExamplePaymentProcessorViewController()
+
     func paymentProcessorViewController() -> UIViewController? {
         return viewController
     }
-    
+
     func support() -> Bool {
         return true
     }
+
     func didReceive(navigationHandler: PXPaymentProcessorNavigationHandler){
         self.navigationHandler = navigationHandler
         viewController.handler = navigationHandler
     }
+
     func didReceive(checkoutStore: PXCheckoutStore){
         
     }
+
     func startPayment(checkoutStore: PXCheckoutStore, errorHandler: PXPaymentProcessorErrorHandler, successWithBusinessResult: @escaping ((PXBusinessResult) -> Void), successWithPaymentResult: @escaping  ((PXGenericPayment) -> Void)){
-        
+
         successWithBusinessResult(PXBusinessResult(receiptId: "123", status: .APPROVED, title: "hola", subtitle: "nono", icon: nil, mainAction: nil, secondaryAction: nil, helpMessage: nil, showPaymentMethod: true, statementDescription: nil, imageUrl: nil, topCustomView: nil, bottomCustomView: nil, paymentStatus: "APPROVED", paymentStatusDetail: "OK"))
     }
-    
 }

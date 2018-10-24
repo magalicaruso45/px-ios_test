@@ -68,7 +68,6 @@ public extension BaseScreen {
     }
     func cellNumber(_ row : Int)  -> XCUIElement{
         return  XCUIApplication().cells.allElementsBoundByIndex[row]
-
     }
     func cellButton(_ text: String) -> XCUIElement {
         return button(text)
