@@ -60,6 +60,11 @@ public class MainGroupScreen: BaseScreen {
         internetBoletoButton.tap()
         return PayerInfoScreen()
     }
+
+    func tapBoletoInternetBankingForReview() -> ReviewScreen {
+        internetBoletoButton.tap()
+        return ReviewScreen()
+    }
 }
 
 class CardsOptionsScreen: BaseScreen {

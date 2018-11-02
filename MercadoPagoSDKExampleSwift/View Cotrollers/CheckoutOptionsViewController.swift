@@ -248,7 +248,9 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
         let checkoutPreference = PXCheckoutPreference(siteId: "MLA", payerEmail: "sadsd@asd.com", items: [item])
 
         if setPayer {
-            // Apply set Payer
+            let type = PXIdentificationType(id: "CFP", name: "CFP", minLength: 1, maxLength: 1, type: "CPF")
+            let payer = PXPayer(id: "", accessToken: "", identification: PXIdentification(identificationType: type, identificationNumber: "66493851238"), type: nil, entityType: nil, email: "sadsd@asd.com", firstName: "Pepe", lastName: "Hongo")
+            checkoutPreference.setPayer(payer: payer)
         }
         if cardId != nil && cardId != "" {
             checkoutPreference.setExcludedPaymentTypes(["credit_card", "atm", "prepaid_card", "account_money"])

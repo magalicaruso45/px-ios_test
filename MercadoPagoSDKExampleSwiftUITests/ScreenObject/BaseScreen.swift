@@ -94,7 +94,7 @@ public extension BaseScreen {
         return XCUIApplication().steppers[text].firstMatch
     }
     func firstSecureTextField() -> XCUIElement {
-        return  XCUIApplication().secureTextFields.firstMatch
+        return XCUIApplication().secureTextFields.firstMatch
     }
 }
 

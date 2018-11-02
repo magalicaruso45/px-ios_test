@@ -183,7 +183,7 @@
                 </label>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8n7-Ii-ykq">
                     <rect key="frame" x="312" y="386" width="51" height="31"/>
-                    <accessibility key="accessibilityConfiguration" identifier="view_controller_switch"/>
+                    <accessibility key="accessibilityConfiguration" identifier="payer_info_switch"/>
                 </switch>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
