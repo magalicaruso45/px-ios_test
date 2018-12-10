@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,6 +16,7 @@
                 <outlet property="comisionesSwitch" destination="csf-l2-8Oc" id="ilN-s9-Tzw"/>
                 <outlet property="descuentoSwitch" destination="eRB-X4-oQv" id="F0m-4F-bFT"/>
                 <outlet property="discountNotAvailableSwitch" destination="gvP-a7-hhS" id="Mvt-jz-ZZe"/>
+                <outlet property="localizedTextsSwitch" destination="C3D-4L-kt1" id="FeZ-uN-ZXY"/>
                 <outlet property="maxRedeemPerUserLabel" destination="3lj-wF-Ixo" id="uOe-gX-l4b"/>
                 <outlet property="maxRedeemPerUserStepper" destination="JDR-wu-zYq" id="Smm-z0-vSC"/>
                 <outlet property="payerInfoSwitch" destination="8n7-Ii-ykq" id="LVS-7S-0NT"/>
@@ -185,6 +186,16 @@
                     <rect key="frame" x="312" y="386" width="51" height="31"/>
                     <accessibility key="accessibilityConfiguration" identifier="payer_info_switch"/>
                 </switch>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change localized texts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hdw-2t-S8m">
+                    <rect key="frame" x="18" y="430" width="286" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="C3D-4L-kt1">
+                    <rect key="frame" x="312" y="425" width="51" height="31"/>
+                    <accessibility key="accessibilityConfiguration" identifier="localized_texts_switch"/>
+                </switch>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -192,10 +203,12 @@
                 <constraint firstItem="xrh-32-Ecp" firstAttribute="leading" secondItem="8Ws-aM-4Sf" secondAttribute="trailing" constant="8" id="0jV-u7-mr5"/>
                 <constraint firstItem="Kzy-Rm-Udr" firstAttribute="centerY" secondItem="8n7-Ii-ykq" secondAttribute="centerY" id="19i-IL-WBF"/>
                 <constraint firstItem="csf-l2-8Oc" firstAttribute="leading" secondItem="Qf7-am-hZf" secondAttribute="trailing" constant="8" id="1uJ-yF-9jB"/>
+                <constraint firstItem="Hdw-2t-S8m" firstAttribute="trailing" secondItem="Kzy-Rm-Udr" secondAttribute="trailing" id="3Ox-3D-0Ci"/>
                 <constraint firstItem="8Ws-aM-4Sf" firstAttribute="trailing" secondItem="r0T-qp-qRg" secondAttribute="trailing" id="3rH-3d-wyy"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="r0T-qp-qRg" secondAttribute="trailing" constant="71" id="5MW-Og-lzh"/>
                 <constraint firstItem="Qf7-am-hZf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="7Bg-Lv-LMn"/>
                 <constraint firstItem="L4k-WZ-aN8" firstAttribute="top" secondItem="VZi-iG-Fxk" secondAttribute="bottom" constant="8" symbolic="YES" id="7WE-Nr-VBT"/>
+                <constraint firstItem="Hdw-2t-S8m" firstAttribute="leading" secondItem="Kzy-Rm-Udr" secondAttribute="leading" id="7Xq-WP-C3m"/>
                 <constraint firstItem="eRB-X4-oQv" firstAttribute="leading" secondItem="5Pc-eE-keT" secondAttribute="trailing" constant="8" id="8wU-m0-ZRM"/>
                 <constraint firstItem="JdY-3h-ulB" firstAttribute="top" secondItem="JDR-wu-zYq" secondAttribute="bottom" constant="13" id="B0g-xn-GPp"/>
                 <constraint firstItem="hnr-31-BCz" firstAttribute="centerY" secondItem="hkR-Fh-rXi" secondAttribute="centerY" id="CiL-0c-ylg"/>
@@ -208,6 +221,7 @@
                 <constraint firstItem="hnr-31-BCz" firstAttribute="leading" secondItem="dJR-gT-Oyn" secondAttribute="leading" id="G8A-mF-cls"/>
                 <constraint firstItem="Qf7-am-hZf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="GNC-ql-KrB"/>
                 <constraint firstItem="vXY-Uv-WUy" firstAttribute="leading" secondItem="5Pc-eE-keT" secondAttribute="leading" id="GrY-1q-scF"/>
+                <constraint firstItem="Hdw-2t-S8m" firstAttribute="top" secondItem="Kzy-Rm-Udr" secondAttribute="bottom" constant="18" id="GyL-Cp-WfQ"/>
                 <constraint firstItem="gvP-a7-hhS" firstAttribute="top" secondItem="hnr-31-BCz" secondAttribute="bottom" constant="8" symbolic="YES" id="H3J-dT-EP6"/>
                 <constraint firstItem="csf-l2-8Oc" firstAttribute="centerY" secondItem="Qf7-am-hZf" secondAttribute="centerY" id="HNK-gj-mDc"/>
                 <constraint firstItem="JDR-wu-zYq" firstAttribute="top" secondItem="gvP-a7-hhS" secondAttribute="bottom" constant="8" symbolic="YES" id="Hx1-z2-dR1"/>
@@ -244,10 +258,12 @@
                 <constraint firstItem="ei5-8p-L6c" firstAttribute="leading" secondItem="hkR-Fh-rXi" secondAttribute="leading" id="nhT-07-bKR"/>
                 <constraint firstItem="eRB-X4-oQv" firstAttribute="leading" secondItem="csf-l2-8Oc" secondAttribute="leading" id="nuU-Xu-XBa"/>
                 <constraint firstItem="hnr-31-BCz" firstAttribute="top" secondItem="dJR-gT-Oyn" secondAttribute="bottom" constant="8" id="ooi-VX-DcH"/>
+                <constraint firstItem="Hdw-2t-S8m" firstAttribute="centerY" secondItem="C3D-4L-kt1" secondAttribute="centerY" id="qcY-id-wJT"/>
                 <constraint firstItem="eRB-X4-oQv" firstAttribute="centerY" secondItem="5Pc-eE-keT" secondAttribute="centerY" id="rN7-KO-dsq"/>
                 <constraint firstItem="hkR-Fh-rXi" firstAttribute="top" secondItem="vXY-Uv-WUy" secondAttribute="bottom" constant="18" id="sPv-4Z-8Yu"/>
                 <constraint firstItem="xrh-32-Ecp" firstAttribute="top" secondItem="L4k-WZ-aN8" secondAttribute="bottom" constant="8" symbolic="YES" id="tZZ-lP-Qk8"/>
                 <constraint firstItem="L4k-WZ-aN8" firstAttribute="leading" secondItem="g4u-6c-ldg" secondAttribute="trailing" constant="8" id="tnR-fG-5MG"/>
+                <constraint firstItem="C3D-4L-kt1" firstAttribute="leading" secondItem="Hdw-2t-S8m" secondAttribute="trailing" constant="8" symbolic="YES" id="tvE-hL-8gu"/>
                 <constraint firstItem="csf-l2-8Oc" firstAttribute="leading" secondItem="Qf7-am-hZf" secondAttribute="trailing" constant="8" id="uae-O0-k70"/>
                 <constraint firstItem="Dkn-CY-kWJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="11" id="vjR-To-e0c"/>
                 <constraint firstItem="hnr-31-BCz" firstAttribute="leading" secondItem="hkR-Fh-rXi" secondAttribute="trailing" constant="8" id="wd8-t4-aM6"/>

@@ -16,6 +16,7 @@ public class ConfigurationScreen: BaseScreen {
     private lazy var accountMoneySwitch = switchElement("account_money_switch")
     private lazy var secondFactorSwitch = switchElement("second_factor_switch")
     private lazy var payerInfoSwitch = switchElement("payer_info_switch")
+    private lazy var localizedTextsSwitch = switchElement("localized_texts_switch")
     private lazy var paymentPluginSwitch = switchElement("payment_plugin_switch")
     private lazy var discountNotAvailableSwitch = switchElement("discount_not_available_switch")
     private lazy var maxRedeemPerUserStepper = stepper("max_redeem_per_user_stepper")
@@ -64,6 +65,11 @@ public class ConfigurationScreen: BaseScreen {
 
     func changePayerInfoSwitch() -> ConfigurationScreen {
         payerInfoSwitch.tap()
+        return self
+    }
+
+    func changeLocalizedTextsSwitch() -> ConfigurationScreen {
+        localizedTextsSwitch.tap()
         return self
     }
 
