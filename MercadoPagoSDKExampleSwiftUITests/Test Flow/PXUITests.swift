@@ -20,7 +20,7 @@ class PXFlowUITests: XCTestCase {
     }
 
     func test_REGRESSION_ETE1_1() { //Tarjeta MASTER con cuotas SIN INTERES
-        MainScreen()
+        let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("APP_USR-648a260d-6fd9-4ad7-9284-90f22262c18d")
             .fillPreferenceId("243966003-d0be0be0-6fd8-4769-bf2f-7f2d979655f5")
@@ -38,7 +38,7 @@ class PXFlowUITests: XCTestCase {
     }
 
     func test_REGRESSION_ETE1_2() { //Tarjeta VISA con cuotas CON INTERES
-        MainScreen()
+        let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("APP_USR-648a260d-6fd9-4ad7-9284-90f22262c18d")
             .fillPreferenceId("243966003-d0be0be0-6fd8-4769-bf2f-7f2d979655f5")
@@ -55,7 +55,7 @@ class PXFlowUITests: XCTestCase {
     }
 
     func test_REGRESSION_ETE1_3() { //Tarjeta AMEX en una sola cuota
-        MainScreen()
+        let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("APP_USR-648a260d-6fd9-4ad7-9284-90f22262c18d")
             .fillPreferenceId("243966003-d0be0be0-6fd8-4769-bf2f-7f2d979655f5")
@@ -72,7 +72,7 @@ class PXFlowUITests: XCTestCase {
     }
 
     func test_REGRESSION_ETE1_4() { //Tarjeta MAESTRO
-        MainScreen()
+        let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("APP_USR-648a260d-6fd9-4ad7-9284-90f22262c18d")
             .fillPreferenceId("243966003-d0be0be0-6fd8-4769-bf2f-7f2d979655f5")
@@ -88,7 +88,7 @@ class PXFlowUITests: XCTestCase {
     }
 
     func test_REGRESSION_ETE1_5() { //Tarjeta VISA DEBITO
-        MainScreen()
+        let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("APP_USR-648a260d-6fd9-4ad7-9284-90f22262c18d")
             .fillPreferenceId("243966003-d0be0be0-6fd8-4769-bf2f-7f2d979655f5")
@@ -104,7 +104,7 @@ class PXFlowUITests: XCTestCase {
     }
 
     func test_REGRESSION_ETE3() {
-        MainScreen()
+        let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("APP_USR-0d933ff3-b803-4999-a211-8b3c7d5c7c03")
             .fillPreferenceId("243966003-faedce8f-ee83-40a7-b8e6-bba34928383d")
@@ -115,7 +115,7 @@ class PXFlowUITests: XCTestCase {
     }
 
     func test_REGRESSION_ETE5() {
-        MainScreen()
+        let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("APP_USR-0d933ff3-b803-4999-a211-8b3c7d5c7c03")
             .fillPreferenceId("243966003-0e1df452-28e3-4d72-8b69-a71123b8a626")
@@ -132,7 +132,7 @@ class PXFlowUITests: XCTestCase {
     }
 
     func test_REGRESSION_ETE6() {
-        MainScreen()
+        let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("APP_USR-0d933ff3-b803-4999-a211-8b3c7d5c7c03")
             .fillPreferenceId("243966003-bb8f7422-39c1-4337-81dd-60a88eb787df")
@@ -148,7 +148,7 @@ class PXFlowUITests: XCTestCase {
     }
 
     func test_REGRESSION_ETE7_1() {
-        MainScreen()
+        let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("APP_USR-0d933ff3-b803-4999-a211-8b3c7d5c7c03")
             .fillPreferenceId("243966003-55f883b7-2cfb-4266-8001-11e081a45797")
@@ -166,7 +166,7 @@ class PXFlowUITests: XCTestCase {
     }
 
     func test_REGRESSION_ETE7_2() {
-        MainScreen()
+        let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("APP_USR-0d933ff3-b803-4999-a211-8b3c7d5c7c03")
             .fillPreferenceId("243966003-55f883b7-2cfb-4266-8001-11e081a45797")
@@ -178,7 +178,7 @@ class PXFlowUITests: XCTestCase {
     }
 
     func test_REGRESSION_ETE8() { //Hacer backs payment_type: Crédito
-        MainScreen()
+        let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("TEST-e4bdd1cf-bcb2-43f7-b565-ed4c9ea25be7")
             .fillPreferenceId("243966003-bb8f7422-39c1-4337-81dd-60a88eb787df")
@@ -203,7 +203,7 @@ class PXFlowUITests: XCTestCase {
     }
 
     func test_REGRESSION_ETE9() { //Hacer backs sin exclusiones
-        MainScreen()
+        let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("TEST-c6d9b1f9-71ff-4e05-9327-3c62468a23ee")
             .fillPreferenceId("243962506-e9464aff-30dd-43e0-a6fa-37e3a54b884c")
@@ -230,7 +230,7 @@ class PXFlowUITests: XCTestCase {
     }
 
     func test_REGRESSION_ETE10() {
-        MainScreen()
+        let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("TEST-c6d9b1f9-71ff-4e05-9327-3c62468a23ee")
             .fillPreferenceId("243962506-465d2dc6-f83b-4090-be64-8374196a3ab3")
@@ -251,7 +251,7 @@ class PXFlowUITests: XCTestCase {
     }
 
     func test_REGRESSION_ETE11_1() { //Verificar CFT Tarjeta VISA con Interes
-        MainScreen()
+        let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("TEST-c6d9b1f9-71ff-4e05-9327-3c62468a23ee")
             .fillPreferenceId("243962506-76cc070f-4678-4eb2-9ada-1605e95986b5")
@@ -270,7 +270,7 @@ class PXFlowUITests: XCTestCase {
     }
 
     func test_REGRESSION_ETE11_2() { //Verificar CFT Tarjeta MASTER sin Interes
-        MainScreen()
+        let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("TEST-c6d9b1f9-71ff-4e05-9327-3c62468a23ee")
             .fillPreferenceId("243962506-76cc070f-4678-4eb2-9ada-1605e95986b5")
@@ -289,7 +289,7 @@ class PXFlowUITests: XCTestCase {
     }
 
     func test_REGRESSION_ETE12() {
-        MainScreen()
+        let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("APP_USR-2681ea61-10af-4bf6-a73d-e426d6b07e2c")
             .fillPreferenceId("243962506-76f3ae80-28de-4c8a-94a5-dad78ef8b4c4")

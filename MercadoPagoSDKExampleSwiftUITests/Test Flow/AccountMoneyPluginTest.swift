@@ -22,7 +22,7 @@ class AccountMoneyPluginTest: XCTestCase {
     }
     
     func test_account_money_with_second_factor() {
-        MainScreen()
+        let _ = MainScreen()
             .tapConfigurationsButton()
             .changeAccountMoneySwitch()
             .changeSecondFactorSwitch()

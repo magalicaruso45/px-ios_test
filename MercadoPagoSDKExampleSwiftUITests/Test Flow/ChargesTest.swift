@@ -16,14 +16,13 @@ class ChargesTest: XCTestCase {
         continueAfterFailure = false
         XCUIApplication().launch()
     }
-    
+
     override func tearDown() {
         super.tearDown()
     }
-    
+
     func test_flujo_con_comision_para_creditcard(){
-        
-        MainScreen()
+        let _ = MainScreen()
             .tapConfigurationsButton()
             .changeComisionesSwitch()
             .tapApplyConfigurationsButton()
@@ -41,8 +40,5 @@ class ChargesTest: XCTestCase {
             .selectIssuerOptionToPayerCostScreenAtRow(1)
             .selectPayerCostOptionAtRow(2)
             .tapPayButtonForAnyCongrats()
-        
-        
     }
-
 }

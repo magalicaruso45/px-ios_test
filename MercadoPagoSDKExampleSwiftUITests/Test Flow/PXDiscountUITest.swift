@@ -21,7 +21,7 @@ class PXDiscountUITest: XCTestCase {
     }
 
     func test_descuento_integrador_con_tope() { //Tarjeta MASTER con cuotas SIN INTERES
-        MainScreen()
+        let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("APP_USR-b8925182-e1bf-4c0e-bc38-1d893a19ab45")
             .fillPreferenceId("241261700-459d4126-903c-4bad-bc05-82e5f13fa7d3")
@@ -74,7 +74,7 @@ class PXDiscountUITest: XCTestCase {
     }
 
     func test_descuento_directo_con_payment_plugin() { //Tarjeta MASTER con cuotas SIN INTERES
-        MainScreen()
+        let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("APP_USR-b8925182-e1bf-4c0e-bc38-1d893a19ab45")
             .fillPreferenceId("241261700-459d4126-903c-4bad-bc05-82e5f13fa7d3")
@@ -110,7 +110,7 @@ class PXDiscountUITest: XCTestCase {
     }
 
     func test_descuento_directo_con_tope() { //Tarjeta MASTER con cuotas SIN INTERES
-        MainScreen()
+        let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("APP_USR-b8925182-e1bf-4c0e-bc38-1d893a19ab45")
             .fillPreferenceId("241261700-459d4126-903c-4bad-bc05-82e5f13fa7d3")
@@ -157,7 +157,7 @@ class PXDiscountUITest: XCTestCase {
     }
 
     func test_descuento_no_disponible_por_budget_agotado() { //Tarjeta MASTER con cuotas SIN INTERES
-        MainScreen()
+        let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("APP_USR-b8925182-e1bf-4c0e-bc38-1d893a19ab45")
             .fillPreferenceId("241261700-459d4126-903c-4bad-bc05-82e5f13fa7d3")
@@ -217,7 +217,7 @@ class PXDiscountUITest: XCTestCase {
     }
 
     func test_descuento_one_shot() { //Tarjeta MASTER con cuotas SIN INTERES
-        MainScreen()
+        let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("APP_USR-b8925182-e1bf-4c0e-bc38-1d893a19ab45")
             .fillPreferenceId("241261700-459d4126-903c-4bad-bc05-82e5f13fa7d3")
@@ -277,7 +277,7 @@ class PXDiscountUITest: XCTestCase {
     }
 
     func test_descuento_multiple_redeem_per_user() { //Tarjeta MASTER con cuotas SIN INTERES
-        MainScreen()
+        let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("APP_USR-b8925182-e1bf-4c0e-bc38-1d893a19ab45")
             .fillPreferenceId("241261700-459d4126-903c-4bad-bc05-82e5f13fa7d3")
