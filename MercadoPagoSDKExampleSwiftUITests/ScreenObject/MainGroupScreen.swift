@@ -14,7 +14,7 @@ public class MainGroupScreen: BaseScreen {
     lazy var cardButton = cell("Nueva tarjeta")
     lazy var cashButton = cell("Pago en efectivo")
     lazy var boletoButton = cell("Boleto Bancário")
-    lazy var boletoPecButton = cell("Pagamento na lotética sem boleto")
+    lazy var boletoPecButton = cell("Pagamento na lotérica sem boleto")
     lazy var floatingRow = element("floating_row_main_value_label")
 
     override open func waitForElements() {

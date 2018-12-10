@@ -130,4 +130,40 @@ class PXBoletoTest: XCTestCase {
             .completeLastNameAndContinueToReview("PEREZ")
             .tapPayButtonForAnyCongrats()
     }
+
+    func test_boleto_accreditation_time_pref_cerrada() {
+        let _ = MainScreen()
+            .tapClearButton()
+            .tapConfigurationsButton()
+            .changePaymentPluginSwitch()
+            .changePayerInfoSwitch()
+            .tapApplyConfigurationsButton()
+            .fillPublicKey("APP_USR-f3f035a2-d343-4a6f-bd3b-fc3c3cb72416")
+            .fillPreferenceId("245099733-8771f469-d68e-4863-b8cb-9402e22c6bb2")
+            .tapCheckoutOption()
+            .tapBoletoOptionForReview()
+            .tapChangePayerInfo()
+            .completeNumberAndContinueToPayer("05487765634")
+            .completeNameAndContinueToPayer("JUAN")
+            .completeLastNameAndContinueToReview("PEREZ")
+            .findLabelContainsText("Se acreditará en 1 día hábil")
+    }
+
+    func test_pec_accreditation_time_pref_cerrada() {
+        let _ = MainScreen()
+            .tapClearButton()
+            .tapConfigurationsButton()
+            .changePaymentPluginSwitch()
+            .changePayerInfoSwitch()
+            .tapApplyConfigurationsButton()
+            .fillPublicKey("APP_USR-f3f035a2-d343-4a6f-bd3b-fc3c3cb72416")
+            .fillPreferenceId("245099733-8771f469-d68e-4863-b8cb-9402e22c6bb2")
+            .tapCheckoutOption()
+            .tapBoletoPecForReview()
+            .tapChangePayerInfo()
+            .completeNumberAndContinueToPayer("05487765634")
+            .completeNameAndContinueToPayer("JUAN")
+            .completeLastNameAndContinueToReview("PEREZ")
+            .findLabelContainsText("Se acreditará en 1 hora")
+    }
 }
