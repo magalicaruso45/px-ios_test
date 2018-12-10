@@ -81,4 +81,53 @@ class PXBoletoTest: XCTestCase {
             .findText("Como deseas pagar cambiado ?")
             .findText("Total cambiado")
     }
+
+    // Mark: Pref cerradas
+    func test_boleto_pref_cerrada() {
+        let _ = MainScreen()
+            .tapClearButton()
+            .tapConfigurationsButton()
+            .changePaymentPluginSwitch()
+            .tapApplyConfigurationsButton()
+            .fillPublicKey("APP_USR-f3f035a2-d343-4a6f-bd3b-fc3c3cb72416")
+            .fillPreferenceId("245099733-8771f469-d68e-4863-b8cb-9402e22c6bb2")
+            .tapCheckoutOption()
+            .tapBoletoOption()
+            .completeNumberAndContinueToPayer("05487765634")
+            .completeNameAndContinueToPayer("JUAN")
+            .completeLastNameAndContinueToReview("PEREZ")
+            .tapPayButtonForAnyCongrats()
+    }
+    
+    func test_boleto_con_payer_pref_cerrada() {
+        let _ = MainScreen()
+            .tapClearButton()
+            .tapConfigurationsButton()
+            .changePaymentPluginSwitch()
+            .changePayerInfoSwitch()
+            .tapApplyConfigurationsButton()
+            .fillPublicKey("APP_USR-f3f035a2-d343-4a6f-bd3b-fc3c3cb72416")
+            .fillPreferenceId("245099733-8771f469-d68e-4863-b8cb-9402e22c6bb2")
+            .tapCheckoutOption()
+            .tapBoletoOptionForReview()
+            .tapPayButtonForAnyCongrats()
+    }
+    
+    func test_boleto_modificar_payer_pref_cerrada() {
+        let _ = MainScreen()
+            .tapClearButton()
+            .tapConfigurationsButton()
+            .changePaymentPluginSwitch()
+            .changePayerInfoSwitch()
+            .tapApplyConfigurationsButton()
+            .fillPublicKey("APP_USR-f3f035a2-d343-4a6f-bd3b-fc3c3cb72416")
+            .fillPreferenceId("245099733-8771f469-d68e-4863-b8cb-9402e22c6bb2")
+            .tapCheckoutOption()
+            .tapBoletoOptionForReview()
+            .tapChangePayerInfo()
+            .completeNumberAndContinueToPayer("05487765634")
+            .completeNameAndContinueToPayer("JUAN")
+            .completeLastNameAndContinueToReview("PEREZ")
+            .tapPayButtonForAnyCongrats()
+    }
 }
