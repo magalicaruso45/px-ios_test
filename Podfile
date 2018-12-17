@@ -9,8 +9,8 @@ target 'MercadoPagoSDKExampleSwift' do
 
   # //:git => 'git@github.com:mercadopago/px-ios.git', :branch => 'add_card_flow'
   # Pods for MercadoPagoSDKExampleSwift
-  pod 'MercadoPagoSDKV4/ESC'
-  pod 'PXAccountMoneyPlugin', '4.0.0'
+  pod 'MercadoPagoSDKV4/ESC', :git => 'git@github.com:mercadopago/px-ios.git', :branch => 'develop'
+  pod 'PXAccountMoneyPlugin', '4.0.2'
 
   target 'MercadoPagoSDKExampleSwiftTests' do
     inherit! :search_paths

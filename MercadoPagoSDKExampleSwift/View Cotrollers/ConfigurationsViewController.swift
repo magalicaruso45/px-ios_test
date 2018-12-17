@@ -24,6 +24,7 @@ class ConfigurationsViewController: UIViewController {
     @IBOutlet weak var viewControllerSwitch: UISwitch!
     @IBOutlet weak var payerInfoSwitch: UISwitch!
     @IBOutlet weak var maxRedeemPerUserLabel: UILabel!
+    @IBOutlet weak var localizedTextsSwitch: UISwitch!
     var delegate: ConfigurationManager?
 
     override func viewDidLoad() {
@@ -41,7 +42,7 @@ class ConfigurationsViewController: UIViewController {
     }
 
     @IBAction func applyAndConfirm(_ sender: Any) {
-        let configs = Configurations(comisiones: comisionesSwitch.isOn, descuento: descuentoSwitch.isOn, tope: topeSwitch.isOn, paymentPlugin: paymentPluginSwitch.isOn, paymentPluginViewController: viewControllerSwitch.isOn, discountNotAvailable: discountNotAvailableSwitch.isOn, maxRedeemPerUser: maxRedeemPerUserStepper.value, accountMoney: accountMoneySwitch.isOn, secondFactor: secondFactorSwitch.isOn, payerInfo: payerInfoSwitch.isOn)
+        let configs = Configurations(comisiones: comisionesSwitch.isOn, descuento: descuentoSwitch.isOn, tope: topeSwitch.isOn, paymentPlugin: paymentPluginSwitch.isOn, paymentPluginViewController: viewControllerSwitch.isOn, discountNotAvailable: discountNotAvailableSwitch.isOn, maxRedeemPerUser: maxRedeemPerUserStepper.value, accountMoney: accountMoneySwitch.isOn, secondFactor: secondFactorSwitch.isOn, payerInfo: payerInfoSwitch.isOn, localizedTexts: localizedTextsSwitch.isOn)
 
         if let delegate = delegate {
             delegate.setConfigurations(configs: configs)

@@ -12,7 +12,7 @@ import PXAccountMoneyPlugin
 
 class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
 
-    var configurations: Configurations = Configurations(comisiones: false,descuento: false,tope: false,paymentPlugin: false, paymentPluginViewController : false, discountNotAvailable: false,maxRedeemPerUser: 0,accountMoney: false, secondFactor: false, payerInfo: false)
+    var configurations: Configurations = Configurations(comisiones: false,descuento: false,tope: false,paymentPlugin: false, paymentPluginViewController : false, discountNotAvailable: false,maxRedeemPerUser: 0,accountMoney: false, secondFactor: false, payerInfo: false, localizedTexts: false)
 
     var addCardFlow : AddCardFlow?
 
@@ -190,7 +190,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
             }
         }
 
-        let builder =  getBuilder(publicKey: publicKey, prefId: prefId, accessToken:accessToken, cardId: cardId, paymentConfig: paymentPref, setPayer: configurations.payerInfo)
+        let builder =  getBuilder(publicKey: publicKey, prefId: prefId, accessToken:accessToken, cardId: cardId, paymentConfig: paymentPref, setPayer: configurations.payerInfo, localizedTexts: configurations.localizedTexts)
         MercadoPagoCheckout.init(builder:builder).start(navigationController: self.navigationController!)
     }
 
@@ -202,7 +202,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
         self.addCardFlow?.start()
     }
 
-    func getBuilder(publicKey: String, prefId: String, accessToken: String?,  cardId: String?, paymentConfig: PXPaymentConfiguration?, setPayer: Bool) -> MercadoPagoCheckoutBuilder {
+    func getBuilder(publicKey: String, prefId: String, accessToken: String?,  cardId: String?, paymentConfig: PXPaymentConfiguration?, setPayer: Bool, localizedTexts: Bool) -> MercadoPagoCheckoutBuilder {
         var builder : MercadoPagoCheckoutBuilder
 
         if let payconf = paymentConfig {
@@ -213,7 +213,12 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
             builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, preferenceId: prefId)
         }
 
-        builder.setLanguage("MLA")
+        if localizedTexts {
+            let texts: [PXCustomTranslationKey : String] = [.total_to_pay: "Total cambiado", .how_to_pay: "Como deseas pagar cambiado ?"]
+            builder.setLanguage("MLA", texts)
+        } else {
+            builder.setLanguage("MLA")
+        }
         
        // guard let configs = configurations else {
        //     return builder

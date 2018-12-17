@@ -81,6 +81,12 @@ public extension BaseScreen {
     func element(_ text: String) -> XCUIElement {
         return XCUIApplication().staticTexts[text].firstMatch
     }
+    func labelContains(_ text: String) -> XCUIElement {
+        let predicate = NSPredicate(format: "label CONTAINS[c] %@", text)
+        let result = XCUIApplication().staticTexts.containing(predicate)
+        let element = XCUIApplication().staticTexts[result.element.label]
+        return element
+    }
     func otherElement(_ text: String) -> XCUIElement {
         return XCUIApplication().otherElements[text].firstMatch
     }

@@ -15,7 +15,7 @@ public class CongratsScreen: BaseScreen {
     override open func waitForElements() {
        // let instructionsFooterButton = element("Cancelar pago")
        // waitFor(element: instructionsFooterButton)
-        waitForAnyCongrats()
+        let _ = waitForAnyCongrats()
     }
 //
     func waitForAnyCongrats() -> CongratsScreen {

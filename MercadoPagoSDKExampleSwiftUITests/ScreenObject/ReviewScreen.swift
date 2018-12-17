@@ -71,4 +71,10 @@ public class ReviewScreen: BaseScreen {
         changePayerInfoButton.tap()
         return PayerInfoScreen()
     }
+
+    func findLabelContainsText(_ text: String) -> ReviewScreen {
+        let element = self.labelContains(text)
+        waitFor(element: element)
+        return ReviewScreen()
+    }
 }

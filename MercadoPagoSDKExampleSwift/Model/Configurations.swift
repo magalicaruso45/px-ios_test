@@ -19,4 +19,5 @@ struct Configurations {
     var accountMoney: Bool
     var secondFactor: Bool
     var payerInfo: Bool
+    var localizedTexts: Bool
 }

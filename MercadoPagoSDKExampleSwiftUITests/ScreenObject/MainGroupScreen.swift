@@ -10,11 +10,11 @@ import XCTest
 
 public class MainGroupScreen: BaseScreen {
 
-    lazy var vaultView = element("¿Cómo quieres pagar?")
+    lazy var vaultView = otherElement("paymentOptionImageContainer")
     lazy var cardButton = cell("Nueva tarjeta")
     lazy var cashButton = cell("Pago en efectivo")
     lazy var boletoButton = cell("Boleto Bancário")
-    lazy var internetBoletoButton = cell("Internet Banking")
+    lazy var boletoPecButton = cell("Pagamento na lotérica sem boleto")
     lazy var floatingRow = element("floating_row_main_value_label")
 
     override open func waitForElements() {
@@ -51,19 +51,30 @@ public class MainGroupScreen: BaseScreen {
         return ReviewScreen()
     }
 
-    func tapBoletoOption() -> MainGroupScreen {
+    func tapBoletoOption() -> PayerInfoScreen {
         boletoButton.tap()
-        return MainGroupScreen()
-    }
-
-    func tapBoletoInternetBanking() -> PayerInfoScreen {
-        internetBoletoButton.tap()
         return PayerInfoScreen()
     }
 
-    func tapBoletoInternetBankingForReview() -> ReviewScreen {
-        internetBoletoButton.tap()
+    func tapBoletoOptionForReview() -> ReviewScreen {
+        boletoButton.tap()
         return ReviewScreen()
+    }
+
+    func tapBoletoPec() -> PayerInfoScreen {
+        boletoPecButton.tap()
+        return PayerInfoScreen()
+    }
+
+    func tapBoletoPecForReview() -> ReviewScreen {
+        boletoPecButton.tap()
+        return ReviewScreen()
+    }
+
+    func findText(_ text: String) -> MainGroupScreen {
+        let element = self.element(text)
+        waitFor(element: element)
+        return MainGroupScreen()
     }
 }
 
