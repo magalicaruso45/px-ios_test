@@ -51,6 +51,44 @@ public class PXFlows {
         return congratsScreen
     }
 
+    public static func startPXFlowWithDebitCardMaestroInCardScreen() -> CongratsScreen {
+        let congratsScreen = CardScreen()
+            .completeNumberAndContinue("501081066 0634280114")
+            .completeNameAndContinue("APRO")
+            .completeExpirationDateAndContinue("1225")
+            .completeCVVAndContinue("123")
+            .completeNumberAndContinueToReview("30666777")
+            .tapPayButtonForAnyCongrats()
+        return congratsScreen
+    }
+
+    public static func startPXFlowWithSavedDebitCard()  -> CongratsScreen {
+        let congratsScreen = SecurityCodeScreen()
+            .completeCVVAndContinueToReview("123")
+            .tapPayButtonForApproved()
+
+        return congratsScreen
+    }
+
+    public static func startPXFlowWithBoleto() -> CongratsScreen {
+        let congratsScreen = MainGroupScreen()
+            .tapBoletoOption()
+            .completeNumberAndContinueToPayer("05487765634")
+            .completeNameAndContinueToPayer("JUAN")
+            .completeLastNameAndContinueToReview("PEREZ")
+            .tapPayButtonForAnyCongrats()
+
+        return congratsScreen
+    }
+
+    public static func startPXFlowWithBoletoWithPayer() -> CongratsScreen {
+        let congratsScreen = MainGroupScreen()
+            .tapBoletoOptionForReview()
+            .tapPayButtonForAnyCongrats()
+
+        return congratsScreen
+    }
+
     public static func startPXFlowWithCashPaymentRapipago() -> CongratsScreen {
         let congratsScreen = MainGroupScreen()
             .tapCashOption()
