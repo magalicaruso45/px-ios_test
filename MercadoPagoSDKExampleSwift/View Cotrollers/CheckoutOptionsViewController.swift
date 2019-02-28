@@ -10,11 +10,15 @@ import UIKit
 import MercadoPagoSDKV4
 import PXAccountMoneyPlugin
 
-class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
+class CheckoutOptionsViewController: UIViewController, ConfigurationManager, AddCardFlowProtocol {
 
-    var configurations: Configurations = Configurations(comisiones: false,descuento: false,tope: false,paymentPlugin: false, paymentPluginViewController : false, discountNotAvailable: false,maxRedeemPerUser: 0,accountMoney: false, secondFactor: false, payerInfo: false, localizedTexts: false)
+    var configurations: Configurations = Configurations(comisiones: false,descuento: false,tope: false,paymentPlugin: false, paymentPluginViewController : false, discountNotAvailable: false,maxRedeemPerUser: 0,accountMoney: false, secondFactor: false, payerInfo: false, localizedTexts: false, countryContext: .mla)
 
     var addCardFlow : AddCardFlow?
+    var publicKeyField: UITextField!
+    var preferenceIDField: UITextField!
+    var accessTokenField: UITextField!
+    var cardIdField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,28 +30,29 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
         self.title = "Checkout Configuration"
         self.view.backgroundColor = .white
         let topMargin = PXLayout.getSafeAreaTopInset() + 70
-
+        
         //Public Key Input
-        let publicKeyField: UITextField = createInputTextField(placeholder: "Public Key")
+        self.publicKeyField = createInputTextField(placeholder: "Public Key")
         PXLayout.centerHorizontally(view: publicKeyField).isActive = true
         PXLayout.pinTop(view: publicKeyField, withMargin: topMargin).isActive = true
 
+
         //Preference ID Input
-        let preferenceIDField: UITextField = createInputTextField(placeholder: "Pref ID")
+        self.preferenceIDField = createInputTextField(placeholder: "Pref ID")
         PXLayout.put(view: preferenceIDField, onBottomOf: publicKeyField, withMargin: PXLayout.S_MARGIN).isActive = true
         PXLayout.centerHorizontally(view: preferenceIDField).isActive = true
 
         //Access Token Input
-        let accessTokenField: UITextField = createInputTextField(placeholder: "Access Token (Optional)")
+        self.accessTokenField = createInputTextField(placeholder: "Access Token (Optional)")
         PXLayout.put(view: accessTokenField, onBottomOf: preferenceIDField, withMargin: PXLayout.S_MARGIN).isActive = true
         PXLayout.centerHorizontally(view: accessTokenField).isActive = true
 
         //Card ID Input
-        let cardIdField: UITextField = createInputTextField(placeholder: "Card Id (Optional)")
-        cardIdField.autocapitalizationType = .none
+        self.cardIdField = createInputTextField(placeholder: "Card Id (Optional)")
+        self.cardIdField.autocapitalizationType = .none
         PXLayout.put(view: cardIdField, onBottomOf: accessTokenField, withMargin: PXLayout.S_MARGIN).isActive = true
         PXLayout.centerHorizontally(view: cardIdField).isActive = true
-
+        
         //Add card flow button
         let addCardFlowButton: UIButton = {
             let button = UIButton()
@@ -57,7 +62,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
             button.layer.cornerRadius = 20
             button.setTitleColor(.white, for: .normal)
             button.add(for: .touchUpInside, {
-                if let accessToken = accessTokenField.text {
+                if let accessToken = self.accessTokenField.text {
                     self.startAddCardFlow(accessToken: accessToken)
                 }
             })
@@ -78,8 +83,8 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
             button.layer.cornerRadius = 20
             button.setTitleColor(.white, for: .normal)
             button.add(for: .touchUpInside, {
-                if let publicKey = publicKeyField.text, let prefId = preferenceIDField.text {
-                    self.startCheckout(publicKey: publicKey, prefId: prefId, accessToken: accessTokenField.text, cardId: cardIdField.text)
+                if let publicKey = self.publicKeyField.text, let prefId = self.preferenceIDField.text {
+                    self.startCheckout(publicKey: publicKey, prefId: prefId, accessToken: self.accessTokenField.text, cardId: self.cardIdField.text)
                 }
             })
             return button
@@ -99,9 +104,9 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
             button.layer.cornerRadius = 20
             button.setTitleColor(.white, for: .normal)
             button.add(for: .touchUpInside, {
-                publicKeyField.text = ""
-                preferenceIDField.text = ""
-                accessTokenField.text = ""
+                self.publicKeyField.text = ""
+                self.preferenceIDField.text = ""
+                self.accessTokenField.text = ""
             })
             return button
         }()
@@ -130,9 +135,9 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
         PXLayout.setHeight(owner: additionalConfigButton, height: 40).isActive = true
         PXLayout.setWidth(owner: additionalConfigButton, width: 200).isActive = true
 
-        publicKeyField.text = "APP_USR-648a260d-6fd9-4ad7-9284-90f22262c18d"
-        preferenceIDField.text = "243966003-d0be0be0-6fd8-4769-bf2f-7f2d979655f5"
-        accessTokenField.text = ""
+        publicKeyField.text = "TEST-47638845-b0ff-469d-9700-1779a2e26e44"
+        preferenceIDField.text = "410973637-e2c78e50-d8a6-43b9-8af2-59fd7fa6ac21"
+        accessTokenField.text = "TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299"
     }
 
     func createInputTextField(placeholder: String? = nil) -> UITextField {
@@ -160,6 +165,10 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
 
     func setConfigurations(configs: Configurations) {
         self.configurations = configs
+        let initConfig = configurations.countryContext.getInitConfiguration()
+        publicKeyField.text = initConfig.publicKey
+        preferenceIDField.text = initConfig.preferenceID
+        accessTokenField.text = initConfig.accessToken
     }
 
     //---- Configs
@@ -199,8 +208,19 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
             return
         }
         self.addCardFlow = AddCardFlow(accessToken: accessToken, locale: "es", navigationController: navController)
+        self.addCardFlow?.delegate = self
         self.addCardFlow?.start()
     }
+    
+    func addCardFlowSucceded(result: [String: Any]) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func addCardFlowFailed(shouldRestart: Bool) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
 
     func getBuilder(publicKey: String, prefId: String, accessToken: String?,  cardId: String?, paymentConfig: PXPaymentConfiguration?, setPayer: Bool, localizedTexts: Bool) -> MercadoPagoCheckoutBuilder {
         var builder : MercadoPagoCheckoutBuilder
@@ -215,11 +235,11 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager {
 
         if localizedTexts {
             let texts: [PXCustomTranslationKey : String] = [.total_to_pay: "Total cambiado", .how_to_pay: "Como deseas pagar cambiado ?"]
-            builder.setLanguage("MLA", texts)
+            builder.setLanguage("MLB")
         } else {
             builder.setLanguage("MLA")
         }
-        
+    
        // guard let configs = configurations else {
        //     return builder
        // }

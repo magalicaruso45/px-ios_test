@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="accountMoneySwitch" destination="VZi-iG-Fxk" id="Wcc-ot-eRU"/>
                 <outlet property="comisionesSwitch" destination="csf-l2-8Oc" id="ilN-s9-Tzw"/>
+                <outlet property="countrySegment" destination="94s-LK-kph" id="hey-Mm-qyf"/>
                 <outlet property="descuentoSwitch" destination="eRB-X4-oQv" id="F0m-4F-bFT"/>
                 <outlet property="discountNotAvailableSwitch" destination="gvP-a7-hhS" id="Mvt-jz-ZZe"/>
                 <outlet property="localizedTextsSwitch" destination="C3D-4L-kt1" id="FeZ-uN-ZXY"/>
@@ -196,6 +197,14 @@
                     <rect key="frame" x="312" y="425" width="51" height="31"/>
                     <accessibility key="accessibilityConfiguration" identifier="localized_texts_switch"/>
                 </switch>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="94s-LK-kph">
+                    <rect key="frame" x="11" y="551" width="348" height="29"/>
+                    <segments>
+                        <segment title="Argentina"/>
+                        <segment title="Brasil"/>
+                        <segment title="México"/>
+                    </segments>
+                </segmentedControl>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -225,6 +234,7 @@
                 <constraint firstItem="gvP-a7-hhS" firstAttribute="top" secondItem="hnr-31-BCz" secondAttribute="bottom" constant="8" symbolic="YES" id="H3J-dT-EP6"/>
                 <constraint firstItem="csf-l2-8Oc" firstAttribute="centerY" secondItem="Qf7-am-hZf" secondAttribute="centerY" id="HNK-gj-mDc"/>
                 <constraint firstItem="JDR-wu-zYq" firstAttribute="top" secondItem="gvP-a7-hhS" secondAttribute="bottom" constant="8" symbolic="YES" id="Hx1-z2-dR1"/>
+                <constraint firstItem="Dkn-CY-kWJ" firstAttribute="top" secondItem="94s-LK-kph" secondAttribute="bottom" constant="23" id="JIC-do-r5G"/>
                 <constraint firstItem="gvP-a7-hhS" firstAttribute="leading" secondItem="ei5-8p-L6c" secondAttribute="trailing" constant="8" id="JNa-aT-Wby"/>
                 <constraint firstItem="xrh-32-Ecp" firstAttribute="centerY" secondItem="8Ws-aM-4Sf" secondAttribute="centerY" id="LEL-2E-akl"/>
                 <constraint firstItem="JDR-wu-zYq" firstAttribute="leading" secondItem="3lj-wF-Ixo" secondAttribute="trailing" constant="4" id="MQ5-Ef-Ry9"/>
@@ -233,6 +243,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="csf-l2-8Oc" secondAttribute="trailing" constant="16" id="NWy-AM-PCV"/>
                 <constraint firstItem="vXY-Uv-WUy" firstAttribute="top" secondItem="5Pc-eE-keT" secondAttribute="bottom" constant="18" id="PI8-cd-LDA"/>
                 <constraint firstItem="dJR-gT-Oyn" firstAttribute="leading" secondItem="vXY-Uv-WUy" secondAttribute="trailing" constant="8" id="QUG-qn-sod"/>
+                <constraint firstItem="94s-LK-kph" firstAttribute="trailing" secondItem="Dkn-CY-kWJ" secondAttribute="trailing" id="QrL-S8-duc"/>
                 <constraint firstItem="5Pc-eE-keT" firstAttribute="leading" secondItem="Qf7-am-hZf" secondAttribute="leading" id="WSz-d7-ISw"/>
                 <constraint firstItem="dJR-gT-Oyn" firstAttribute="trailing" secondItem="Dkn-CY-kWJ" secondAttribute="trailing" id="WkR-AT-vCS"/>
                 <constraint firstItem="dJR-gT-Oyn" firstAttribute="leading" secondItem="eRB-X4-oQv" secondAttribute="leading" id="Y6S-kS-1XG"/>
@@ -245,6 +256,7 @@
                 <constraint firstItem="Kzy-Rm-Udr" firstAttribute="leading" secondItem="8Ws-aM-4Sf" secondAttribute="leading" id="dv6-ID-LOP"/>
                 <constraint firstItem="L4k-WZ-aN8" firstAttribute="centerY" secondItem="g4u-6c-ldg" secondAttribute="centerY" id="eBu-HB-ekg"/>
                 <constraint firstItem="VZi-iG-Fxk" firstAttribute="leading" secondItem="JdY-3h-ulB" secondAttribute="trailing" constant="8" id="eQP-n4-8BD"/>
+                <constraint firstItem="94s-LK-kph" firstAttribute="leading" secondItem="Dkn-CY-kWJ" secondAttribute="leading" id="eyN-i5-Tgf"/>
                 <constraint firstItem="eRB-X4-oQv" firstAttribute="leading" secondItem="5Pc-eE-keT" secondAttribute="trailing" constant="8" id="f7T-OX-2eu"/>
                 <constraint firstItem="gvP-a7-hhS" firstAttribute="leading" secondItem="ei5-8p-L6c" secondAttribute="trailing" constant="8" id="hnP-eJ-5An"/>
                 <constraint firstItem="JdY-3h-ulB" firstAttribute="leading" secondItem="ei5-8p-L6c" secondAttribute="leading" id="i7Q-GE-9g9"/>
@@ -274,5 +286,13 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>
+        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="QVE-Vk-kSQ">
+            <rect key="frame" x="0.0" y="0.0" width="121" height="28"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <segments>
+                <segment title="First"/>
+                <segment title="Second"/>
+            </segments>
+        </segmentedControl>
     </objects>
 </document>
