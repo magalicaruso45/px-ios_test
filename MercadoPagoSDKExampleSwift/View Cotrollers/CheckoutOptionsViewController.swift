@@ -9,12 +9,14 @@
 import UIKit
 import MercadoPagoSDKV4
 import PXAccountMoneyPlugin
+import PureLayout
 
 class CheckoutOptionsViewController: UIViewController, ConfigurationManager, AddCardFlowProtocol {
 
-    var configurations: Configurations = Configurations(comisiones: false,descuento: false,tope: false,paymentPlugin: false, paymentPluginViewController : false, discountNotAvailable: false,maxRedeemPerUser: 0,accountMoney: false, secondFactor: false, payerInfo: false, localizedTexts: false, countryContext: .mla)
+    var configurations: Configurations = Configurations(comisiones: false,descuento: false,fullCustomization: false,paymentPlugin: false, paymentPluginViewController : false, businessResult: false,maxRedeemPerUser: 0,accessToken: false, oneTap: false, advancedConfiguration: false,splitPayment: false, payerInfo: false, localizedTexts: false, countryContext: .mla, businessStatus: .APPROVED)
 
     var addCardFlow : AddCardFlow?
+    var descriptionLabel: UILabel!
     var publicKeyField: UITextField!
     var preferenceIDField: UITextField!
     var accessTokenField: UITextField!
@@ -31,11 +33,15 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         self.view.backgroundColor = .white
         let topMargin = PXLayout.getSafeAreaTopInset() + 70
         
+        //General description label
+        self.descriptionLabel = createDescriptionLabel()
+        PXLayout.centerHorizontally(view: descriptionLabel).isActive = true
+        PXLayout.pinTop(view: descriptionLabel, withMargin: topMargin).isActive = true
+        
         //Public Key Input
         self.publicKeyField = createInputTextField(placeholder: "Public Key")
+        PXLayout.put(view: publicKeyField, onBottomOf: descriptionLabel, withMargin: PXLayout.S_MARGIN).isActive = true
         PXLayout.centerHorizontally(view: publicKeyField).isActive = true
-        PXLayout.pinTop(view: publicKeyField, withMargin: topMargin).isActive = true
-
 
         //Preference ID Input
         self.preferenceIDField = createInputTextField(placeholder: "Pref ID")
@@ -139,6 +145,20 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         preferenceIDField.text = "410973637-e2c78e50-d8a6-43b9-8af2-59fd7fa6ac21"
         accessTokenField.text = "TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299"
     }
+    
+    func createDescriptionLabel() -> UILabel {
+        let label: UILabel = {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.text = "Empty"
+            label.numberOfLines = 0
+            return label
+        }()
+        self.view.addSubview(label)
+        PXLayout.setHeight(owner: label, height: 90).isActive = true
+        PXLayout.matchWidth(ofView: label, withPercentage: 80).isActive = true
+        return label
+    }
 
     func createInputTextField(placeholder: String? = nil) -> UITextField {
         let textField: UITextField = {
@@ -168,38 +188,40 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         let initConfig = configurations.countryContext.getInitConfiguration()
         publicKeyField.text = initConfig.publicKey
         preferenceIDField.text = initConfig.preferenceID
-        accessTokenField.text = initConfig.accessToken
+        accessTokenField.text = configurations.accessToken ? initConfig.accessToken : ""
+        descriptionLabel.text = "Site: \(configurations.countryContext.rawValue) \nPayer: \(initConfig.payer) \nCollector: \(initConfig.collector)"
     }
 
     //---- Configs
     func startCheckout(publicKey: String, prefId: String, accessToken: String? = nil, cardId: String? = nil) {
         var paymentPref: PXPaymentConfiguration? = nil
-        let accountMoney = configurations.accountMoney
-        if configurations.paymentPlugin || getComisions() != nil || getDiscountConfiguration() != nil || accountMoney {
-            if configurations.paymentPluginViewController {
-                paymentPref = PXPaymentConfiguration(paymentProcessor: PaymentPluginViewController())
-            }else{
-                paymentPref = PXPaymentConfiguration(paymentProcessor: PaymentPlugin())
+        if configurations.paymentPlugin {
+            if configurations.splitPayment {
+                let processor = SplitPaymentPlugin()
+                paymentPref = PXPaymentConfiguration(splitPaymentProcessor: processor)
+            } else if configurations.paymentPluginViewController {
+                let processor = PaymentPluginViewController(isBusinessResult: configurations.businessResult, showFullCustomization: configurations.fullCustomization, businessResultStatus: configurations.businessStatus)
+                paymentPref = PXPaymentConfiguration(paymentProcessor: processor)
+            } else{
+                let processor = PaymentPlugin(isBusinessResult: configurations.businessResult, showFullCustomization: configurations.fullCustomization, businessResultStatus: configurations.businessStatus)
+                paymentPref = PXPaymentConfiguration(paymentProcessor: processor)
             }
-            if let discountConfig = getDiscountConfiguration() {
-                _ = paymentPref!.setDiscountConfiguration(config:discountConfig)
-            }
-            if let comisiones = getComisions() {
-                _ = paymentPref!.addChargeRules(charges: comisiones)
-            }
-            if accountMoney {
-                var accessToken = ""
-                if configurations.secondFactor {
-                    accessToken = "APP_USR-1505-092515-a228f3d4c560fc073217187ce74bb043-145698489"
-                }else{
-                    accessToken = "APP_USR-1505-092514-c93c525595748980b4c36c1a4bec9e41-207100706"
-                }
-                let accountMoneyPlugin = AccountMoneyPlugin(accessToken: accessToken, language: PXLanguages.SPANISH.rawValue)
-                paymentPref = paymentPref!.addPaymentMethodPlugin(plugin: accountMoneyPlugin)
+            if configurations.comisiones == true {
+                _ = paymentPref!.addChargeRules(charges: getComisions())
             }
         }
-
+    
         let builder =  getBuilder(publicKey: publicKey, prefId: prefId, accessToken:accessToken, cardId: cardId, paymentConfig: paymentPref, setPayer: configurations.payerInfo, localizedTexts: configurations.localizedTexts)
+        
+        if configurations.advancedConfiguration {
+            let advancedConfig = PXAdvancedConfiguration()
+            if configurations.oneTap == true {
+                advancedConfig.expressEnabled = true
+            }
+            
+            builder.setAdvancedConfiguration(config: advancedConfig)
+        }
+        
         MercadoPagoCheckout.init(builder:builder).start(navigationController: self.navigationController!)
     }
 
@@ -235,37 +257,14 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
 
         if localizedTexts {
             let texts: [PXCustomTranslationKey : String] = [.total_to_pay: "Total cambiado", .how_to_pay: "Como deseas pagar cambiado ?"]
-            builder.setLanguage("MLB")
+            builder.setLanguage("MLB", texts)
         } else {
             builder.setLanguage("MLA")
-        }
-    
-       // guard let configs = configurations else {
-       //     return builder
-       // }
-        if configurations.descuento && configurations.paymentPlugin {
-            var maxCouponAmount: Double = 0
-            if configurations.tope {
-                maxCouponAmount = 10
-            }
-            
-            let discount = PXDiscount(id: "12344", name: "Descuento de prueba", percentOff: 0, amountOff: 10, couponAmount: 10, currencyId: "ARS")
-            let campaign = PXCampaign(id: 12344, code: "code", name: "Campaña de prueba", maxCouponAmount: maxCouponAmount)
-            if let maxRedeemPerUser = Int(exactly: configurations.maxRedeemPerUser)  {
-                campaign.maxRedeemPerUser = maxRedeemPerUser
-            }
         }
             
         return builder
     }
 
-    func applyConfigurations(checkout: MercadoPagoCheckout){
-        if (configurations.comisiones) {
-           // getComisions(checkout: checkout)
-        }
-        //applyDiscountConfigurations(checkout: checkout)
-        //applyPaymentPluginConfigurations(checkout: checkout)
-    }
 
     func createPreference(prefId: String, cardId: String? = nil, setPayer: Bool) -> PXCheckoutPreference {
 
@@ -289,11 +288,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
 //MARK: Configurations --
 extension CheckoutOptionsViewController {
 
-    func getComisions() ->  [PXPaymentTypeChargeRule]? {
-
-        if !configurations.comisiones || !configurations.paymentPlugin{
-            return nil
-        }
+    func getComisions() ->  [PXPaymentTypeChargeRule] {
         let comision = PXPaymentTypeChargeRule(paymentMethdodId: "credit_card", amountCharge: 10.0)
         var chargesArray = [PXPaymentTypeChargeRule]()
         chargesArray.append(comision)
@@ -310,36 +305,34 @@ extension CheckoutOptionsViewController {
         }*/
     }
 }
-//MARK: Configurations --
-extension CheckoutOptionsViewController {
+
+
+
+class SplitPaymentPlugin: NSObject, PXSplitPaymentProcessor {
+    func paymentProcessorViewController() -> UIViewController? {
+        return UIViewController()
+    }
     
-    func getDiscountConfiguration() -> PXDiscountConfiguration? {
-
-         if configurations.descuento {
-            var maxCouponAmount: Double = 0
-            if configurations.tope {
-                maxCouponAmount = 10
-            }
-
-            if configurations.discountNotAvailable {
-                return PXDiscountConfiguration.initForNotAvailableDiscount()
-            }
-            let discount = PXDiscount(id: "12344", name: "Descuento de prueba", percentOff: 0, amountOff: 10, couponAmount: 10, currencyId: "ARS")
-            let campaign = PXCampaign(id: 12344, code: "code", name: "Campaña de prueba", maxCouponAmount: maxCouponAmount)
-            if let maxRedeemPerUser = Int(exactly: configurations.maxRedeemPerUser)  {
-                campaign.maxRedeemPerUser = maxRedeemPerUser
-            }
-            return PXDiscountConfiguration(discount: discount, campaign: campaign)
-         }
-        //TODO
-         //if configs.discountNotAvailable {
-         //   checkout.discountNotAvailable()
-        // }
-        return nil
+    func support() -> Bool {
+        return true
+    }
+    
+    func supportSplitPaymentMethodPayment(checkoutStore: PXCheckoutStore) -> Bool {
+        return true
     }
 }
 
 class PaymentPlugin: NSObject, PXPaymentProcessor {
+    let isBusinessResult: Bool
+    let showFullCustomization: Bool
+    let businessResultStatus: PXBusinessResultStatus
+    
+    init(isBusinessResult: Bool, showFullCustomization: Bool, businessResultStatus: PXBusinessResultStatus) {
+        self.isBusinessResult = isBusinessResult
+        self.showFullCustomization = showFullCustomization
+        self.businessResultStatus = businessResultStatus
+    }
+
     func paymentProcessorViewController() -> UIViewController? {
         return nil
     }
@@ -357,14 +350,31 @@ class PaymentPlugin: NSObject, PXPaymentProcessor {
     }
 
     func startPayment(checkoutStore: PXCheckoutStore, errorHandler: PXPaymentProcessorErrorHandler, successWithBusinessResult: @escaping ((PXBusinessResult) -> Void), successWithPaymentResult: @escaping  ((PXGenericPayment) -> Void)){
-
-        successWithBusinessResult(PXBusinessResult(receiptId: "123", status: .APPROVED, title: "hola", subtitle: "nono", icon: nil, mainAction: nil, secondaryAction: nil, helpMessage: nil, showPaymentMethod: true, statementDescription: nil, imageUrl: nil, topCustomView: nil, bottomCustomView: nil, paymentStatus: "APPROVED", paymentStatusDetail: "OK"))
+        if (self.isBusinessResult) {
+            let status = self.getStringStatus(businessResultStatus)
+            let topCustomView : UIView? = self.showFullCustomization ? buildCustomView(color: UIColor.gray) : nil
+            let bottomCustomView : UIView? = self.showFullCustomization ? buildCustomView(color: UIColor.lightGray) : nil
+            let customAction : PXAction? = self.showFullCustomization ? buildCustomAction() : nil
+            let customDescription = self.showFullCustomization ? "Sample text" : nil
+            successWithBusinessResult(PXBusinessResult(receiptId: nil, status: businessResultStatus, title: "Ejecutamos tu transacción custom", subtitle: "Subtitulo", icon: nil, mainAction: customAction, secondaryAction: customAction, helpMessage: customDescription, showPaymentMethod: true, statementDescription: customDescription, imageUrl: nil, topCustomView: topCustomView, bottomCustomView: bottomCustomView, paymentStatus: status, paymentStatusDetail: ""))
+        } else {
+            successWithPaymentResult(PXGenericPayment(status: "rejected", statusDetail: "cc_rejected_high_risk"))
+        }
     }
 }
 
 class PaymentPluginViewController: NSObject, PXPaymentProcessor {
     var navigationHandler: PXPaymentProcessorNavigationHandler!
     let viewController = ExamplePaymentProcessorViewController()
+    let isBusinessResult: Bool
+    let showFullCustomization: Bool
+    let businessResultStatus: PXBusinessResultStatus
+    
+    init(isBusinessResult: Bool, showFullCustomization: Bool, businessResultStatus: PXBusinessResultStatus) {
+        self.isBusinessResult = isBusinessResult
+        self.showFullCustomization = showFullCustomization
+        self.businessResultStatus = businessResultStatus
+    }
 
     func paymentProcessorViewController() -> UIViewController? {
         return viewController
@@ -384,7 +394,46 @@ class PaymentPluginViewController: NSObject, PXPaymentProcessor {
     }
 
     func startPayment(checkoutStore: PXCheckoutStore, errorHandler: PXPaymentProcessorErrorHandler, successWithBusinessResult: @escaping ((PXBusinessResult) -> Void), successWithPaymentResult: @escaping  ((PXGenericPayment) -> Void)){
-
-        successWithBusinessResult(PXBusinessResult(receiptId: "123", status: .APPROVED, title: "hola", subtitle: "nono", icon: nil, mainAction: nil, secondaryAction: nil, helpMessage: nil, showPaymentMethod: true, statementDescription: nil, imageUrl: nil, topCustomView: nil, bottomCustomView: nil, paymentStatus: "APPROVED", paymentStatusDetail: "OK"))
+        if (self.isBusinessResult) {
+            let status = self.getStringStatus(businessResultStatus)
+            let topCustomView : UIView? = self.showFullCustomization ? buildCustomView(color: UIColor.gray) : nil
+            let bottomCustomView : UIView? = self.showFullCustomization ? buildCustomView(color: UIColor.lightGray) : nil
+            let customAction : PXAction? = self.showFullCustomization ? buildCustomAction() : nil
+            let customDescription = self.showFullCustomization ? "Sample text" : nil
+            successWithBusinessResult(PXBusinessResult(receiptId: nil, status: businessResultStatus, title: "Ejecutamos tu transacción custom", subtitle: "Subtitulo", icon: nil, mainAction: customAction, secondaryAction: customAction, helpMessage: customDescription, showPaymentMethod: true, statementDescription: customDescription, imageUrl: nil, topCustomView: topCustomView, bottomCustomView: bottomCustomView, paymentStatus: status, paymentStatusDetail: ""))
+        } else {
+            successWithPaymentResult(PXGenericPayment(status: "rejected", statusDetail: "cc_call_for_authorize"))
+        }
     }
 }
+
+extension PXPaymentProcessor {
+    func getStringStatus(_ businessResultStatus : PXBusinessResultStatus) -> String {
+        switch businessResultStatus {
+        case .APPROVED: return "APPROVED"
+        case .REJECTED: return "REJECTED"
+        case .PENDING: return "PENDING"
+        case .IN_PROGRESS: return "IN PROGRESS"
+        }
+    }
+    
+    
+    func buildCustomView(color: UIColor? = UIColor.red) -> UIView {
+        let height = CGFloat(90)
+        let frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: height)
+        let containerView = UIView(frame: frame)
+        containerView.backgroundColor = color
+        containerView.autoSetDimension(ALDimension.height, toSize: 240)
+        return containerView
+    }
+    
+    func buildCustomAction() -> PXAction {
+        let action = PXAction(label: "Custom action") {
+            let alert: UIAlertView = UIAlertView(title: "Sample custom action", message: "Custom message",
+                                                        delegate: nil, cancelButtonTitle: "Continue", otherButtonTitles: "Cancel")
+            alert.show()
+        }
+        return action
+    }
+}
+

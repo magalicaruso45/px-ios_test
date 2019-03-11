@@ -15,6 +15,7 @@ public class IssuersScreen: BaseScreen {
 
     override open func waitForElements() {
         waitFor(element: cellNumber(2))
+        waitFor(element: backButton)
     }
 
     func selectIssuerOptionToPayerCostScreenAtRow(_ rowNumber: Int) -> PayerCostScreen {

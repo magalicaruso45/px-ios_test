@@ -10,66 +10,83 @@ import UIKit
 
 public class ConfigurationScreen: BaseScreen {
 
-    private lazy var descuentoSwitch = switchElement("descuento_switch")
-    private lazy var topeDeDescuentoSwitch = switchElement("tope_switch")
-    private lazy var comisionesSwitch = switchElement("comisiones_switch")
-    private lazy var accountMoneySwitch = switchElement("account_money_switch")
-    private lazy var secondFactorSwitch = switchElement("second_factor_switch")
+    private lazy var paymentProcessorSwitch = switchElement("payment_processor_switch")
+    private lazy var paymentVCSwitch = switchElement("payment_vc_switch")
+    private lazy var chargeSwitch = switchElement("charge_switch")
+    private lazy var accessTokenSwitch = switchElement("access_token_switch")
+    private lazy var businessSwitch = switchElement("business_switch")
+    private lazy var fullCustomizationSwitch = switchElement("full_customization_switch")
+    private lazy var advancedSwitch = switchElement("advanced_switch")
+    private lazy var oneTapSwitch = switchElement("one_tap_switch")
+    private lazy var splitSwitch = switchElement("split_switch")
     private lazy var payerInfoSwitch = switchElement("payer_info_switch")
-    private lazy var localizedTextsSwitch = switchElement("localized_texts_switch")
-    private lazy var paymentPluginSwitch = switchElement("payment_plugin_switch")
-    private lazy var discountNotAvailableSwitch = switchElement("discount_not_available_switch")
+    private lazy var localizedSwitch = switchElement("localized_texts_switch")
+    
+    
+    private lazy var businessSegment = element("business_segment")
+    private lazy var countrySegment = element("country_segment")
+    private lazy var preferenceSegment = element("preference_segment")
+    
     private lazy var maxRedeemPerUserStepper = stepper("max_redeem_per_user_stepper")
     private lazy var applyConfigsButton = button("apply_configs_button")
-    private lazy var pluginViewController = switchElement("view_controller_switch")
 
     func tapApplyConfigurationsButton() -> MainScreen {
         applyConfigsButton.tap()
         return MainScreen()
     }
-
-    func changeDiscountSwitch() -> ConfigurationScreen {
-        descuentoSwitch.tap()
+    
+    func changePaymentProcessorSwitch() -> ConfigurationScreen {
+        paymentProcessorSwitch.tap()
         return self
     }
 
-    func changeTopeDeDescuentoSwitch() -> ConfigurationScreen {
-        topeDeDescuentoSwitch.tap()
+    func changePaymentVCSwitchSwitch() -> ConfigurationScreen {
+        paymentVCSwitch.tap()
         return self
     }
 
-    func changeComisionesSwitch() -> ConfigurationScreen {
-        comisionesSwitch.tap()
+    func changeChargeSwitch() -> ConfigurationScreen {
+        chargeSwitch.tap()
         return self
     }
 
-    func changePaymentPluginSwitch() -> ConfigurationScreen {
-        paymentPluginSwitch.tap()
+    func changeAccessTokenSwitch() -> ConfigurationScreen {
+        accessTokenSwitch.tap()
         return self
     }
 
-    func changeAccountMoneySwitch() -> ConfigurationScreen {
-        accountMoneySwitch.tap()
+    func changeBusinessSwitch() -> ConfigurationScreen {
+        businessSwitch.tap()
         return self
     }
     
-    func changeSecondFactorSwitch() -> ConfigurationScreen {
-        secondFactorSwitch.tap()
+    func changeFullCustomizationSwitch() -> ConfigurationScreen {
+        fullCustomizationSwitch.tap()
         return self
     }
 
-    func changePluginViewControllerSwitch() -> ConfigurationScreen {
-        pluginViewController.tap()
+    func changeAdvancedSwitch() -> ConfigurationScreen {
+        advancedSwitch.tap()
         return self
     }
 
+    func changeOneTapSwitch() -> ConfigurationScreen {
+        oneTapSwitch.tap()
+        return self
+    }
+
+    func changeSplitSwitch() -> ConfigurationScreen {
+        splitSwitch.tap()
+        return self
+    }
+    
     func changePayerInfoSwitch() -> ConfigurationScreen {
         payerInfoSwitch.tap()
         return self
     }
 
     func changeLocalizedTextsSwitch() -> ConfigurationScreen {
-        localizedTextsSwitch.tap()
+        localizedSwitch.tap()
         return self
     }
 
@@ -87,18 +104,7 @@ public class ConfigurationScreen: BaseScreen {
         return self
     }
 
-    func changeDiscountNotAvailableSwitch() -> ConfigurationScreen {
-        discountNotAvailableSwitch.tap()
-        return self
-    }
-
     override open func waitForElements() {
-        waitFor(element: descuentoSwitch)
-   //     waitFor(element: topeDeDescuentoSwitch)
-   //     waitFor(element: comisionesSwitch)
-    //    waitFor(element: paymentPluginSwitch)
-    //    waitFor(element: discountNotAvailableSwitch)
-    //    waitFor(element: applyConfigsButton)
-     //   waitFor(element: maxRedeemPerUserStepper)
+        waitFor(element: paymentProcessorSwitch)
     }
 }

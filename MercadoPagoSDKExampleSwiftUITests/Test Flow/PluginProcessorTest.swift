@@ -24,7 +24,8 @@ class PluginProcessorTest: XCTestCase {
     func test_payment_processor_without_view_controller() {
         let _ = MainScreen()
             .tapConfigurationsButton()
-            .changePluginViewControllerSwitch()
+            .changePaymentProcessorSwitch()
+            .changePaymentVCSwitchSwitch()
             .tapApplyConfigurationsButton()
             .tapClearButton()
             .fillPublicKey("APP_USR-648a260d-6fd9-4ad7-9284-90f22262c18d")
@@ -38,8 +39,8 @@ class PluginProcessorTest: XCTestCase {
     func test_payment_processor_with_view_controller() {
         let _ = MainScreen()
             .tapConfigurationsButton()
-            .changePluginViewControllerSwitch()
-            .changePaymentPluginSwitch()
+            .changePaymentProcessorSwitch()
+            .changePaymentVCSwitchSwitch()
             .tapApplyConfigurationsButton()
             .tapClearButton()
             .fillPublicKey("APP_USR-648a260d-6fd9-4ad7-9284-90f22262c18d")

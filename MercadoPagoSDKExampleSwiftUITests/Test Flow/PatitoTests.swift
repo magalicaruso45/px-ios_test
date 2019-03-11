@@ -1,35 +1,31 @@
 //
-//  ChargesTest.swift
+//  PatitoTests.swift
 //  MercadoPagoSDKExampleSwiftUITests
 //
-//  Created by Demian Tejo on 11/7/18.
-//  Copyright © 2018 Mercado Pago. All rights reserved.
+//  Created by Federico Bustos Fierro on 08/03/2019.
+//  Copyright © 2019 Mercado Pago. All rights reserved.
 //
 
 import XCTest
-import MercadoPagoSDKV4
 
-class ChargesTest: XCTestCase {
-
+class PatitoTests: XCTestCase {
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
         XCUIApplication().launch()
     }
-
+    
     override func tearDown() {
+        sleep(5)
         super.tearDown()
     }
-
-    func test_flujo_con_comision_para_creditcard(){
+    
+    func test_payment_error() { //Tarjeta MASTER con cuotas SIN INTERES
         let _ = MainScreen()
+            .tapClearButton()
             .tapConfigurationsButton()
             .changePaymentProcessorSwitch()
-            .changeChargeSwitch()
             .tapApplyConfigurationsButton()
-            .tapClearButton()
-            .fillPublicKey("APP_USR-648a260d-6fd9-4ad7-9284-90f22262c18d")
-            .fillPreferenceId("243966003-d0be0be0-6fd8-4769-bf2f-7f2d979655f5")
             .tapCheckoutOption()
             .tapCardOption()
             .tapCreditCardOption()
@@ -41,5 +37,6 @@ class ChargesTest: XCTestCase {
             .selectIssuerOptionToPayerCostScreenAtRow(1)
             .selectPayerCostOptionAtRow(2)
             .tapPayButtonForAnyCongrats()
+            .waitForAnyCongrats()
     }
 }

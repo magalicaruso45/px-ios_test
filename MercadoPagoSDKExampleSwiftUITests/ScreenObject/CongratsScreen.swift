@@ -19,8 +19,7 @@ public class CongratsScreen: BaseScreen {
     }
 //
     func waitForAnyCongrats() -> CongratsScreen {
-        let headerView = otherElement("result_header_view")
-        waitFor(element: headerView)
+        waitFor(element: button("result_close_button"))
         return self
     }
 //

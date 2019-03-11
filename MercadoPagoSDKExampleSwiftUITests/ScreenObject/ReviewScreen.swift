@@ -6,11 +6,11 @@
 //  Copyright © 2018 MercadoPago. All rights reserved.
 //
 
+import XCTest
 import UIKit
 
 public class ReviewScreen: BaseScreen {
     private lazy var payButton = button("Confirmar")
-    private lazy var changePaymentMethodButton = otherElement("Cambiar medio de pago")
     private lazy var changePayerInfoButton = otherElement("review_change_payer_action")
     private lazy var backButton = getBackButton()
 
@@ -51,8 +51,9 @@ public class ReviewScreen: BaseScreen {
     }
 
     func tapChangePaymentMethod() -> MainGroupScreen {
-        swipeUp()
-        changePaymentMethodButton.tap()
+        //swipeUp()
+        let button = XCUIApplication().scrollViews.otherElements.staticTexts["Cambiar medio de pago"].firstMatch
+        button.tap()
         return MainGroupScreen()
     }
 
