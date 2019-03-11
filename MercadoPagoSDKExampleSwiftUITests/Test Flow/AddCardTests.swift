@@ -30,7 +30,8 @@ class AddCardTests: XCTestCase {
 
     func testAddVisaCard() {
         _ = MainScreen()
-            .fillAccessToken("APP_USR-1505-080815-c6ea450de1bf828e39add499237d727f-312667294")
+            .tapClearButton()
+            .fillAccessToken("TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299")
             .tapAddCardButton()
             .completeNumberAndContinue("4111111111111111")
             .completeNameAndContinue("JUAN PEREZ")
@@ -41,7 +42,8 @@ class AddCardTests: XCTestCase {
 
     func testAddAmexCard() {
         _ = MainScreen()
-            .fillAccessToken("APP_USR-1505-080815-c6ea450de1bf828e39add499237d727f-312667294")
+            .tapClearButton()
+            .fillAccessToken("TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299")
             .tapAddCardButton()
             .completeNumberAndContinue("371180303257522")
             .completeNameAndContinue("JUAN PEREZ")
@@ -52,7 +54,8 @@ class AddCardTests: XCTestCase {
 
     func testMasterDebitCard() {
         _ = MainScreen()
-            .fillAccessToken("APP_USR-1945000207238192-100316-bfa3a266fb63c50143034e0bef59c254-290714514")
+            .tapClearButton()
+            .fillAccessToken("TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299")
             .tapAddCardButton()
             .completeNumberAndContinue("5579078521025680")
             .completeNameAndContinue("JUAN PEREZ")
@@ -63,7 +66,8 @@ class AddCardTests: XCTestCase {
     func testAddAmexNoID() {
         //AT de MLM
         _ = MainScreen()
-            .fillAccessToken("APP_USR-1945000207238192-100316-bfa3a266fb63c50143034e0bef59c254-290714514")
+            .tapClearButton()
+            .fillAccessToken("TEST-1178809857150049-022812-1b795ddd0f07c85489b50d6f827b0600-411553753")
             .tapAddCardButton()
             .completeNumberAndContinue("371180303257522")
             .completeNameAndContinue("JUAN PEREZ")
@@ -73,7 +77,8 @@ class AddCardTests: XCTestCase {
 
     func testAddHipercardMLB() {
         _ = MainScreen()
-            .fillAccessToken("APP_USR-1945000207238192-100317-a0ae23e7c7b588d4b735dd070725b3ac-242964413")
+            .tapClearButton()
+            .fillAccessToken("TEST-7182822688046193-022812-1fc2bafbe7ce8a723231331c8b383aee-411549390")
             .tapAddCardButton()
             .completeNumberAndContinue("6062826786276634")
             .completeNameAndContinue("JUAN PEREZ")

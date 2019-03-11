@@ -18,6 +18,7 @@ class ChargesTest: XCTestCase {
     }
 
     override func tearDown() {
+        sleep(5)
         super.tearDown()
     }
 
@@ -41,5 +42,6 @@ class ChargesTest: XCTestCase {
             .selectIssuerOptionToPayerCostScreenAtRow(1)
             .selectPayerCostOptionAtRow(2)
             .tapPayButtonForAnyCongrats()
+            .waitForAnyCongrats()
     }
 }

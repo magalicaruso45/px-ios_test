@@ -17,6 +17,7 @@ class PXBoletoTest: XCTestCase {
     }
 
     override func tearDown() {
+        sleep(5)
         super.tearDown()
     }
 
