@@ -16,6 +16,7 @@ class PXFlowUITests: XCTestCase {
     }
 
     override func tearDown() {
+        sleep(5)
         super.tearDown()
     }
 
@@ -35,6 +36,7 @@ class PXFlowUITests: XCTestCase {
             .selectIssuerOptionToPayerCostScreenAtRow(1)
             .selectPayerCostOptionAtRow(2)
             .tapPayButtonForAnyCongrats()
+            .waitForAnyCongrats()
     }
 
     func test_REGRESSION_ETE1_2() { //Tarjeta VISA con cuotas CON INTERES
@@ -52,6 +54,7 @@ class PXFlowUITests: XCTestCase {
             .completeNumberAndContinueToPayerCost("30666777")
             .selectPayerCostOptionAtRow(3)
             .tapPayButtonForAnyCongrats()
+            .waitForAnyCongrats()
     }
 
     func test_REGRESSION_ETE1_3() { //Tarjeta AMEX en una sola cuota
@@ -69,6 +72,7 @@ class PXFlowUITests: XCTestCase {
             .completeNumberAndContinueToPayerCost("30666777")
             .selectPayerCostOptionAtRow(1)
             .tapPayButtonForAnyCongrats()
+            .waitForAnyCongrats()
     }
 
     func test_REGRESSION_ETE1_4() { //Tarjeta MAESTRO
@@ -85,6 +89,7 @@ class PXFlowUITests: XCTestCase {
             .completeCVVAndContinue("123")
             .completeNumberAndContinueToReview("30666777")
             .tapPayButtonForAnyCongrats()
+            .waitForAnyCongrats()
     }
 
     func test_REGRESSION_ETE1_5() { //Tarjeta VISA DEBITO
@@ -101,6 +106,7 @@ class PXFlowUITests: XCTestCase {
             .completeCVVAndContinue("123")
             .completeNumberAndContinueToReview("30666777")
             .tapPayButtonForAnyCongrats()
+            .waitForAnyCongrats()
     }
 
     func test_REGRESSION_ETE3() {
@@ -112,6 +118,7 @@ class PXFlowUITests: XCTestCase {
             .tapCashOption()
             .tapRapipagoOption()
             .tapPayButtonForInstructions()
+            .waitForAnyCongrats()
     }
 
     func test_REGRESSION_ETE5() {
@@ -129,6 +136,7 @@ class PXFlowUITests: XCTestCase {
             .completeNumberAndContinueToIssuers("30666777")
             .selectIssuerOptionToReviewScreenAtRow(5)
             .tapPayButtonForAnyCongrats()
+            .waitForAnyCongrats()
     }
 
     func test_REGRESSION_ETE6() {
@@ -145,6 +153,7 @@ class PXFlowUITests: XCTestCase {
             .selectIssuerOptionToPayerCostScreenAtRow(1)
             .selectPayerCostOptionAtRow(1)
             .tapPayButtonForAnyCongrats()
+            .waitForAnyCongrats()
     }
 
     func test_REGRESSION_ETE7_1() {
@@ -163,6 +172,7 @@ class PXFlowUITests: XCTestCase {
             .selectIssuerOptionToPayerCostScreenAtRow(1)
             .selectPayerCostOptionAtRow(1)
             .tapPayButtonForAnyCongrats()
+            .waitForAnyCongrats()
     }
 
     func test_REGRESSION_ETE7_2() {
@@ -248,9 +258,14 @@ class PXFlowUITests: XCTestCase {
             .tapCashOption()
             .tapRapipagoOption()
             .tapPayButtonForInstructions()
+            .waitForAnyCongrats()
     }
 
-    func test_REGRESSION_ETE11_1() { //Verificar CFT Tarjeta VISA con Interes
+    func test_REGRESSION_ETE11_1() {
+        
+        
+        
+        //Verificar CFT Tarjeta VISA con Interes
         let _ = MainScreen()
             .tapClearButton()
             .fillPublicKey("TEST-c6d9b1f9-71ff-4e05-9327-3c62468a23ee")
@@ -267,6 +282,7 @@ class PXFlowUITests: XCTestCase {
             .validate { (reviewScreen) in
                 XCTAssert(reviewScreen.element("CFT_label").exists)
         }
+        sleep(2)
     }
 
     func test_REGRESSION_ETE11_2() { //Verificar CFT Tarjeta MASTER sin Interes

@@ -19,8 +19,7 @@ public class CongratsScreen: BaseScreen {
     }
 //
     func waitForAnyCongrats() -> CongratsScreen {
-        let headerView = otherElement("result_header_view")
-        waitFor(element: headerView)
+        waitFor(element: button("result_close_button"))
         return self
     }
 //
@@ -44,28 +43,16 @@ public class CongratsScreen: BaseScreen {
 }
 
 public class ApprovedScreen: CongratsScreen {
-    override public func waitForElements() {
-
-    }
 }
 
 public class RejectedScreen: CongratsScreen {
     private lazy var subtitleLabel = element("Continuar")
-    override public func waitForElements() {
-        waitFor(element: subtitleLabel)
-    }
 }
 
 public class PendingScreen: CongratsScreen {
-    override public func waitForElements() {
-
-    }
 }
 
 public class InstructionsScreen: CongratsScreen {
     private lazy var instructionsFooterButton = element("Continuar")
-    override public func waitForElements() {
-        waitFor(element: instructionsFooterButton)
-    }
 }
 

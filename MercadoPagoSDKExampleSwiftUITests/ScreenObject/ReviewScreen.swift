@@ -6,6 +6,7 @@
 //  Copyright © 2018 MercadoPago. All rights reserved.
 //
 
+import XCTest
 import UIKit
 
 public class ReviewScreen: BaseScreen {
@@ -52,13 +53,14 @@ public class ReviewScreen: BaseScreen {
 
     func tapChangePaymentMethod() -> MainGroupScreen {
         swipeUp()
-        changePaymentMethodButton.tap()
+        let button = XCUIApplication().scrollViews.otherElements.staticTexts["Cambiar medio de pago"].firstMatch
+        button.tap()
         return MainGroupScreen()
     }
 
     func tapChangePaymentMethodWithCardId() -> CardsOptionsScreen {
         swipeUp()
-        changePaymentMethodButton.tap()
+        let button = XCUIApplication().scrollViews.otherElements.staticTexts["Cambiar medio de pago"].firstMatch
         return CardsOptionsScreen()
     }
 
