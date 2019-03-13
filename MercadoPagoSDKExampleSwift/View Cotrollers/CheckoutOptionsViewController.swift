@@ -69,11 +69,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             button.setTitleColor(.white, for: .normal)
             button.add(for: .touchUpInside, {
                 if let accessToken = self.accessTokenField.text {
-                    if self.configurations.skipCongrats {
-                        self.startAddCardFlowSkippingCongrats(accessToken: accessToken)
-                        return
-                    }
-                    self.startAddCardFlow(accessToken: accessToken)
+                    self.configurations.skipCongrats ? self.startAddCardFlowSkippingCongrats(accessToken: accessToken) :self.startAddCardFlow(accessToken: accessToken)
                 }
             })
             return button

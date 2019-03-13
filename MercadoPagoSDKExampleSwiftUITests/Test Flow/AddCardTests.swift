@@ -9,25 +9,25 @@
 import XCTest
 
 class AddCardTests: XCTestCase {
-    
+
     override func setUp() {
         super.setUp()
-        
+
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        
+
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
         XCUIApplication().launch()
-        
+
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
-    
+
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
+
     func testAddVisaCard() {
         _ = MainScreen()
             .tapClearButton()
@@ -39,7 +39,7 @@ class AddCardTests: XCTestCase {
             .completeCVVAndContinue("123")
             .completeNumberAndContinueToCongrats("12345678")
     }
-    
+
     func testAddAmexCard() {
         _ = MainScreen()
             .tapClearButton()
@@ -51,7 +51,7 @@ class AddCardTests: XCTestCase {
             .completeCVVAndContinue("1234")
             .completeNumberAndContinueToCongrats("12345678")
     }
-    
+
     func testMasterDebitCard() {
         _ = MainScreen()
             .tapClearButton()
@@ -62,7 +62,7 @@ class AddCardTests: XCTestCase {
             .completeExpirationDateAndContinue("1225")
             .completeCVVAndContinueToCongrats("123")
     }
-    
+
     func testAddAmexNoID() {
         //AT de MLM
         _ = MainScreen()
@@ -74,7 +74,7 @@ class AddCardTests: XCTestCase {
             .completeExpirationDateAndContinue("1225")
             .completeCVVAndContinueToCongrats("1234")
     }
-    
+
     func testAddHipercardMLB() {
         _ = MainScreen()
             .tapClearButton()
