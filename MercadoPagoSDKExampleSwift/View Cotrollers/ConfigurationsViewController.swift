@@ -32,6 +32,7 @@ class ConfigurationsViewController: UIViewController {
     @IBOutlet weak var preferenceSegment: UISegmentedControl!
     @IBOutlet weak var oneTapSwitch: UISwitch!
     @IBOutlet weak var splitSwitch: UISwitch!
+    @IBOutlet weak var AddCardFlowSkipCongrats: UISwitch!
     
     var delegate: ConfigurationManager?
 
