@@ -141,9 +141,9 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         PXLayout.setHeight(owner: additionalConfigButton, height: 40).isActive = true
         PXLayout.setWidth(owner: additionalConfigButton, width: 200).isActive = true
 
-        publicKeyField.text = "TEST-47638845-b0ff-469d-9700-1779a2e26e44"
-        preferenceIDField.text = "410973637-e2c78e50-d8a6-43b9-8af2-59fd7fa6ac21"
-        accessTokenField.text = "TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299"
+        publicKeyField.text = "APP_USR-ba2e6b8c-8b6d-4fc3-8a47-0ab241d0dba4"
+        preferenceIDField.text = "384414502-d095679d-f7d9-4653-ad71-4fb5feda3494"
+        accessTokenField.text = "TEST-1458038826212807-062020-ff9273c67bc567320eae1a07d1c2d5b5-246046416"
     }
     
     func createDescriptionLabel() -> UILabel {
@@ -219,6 +219,9 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
                 advancedConfig.expressEnabled = true
             }
             
+            //IF PARAMS CONFIGURATION
+//            advancedConfig.discountParamsConfiguration = PXDiscountParamsConfiguration(labels: ["fruta"], productId: "BCKJO2VHAU10018OVCE0")
+            
             builder.setAdvancedConfiguration(config: advancedConfig)
         }
         
@@ -248,9 +251,10 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         var builder : MercadoPagoCheckoutBuilder
 
         if let payconf = paymentConfig {
-            builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, checkoutPreference: createPreference(prefId: prefId, cardId: cardId, setPayer: setPayer), paymentConfiguration: payconf)
+// MODO PREFERENCIA ABIERTA builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, checkoutPreference: createPreference(prefId: prefId, cardId: cardId, setPayer: setPayer), paymentConfiguration: payconf)
+            
+            builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, preferenceId: prefId, paymentConfiguration: payconf)
             builder.setPrivateKey(key: accessToken!)
-            //builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, preferenceId: prefId, paymentConfiguration: payconf)
         } else {
             builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, preferenceId: prefId)
         }
@@ -358,7 +362,7 @@ class PaymentPlugin: NSObject, PXPaymentProcessor {
             let customDescription = self.showFullCustomization ? "Sample text" : nil
             successWithBusinessResult(PXBusinessResult(receiptId: nil, status: businessResultStatus, title: "Ejecutamos tu transacción custom", subtitle: "Subtitulo", icon: nil, mainAction: customAction, secondaryAction: customAction, helpMessage: customDescription, showPaymentMethod: true, statementDescription: customDescription, imageUrl: nil, topCustomView: topCustomView, bottomCustomView: bottomCustomView, paymentStatus: status, paymentStatusDetail: ""))
         } else {
-            successWithPaymentResult(PXGenericPayment(status: "rejected", statusDetail: "cc_rejected_high_risk"))
+            successWithPaymentResult(PXGenericPayment(status: "approved", statusDetail: "accredited"))
         }
     }
 }
