@@ -55,7 +55,7 @@ class AddCardTests: XCTestCase {
     func testMasterDebitCard() {
         _ = MainScreen()
             .tapClearButton()
-            .fillAccessToken("TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299")
+            .fillAccessToken("TEST-1178809857150049-022812-1b795ddd0f07c85489b50d6f827b0600-411553753")
             .tapAddCardButton()
             .completeNumberAndContinue("5579078521025680")
             .completeNameAndContinue("JUAN PEREZ")

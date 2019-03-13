@@ -76,6 +76,18 @@ public class MainGroupScreen: BaseScreen {
         waitFor(element: element)
         return MainGroupScreen()
     }
+    
+    func screenSwipeUp() -> MainGroupScreen {
+        let app = XCUIApplication()
+        app.otherElements.containing(.navigationBar, identifier:"Checkout Configuration").children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .collectionView).element.swipeUp()
+        return self
+    }
+    
+    func screenSwipeDown() -> MainGroupScreen {
+        let app = XCUIApplication()
+        app.otherElements.containing(.navigationBar, identifier:"Checkout Configuration").children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .collectionView).element.swipeDown()
+        return self
+    }
 }
 
 class CardsOptionsScreen: BaseScreen {
