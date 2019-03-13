@@ -47,4 +47,9 @@ public class IdentificationScreen: BaseScreen {
         return CongratsScreen()
     }
     
+    func completeNumberAndFinish(_ text: String) {
+        numberTextField.typeText(text)
+        continueButton.tap()
+    }
+    
 }

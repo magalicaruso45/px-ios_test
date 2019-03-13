@@ -32,6 +32,7 @@ class ConfigurationsViewController: UIViewController {
     @IBOutlet weak var preferenceSegment: UISegmentedControl!
     @IBOutlet weak var oneTapSwitch: UISwitch!
     @IBOutlet weak var splitSwitch: UISwitch!
+    @IBOutlet weak var addCardFlowSkipCongrats: UISwitch!
     
     var delegate: ConfigurationManager?
 
@@ -49,6 +50,7 @@ class ConfigurationsViewController: UIViewController {
         self.businessSegment.isEnabled = false
         self.customizationSwitch.isEnabled = false
         self.validatePaymentPluginSwitches()
+        self.validateAddCardFlowSwitches()
         self.validateAdvancedConfigSwitches()
         updateBusinessSegmentColor()
     }
@@ -77,6 +79,10 @@ class ConfigurationsViewController: UIViewController {
         self.businessSwitch.isEnabled = enableSwitchs
         self.updateBusinessSegmentColor()
         self.validateAdvancedConfigSwitches()
+    }
+    
+    func validateAddCardFlowSwitches() {
+        self.addCardFlowSkipCongrats.isOn = false
     }
     
     @IBAction func advancedConfigChanged(_ sender: Any) {
@@ -133,7 +139,7 @@ class ConfigurationsViewController: UIViewController {
     }
     
     @IBAction func applyAndConfirm(_ sender: Any) {
-        let configs = Configurations(comisiones: comisionesSwitch.isOn, descuento: descuentoSwitch.isOn, fullCustomization: customizationSwitch.isOn, paymentPlugin: paymentPluginSwitch.isOn, paymentPluginViewController: viewControllerSwitch.isOn, businessResult: businessSwitch.isOn, maxRedeemPerUser: maxRedeemPerUserStepper.value, accessToken: accessTokenSwitch.isOn, oneTap: oneTapSwitch.isOn, advancedConfiguration: advancedConfigSwitch.isOn, splitPayment: splitSwitch.isOn, payerInfo: payerInfoSwitch.isOn, localizedTexts: localizedTextsSwitch.isOn, countryContext: countryContext() ?? .mla, businessStatus: businessStatus() ?? .APPROVED)
+        let configs = Configurations(comisiones: comisionesSwitch.isOn, descuento: descuentoSwitch.isOn, fullCustomization: customizationSwitch.isOn, paymentPlugin: paymentPluginSwitch.isOn, paymentPluginViewController: viewControllerSwitch.isOn, businessResult: businessSwitch.isOn, maxRedeemPerUser: maxRedeemPerUserStepper.value, skipCongrats: addCardFlowSkipCongrats.isOn, accessToken: accessTokenSwitch.isOn, oneTap: oneTapSwitch.isOn, advancedConfiguration: advancedConfigSwitch.isOn, splitPayment: splitSwitch.isOn, payerInfo: payerInfoSwitch.isOn, localizedTexts: localizedTextsSwitch.isOn, countryContext: countryContext() ?? .mla, businessStatus: businessStatus() ?? .APPROVED)
 
         if let delegate = delegate {
             delegate.setConfigurations(configs: configs)

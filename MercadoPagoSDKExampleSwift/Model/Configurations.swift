@@ -72,6 +72,7 @@ struct Configurations {
     var paymentPluginViewController: Bool
     var businessResult: Bool
     var maxRedeemPerUser: Double
+    var skipCongrats: Bool
     var accessToken: Bool
     var oneTap: Bool
     var advancedConfiguration: Bool

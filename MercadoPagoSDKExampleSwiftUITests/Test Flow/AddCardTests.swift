@@ -86,4 +86,19 @@ class AddCardTests: XCTestCase {
             .completeCVVAndContinue("123")
             .completeNumberAndContinueToCongrats("63538416397")
     }
+    
+    func testAddCardSkippingCongrats() {
+        _ = MainScreen()
+            .tapConfigurationsButton()
+            .changeSkipCongratsSwitch()
+            .tapApplyConfigurationsButton()
+            .tapClearButton()
+            .fillAccessToken("TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299")
+            .tapAddCardButton()
+            .completeNumberAndContinue("4111111111111111")
+            .completeNameAndContinue("JUAN PEREZ")
+            .completeExpirationDateAndContinue("1225")
+            .completeCVVAndContinue("123")
+            .completeNumberAndFinish("12345678")
+    }
 }
