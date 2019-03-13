@@ -13,7 +13,7 @@ import PureLayout
 
 class CheckoutOptionsViewController: UIViewController, ConfigurationManager, AddCardFlowProtocol {
 
-    var configurations: Configurations = Configurations(comisiones: false,descuento: false,fullCustomization: false,paymentPlugin: false, paymentPluginViewController : false, businessResult: false,maxRedeemPerUser: 0,accessToken: false, oneTap: false, advancedConfiguration: false,splitPayment: false, payerInfo: false, localizedTexts: false, countryContext: .mla, businessStatus: .APPROVED)
+    var configurations: Configurations = Configurations(comisiones: false,descuento: false,fullCustomization: false,paymentPlugin: false, paymentPluginViewController : false, businessResult: false,maxRedeemPerUser: 0, skipCongrats: false,accessToken: false, oneTap: false, advancedConfiguration: false,splitPayment: false, payerInfo: false, localizedTexts: false, countryContext: .mla, businessStatus: .APPROVED)
 
     var addCardFlow : AddCardFlow?
     var descriptionLabel: UILabel!
@@ -69,6 +69,10 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             button.setTitleColor(.white, for: .normal)
             button.add(for: .touchUpInside, {
                 if let accessToken = self.accessTokenField.text {
+                    if self.configurations.skipCongrats {
+                        self.startAddCardFlowSkippingCongrats(accessToken: accessToken)
+                        return
+                    }
                     self.startAddCardFlow(accessToken: accessToken)
                 }
             })
@@ -233,6 +237,15 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             return
         }
         self.addCardFlow = AddCardFlow(accessToken: accessToken, locale: "es", navigationController: navController)
+        self.addCardFlow?.delegate = self
+        self.addCardFlow?.start()
+    }
+    
+    func startAddCardFlowSkippingCongrats(accessToken: String) {
+        guard let navController = self.navigationController else {
+            return
+        }
+        self.addCardFlow = AddCardFlow(accessToken: accessToken, locale: "es", navigationController: navController, shouldSkipCongrats: true)
         self.addCardFlow?.delegate = self
         self.addCardFlow?.start()
     }

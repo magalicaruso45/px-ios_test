@@ -16,6 +16,7 @@ public class ConfigurationScreen: BaseScreen {
     private lazy var accessTokenSwitch = switchElement("access_token_switch")
     private lazy var businessSwitch = switchElement("business_switch")
     private lazy var fullCustomizationSwitch = switchElement("full_customization_switch")
+    private lazy var addCardFlowSkipCongratsSwitch = switchElement("skip_congrats_switch")
     private lazy var advancedSwitch = switchElement("advanced_switch")
     private lazy var oneTapSwitch = switchElement("one_tap_switch")
     private lazy var splitSwitch = switchElement("split_switch")
@@ -62,6 +63,11 @@ public class ConfigurationScreen: BaseScreen {
     
     func changeFullCustomizationSwitch() -> ConfigurationScreen {
         fullCustomizationSwitch.tap()
+        return self
+    }
+    
+    func changeSkipCongratsSwitch() -> ConfigurationScreen {
+        addCardFlowSkipCongratsSwitch.tap()
         return self
     }
 

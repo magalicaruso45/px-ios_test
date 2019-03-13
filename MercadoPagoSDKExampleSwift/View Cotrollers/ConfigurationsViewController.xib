@@ -131,6 +131,7 @@
                 </label>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="sD6-9D-TR9" userLabel="SkipCongrats Switch">
                     <rect key="frame" x="349" y="257" width="51" height="31"/>
+                    <accessibility key="accessibilityConfiguration" identifier="skip_congrats_switch"/>
                 </switch>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max redeem per user" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r0T-qp-qRg">
                     <rect key="frame" x="18" y="328" width="325" height="21"/>
