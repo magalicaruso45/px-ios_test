@@ -251,9 +251,9 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         var builder : MercadoPagoCheckoutBuilder
 
         if let payconf = paymentConfig {
-// MODO PREFERENCIA ABIERTA builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, checkoutPreference: createPreference(prefId: prefId, cardId: cardId, setPayer: setPayer), paymentConfiguration: payconf)
+            builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, checkoutPreference: createPreference(prefId: prefId, cardId: cardId, setPayer: setPayer), paymentConfiguration: payconf)
             
-            builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, preferenceId: prefId, paymentConfiguration: payconf)
+// MODO PREFERENCIA CERRADA builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, preferenceId: prefId, paymentConfiguration: payconf)
             builder.setPrivateKey(key: accessToken!)
         } else {
             builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, preferenceId: prefId)
