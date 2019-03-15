@@ -22,6 +22,9 @@ public class ConfigurationScreen: BaseScreen {
     private lazy var splitSwitch = switchElement("split_switch")
     private lazy var payerInfoSwitch = switchElement("payer_info_switch")
     private lazy var localizedSwitch = switchElement("localized_texts_switch")
+    private lazy var openPrefSwitch = switchElement("open_pref_switch")
+    private lazy var escSwitch = switchElement("esc_switch")
+    private lazy var discountParamsSwitch = switchElement("discount_switch")
     
     
     private lazy var businessSegment = element("business_segment")
@@ -30,6 +33,12 @@ public class ConfigurationScreen: BaseScreen {
     
     private lazy var maxRedeemPerUserStepper = stepper("max_redeem_per_user_stepper")
     private lazy var applyConfigsButton = button("apply_configs_button")
+    private lazy var mlaButton = button("Argentina")
+    private lazy var mlbButton = button("Brasil")
+    private lazy var mlmButton = button("México")
+    private lazy var approvedButton = button("Approved")
+    private lazy var pendingButton = button("Pending")
+    private lazy var rejectedButton = button("Rejected")
 
     func tapApplyConfigurationsButton() -> MainScreen {
         applyConfigsButton.tap()
@@ -93,6 +102,51 @@ public class ConfigurationScreen: BaseScreen {
 
     func changeLocalizedTextsSwitch() -> ConfigurationScreen {
         localizedSwitch.tap()
+        return self
+    }
+    
+    func tapESCSwitch() -> ConfigurationScreen {
+        escSwitch.tap()
+        return self
+    }
+    
+    func tapOpenPrefSwitch() -> ConfigurationScreen {
+        openPrefSwitch.tap()
+        return self
+    }
+    
+    func tapDiscountParamsSwitch() -> ConfigurationScreen {
+        discountParamsSwitch.tap()
+        return self
+    }
+    
+    func tapBusinessSegmentApproved() -> ConfigurationScreen {
+        approvedButton.tap()
+        return self
+    }
+    
+    func tapBusinessSegmentPending() -> ConfigurationScreen {
+        pendingButton.tap()
+        return self
+    }
+    
+    func tapBusinessSegmentRejected() -> ConfigurationScreen {
+        rejectedButton.tap()
+        return self
+    }
+    
+    func tapPreferenceSegmentMLA() -> ConfigurationScreen {
+        mlaButton.tap()
+        return self
+    }
+    
+    func tapPreferenceSegmentMLB() -> ConfigurationScreen {
+        mlbButton.tap()
+        return self
+    }
+    
+    func tapPreferenceSegmentMLM() -> ConfigurationScreen {
+        mlmButton.tap()
         return self
     }
 

@@ -79,6 +79,9 @@ struct Configurations {
     var splitPayment: Bool
     var payerInfo: Bool
     var localizedTexts: Bool
+    var openPreference: Bool
+    var escEnabled: Bool
+    var discountParams: Bool
     var countryContext: CountryContext
     var businessStatus: PXBusinessResultStatus
 }

@@ -13,7 +13,26 @@ import PureLayout
 
 class CheckoutOptionsViewController: UIViewController, ConfigurationManager, AddCardFlowProtocol {
 
-    var configurations: Configurations = Configurations(comisiones: false,descuento: false,fullCustomization: false,paymentPlugin: false, paymentPluginViewController : false, businessResult: false,maxRedeemPerUser: 0, skipCongrats: false,accessToken: false, oneTap: false, advancedConfiguration: false,splitPayment: false, payerInfo: false, localizedTexts: false, countryContext: .mla, businessStatus: .APPROVED)
+    var configurations: Configurations =
+        Configurations(comisiones: false,
+                       descuento: false,
+                       fullCustomization: false,
+                       paymentPlugin: false,
+                       paymentPluginViewController : false,
+                       businessResult: false,
+                       maxRedeemPerUser: 0,
+                       skipCongrats: false,
+                       accessToken: false,
+                       oneTap: false,
+                       advancedConfiguration: false,
+                       splitPayment: false,
+                       payerInfo: false,
+                       localizedTexts: false,
+                       openPreference: false,
+                       escEnabled: false,
+                       discountParams: false,
+                       countryContext: .mla,
+                       businessStatus: .APPROVED)
 
     var addCardFlow : AddCardFlow?
     var descriptionLabel: UILabel!
@@ -68,9 +87,9 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             button.layer.cornerRadius = 20
             button.setTitleColor(.white, for: .normal)
             button.add(for: .touchUpInside, {
-                if let accessToken = self.accessTokenField.text {
-                    self.configurations.skipCongrats ? self.startAddCardFlowSkippingCongrats(accessToken: accessToken) :self.startAddCardFlow(accessToken: accessToken)
-                }
+//                if let accessToken = self.accessTokenField.text {
+//                    self.configurations.skipCongrats ? self.startAddCardFlowSkippingCongrats(accessToken: accessToken) :self.startAddCardFlow(accessToken: accessToken)
+//                }
             })
             return button
         }()
@@ -215,13 +234,15 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         
         if configurations.advancedConfiguration {
             let advancedConfig = PXAdvancedConfiguration()
-            if configurations.oneTap == true {
+            if configurations.oneTap {
                 advancedConfig.expressEnabled = true
             }
-            
-            //IF PARAMS CONFIGURATION
-//            advancedConfig.discountParamsConfiguration = PXDiscountParamsConfiguration(labels: ["fruta"], productId: "BCKJO2VHAU10018OVCE0")
-            
+            if configurations.discountParams {
+                advancedConfig.discountParamsConfiguration = PXDiscountParamsConfiguration(labels: ["fruta"], productId: "BCKJO2VHAU10018OVCE0")
+            }
+            if configurations.escEnabled {
+                advancedConfig.escEnabled = true
+            }
             builder.setAdvancedConfiguration(config: advancedConfig)
         }
         
@@ -236,15 +257,16 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         self.addCardFlow?.delegate = self
         self.addCardFlow?.start()
     }
-    
-    func startAddCardFlowSkippingCongrats(accessToken: String) {
-        guard let navController = self.navigationController else {
-            return
-        }
-        self.addCardFlow = AddCardFlow(accessToken: accessToken, locale: "es", navigationController: navController, shouldSkipCongrats: true)
-        self.addCardFlow?.delegate = self
-        self.addCardFlow?.start()
-    }
+ 
+//this case is commented until the corresponding PR is merged https://github.com/mercadopago/px-ios/pull/1829
+//    func startAddCardFlowSkippingCongrats(accessToken: String) {
+//        guard let navController = self.navigationController else {
+//            return
+//        }
+//        self.addCardFlow = AddCardFlow(accessToken: accessToken, locale: "es", navigationController: navController, shouldSkipCongrats: true)
+//        self.addCardFlow?.delegate = self
+//        self.addCardFlow?.start()
+//    }
     
     func addCardFlowSucceded(result: [String: Any]) {
         self.navigationController?.popViewController(animated: true)
@@ -253,19 +275,27 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
     func addCardFlowFailed(shouldRestart: Bool) {
         self.navigationController?.popViewController(animated: true)
     }
-    
-    
 
     func getBuilder(publicKey: String, prefId: String, accessToken: String?,  cardId: String?, paymentConfig: PXPaymentConfiguration?, setPayer: Bool, localizedTexts: Bool) -> MercadoPagoCheckoutBuilder {
         var builder : MercadoPagoCheckoutBuilder
 
         if let payconf = paymentConfig {
-            builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, checkoutPreference: createPreference(prefId: prefId, cardId: cardId, setPayer: setPayer), paymentConfiguration: payconf)
-            
-// MODO PREFERENCIA CERRADA builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, preferenceId: prefId, paymentConfiguration: payconf)
-            builder.setPrivateKey(key: accessToken!)
+            if configurations.openPreference {
+                let preference = createPreference(prefId: prefId,
+                                                  cardId: cardId,
+                                                  setPayer: setPayer)
+                builder = MercadoPagoCheckoutBuilder(publicKey: publicKey,
+                                                     checkoutPreference: preference,
+                                                     paymentConfiguration: payconf)
+            } else {
+                builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, preferenceId: prefId, paymentConfiguration: payconf)
+            }
         } else {
             builder = MercadoPagoCheckoutBuilder(publicKey: publicKey, preferenceId: prefId)
+        }
+        
+        if let privateKey = accessToken {
+            builder.setPrivateKey(key: privateKey)
         }
 
         if localizedTexts {
@@ -281,7 +311,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
 
     func createPreference(prefId: String, cardId: String? = nil, setPayer: Bool) -> PXCheckoutPreference {
 
-        let item = PXItem(title: "id", quantity: 1, unitPrice: 100)
+        let item = PXItem(title: "id", quantity: 1, unitPrice: 123)
         let checkoutPreference = PXCheckoutPreference(siteId: "MLA", payerEmail: "sadsd@asd.com", items: [item])
 
         if setPayer {

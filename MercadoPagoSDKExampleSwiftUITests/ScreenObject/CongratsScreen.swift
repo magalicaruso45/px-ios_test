@@ -11,17 +11,22 @@ import UIKit
 public class CongratsScreen: BaseScreen {
     
     
+    private lazy var closeButton = button("result_close_button")
     
     override open func waitForElements() {
-       // let instructionsFooterButton = element("Cancelar pago")
-       // waitFor(element: instructionsFooterButton)
         let _ = waitForAnyCongrats()
     }
-//
+    
     func waitForAnyCongrats() -> CongratsScreen {
-        waitFor(element: button("result_close_button"))
+        waitFor(element: closeButton)
         return self
     }
+    
+    func tapCloseButton() -> MainScreen {
+        closeButton.tap()
+        return MainScreen()
+    }
+    
 //
 //    func waitForApprovedCongrats() -> CongratsScreen {
 //        let instructionsFooterButton = cellButton("Continuar")
