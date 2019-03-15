@@ -91,12 +91,15 @@ class ConfigurationsViewController: UIViewController {
         self.businessSwitch.isOn = false
         self.businessSegment.isEnabled = false
         self.customizationSwitch.isEnabled = false
+        self.openPrefSwitch.isEnabled = false
         self.oneTapSwitch.isOn = false
+        self.openPrefSwitch.isOn = false
         self.oneTapSwitch.isEnabled = false
         self.viewControllerSwitch.isEnabled = enableSwitchs
         self.accessTokenSwitch.isEnabled = enableSwitchs
         self.comisionesSwitch.isEnabled = enableSwitchs
         self.businessSwitch.isEnabled = enableSwitchs
+        self.openPrefSwitch.isEnabled = enableSwitchs
         self.updateBusinessSegmentColor()
         self.validateAdvancedConfigSwitches()
     }
@@ -112,8 +115,12 @@ class ConfigurationsViewController: UIViewController {
     func validateAdvancedConfigSwitches() {
         self.oneTapSwitch.isOn = false
         self.splitSwitch.isOn = false
+        self.escSwitch.isOn = false
+        self.discountParamsSwitch.isOn = false
+        let enableSwitchs = self.advancedConfigSwitch.isOn
+        self.escSwitch.isEnabled = enableSwitchs
+        self.discountParamsSwitch.isEnabled = enableSwitchs
         self.splitSwitch.isEnabled = false
-//        let enableSwitchs = self.advancedConfigSwitch.isOn
         self.oneTapSwitch.isEnabled = self.advancedConfigSwitch.isOn && self.accessTokenSwitch.isOn && self.paymentPluginSwitch.isOn
     }
     
