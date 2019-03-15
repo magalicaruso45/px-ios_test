@@ -31,7 +31,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
                        openPreference: false,
                        escEnabled: false,
                        discountParams: false,
-                       countryContext: .mla,
+                       preferenceContext: .mla,
                        businessStatus: .APPROVED)
 
     var addCardFlow : AddCardFlow?
@@ -205,11 +205,11 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
 
     func setConfigurations(configs: Configurations) {
         self.configurations = configs
-        let initConfig = configurations.countryContext.getInitConfiguration()
+        let initConfig = configurations.preferenceContext.getInitConfiguration()
         publicKeyField.text = initConfig.publicKey
         preferenceIDField.text = initConfig.preferenceID
         accessTokenField.text = configurations.accessToken ? initConfig.accessToken : ""
-        descriptionLabel.text = "Site: \(configurations.countryContext.rawValue) \nPayer: \(initConfig.payer) \nCollector: \(initConfig.collector)"
+        descriptionLabel.text = "Case: \(configurations.preferenceContext.getContextDescription()) \nPayer: \(initConfig.payer) \nCollector: \(initConfig.collector)"
     }
 
     //---- Configs

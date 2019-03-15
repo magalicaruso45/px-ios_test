@@ -29,7 +29,6 @@
                 <outlet property="openPrefSwitch" destination="sD6-9D-TR9" id="til-Zm-YbY"/>
                 <outlet property="payerInfoSwitch" destination="8n7-Ii-ykq" id="Xls-Yv-aAS"/>
                 <outlet property="paymentPluginSwitch" destination="csf-l2-8Oc" id="84U-hZ-vCr"/>
-                <outlet property="preferenceSegment" destination="5Ds-NG-lLw" id="kE6-I0-Plb"/>
                 <outlet property="splitSwitch" destination="xrh-32-Ecp" id="UKz-Iy-amg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewControllerSwitch" destination="eRB-X4-oQv" id="Wmd-4S-lam"/>
@@ -264,6 +263,12 @@
                         <segment title="Argentina"/>
                         <segment title="Brasil"/>
                         <segment title="México"/>
+                        <segment title="Always On"/>
+                        <segment title="Soldout"/>
+                        <segment title="PM"/>
+                        <segment title="Issuer"/>
+                        <segment title="AM"/>
+                        <segment title="Boleto"/>
                     </segments>
                 </segmentedControl>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bTg-39-tKM">
@@ -287,15 +292,6 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5Ds-NG-lLw">
-                    <rect key="frame" x="11" y="576" width="387" height="29"/>
-                    <segments>
-                        <segment title="Cheap pref"/>
-                        <segment title="Expensive pref"/>
-                        <segment title="Only AM"/>
-                    </segments>
-                    <color key="tintColor" red="0.15705830649999999" green="0.4630493222" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                </segmentedControl>
                 <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="JDR-wu-zYq">
                     <rect key="frame" x="302" y="285" width="94" height="29"/>
                     <connections>
@@ -324,13 +320,11 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="r0T-qp-qRg" secondAttribute="trailing" constant="71" id="5MW-Og-lzh"/>
                 <constraint firstItem="8n7-Ii-ykq" firstAttribute="top" secondItem="56R-lD-Ik4" secondAttribute="bottom" id="6yE-V2-u6F"/>
                 <constraint firstItem="Qf7-am-hZf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="7Bg-Lv-LMn"/>
-                <constraint firstItem="94s-LK-kph" firstAttribute="top" secondItem="5Ds-NG-lLw" secondAttribute="bottom" constant="16" id="7Pi-jn-3XJ"/>
                 <constraint firstItem="eRB-X4-oQv" firstAttribute="leading" secondItem="5Pc-eE-keT" secondAttribute="trailing" constant="8" id="8wU-m0-ZRM"/>
                 <constraint firstItem="JdY-3h-ulB" firstAttribute="top" secondItem="r0T-qp-qRg" secondAttribute="bottom" constant="20" id="B0g-xn-GPp"/>
                 <constraint firstItem="2m4-gb-JeP" firstAttribute="centerY" secondItem="y6S-AS-sFO" secondAttribute="centerY" id="BVt-Cl-AyS"/>
                 <constraint firstItem="3lj-wF-Ixo" firstAttribute="centerY" secondItem="JDR-wu-zYq" secondAttribute="centerY" id="C65-SK-J4w"/>
                 <constraint firstItem="hnr-31-BCz" firstAttribute="centerY" secondItem="hkR-Fh-rXi" secondAttribute="centerY" id="CiL-0c-ylg"/>
-                <constraint firstItem="5Ds-NG-lLw" firstAttribute="leading" secondItem="94s-LK-kph" secondAttribute="leading" id="Cxn-cX-HoS"/>
                 <constraint firstItem="8Ws-aM-4Sf" firstAttribute="leading" secondItem="r0T-qp-qRg" secondAttribute="leading" constant="40" id="D0Z-0a-VXH"/>
                 <constraint firstItem="L4k-WZ-aN8" firstAttribute="top" secondItem="VZi-iG-Fxk" secondAttribute="bottom" id="DHe-Q1-Oyh"/>
                 <constraint firstItem="sD6-9D-TR9" firstAttribute="top" secondItem="gvP-a7-hhS" secondAttribute="bottom" id="Das-6I-mhH"/>
@@ -407,7 +401,6 @@
                 <constraint firstItem="Dkn-CY-kWJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="11" id="vjR-To-e0c"/>
                 <constraint firstItem="hnr-31-BCz" firstAttribute="leading" secondItem="hkR-Fh-rXi" secondAttribute="trailing" constant="8" id="wd8-t4-aM6"/>
                 <constraint firstItem="gvP-a7-hhS" firstAttribute="centerY" secondItem="ei5-8p-L6c" secondAttribute="centerY" id="wwI-ER-HQK"/>
-                <constraint firstItem="5Ds-NG-lLw" firstAttribute="trailing" secondItem="94s-LK-kph" secondAttribute="trailing" id="x7o-rB-2MN"/>
                 <constraint firstItem="gvP-a7-hhS" firstAttribute="top" secondItem="Ee4-Aw-xAa" secondAttribute="bottom" id="xKA-0g-TBS"/>
                 <constraint firstItem="dJR-gT-Oyn" firstAttribute="centerY" secondItem="vXY-Uv-WUy" secondAttribute="centerY" id="xvt-OK-KEy"/>
                 <constraint firstItem="3lj-wF-Ixo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="232" id="yTT-nB-sUT"/>

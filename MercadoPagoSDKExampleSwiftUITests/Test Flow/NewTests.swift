@@ -58,7 +58,8 @@ class NewTests: XCTestCase {
             .changePaymentProcessorSwitch()
             .changeBusinessSwitch()
             .tapBusinessSegmentApproved()
-            .tapESCSwitch()
+            .changeAdvancedSwitch()
+            .changeESCSwitch()
             .tapApplyConfigurationsButton()
         return mainScreen
     }

@@ -27,7 +27,6 @@ class ConfigurationsViewController: UIViewController {
     @IBOutlet weak var localizedTextsSwitch: UISwitch!
     @IBOutlet weak var countrySegment: UISegmentedControl!
     @IBOutlet weak var businessSegment: UISegmentedControl!
-    @IBOutlet weak var preferenceSegment: UISegmentedControl!
     @IBOutlet weak var oneTapSwitch: UISwitch!
     @IBOutlet weak var splitSwitch: UISwitch!
     @IBOutlet weak var addCardFlowSkipCongrats: UISwitch!
@@ -42,8 +41,7 @@ class ConfigurationsViewController: UIViewController {
         maxRedeemPerUserStepper.accessibilityIdentifier = "max_redeem_per_user_stepper"
         countrySegment.accessibilityIdentifier = "country_segment"
         businessSegment.accessibilityIdentifier = "business_segment"
-        preferenceSegment.accessibilityIdentifier = "preference_segment"
-
+        
         let frame = CGRect(x: -maxRedeemPerUserStepper.frame.midX, y: maxRedeemPerUserStepper.frame.midY, width: 2, height: 2)
         let view = UIView(frame: frame)
         view.backgroundColor = .red
@@ -179,7 +177,7 @@ class ConfigurationsViewController: UIViewController {
             openPreference: openPrefSwitch.isOn,
             escEnabled: escSwitch.isOn,
             discountParams: discountParamsSwitch.isOn,
-            countryContext: countryContext() ?? .mla,
+            preferenceContext: preferenceContext() ?? .mla,
             businessStatus: businessStatus() ?? .APPROVED)
 
         if let delegate = delegate {
@@ -189,7 +187,7 @@ class ConfigurationsViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
-    func countryContext() -> CountryContext? {
+    func preferenceContext() -> PreferenceContext? {
         switch self.countrySegment.selectedSegmentIndex {
         case 0:
             return .mla
@@ -197,6 +195,18 @@ class ConfigurationsViewController: UIViewController {
             return .mlb
         case 2:
             return .mlm
+        case 3:
+            return .discountAlwaysOn
+        case 4:
+            return .discountSoldOut
+        case 5:
+            return .discountByPaymentMethod
+        case 6:
+            return .discountByIssuer
+        case 7:
+            return .discountForAM
+        case 8:
+            return .boleto
         default:
             return nil
         }

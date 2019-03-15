@@ -36,6 +36,12 @@ public class ConfigurationScreen: BaseScreen {
     private lazy var mlaButton = button("Argentina")
     private lazy var mlbButton = button("Brasil")
     private lazy var mlmButton = button("México")
+    private lazy var discountAlwaysOnButton = button("Always On")
+    private lazy var discountSoldoutButton = button("Soldout")
+    private lazy var discountByPaymentMethodButton = button("PM")
+    private lazy var discountByIssuerButton = button("Issuer")
+    private lazy var discountForAMButton = button("AM")
+    private lazy var boletoButton = button("Boleto")
     private lazy var approvedButton = button("Approved")
     private lazy var pendingButton = button("Pending")
     private lazy var rejectedButton = button("Rejected")
@@ -105,17 +111,17 @@ public class ConfigurationScreen: BaseScreen {
         return self
     }
     
-    func tapESCSwitch() -> ConfigurationScreen {
+    func changeESCSwitch() -> ConfigurationScreen {
         escSwitch.tap()
         return self
     }
     
-    func tapOpenPrefSwitch() -> ConfigurationScreen {
+    func changeOpenPrefSwitch() -> ConfigurationScreen {
         openPrefSwitch.tap()
         return self
     }
     
-    func tapDiscountParamsSwitch() -> ConfigurationScreen {
+    func changeDiscountParamsSwitch() -> ConfigurationScreen {
         discountParamsSwitch.tap()
         return self
     }
@@ -149,7 +155,38 @@ public class ConfigurationScreen: BaseScreen {
         mlmButton.tap()
         return self
     }
-
+    
+    func tapPreferenceSegmentDiscountAlwaysOn() -> ConfigurationScreen {
+        discountAlwaysOnButton.tap()
+        return self
+    }
+    
+    func tapPreferenceSegmentDiscountSoldout() -> ConfigurationScreen {
+        discountSoldoutButton.tap()
+        return self
+    }
+    
+    func tapPreferenceSegmentDiscountByPaymentMethod() -> ConfigurationScreen {
+        discountByPaymentMethodButton.tap()
+        return self
+    }
+    
+    
+    func tapPreferenceSegmentDiscountByIssuer() -> ConfigurationScreen {
+        discountByIssuerButton.tap()
+        return self
+    }
+    
+    func tapPreferenceSegmentDiscountForAM() -> ConfigurationScreen {
+        discountForAMButton.tap()
+        return self
+    }
+    
+    func tapPreferenceSegmentBoleto() -> ConfigurationScreen {
+        boletoButton.tap()
+        return self
+    }
+    
     func incrementMaxRedeemPerUserStepperBy(_ int: Int) -> ConfigurationScreen {
         for _ in 1...int {
             maxRedeemPerUserStepper.buttons["Increment"].tap()
