@@ -87,6 +87,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             button.layer.cornerRadius = 20
             button.setTitleColor(.white, for: .normal)
             button.add(for: .touchUpInside, {
+//this case is commented until the corresponding PR is merged https://github.com/mercadopago/px-ios/pull/1829
 //                if let accessToken = self.accessTokenField.text {
 //                    self.configurations.skipCongrats ? self.startAddCardFlowSkippingCongrats(accessToken: accessToken) :self.startAddCardFlow(accessToken: accessToken)
 //                }
