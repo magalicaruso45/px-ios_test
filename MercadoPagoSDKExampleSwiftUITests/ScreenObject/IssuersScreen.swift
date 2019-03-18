@@ -14,11 +14,11 @@ public class IssuersScreen: BaseScreen {
     private lazy var backButton = getBackButton()
 
     override open func waitForElements() {
-        waitFor(element: cellNumber(2))
         waitFor(element: backButton)
     }
 
     func selectIssuerOptionToPayerCostScreenAtRow(_ rowNumber: Int) -> PayerCostScreen {
+        sleep(1)
         tapRow(number: rowNumber)
         return PayerCostScreen()
     }
