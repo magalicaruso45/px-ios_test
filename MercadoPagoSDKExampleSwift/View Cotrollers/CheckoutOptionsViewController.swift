@@ -313,7 +313,9 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
     func createPreference(prefId: String, cardId: String? = nil, setPayer: Bool) -> PXCheckoutPreference {
 
         let item = PXItem(title: "id", quantity: 1, unitPrice: 123)
-        let checkoutPreference = PXCheckoutPreference(siteId: "MLB", payerEmail: "sadsd@asd.com", items: [item])
+
+        let site = configurations.preferenceContext.getSite()
+        let checkoutPreference = PXCheckoutPreference(siteId: site, payerEmail: "sadsd@asd.com", items: [item])
 
         if setPayer {
             let type = PXIdentificationType(id: "CNPJ", name: "CNPJ", minLength: 1, maxLength: 1, type: "CNPJ")
