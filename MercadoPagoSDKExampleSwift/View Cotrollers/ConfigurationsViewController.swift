@@ -15,8 +15,6 @@ protocol ConfigurationManager {
 
 class ConfigurationsViewController: UIViewController {
     @IBOutlet weak var comisionesSwitch: UISwitch!
-    @IBOutlet weak var descuentoSwitch: UISwitch!
-
     @IBOutlet weak var customizationSwitch: UISwitch!
     @IBOutlet weak var paymentPluginSwitch: UISwitch!
     @IBOutlet weak var businessSwitch: UISwitch!
@@ -29,10 +27,12 @@ class ConfigurationsViewController: UIViewController {
     @IBOutlet weak var localizedTextsSwitch: UISwitch!
     @IBOutlet weak var countrySegment: UISegmentedControl!
     @IBOutlet weak var businessSegment: UISegmentedControl!
-    @IBOutlet weak var preferenceSegment: UISegmentedControl!
     @IBOutlet weak var oneTapSwitch: UISwitch!
     @IBOutlet weak var splitSwitch: UISwitch!
     @IBOutlet weak var addCardFlowSkipCongrats: UISwitch!
+    @IBOutlet weak var escSwitch: UISwitch!
+    @IBOutlet weak var discountParamsSwitch: UISwitch!
+    @IBOutlet weak var openPrefSwitch: UISwitch!
     
     var delegate: ConfigurationManager?
 
@@ -41,8 +41,7 @@ class ConfigurationsViewController: UIViewController {
         maxRedeemPerUserStepper.accessibilityIdentifier = "max_redeem_per_user_stepper"
         countrySegment.accessibilityIdentifier = "country_segment"
         businessSegment.accessibilityIdentifier = "business_segment"
-        preferenceSegment.accessibilityIdentifier = "preference_segment"
-
+        
         let frame = CGRect(x: -maxRedeemPerUserStepper.frame.midX, y: maxRedeemPerUserStepper.frame.midY, width: 2, height: 2)
         let view = UIView(frame: frame)
         view.backgroundColor = .red
@@ -53,6 +52,27 @@ class ConfigurationsViewController: UIViewController {
         self.validateAddCardFlowSwitches()
         self.validateAdvancedConfigSwitches()
         updateBusinessSegmentColor()
+        resizeSwitches()
+    }
+    
+    func resizeSwitches() {
+        let newScale = CGAffineTransform(scaleX: 0.75, y: 0.75)
+        comisionesSwitch.transform = newScale
+        customizationSwitch.transform = newScale
+        paymentPluginSwitch.transform = newScale
+        businessSwitch.transform = newScale
+        maxRedeemPerUserStepper.transform = newScale
+        accessTokenSwitch.transform = newScale
+        viewControllerSwitch.transform = newScale
+        payerInfoSwitch.transform = newScale
+        advancedConfigSwitch.transform = newScale
+        localizedTextsSwitch.transform = newScale
+        oneTapSwitch.transform = newScale
+        splitSwitch.transform = newScale
+        addCardFlowSkipCongrats.transform = newScale
+        escSwitch.transform = newScale
+        discountParamsSwitch.transform = newScale
+        openPrefSwitch.transform = newScale
     }
 
     @IBAction func stepperValueChanges(_ sender: Any) {
@@ -71,12 +91,15 @@ class ConfigurationsViewController: UIViewController {
         self.businessSwitch.isOn = false
         self.businessSegment.isEnabled = false
         self.customizationSwitch.isEnabled = false
+        self.openPrefSwitch.isEnabled = false
         self.oneTapSwitch.isOn = false
+        self.openPrefSwitch.isOn = false
         self.oneTapSwitch.isEnabled = false
         self.viewControllerSwitch.isEnabled = enableSwitchs
         self.accessTokenSwitch.isEnabled = enableSwitchs
         self.comisionesSwitch.isEnabled = enableSwitchs
         self.businessSwitch.isEnabled = enableSwitchs
+        self.openPrefSwitch.isEnabled = enableSwitchs
         self.updateBusinessSegmentColor()
         self.validateAdvancedConfigSwitches()
     }
@@ -92,8 +115,12 @@ class ConfigurationsViewController: UIViewController {
     func validateAdvancedConfigSwitches() {
         self.oneTapSwitch.isOn = false
         self.splitSwitch.isOn = false
+        self.escSwitch.isOn = false
+        self.discountParamsSwitch.isOn = false
+        let enableSwitchs = self.advancedConfigSwitch.isOn
+        self.escSwitch.isEnabled = enableSwitchs
+        self.discountParamsSwitch.isEnabled = enableSwitchs
         self.splitSwitch.isEnabled = false
-//        let enableSwitchs = self.advancedConfigSwitch.isOn
         self.oneTapSwitch.isEnabled = self.advancedConfigSwitch.isOn && self.accessTokenSwitch.isOn && self.paymentPluginSwitch.isOn
     }
     
@@ -139,7 +166,26 @@ class ConfigurationsViewController: UIViewController {
     }
     
     @IBAction func applyAndConfirm(_ sender: Any) {
-        let configs = Configurations(comisiones: comisionesSwitch.isOn, descuento: descuentoSwitch.isOn, fullCustomization: customizationSwitch.isOn, paymentPlugin: paymentPluginSwitch.isOn, paymentPluginViewController: viewControllerSwitch.isOn, businessResult: businessSwitch.isOn, maxRedeemPerUser: maxRedeemPerUserStepper.value, skipCongrats: addCardFlowSkipCongrats.isOn, accessToken: accessTokenSwitch.isOn, oneTap: oneTapSwitch.isOn, advancedConfiguration: advancedConfigSwitch.isOn, splitPayment: splitSwitch.isOn, payerInfo: payerInfoSwitch.isOn, localizedTexts: localizedTextsSwitch.isOn, countryContext: countryContext() ?? .mla, businessStatus: businessStatus() ?? .APPROVED)
+        let configs = Configurations(
+            comisiones: comisionesSwitch.isOn,
+            descuento: true,
+            fullCustomization: customizationSwitch.isOn,
+            paymentPlugin: paymentPluginSwitch.isOn,
+            paymentPluginViewController: viewControllerSwitch.isOn,
+            businessResult: businessSwitch.isOn,
+            maxRedeemPerUser: maxRedeemPerUserStepper.value,
+            skipCongrats: addCardFlowSkipCongrats.isOn,
+            accessToken: accessTokenSwitch.isOn,
+            oneTap: oneTapSwitch.isOn,
+            advancedConfiguration: advancedConfigSwitch.isOn,
+            splitPayment: splitSwitch.isOn,
+            payerInfo: payerInfoSwitch.isOn,
+            localizedTexts: localizedTextsSwitch.isOn,
+            openPreference: openPrefSwitch.isOn,
+            escEnabled: escSwitch.isOn,
+            discountParams: discountParamsSwitch.isOn,
+            preferenceContext: preferenceContext() ?? .mla,
+            businessStatus: businessStatus() ?? .APPROVED)
 
         if let delegate = delegate {
             delegate.setConfigurations(configs: configs)
@@ -148,7 +194,7 @@ class ConfigurationsViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
-    func countryContext() -> CountryContext? {
+    func preferenceContext() -> PreferenceContext? {
         switch self.countrySegment.selectedSegmentIndex {
         case 0:
             return .mla
@@ -156,6 +202,18 @@ class ConfigurationsViewController: UIViewController {
             return .mlb
         case 2:
             return .mlm
+        case 3:
+            return .discountAlwaysOn
+        case 4:
+            return .discountSoldOut
+        case 5:
+            return .discountByPaymentMethod
+        case 6:
+            return .discountByIssuer
+        case 7:
+            return .discountForAM
+        case 8:
+            return .boleto
         default:
             return nil
         }
