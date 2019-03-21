@@ -321,7 +321,8 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             checkoutPreference.setPayer(payer: payer)
         }
         if cardId != nil && cardId != "" {
-            checkoutPreference.setExcludedPaymentTypes(["credit_card", "atm", "prepaid_card", "account_money"])
+            checkoutPreference.setExcludedPaymentMethods(["visa"])
+            checkoutPreference.setExcludedPaymentTypes(["debit_card", "atm"])
             checkoutPreference.setCardId(cardId: cardId!)
             return checkoutPreference
         }
