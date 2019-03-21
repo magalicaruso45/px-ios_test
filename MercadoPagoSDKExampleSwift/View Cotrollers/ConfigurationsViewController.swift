@@ -81,7 +81,11 @@ class ConfigurationsViewController: UIViewController {
     @IBAction func paymentPluginChanged(_ sender: Any) {
         self.validatePaymentPluginSwitches()
     }
-    
+    @IBAction func openPrefChanged(_ sender: Any) {
+        self.payerInfoSwitch.isOn = false
+        self.payerInfoSwitch.isEnabled = self.openPrefSwitch.isOn
+    }
+
     func validatePaymentPluginSwitches() {
         let enableSwitchs = self.paymentPluginSwitch.isOn
         self.viewControllerSwitch.isOn = false
@@ -94,6 +98,8 @@ class ConfigurationsViewController: UIViewController {
         self.openPrefSwitch.isEnabled = false
         self.oneTapSwitch.isOn = false
         self.openPrefSwitch.isOn = false
+        self.payerInfoSwitch.isOn = false
+        self.payerInfoSwitch.isEnabled = false
         self.oneTapSwitch.isEnabled = false
         self.viewControllerSwitch.isEnabled = enableSwitchs
         self.accessTokenSwitch.isEnabled = enableSwitchs
