@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import XCTest
 
 public class ConfigurationScreen: BaseScreen {
 
@@ -36,6 +37,7 @@ public class ConfigurationScreen: BaseScreen {
     private lazy var mlaButton = button("Argentina")
     private lazy var mlbButton = button("Brasil")
     private lazy var mlmButton = button("México")
+    private lazy var statusDetailButton = button("status_detail_button")
     private lazy var discountAlwaysOnButton = button("Always On")
     private lazy var discountSoldoutButton = button("Soldout")
     private lazy var discountByPaymentMethodButton = button("PM")
@@ -45,6 +47,16 @@ public class ConfigurationScreen: BaseScreen {
     private lazy var approvedButton = button("Approved")
     private lazy var pendingButton = button("Pending")
     private lazy var rejectedButton = button("Rejected")
+
+    func configurePaymentStatusDetail(_ statusDetail: String) -> ConfigurationScreen {
+        statusDetailButton.tap()
+        let app = XCUIApplication()
+        let textfield = app.alerts["Status detail"].textFields.firstMatch
+        textfield.typeText(statusDetail)
+        let okButton = app.alerts["Status detail"].buttons["Ok"]
+        okButton.tap()
+        return ConfigurationScreen()
+    }
 
     func tapApplyConfigurationsButton() -> MainScreen {
         applyConfigsButton.tap()

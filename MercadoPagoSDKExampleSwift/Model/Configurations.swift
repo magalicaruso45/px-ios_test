@@ -20,6 +20,17 @@ enum PreferenceContext {
     case discountForAM
     case boleto
 
+    func getLanguage() -> String {
+        switch self {
+        case .mlb:
+            return "pt"
+        case .boleto:
+            return "pt"
+        default:
+            return "es"
+        }
+    }
+
     func getSite() -> String {
         switch self {
         case .mla:
@@ -196,4 +207,5 @@ struct Configurations {
     var discountParams: Bool
     var preferenceContext: PreferenceContext
     var businessStatus: PXBusinessResultStatus
+    var statusDetail: String
 }

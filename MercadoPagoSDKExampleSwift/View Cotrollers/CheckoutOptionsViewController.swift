@@ -32,7 +32,8 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
                        escEnabled: false,
                        discountParams: false,
                        preferenceContext: .mla,
-                       businessStatus: .APPROVED)
+                       businessStatus: .REJECTED,
+                       statusDetail: "cc_rejected_call_for_authorize")
 
     var addCardFlow : AddCardFlow?
     var descriptionLabel: UILabel!
@@ -220,10 +221,10 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
                 let processor = SplitPaymentPlugin()
                 paymentPref = PXPaymentConfiguration(splitPaymentProcessor: processor)
             } else if configurations.paymentPluginViewController {
-                let processor = PaymentPluginViewController(isBusinessResult: configurations.businessResult, showFullCustomization: configurations.fullCustomization, businessResultStatus: configurations.businessStatus)
+                let processor = PaymentPluginViewController(isBusinessResult: configurations.businessResult, showFullCustomization: configurations.fullCustomization, businessResultStatus: configurations.businessStatus, statusDetail: configurations.statusDetail)
                 paymentPref = PXPaymentConfiguration(paymentProcessor: processor)
             } else{
-                let processor = PaymentPlugin(isBusinessResult: configurations.businessResult, showFullCustomization: configurations.fullCustomization, businessResultStatus: configurations.businessStatus)
+                let processor = PaymentPlugin(isBusinessResult: configurations.businessResult, showFullCustomization: configurations.fullCustomization, businessResultStatus: configurations.businessStatus, statusDetail: configurations.statusDetail)
                 paymentPref = PXPaymentConfiguration(paymentProcessor: processor)
             }
             if configurations.comisiones == true {
@@ -299,11 +300,13 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             builder.setPrivateKey(key: privateKey)
         }
 
+        let language = configurations.preferenceContext.getLanguage()
+        builder.setLanguage(language)
         if localizedTexts {
             let texts: [PXCustomTranslationKey : String] = [.total_to_pay: "Total cambiado", .how_to_pay: "Como deseas pagar cambiado ?"]
-            builder.setLanguage("MLB", texts)
+            builder.setLanguage(language, texts)
         } else {
-            builder.setLanguage("MLA")
+            builder.setLanguage(language)
         }
             
         return builder
@@ -373,11 +376,13 @@ class PaymentPlugin: NSObject, PXPaymentProcessor {
     let isBusinessResult: Bool
     let showFullCustomization: Bool
     let businessResultStatus: PXBusinessResultStatus
+    let statusDetail: String
     
-    init(isBusinessResult: Bool, showFullCustomization: Bool, businessResultStatus: PXBusinessResultStatus) {
+    init(isBusinessResult: Bool, showFullCustomization: Bool, businessResultStatus: PXBusinessResultStatus, statusDetail: String) {
         self.isBusinessResult = isBusinessResult
         self.showFullCustomization = showFullCustomization
         self.businessResultStatus = businessResultStatus
+        self.statusDetail = statusDetail
     }
 
     func paymentProcessorViewController() -> UIViewController? {
@@ -405,7 +410,7 @@ class PaymentPlugin: NSObject, PXPaymentProcessor {
             let customDescription = self.showFullCustomization ? "Sample text" : nil
             successWithBusinessResult(PXBusinessResult(receiptId: nil, status: businessResultStatus, title: "Ejecutamos tu transacción custom", subtitle: "Subtitulo", icon: nil, mainAction: customAction, secondaryAction: customAction, helpMessage: customDescription, showPaymentMethod: true, statementDescription: customDescription, imageUrl: nil, topCustomView: topCustomView, bottomCustomView: bottomCustomView, paymentStatus: status, paymentStatusDetail: ""))
         } else {
-            successWithPaymentResult(PXGenericPayment(status: "rejected", statusDetail: "cc_rejected_call_for_authorize"))
+            successWithPaymentResult(PXGenericPayment(status: "rejected", statusDetail: self.statusDetail))
         }
     }
 }
@@ -416,11 +421,13 @@ class PaymentPluginViewController: NSObject, PXPaymentProcessor {
     let isBusinessResult: Bool
     let showFullCustomization: Bool
     let businessResultStatus: PXBusinessResultStatus
+    let statusDetail: String
     
-    init(isBusinessResult: Bool, showFullCustomization: Bool, businessResultStatus: PXBusinessResultStatus) {
+    init(isBusinessResult: Bool, showFullCustomization: Bool, businessResultStatus: PXBusinessResultStatus, statusDetail: String) {
         self.isBusinessResult = isBusinessResult
         self.showFullCustomization = showFullCustomization
         self.businessResultStatus = businessResultStatus
+        self.statusDetail = statusDetail
     }
 
     func paymentProcessorViewController() -> UIViewController? {
@@ -449,7 +456,7 @@ class PaymentPluginViewController: NSObject, PXPaymentProcessor {
             let customDescription = self.showFullCustomization ? "Sample text" : nil
             successWithBusinessResult(PXBusinessResult(receiptId: nil, status: businessResultStatus, title: "Ejecutamos tu transacción custom", subtitle: "Subtitulo", icon: nil, mainAction: customAction, secondaryAction: customAction, helpMessage: customDescription, showPaymentMethod: true, statementDescription: customDescription, imageUrl: nil, topCustomView: topCustomView, bottomCustomView: bottomCustomView, paymentStatus: status, paymentStatusDetail: ""))
         } else {
-            successWithPaymentResult(PXGenericPayment(status: "rejected", statusDetail: "cc_call_for_authorize"))
+            successWithPaymentResult(PXGenericPayment(status: "rejected", statusDetail: self.statusDetail))
         }
     }
 }
