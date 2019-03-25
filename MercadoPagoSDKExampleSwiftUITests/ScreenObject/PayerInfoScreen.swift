@@ -14,12 +14,24 @@ public class PayerInfoScreen: BaseScreen {
     private lazy var numberTextField = textField("Número")
     private lazy var nameTextField = textField("Nombre")
     private lazy var lastNameTextField = textField("Apellido")
+    private lazy var businessName = textField("Razón Social")
     private lazy var continueButton = toolbarButton("Continuar")
+    private lazy var pickerWheel = textField("Tipo")
     private lazy var backButton = getBackButton()
 
     override open func waitForElements() {
         waitFor(element: payerBoletoComponent)
     }
+
+    func swapToCNPJ() -> PayerInfoScreen {
+        pickerWheel.tap()
+        let app = XCUIApplication()
+        app.textFields["Tipo"].tap()
+        sleep(1)
+        app.pickerWheels["CPF"].adjust(toPickerWheelValue: "CNPJ")
+        return PayerInfoScreen()
+    }
+
 
     func completeNumberAndContinueToPayer(_ text: String) -> PayerInfoScreen {
         numberTextField.typeText(text)
@@ -38,4 +50,17 @@ public class PayerInfoScreen: BaseScreen {
         continueButton.tap()
         return ReviewScreen()
     }
+
+    func completeBusinessNameAndContinueToPayer(_ text: String) -> PayerInfoScreen {
+        businessName.typeText(text)
+        continueButton.tap()
+        return PayerInfoScreen()
+    }
+
+    func completeBusinessNameAndContinueToReview(_ text: String) -> ReviewScreen {
+        businessName.typeText(text)
+        continueButton.tap()
+        return ReviewScreen()
+    }
+
 }

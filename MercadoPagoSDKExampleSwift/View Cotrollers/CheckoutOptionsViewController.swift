@@ -333,15 +333,18 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
     func createPreference(prefId: String, cardId: String? = nil, setPayer: Bool) -> PXCheckoutPreference {
 
         let item = PXItem(title: "id", quantity: 1, unitPrice: 123)
-        let checkoutPreference = PXCheckoutPreference(siteId: "MLA", payerEmail: "sadsd@asd.com", items: [item])
+
+        let site = configurations.preferenceContext.getSite()
+        let checkoutPreference = PXCheckoutPreference(siteId: site, payerEmail: "sadsd@asd.com", items: [item])
 
         if setPayer {
-            let type = PXIdentificationType(id: "CFP", name: "CFP", minLength: 1, maxLength: 1, type: "CPF")
-            let payer = PXPayer(id: "", accessToken: "", identification: PXIdentification(identificationType: type, identificationNumber: "66493851238"), type: nil, entityType: nil, email: "sadsd@asd.com", firstName: "Pepe", lastName: "Hongo")
+            let type = PXIdentificationType(id: "CNPJ", name: "CNPJ", minLength: 1, maxLength: 1, type: "CNPJ")
+            let payer = PXPayer(id: "", accessToken: "", identification: PXIdentification(identificationType: type, identificationNumber: "66493851238"), type: nil, entityType: nil, email: "sadsd@asd.com", firstName: "Pepe", lastName: "Hongo", legalName: "RAZAO")
             checkoutPreference.setPayer(payer: payer)
         }
         if cardId != nil && cardId != "" {
-            checkoutPreference.setExcludedPaymentTypes(["credit_card", "atm", "prepaid_card", "account_money"])
+            checkoutPreference.setExcludedPaymentMethods(["visa"])
+            checkoutPreference.setExcludedPaymentTypes(["debit_card", "atm"])
             checkoutPreference.setCardId(cardId: cardId!)
             return checkoutPreference
         }
@@ -422,7 +425,7 @@ class PaymentPlugin: NSObject, PXPaymentProcessor {
             let customDescription = self.showFullCustomization ? "Sample text" : nil
             successWithBusinessResult(PXBusinessResult(receiptId: nil, status: businessResultStatus, title: "Ejecutamos tu transacción custom", subtitle: "Subtitulo", icon: nil, mainAction: customAction, secondaryAction: customAction, helpMessage: customDescription, showPaymentMethod: true, statementDescription: customDescription, imageUrl: nil, topCustomView: topCustomView, bottomCustomView: bottomCustomView, paymentStatus: status, paymentStatusDetail: ""))
         } else {
-            successWithPaymentResult(PXGenericPayment(status: "approved", statusDetail: "accredited"))
+            successWithPaymentResult(PXGenericPayment(status: "rejected", statusDetail: "cc_rejected_call_for_authorize"))
         }
     }
 }

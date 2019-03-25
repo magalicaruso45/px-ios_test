@@ -21,14 +21,13 @@ class PXBoletoTest: XCTestCase {
         super.tearDown()
     }
 
-    func test_boleto() {
+    //reminder: the preset payer feature has been developed to work only in combination with an open preference. As any open preference requires a payment processor, there should be no cases in which "preset payer and closed pref" o "preset payer and no payment processor" could coexist. Since the money-in flow will always initiliaze with an open preference, such limitation does never affect this integration.
+
+    func test_boleto_cpf() {
         let _ = MainScreen()
             .tapConfigurationsButton()
-            .changePaymentProcessorSwitch()
+            .tapPreferenceSegmentBoleto()
             .tapApplyConfigurationsButton()
-            .tapClearButton()
-            .fillPublicKey("APP_USR-0c49ceb6-3cf7-4be9-b59d-f1f76671af68")
-            .fillAccessToken("APP_USR-1505-101710-2aa28f80031d35d3fc866e17765bde43-347997394")
             .tapCheckoutOption()
             .tapBoletoOption()
             .completeNumberAndContinueToPayer("05487765634")
@@ -37,15 +36,27 @@ class PXBoletoTest: XCTestCase {
             .tapPayButtonForAnyCongrats()
     }
 
+    func test_boleto_cnpj() {
+        let _ = MainScreen()
+            .tapConfigurationsButton()
+            .tapPreferenceSegmentBoleto()
+            .tapApplyConfigurationsButton()
+            .tapCheckoutOption()
+            .tapBoletoOption()
+            .swapToCNPJ()
+            .completeNumberAndContinueToPayer("36897693000104")
+            .completeBusinessNameAndContinueToReview("Social name")
+            .tapPayButtonForAnyCongrats()
+    }
+
     func test_boleto_con_payer() {
         let _ = MainScreen()
             .tapConfigurationsButton()
             .changePaymentProcessorSwitch()
+            .changeOpenPrefSwitch()
             .changePayerInfoSwitch()
+            .tapPreferenceSegmentBoleto()
             .tapApplyConfigurationsButton()
-            .tapClearButton()
-            .fillPublicKey("APP_USR-0c49ceb6-3cf7-4be9-b59d-f1f76671af68")
-            .fillAccessToken("APP_USR-1505-101710-2aa28f80031d35d3fc866e17765bde43-347997394")
             .tapCheckoutOption()
             .tapBoletoOptionForReview()
             .tapPayButtonForAnyCongrats()
@@ -55,11 +66,10 @@ class PXBoletoTest: XCTestCase {
         let _ = MainScreen()
             .tapConfigurationsButton()
             .changePaymentProcessorSwitch()
+            .changeOpenPrefSwitch()
             .changePayerInfoSwitch()
+            .tapPreferenceSegmentBoleto()
             .tapApplyConfigurationsButton()
-            .tapClearButton()
-            .fillPublicKey("APP_USR-0c49ceb6-3cf7-4be9-b59d-f1f76671af68")
-            .fillAccessToken("APP_USR-1505-101710-2aa28f80031d35d3fc866e17765bde43-347997394")
             .tapCheckoutOption()
             .tapBoletoOptionForReview()
             .tapChangePayerInfo()
@@ -69,25 +79,25 @@ class PXBoletoTest: XCTestCase {
             .tapPayButtonForAnyCongrats()
     }
 
-    func test_boleto_cambio_textos() {
-        let _ = MainScreen()
-            .tapConfigurationsButton()
-            .changePaymentProcessorSwitch()
-            .changeLocalizedTextsSwitch()
-            .tapApplyConfigurationsButton()
-            .tapClearButton()
-            .fillPublicKey("APP_USR-0c49ceb6-3cf7-4be9-b59d-f1f76671af68")
-            .fillAccessToken("APP_USR-1505-101710-2aa28f80031d35d3fc866e17765bde43-347997394")
-            .tapCheckoutOption()
-            .findText("Como deseas pagar cambiado ?")
-            .findText("Total cambiado")
-    }
-
     // Mark: Pref cerradas
     func test_boleto_pref_cerrada() {
         let _ = MainScreen()
             .tapConfigurationsButton()
-            .changePaymentProcessorSwitch()
+            .tapPreferenceSegmentBoleto()
+            .tapApplyConfigurationsButton()
+            .tapCheckoutOption()
+            .tapBoletoOption()
+            .completeNumberAndContinueToPayer("05487765634")
+            .completeNameAndContinueToPayer("JUAN")
+            .completeLastNameAndContinueToReview("PEREZ")
+            .tapPayButtonForAnyCongrats()
+    }
+    
+    func test_boleto_modificar_payer_pref_cerrada() {
+        let _ = MainScreen()
+            .tapConfigurationsButton()
+            .changePayerInfoSwitch()
+            .tapPreferenceSegmentBoleto()
             .tapApplyConfigurationsButton()
             .tapClearButton()
             .fillPublicKey("APP_USR-f3f035a2-d343-4a6f-bd3b-fc3c3cb72416")
@@ -97,34 +107,6 @@ class PXBoletoTest: XCTestCase {
             .completeNumberAndContinueToPayer("05487765634")
             .completeNameAndContinueToPayer("JUAN")
             .completeLastNameAndContinueToReview("PEREZ")
-            .tapPayButtonForAnyCongrats()
-    }
-    
-    func test_boleto_con_payer_pref_cerrada() {
-        let _ = MainScreen()
-            .tapConfigurationsButton()
-            .changePaymentProcessorSwitch()
-            .changePayerInfoSwitch()
-            .tapApplyConfigurationsButton()
-            .tapClearButton()
-            .fillPublicKey("APP_USR-f3f035a2-d343-4a6f-bd3b-fc3c3cb72416")
-            .fillPreferenceId("245099733-8771f469-d68e-4863-b8cb-9402e22c6bb2")
-            .tapCheckoutOption()
-            .tapBoletoOptionForReview()
-            .tapPayButtonForAnyCongrats()
-    }
-    
-    func test_boleto_modificar_payer_pref_cerrada() {
-        let _ = MainScreen()
-            .tapConfigurationsButton()
-            .changePaymentProcessorSwitch()
-            .changePayerInfoSwitch()
-            .tapApplyConfigurationsButton()
-            .tapClearButton()
-            .fillPublicKey("APP_USR-f3f035a2-d343-4a6f-bd3b-fc3c3cb72416")
-            .fillPreferenceId("245099733-8771f469-d68e-4863-b8cb-9402e22c6bb2")
-            .tapCheckoutOption()
-            .tapBoletoOptionForReview()
             .tapChangePayerInfo()
             .completeNumberAndContinueToPayer("05487765634")
             .completeNameAndContinueToPayer("JUAN")
@@ -135,14 +117,17 @@ class PXBoletoTest: XCTestCase {
     func test_boleto_accreditation_time_pref_cerrada() {
         let _ = MainScreen()
             .tapConfigurationsButton()
-            .changePaymentProcessorSwitch()
             .changePayerInfoSwitch()
+            .tapPreferenceSegmentBoleto()
             .tapApplyConfigurationsButton()
             .tapClearButton()
             .fillPublicKey("APP_USR-f3f035a2-d343-4a6f-bd3b-fc3c3cb72416")
             .fillPreferenceId("245099733-8771f469-d68e-4863-b8cb-9402e22c6bb2")
             .tapCheckoutOption()
-            .tapBoletoOptionForReview()
+            .tapBoletoOption()
+            .completeNumberAndContinueToPayer("05487765634")
+            .completeNameAndContinueToPayer("JUAN")
+            .completeLastNameAndContinueToReview("PEREZ")
             .tapChangePayerInfo()
             .completeNumberAndContinueToPayer("05487765634")
             .completeNameAndContinueToPayer("JUAN")
@@ -153,14 +138,17 @@ class PXBoletoTest: XCTestCase {
     func test_pec_accreditation_time_pref_cerrada() {
         let _ = MainScreen()
             .tapConfigurationsButton()
-            .changePaymentProcessorSwitch()
             .changePayerInfoSwitch()
+            .tapPreferenceSegmentBoleto()
             .tapApplyConfigurationsButton()
             .tapClearButton()
             .fillPublicKey("APP_USR-f3f035a2-d343-4a6f-bd3b-fc3c3cb72416")
             .fillPreferenceId("245099733-8771f469-d68e-4863-b8cb-9402e22c6bb2")
             .tapCheckoutOption()
-            .tapBoletoPecForReview()
+            .tapBoletoPec()
+            .completeNumberAndContinueToPayer("05487765634")
+            .completeNameAndContinueToPayer("JUAN")
+            .completeLastNameAndContinueToReview("PEREZ")
             .tapChangePayerInfo()
             .completeNumberAndContinueToPayer("05487765634")
             .completeNameAndContinueToPayer("JUAN")

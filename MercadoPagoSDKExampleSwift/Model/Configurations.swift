@@ -20,6 +20,29 @@ enum PreferenceContext {
     case discountByIssuer
     case discountForAM
     case boleto
+
+    func getSite() -> String {
+        switch self {
+        case .mla:
+            return "MLA"
+        case .mlb:
+            return "MLB"
+        case .mlm:
+            return "MLM"
+        case .discountAlwaysOn:
+            return "MLA"
+        case .discountSoldOut:
+            return "MLA"
+        case .discountByPaymentMethod:
+            return "MLA"
+        case .discountByIssuer:
+            return "MLA"
+        case .discountForAM:
+            return "MLA"
+        case .boleto:
+            return "MLB"
+        }
+    }
     
     func getContextDescription() -> String {
         switch self {
