@@ -25,7 +25,7 @@ open class BaseScreen : BaseScreenProtocol {
     }
 
     open func waitForElements() {
-        fatalError("All Screens Must Override this Method")
+        //fatalError("All Screens Must Override this Method")
     }
 
     func exist(element: XCUIElement) -> Bool{
@@ -35,20 +35,24 @@ open class BaseScreen : BaseScreenProtocol {
 
 // MARK: Loading screen helpers
 public extension BaseScreen {
+    @discardableResult
     func waitForExpectation(expectation:XCTestExpectation,
                             time: Double,
-                            safe: Bool = false) {
+                            safe: Bool = false) -> Bool {
         let result: XCTWaiter.Result =
             XCTWaiter().wait(for: [expectation],
                              timeout: time)
         if !safe && result != .completed {
             XCTFail("Condition was not satisfied during \(time) seconds")
         }
+
+        return result == .completed
     }
 
-    func waitFor(element: XCUIElement) {
+    @discardableResult
+    func waitFor(element: XCUIElement, time: Double = 10, terminate: Bool = true) -> Bool {
         let exists = NSPredicate(format: "exists = 1")
-        self.waitForExpectation(expectation: XCTNSPredicateExpectation(predicate: exists, object: element), time: TIME_OUT)
+        return waitForExpectation(expectation: XCTNSPredicateExpectation(predicate: exists, object: element), time: time, safe: !terminate)
     }
 }
 

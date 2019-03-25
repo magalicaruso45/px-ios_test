@@ -10,8 +10,11 @@ import UIKit
 
 class ExamplePaymentProcessorViewController: UIViewController {
     var handler : PXPaymentProcessorNavigationHandler?
+    var status: String = ""
+    var businessResultStatus: PXBusinessResultStatus? = nil
 
     override func viewDidLoad() {
+        handler?.hideLoading()
         super.viewDidLoad()
     }
 
@@ -19,7 +22,7 @@ class ExamplePaymentProcessorViewController: UIViewController {
         guard let handler = handler else {
             return
         }
-        let bussinessResult = PXBusinessResult(receiptId: "123", status: .APPROVED, title: "hola", subtitle: "nono", icon: nil, mainAction: nil, secondaryAction: nil, helpMessage: nil, showPaymentMethod: true, statementDescription: nil, imageUrl: nil, topCustomView: nil, bottomCustomView: nil, paymentStatus: "APPROVED", paymentStatusDetail: "OK")
+        let bussinessResult = PXBusinessResult(receiptId: "123", status: businessResultStatus ?? .APPROVED, title: "hola", subtitle: "nono", icon: nil, mainAction: nil, secondaryAction: nil, helpMessage: nil, showPaymentMethod: true, statementDescription: nil, imageUrl: nil, topCustomView: nil, bottomCustomView: nil, paymentStatus: status, paymentStatusDetail: "OK")
         handler.didFinishPayment(businessResult: bussinessResult)
     }
 }

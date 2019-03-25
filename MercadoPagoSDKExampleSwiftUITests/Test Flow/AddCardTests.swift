@@ -5,7 +5,6 @@
 //  Created by Diego Flores Domenech on 1/10/18.
 //  Copyright © 2018 Mercado Pago. All rights reserved.
 //
-
 import XCTest
 
 class AddCardTests: XCTestCase {
@@ -14,7 +13,6 @@ class AddCardTests: XCTestCase {
         super.setUp()
 
         // Put setup code here. This method is called before the invocation of each test method in the class.
-
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
@@ -86,7 +84,7 @@ class AddCardTests: XCTestCase {
             .completeCVVAndContinue("123")
             .completeNumberAndContinueToCongrats("63538416397")
     }
-    
+
     func testAddCardSkippingCongrats() {
         _ = MainScreen()
             .tapConfigurationsButton()
@@ -102,3 +100,4 @@ class AddCardTests: XCTestCase {
             .completeNumberAndFinish("12345678")
     }
 }
+

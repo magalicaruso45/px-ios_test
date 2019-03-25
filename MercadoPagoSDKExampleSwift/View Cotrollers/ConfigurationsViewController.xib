@@ -269,6 +269,7 @@
                         <segment title="Issuer"/>
                         <segment title="AM"/>
                         <segment title="Boleto"/>
+                        <segment title="Argentina One Card"/>
                     </segments>
                 </segmentedControl>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bTg-39-tKM">
@@ -408,13 +409,5 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="32.799999999999997" y="52.623688155922046"/>
         </view>
-        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="QVE-Vk-kSQ">
-            <rect key="frame" x="0.0" y="-1" width="121" height="28"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <segments>
-                <segment title="First"/>
-                <segment title="Second"/>
-            </segments>
-        </segmentedControl>
     </objects>
 </document>

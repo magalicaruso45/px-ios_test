@@ -24,6 +24,12 @@ public class PayerCostScreen: BaseScreen {
         return ReviewScreen()
     }
 
+    @discardableResult
+    func selectPayerCostOptionAtRowWithoutESC(_ rowNumber: Int) -> SecurityCodeScreen {
+        tapRow(number: rowNumber)
+        return SecurityCodeScreen()
+    }
+    
     func tapFloatingRowToPayerCost() -> PayerCostScreen {
         floatingRow.tap()
         return self

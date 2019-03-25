@@ -14,6 +14,7 @@ public class MainScreen: BaseScreen {
     private lazy var addCardButton = button("Start Card Flow")
     private lazy var clearButton = button("Clear fields")
     private lazy var configurationButton = button("Add Configutations")
+    private lazy var resetExtraConfigsButton = button("Reset extra configs")
     private lazy var publicKeyField = textField("Public Key")
     private lazy var preferenceIdField = textField("Pref ID")
     private lazy var accessTokenField = textField("Access Token (Optional)")
@@ -23,6 +24,11 @@ public class MainScreen: BaseScreen {
         checkoutButton.tap()
         let mainGroupScreen = MainGroupScreen()
         return mainGroupScreen
+    }
+
+    func tapOneTapOption() -> OneTapScreen {
+        checkoutButton.tap()
+        return OneTapScreen()
     }
 
     func tapCheckoutOptionOnlyCard() -> CardScreen {
@@ -68,6 +74,11 @@ public class MainScreen: BaseScreen {
         configurationButton.tap()
         return ConfigurationScreen()
     }
+
+    func resetExtraConfigurations() -> MainScreen {
+        resetExtraConfigsButton.tap()
+        return self
+    }
     
     func tapAddCardButton() -> CardScreen{
         addCardButton.tap()
@@ -75,7 +86,7 @@ public class MainScreen: BaseScreen {
     }
 
     override open func waitForElements() {
-        waitFor(element: checkoutButton)
+       // waitFor(element: checkoutButton)
       //  waitFor(element: configurationButton)
        // waitFor(element: publicKeyField)
        // waitFor(element: preferenceIdField)
