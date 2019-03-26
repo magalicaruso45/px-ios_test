@@ -10,7 +10,7 @@ import XCTest
 
 public class SecurityCodeScreen: BaseScreen {
 
-    private lazy var securityCodeTextField = textField("Código de seguridad")
+    private lazy var securityCodeTextField = textField("security_code")
     private lazy var continueToolbarButton = toolbarButton("Continuar")
 
     override open func waitForElements() {
@@ -23,5 +23,13 @@ public class SecurityCodeScreen: BaseScreen {
         securityCodeTextField.typeText(text)
         continueToolbarButton.tap()
         return ReviewScreen()
+    }
+    
+    func completeCVVAndContinueToAnyCongrats(_ text: String) -> CongratsScreen {
+        waitFor(element: securityCodeTextField)
+        securityCodeTextField.tap()
+        securityCodeTextField.typeText(text)
+        continueToolbarButton.tap()
+        return CongratsScreen()
     }
 }

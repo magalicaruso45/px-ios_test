@@ -21,6 +21,8 @@ class RejectedTests: XCTestCase {
         super.tearDown()
     }
 
+//MLA TESTS
+
     func test_high_risk() {
         execute_payment_error_flow("rejected_high_risk")
     }
@@ -89,30 +91,92 @@ class RejectedTests: XCTestCase {
         execute_payment_error_flow("broken")
     }
 
+//MLB TESTS
+
     func test_high_risk_mlb() {
         execute_payment_error_flow("rejected_high_risk", isMLA: false)
     }
 
-    func execute_payment_error_flow(_ statusDetail: String, isMLA: Bool = true) { //bad filled
+    func test_cc_high_risk_mlb() {
+        execute_payment_error_flow("cc_rejected_high_risk", isMLA: false)
+    }
+
+    func test_call_for_auth_mlb() {
+        execute_payment_error_flow("cc_rejected_call_for_authorize", isMLA: false)
+    }
+
+    func test_card_disabled_mlb() {
+        execute_payment_error_flow("cc_rejected_card_disabled", isMLA: false)
+    }
+
+    func test_bad_filled_mlb() {
+        execute_payment_error_flow("cc_rejected_bad_filled_other", isMLA: false)
+    }
+
+    func test_other_reason_mlb() {
+        execute_payment_error_flow("cc_rejected_other_reason", isMLA: false)
+    }
+
+    func test_insufficient_amount_mlb() {
+        execute_payment_error_flow("cc_rejected_insufficient_amount", isMLA: false)
+    }
+
+    func test_invalid_installments_mlb() {
+        execute_payment_error_flow("cc_rejected_invalid_installments", isMLA: false)
+    }
+
+    func test_duplicated_payment_mlb() {
+        execute_payment_error_flow("cc_rejected_duplicated_payment", isMLA: false)
+    }
+
+    func test_fraud_mlb() {
+        execute_payment_error_flow("cc_rejected_fraud", isMLA: false)
+    }
+
+    func test_blacklist_mlb() {
+        execute_payment_error_flow("cc_rejected_blacklist", isMLA: false)
+    }
+
+    func test_max_attempts_mlb() {
+        execute_payment_error_flow("cc_rejected_max_attempts", isMLA: false)
+    }
+
+    func test_rejected_by_regulations_mlb() {
+        execute_payment_error_flow("rejected_by_regulations", isMLA: false)
+    }
+
+    func test_review_manual_mlb() {
+        execute_payment_error_flow("pending_review_manual", isMLA: false)
+    }
+
+    func test_contingency_mlb() {
+        execute_payment_error_flow("pending_contingency", isMLA: false)
+    }
+
+    func test_broken_status_detail_mlb() {
+        execute_payment_error_flow("broken_status_detail", isMLA: false)
+    }
+
+    func test_broken_status_mlb() {
+        execute_payment_error_flow("broken", isMLA: false)
+    }
+
+
+    func execute_payment_error_flow(_ statusDetail: String, isMLA: Bool = true) {
         let main = isMLA ? configureForMLA(statusDetail) : configureForMLB(statusDetail)
-        main.tapCheckoutOption()
-            .tapCardOption()
-            .tapCreditCardOption()
-            .completeNumberAndContinue("5323 7937 3550 6106")
-            .completeNameAndContinue("APRO")
-            .completeExpirationDateAndContinue("1225")
-            .completeCVVAndContinue("123")
-            .completeNumberAndContinueToIssuers("30666777")
-            .selectIssuerOptionToPayerCostScreenAtRow(1)
-            .selectPayerCostOptionAtRow(2)
-            .tapPayButtonForAnyCongrats()
-            .waitForAnyCongrats()
+        main.tapCheckoutOptionForOneTap()
+        .tapPayButtonForCVV()
+        .completeCVVAndContinueToAnyCongrats("1234")
+        .waitForAnyCongrats()
     }
 
     func configureForMLA(_ statusDetail: String) -> MainScreen {
         let main = MainScreen()
             .tapConfigurationsButton()
             .changePaymentProcessorSwitch()
+            .changeAccessTokenSwitch()
+            .changeAdvancedSwitch()
+            .changeOneTapSwitch()
             .configurePaymentStatusDetail(statusDetail)
             .tapPreferenceSegmentMLA()
             .tapApplyConfigurationsButton()
@@ -124,6 +188,9 @@ class RejectedTests: XCTestCase {
             .tapClearButton()
             .tapConfigurationsButton()
             .changePaymentProcessorSwitch()
+            .changeAccessTokenSwitch()
+            .changeAdvancedSwitch()
+            .changeOneTapSwitch()
             .configurePaymentStatusDetail(statusDetail)
             .tapPreferenceSegmentMLB()
             .tapApplyConfigurationsButton()
