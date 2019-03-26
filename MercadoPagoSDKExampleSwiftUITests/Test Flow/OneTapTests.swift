@@ -23,23 +23,32 @@ class OneTapTests: XCTestCase {
     func onetapPreSet() -> OneTapScreen {
         return MainScreen()
             .tapConfigurationsButton()
+            .changePaymentProcessorSwitch()
             .changeAccessTokenSwitch()
             .changeAdvancedSwitch()
             .changeOneTapSwitch()
             .tapApplyConfigurationsButton()
+            .tapClearButton()
+            .fillAccessToken("TEST-1458038826212807-062020-ff9273c67bc567320eae1a07d1c2d5b5-246046416")
+            .fillPublicKey("TEST-4763b824-93d7-4ca2-a7f7-93539c3ee5bd")
+            .fillPreferenceId("242624092-2a26fccd-14dd-4456-9161-5f2c44532f1d")
             .tapCheckoutOptionForOneTap()
     }
 
-    func testPayWithAccountMoneyWhitoutScrolling() {
+    func testPayWithoutScrolling() {
         _ = onetapPreSet()
-        .tapPayButtonForAnyCongrats()
+        .tapPayButtonForCVV()
+        .completeCVVAndContinueToAnyCongrats("1234")
+        .waitForAnyCongrats()
     }
 
-    func testPayWithAccountMoneyWithScrolling() {
+    func testPayWithScrolling() {
         _ = onetapPreSet()
             .swipeCardLeft()
             .swipeCardRight()
-            .tapPayButtonForAnyCongrats()
+            .tapPayButtonForCVV()
+            .completeCVVAndContinueToAnyCongrats("1234")
+            .waitForAnyCongrats()
     }
 
     func testPayWithCreditCard() {
@@ -47,6 +56,7 @@ class OneTapTests: XCTestCase {
             .swipeCardLeft()
             .tapPayButtonForCVV()
         .completeCVVAndContinueToAnyCongrats("123")
+            .waitForAnyCongrats()
 
     }
 
@@ -56,13 +66,7 @@ class OneTapTests: XCTestCase {
             .swipeCardLeft()
             .tapPayButtonForCVV()
             .completeCVVAndContinueToAnyCongrats("123")
-    }
-
-    func testPayWithCreditCardChangingInstallments() {
-        _ = onetapPreSet()
-        // do stuff
-        XCUIApplication().scrollViews.otherElements.otherElements["installment_button"].collectionViews.children(matching: .cell).element(boundBy: 1).staticTexts["1x $ 100 Sin interés CFT: 0,00%"].tap()
-
+            .waitForAnyCongrats()
     }
 
 }
