@@ -26,6 +26,12 @@ public class CongratsScreen: BaseScreen {
         closeButton.tap()
         return MainScreen()
     }
+
+    func findLabelContainsText(_ text: String) -> CongratsScreen {
+        let element = self.labelContains(text)
+        waitFor(element: element)
+        return CongratsScreen()
+    }
     
 //
 //    func waitForApprovedCongrats() -> CongratsScreen {

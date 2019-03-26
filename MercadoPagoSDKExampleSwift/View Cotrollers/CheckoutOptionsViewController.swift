@@ -8,7 +8,6 @@
 
 import UIKit
 import MercadoPagoSDKV4
-import PXAccountMoneyPlugin
 import PureLayout
 
 class CheckoutOptionsViewController: UIViewController, ConfigurationManager, AddCardFlowProtocol {
@@ -88,10 +87,9 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             button.layer.cornerRadius = 20
             button.setTitleColor(.white, for: .normal)
             button.add(for: .touchUpInside, {
-//this case is commented until the corresponding PR is merged https://github.com/mercadopago/px-ios/pull/1829
-//                if let accessToken = self.accessTokenField.text {
-//                    self.configurations.skipCongrats ? self.startAddCardFlowSkippingCongrats(accessToken: accessToken) :self.startAddCardFlow(accessToken: accessToken)
-//                }
+                if let accessToken = self.accessTokenField.text {
+                    self.configurations.skipCongrats ? self.startAddCardFlowSkippingCongrats(accessToken: accessToken) :self.startAddCardFlow(accessToken: accessToken)
+                }
             })
             return button
         }()
@@ -260,16 +258,15 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         self.addCardFlow?.start()
     }
  
-//this case is commented until the corresponding PR is merged https://github.com/mercadopago/px-ios/pull/1829
-//    func startAddCardFlowSkippingCongrats(accessToken: String) {
-//        guard let navController = self.navigationController else {
-//            return
-//        }
-//        self.addCardFlow = AddCardFlow(accessToken: accessToken, locale: "es", navigationController: navController, shouldSkipCongrats: true)
-//        self.addCardFlow?.delegate = self
-//        self.addCardFlow?.start()
-//    }
-    
+    func startAddCardFlowSkippingCongrats(accessToken: String) {
+        guard let navController = self.navigationController else {
+            return
+        }
+        self.addCardFlow = AddCardFlow(accessToken: accessToken, locale: "es", navigationController: navController, shouldSkipCongrats: true)
+        self.addCardFlow?.delegate = self
+        self.addCardFlow?.start()
+    }
+
     func addCardFlowSucceded(result: [String: Any]) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -410,7 +407,20 @@ class PaymentPlugin: NSObject, PXPaymentProcessor {
             let customDescription = self.showFullCustomization ? "Sample text" : nil
             successWithBusinessResult(PXBusinessResult(receiptId: nil, status: businessResultStatus, title: "Ejecutamos tu transacción custom", subtitle: "Subtitulo", icon: nil, mainAction: customAction, secondaryAction: customAction, helpMessage: customDescription, showPaymentMethod: true, statementDescription: customDescription, imageUrl: nil, topCustomView: topCustomView, bottomCustomView: bottomCustomView, paymentStatus: status, paymentStatusDetail: ""))
         } else {
-            successWithPaymentResult(PXGenericPayment(status: "rejected", statusDetail: self.statusDetail))
+
+            var status: String
+            switch statusDetail {
+            case "pending_review_manual":
+                status = "in_process"
+            case "pending_contingency":
+                status = "in_process"
+            case "broken":
+                status = "broken"
+            default:
+                status = "rejected"
+            }
+
+            successWithPaymentResult(PXGenericPayment(status: status, statusDetail: self.statusDetail))
         }
     }
 }
@@ -456,7 +466,18 @@ class PaymentPluginViewController: NSObject, PXPaymentProcessor {
             let customDescription = self.showFullCustomization ? "Sample text" : nil
             successWithBusinessResult(PXBusinessResult(receiptId: nil, status: businessResultStatus, title: "Ejecutamos tu transacción custom", subtitle: "Subtitulo", icon: nil, mainAction: customAction, secondaryAction: customAction, helpMessage: customDescription, showPaymentMethod: true, statementDescription: customDescription, imageUrl: nil, topCustomView: topCustomView, bottomCustomView: bottomCustomView, paymentStatus: status, paymentStatusDetail: ""))
         } else {
-            successWithPaymentResult(PXGenericPayment(status: "rejected", statusDetail: self.statusDetail))
+            var status: String
+            switch statusDetail {
+            case "pending_review_manual":
+                status = "in_process"
+            case "pending_contingency":
+                status = "in_process"
+            case "broken":
+                status = "broken"
+            default:
+                status = "rejected"
+            }
+            successWithPaymentResult(PXGenericPayment(status: status, statusDetail: self.statusDetail))
         }
     }
 }

@@ -285,7 +285,7 @@
                 </switch>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2m4-gb-JeP">
                     <rect key="frame" x="351" y="542" width="51" height="31"/>
-                    <accessibility key="accessibilityConfiguration" identifier="localized_texts_switch"/>
+                    <accessibility key="accessibilityConfiguration" identifier="skip_congrats_switch"/>
                 </switch>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="94s-LK-kph">
                     <rect key="frame" x="11" y="620" width="387" height="29"/>
