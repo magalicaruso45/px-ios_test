@@ -22,58 +22,78 @@ class RejectedTests: XCTestCase {
     }
 
     func test_high_risk() {
-        let _ = test_payment_error("rejected_high_risk")
+        execute_payment_error_flow("rejected_high_risk")
     }
 
     func test_cc_high_risk() {
-        let _ = test_payment_error("cc_rejected_high_risk")
+        execute_payment_error_flow("cc_rejected_high_risk")
     }
 
     func test_call_for_auth() {
-        let _ = test_payment_error("cc_rejected_call_for_authorize")
+        execute_payment_error_flow("cc_rejected_call_for_authorize")
     }
 
     func test_card_disabled() {
-        let _ = test_payment_error("cc_rejected_card_disabled")
+        execute_payment_error_flow("cc_rejected_card_disabled")
     }
 
     func test_bad_filled() {
-        let _ = test_payment_error("cc_rejected_bad_filled_other")
-    }
-
-    func test_insufficient_amount() {
-        let _ = test_payment_error("cc_rejected_insufficient_amount")
-    }
-
-    func test_invalid_installments() {
-        let _ = test_payment_error("cc_rejected_invalid_installments")
+        execute_payment_error_flow("cc_rejected_bad_filled_other")
     }
 
     func test_other_reason() {
-        let _ = test_payment_error("cc_rejected_other_reason")
+        execute_payment_error_flow("cc_rejected_other_reason")
+    }
+
+    func test_insufficient_amount() {
+        execute_payment_error_flow("cc_rejected_insufficient_amount")
+    }
+
+    func test_invalid_installments() {
+        execute_payment_error_flow("cc_rejected_invalid_installments")
     }
 
     func test_duplicated_payment() {
-        let _ = test_payment_error("cc_rejected_duplicated_payment")
+        execute_payment_error_flow("cc_rejected_duplicated_payment")
     }
 
     func test_fraud() {
-        let _ = test_payment_error("cc_rejected_fraud")
+        execute_payment_error_flow("cc_rejected_fraud")
     }
 
     func test_blacklist() {
-        let _ = test_payment_error("cc_rejected_blacklist")
+        execute_payment_error_flow("cc_rejected_blacklist")
     }
 
     func test_max_attempts() {
-        let _ = test_payment_error("cc_rejected_max_attempts")
+        execute_payment_error_flow("cc_rejected_max_attempts")
     }
 
     func test_rejected_by_regulations() {
-        let _ = test_payment_error("rejected_by_regulations")
+        execute_payment_error_flow("rejected_by_regulations")
     }
 
-    func test_payment_error(_ statusDetail: String, isMLA: Bool = true) { //bad filled
+    func test_review_manual() {
+        execute_payment_error_flow("pending_review_manual")
+    }
+
+    func test_contingency() {
+        execute_payment_error_flow("pending_contingency")
+    }
+
+    func test_broken_status_detail() {
+        execute_payment_error_flow("broken_status_detail")
+    }
+
+    func test_broken_status() {
+        execute_payment_error_flow("broken")
+    }
+
+    func test_high_risk_mlb() {
+        execute_payment_error_flow("rejected_high_risk", isMLA: false)
+    }
+
+    func execute_payment_error_flow(_ statusDetail: String, isMLA: Bool = true) { //bad filled
         let main = isMLA ? configureForMLA(statusDetail) : configureForMLB(statusDetail)
         main.tapCheckoutOption()
             .tapCardOption()
