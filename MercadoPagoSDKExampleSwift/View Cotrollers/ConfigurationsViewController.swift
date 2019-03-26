@@ -33,6 +33,9 @@ class ConfigurationsViewController: UIViewController {
     @IBOutlet weak var escSwitch: UISwitch!
     @IBOutlet weak var discountParamsSwitch: UISwitch!
     @IBOutlet weak var openPrefSwitch: UISwitch!
+    @IBOutlet weak var statusDetailButton: UIButton!
+
+    var statusDetailText: String = "cc_rejected_call_for_authorize"
     
     var delegate: ConfigurationManager?
 
@@ -54,7 +57,30 @@ class ConfigurationsViewController: UIViewController {
         updateBusinessSegmentColor()
         resizeSwitches()
     }
-    
+
+    @IBAction func customizeStatusDetail(_ sender: Any) {
+        let alert = UIAlertController(title: "Status detail", message: "Escribe el status detail asociado al resultado de pago", preferredStyle: UIAlertControllerStyle.alert)
+
+        alert.addTextField(configurationHandler: configurationTextField)
+
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler:{ (UIAlertAction)in
+
+            if let textField = alert.textFields!.first,
+                let text = textField.text {
+                self.statusDetailText = text
+            }
+        }))
+
+        self.present(alert, animated: true, completion: {
+            print("completion block")
+        })
+    }
+
+    func configurationTextField(textField: UITextField!){
+        textField.text = ""
+        textField.placeholder = "cc_rejected_call_for_authorize"
+    }
+
     func resizeSwitches() {
         let newScale = CGAffineTransform(scaleX: 0.75, y: 0.75)
         comisionesSwitch.transform = newScale
@@ -106,6 +132,7 @@ class ConfigurationsViewController: UIViewController {
         self.comisionesSwitch.isEnabled = enableSwitchs
         self.businessSwitch.isEnabled = enableSwitchs
         self.openPrefSwitch.isEnabled = enableSwitchs
+        statusDetailButton.isEnabled = !self.businessSwitch.isOn &&  self.paymentPluginSwitch.isOn
         self.updateBusinessSegmentColor()
         self.validateAdvancedConfigSwitches()
     }
@@ -136,6 +163,7 @@ class ConfigurationsViewController: UIViewController {
         if !self.customizationSwitch.isEnabled {
             self.customizationSwitch.isOn = false
         }
+        statusDetailButton.isEnabled = !self.businessSwitch.isOn &&  self.paymentPluginSwitch.isOn
         updateBusinessSegmentColor()
     }
     @IBAction func accessTokenStateChanged(_ sender: Any) {
@@ -191,7 +219,8 @@ class ConfigurationsViewController: UIViewController {
             escEnabled: escSwitch.isOn,
             discountParams: discountParamsSwitch.isOn,
             preferenceContext: preferenceContext() ?? .mla,
-            businessStatus: businessStatus() ?? .APPROVED)
+            businessStatus: businessStatus() ?? .APPROVED,
+            statusDetail: self.statusDetailText)
 
         if let delegate = delegate {
             delegate.setConfigurations(configs: configs)
