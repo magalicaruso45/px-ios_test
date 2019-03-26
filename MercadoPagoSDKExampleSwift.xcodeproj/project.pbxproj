@@ -28,6 +28,8 @@
 		157E0A1320AC9D3B00049905 /* PXFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157E0A1220AC9D3B00049905 /* PXFile.swift */; };
 		2AF7FF9E3B0EE02225C8B46E /* Pods_MercadoPagoSDKExampleSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F21328D97BD0E508C5F72CE /* Pods_MercadoPagoSDKExampleSwift.framework */; };
 		4BE78D3C20D818CA00F23CA5 /* PXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE78D3B20D818CA00F23CA5 /* PXUITests.swift */; };
+		637C0209224A9A7C007E5A1D /* OneTapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637C0208224A9A7C007E5A1D /* OneTapTests.swift */; };
+		637C020B224A9A93007E5A1D /* OneTapScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637C020A224A9A93007E5A1D /* OneTapScreen.swift */; };
 		63DC2BCE223B5CB100BFD1D0 /* NewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DC2BCD223B5CB100BFD1D0 /* NewTests.swift */; };
 		63DC2BD0224673B400BFD1D0 /* RejectedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DC2BCF224673B400BFD1D0 /* RejectedTests.swift */; };
 		63FEA3FF22393C3A00C08DEF /* DiscountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FEA3FE22393C3A00C08DEF /* DiscountTests.swift */; };
@@ -90,6 +92,8 @@
 		34E8F2814623B45C5AF1938A /* Pods-MercadoPagoSDKExampleSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MercadoPagoSDKExampleSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-MercadoPagoSDKExampleSwift/Pods-MercadoPagoSDKExampleSwift.release.xcconfig"; sourceTree = "<group>"; };
 		4BE78D3B20D818CA00F23CA5 /* PXUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXUITests.swift; sourceTree = "<group>"; };
 		5419EEC20E78814A47779EC8 /* Pods-MercadoPagoSDKExampleSwiftUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MercadoPagoSDKExampleSwiftUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MercadoPagoSDKExampleSwiftUITests/Pods-MercadoPagoSDKExampleSwiftUITests.release.xcconfig"; sourceTree = "<group>"; };
+		637C0208224A9A7C007E5A1D /* OneTapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTapTests.swift; sourceTree = "<group>"; };
+		637C020A224A9A93007E5A1D /* OneTapScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTapScreen.swift; sourceTree = "<group>"; };
 		63DC2BCD223B5CB100BFD1D0 /* NewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTests.swift; sourceTree = "<group>"; };
 		63DC2BCF224673B400BFD1D0 /* RejectedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RejectedTests.swift; sourceTree = "<group>"; };
 		63FEA3FE22393C3A00C08DEF /* DiscountTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountTests.swift; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 				15225CA120F6851F002CF168 /* ChargesTest.swift */,
 				1518B929215BFBA900799D38 /* PluginProcessorTest.swift */,
 				E136E9D82162C1F10038ABE4 /* AddCardTests.swift */,
+				637C0208224A9A7C007E5A1D /* OneTapTests.swift */,
 				63FEA3FE22393C3A00C08DEF /* DiscountTests.swift */,
 				63DC2BCD223B5CB100BFD1D0 /* NewTests.swift */,
 				63DC2BCF224673B400BFD1D0 /* RejectedTests.swift */,
@@ -238,6 +243,7 @@
 				FC89F7522088F5540093B001 /* ReviewScreen.swift */,
 				FC7D2F5E20F649A3001C97CF /* DiscountDetailModalScreen.swift */,
 				152A6820215AD82A009F9B94 /* SecondFactorScreen.swift */,
+				637C020A224A9A93007E5A1D /* OneTapScreen.swift */,
 				1518B92B215BFC3E00799D38 /* PluginViewControllerScreen.swift */,
 			);
 			path = ScreenObject;
@@ -638,6 +644,7 @@
 			files = (
 				FC89F7532088F5540093B001 /* MainGroupScreen.swift in Sources */,
 				63FEA3FF22393C3A00C08DEF /* DiscountTests.swift in Sources */,
+				637C0209224A9A7C007E5A1D /* OneTapTests.swift in Sources */,
 				0604D837211FE7F900D5C5D9 /* PXCardIdTest.swift in Sources */,
 				FC157D4A209A2386009A2C3A /* IssuersScreen.swift in Sources */,
 				FC7D2F5F20F649A3001C97CF /* DiscountDetailModalScreen.swift in Sources */,
@@ -649,6 +656,7 @@
 				63DC2BD0224673B400BFD1D0 /* RejectedTests.swift in Sources */,
 				FC89F7542088F5540093B001 /* CongratsScreen.swift in Sources */,
 				FCB9B13120F6754F0097F746 /* ConfigurationScreen.swift in Sources */,
+				637C020B224A9A93007E5A1D /* OneTapScreen.swift in Sources */,
 				FC89F7562088F5540093B001 /* CardScreen.swift in Sources */,
 				1518B92A215BFBA900799D38 /* PluginProcessorTest.swift in Sources */,
 				63DC2BCE223B5CB100BFD1D0 /* NewTests.swift in Sources */,
