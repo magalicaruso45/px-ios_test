@@ -33,6 +33,10 @@ class RejectedTests: XCTestCase {
         let _ = test_payment_error("cc_rejected_call_for_authorize")
     }
 
+    func test_card_disabled() {
+        let _ = test_payment_error("cc_rejected_card_disabled")
+    }
+
     func test_bad_filled() {
         let _ = test_payment_error("cc_rejected_bad_filled_other")
     }
