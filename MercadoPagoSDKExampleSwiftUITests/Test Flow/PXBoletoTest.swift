@@ -132,7 +132,7 @@ class PXBoletoTest: XCTestCase {
             .completeNumberAndContinueToPayer("05487765634")
             .completeNameAndContinueToPayer("JUAN")
             .completeLastNameAndContinueToReview("PEREZ")
-            .findLabelContainsText("Se acreditará en 1 día hábil")
+            .findLabelContainsText("Será aprovado em 1 dia útil")
     }
 
     func test_pec_accreditation_time_pref_cerrada() {
@@ -153,6 +153,6 @@ class PXBoletoTest: XCTestCase {
             .completeNumberAndContinueToPayer("05487765634")
             .completeNameAndContinueToPayer("JUAN")
             .completeLastNameAndContinueToReview("PEREZ")
-            .findLabelContainsText("Se acreditará en 1 hora")
+            .findLabelContainsText("Será aprovado em 1 hora")
     }
 }
