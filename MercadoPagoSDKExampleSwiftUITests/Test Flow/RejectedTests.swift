@@ -161,6 +161,21 @@ class RejectedTests: XCTestCase {
         execute_payment_error_flow("broken", isMLA: false)
     }
 
+    func test_disable_account_money() {
+        let _ = configureForMLA("rejected_high_risk")
+            .tapCheckoutOptionForOneTap()
+            .tapPayButtonForAnyCongrats()
+            .waitForAnyCongrats()
+    }
+
+    func test_disable_card_id() {
+        let _ = configureForMLA("cc_rejected_high_risk")
+            .tapCheckoutOptionForOneTap()
+            .swipeCardLeft()
+            .tapPayButtonForCVV()
+            .completeCVVAndContinueToAnyCongrats("1234")
+            .waitForAnyCongrats()
+    }
 
     func execute_payment_error_flow(_ statusDetail: String, isMLA: Bool = true) {
         let main = isMLA ? configureForMLA(statusDetail) : configureForMLB(statusDetail)
@@ -193,6 +208,20 @@ class RejectedTests: XCTestCase {
             .changeOneTapSwitch()
             .configurePaymentStatusDetail(statusDetail)
             .tapPreferenceSegmentMLB()
+            .tapApplyConfigurationsButton()
+        return main
+    }
+
+    func configureForMLM(_ statusDetail: String) -> MainScreen {
+        let main = MainScreen()
+            .tapClearButton()
+            .tapConfigurationsButton()
+            .changePaymentProcessorSwitch()
+            .changeAccessTokenSwitch()
+            .changeAdvancedSwitch()
+            .changeOneTapSwitch()
+            .configurePaymentStatusDetail(statusDetail)
+            .tapPreferenceSegmentMLM()
             .tapApplyConfigurationsButton()
         return main
     }

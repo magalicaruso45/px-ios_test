@@ -17,7 +17,8 @@ class OneTapTests: XCTestCase {
     }
     
     override func tearDown() {
-         super.tearDown()
+        sleep(2)
+        super.tearDown()
     }
     
     func onetapPreSet() -> OneTapScreen {
