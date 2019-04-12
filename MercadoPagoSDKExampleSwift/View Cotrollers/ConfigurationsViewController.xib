@@ -30,6 +30,7 @@
                 <outlet property="payerInfoSwitch" destination="8n7-Ii-ykq" id="Xls-Yv-aAS"/>
                 <outlet property="paymentPluginSwitch" destination="csf-l2-8Oc" id="84U-hZ-vCr"/>
                 <outlet property="splitSwitch" destination="xrh-32-Ecp" id="UKz-Iy-amg"/>
+                <outlet property="statusDetailButton" destination="iJM-5G-Urt" id="6ia-1g-9R3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewControllerSwitch" destination="eRB-X4-oQv" id="Wmd-4S-lam"/>
             </connections>
@@ -284,7 +285,7 @@
                 </switch>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2m4-gb-JeP">
                     <rect key="frame" x="351" y="542" width="51" height="31"/>
-                    <accessibility key="accessibilityConfiguration" identifier="localized_texts_switch"/>
+                    <accessibility key="accessibilityConfiguration" identifier="skip_congrats_switch"/>
                 </switch>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="94s-LK-kph">
                     <rect key="frame" x="11" y="620" width="387" height="29"/>
@@ -334,6 +335,15 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iJM-5G-Urt">
+                    <rect key="frame" x="193" y="148" width="96" height="33"/>
+                    <accessibility key="accessibilityConfiguration" identifier="status_detail_button"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Status detail"/>
+                    <connections>
+                        <action selector="customizeStatusDetail:" destination="-1" eventType="touchUpInside" id="UrT-iN-q9c"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -343,6 +353,7 @@
                 <constraint firstItem="bTg-39-tKM" firstAttribute="trailing" secondItem="94s-LK-kph" secondAttribute="trailing" id="1GZ-Tw-5Cj"/>
                 <constraint firstItem="lIw-Ki-hmq" firstAttribute="centerY" secondItem="K2K-93-Mel" secondAttribute="centerY" id="1di-LF-1aq"/>
                 <constraint firstItem="csf-l2-8Oc" firstAttribute="leading" secondItem="Qf7-am-hZf" secondAttribute="trailing" constant="8" id="1uJ-yF-9jB"/>
+                <constraint firstItem="iJM-5G-Urt" firstAttribute="leading" secondItem="wco-N1-SCm" secondAttribute="trailing" constant="16" id="2tv-us-IlP"/>
                 <constraint firstItem="Kzy-Rm-Udr" firstAttribute="leading" secondItem="JdY-3h-ulB" secondAttribute="leading" id="2zm-ma-wTw"/>
                 <constraint firstItem="Hdw-2t-S8m" firstAttribute="trailing" secondItem="Kzy-Rm-Udr" secondAttribute="trailing" id="3Ox-3D-0Ci"/>
                 <constraint firstItem="Ee4-Aw-xAa" firstAttribute="centerX" secondItem="gvP-a7-hhS" secondAttribute="centerX" id="3j8-U9-JHT"/>
@@ -429,6 +440,7 @@
                 <constraint firstItem="csf-l2-8Oc" firstAttribute="leading" secondItem="Qf7-am-hZf" secondAttribute="trailing" constant="8" id="uae-O0-k70"/>
                 <constraint firstItem="y6S-AS-sFO" firstAttribute="leading" secondItem="Hdw-2t-S8m" secondAttribute="leading" id="v3F-Tq-k5G"/>
                 <constraint firstItem="Dkn-CY-kWJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="11" id="vjR-To-e0c"/>
+                <constraint firstItem="iJM-5G-Urt" firstAttribute="centerY" secondItem="wco-N1-SCm" secondAttribute="centerY" id="wJX-zw-Yrs"/>
                 <constraint firstItem="hnr-31-BCz" firstAttribute="leading" secondItem="hkR-Fh-rXi" secondAttribute="trailing" constant="8" id="wd8-t4-aM6"/>
                 <constraint firstItem="gvP-a7-hhS" firstAttribute="centerY" secondItem="ei5-8p-L6c" secondAttribute="centerY" id="wwI-ER-HQK"/>
                 <constraint firstItem="gvP-a7-hhS" firstAttribute="top" secondItem="Ee4-Aw-xAa" secondAttribute="bottom" id="xKA-0g-TBS"/>

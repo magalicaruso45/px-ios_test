@@ -8,7 +8,6 @@
 
 import UIKit
 import MercadoPagoSDKV4
-import PXAccountMoneyPlugin
 import PureLayout
 
 class CheckoutOptionsViewController: UIViewController, ConfigurationManager, AddCardFlowProtocol {
@@ -32,7 +31,8 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
                        escEnabled: false,
                        discountParams: false,
                        preferenceContext: .mla,
-                       businessStatus: .APPROVED)
+                       businessStatus: .REJECTED,
+                       statusDetail: "cc_rejected_call_for_authorize")
 
     var addCardFlow : AddCardFlow?
     var descriptionLabel: UILabel!
@@ -88,10 +88,9 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             button.layer.cornerRadius = 5
             button.setTitleColor(.white, for: .normal)
             button.add(for: .touchUpInside, {
-//this case is commented until the corresponding PR is merged https://github.com/mercadopago/px-ios/pull/1829
-//                if let accessToken = self.accessTokenField.text {
-//                    self.configurations.skipCongrats ? self.startAddCardFlowSkippingCongrats(accessToken: accessToken) :self.startAddCardFlow(accessToken: accessToken)
-//                }
+                if let accessToken = self.accessTokenField.text {
+                    self.configurations.skipCongrats ? self.startAddCardFlowSkippingCongrats(accessToken: accessToken) :self.startAddCardFlow(accessToken: accessToken)
+                }
             })
             return button
         }()
@@ -240,10 +239,10 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
                 let processor = SplitPaymentPlugin()
                 paymentPref = PXPaymentConfiguration(splitPaymentProcessor: processor)
             } else if configurations.paymentPluginViewController {
-                let processor = PaymentPluginViewController(isBusinessResult: configurations.businessResult, showFullCustomization: configurations.fullCustomization, businessResultStatus: configurations.businessStatus)
+                let processor = PaymentPluginViewController(isBusinessResult: configurations.businessResult, showFullCustomization: configurations.fullCustomization, businessResultStatus: configurations.businessStatus, statusDetail: configurations.statusDetail)
                 paymentPref = PXPaymentConfiguration(paymentProcessor: processor)
             } else{
-                let processor = PaymentPlugin(isBusinessResult: configurations.businessResult, showFullCustomization: configurations.fullCustomization, businessResultStatus: configurations.businessStatus)
+                let processor = PaymentPlugin(isBusinessResult: configurations.businessResult, showFullCustomization: configurations.fullCustomization, businessResultStatus: configurations.businessStatus, statusDetail: configurations.statusDetail)
                 paymentPref = PXPaymentConfiguration(paymentProcessor: processor)
             }
             if configurations.comisiones == true {
@@ -279,16 +278,15 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         self.addCardFlow?.start()
     }
  
-//this case is commented until the corresponding PR is merged https://github.com/mercadopago/px-ios/pull/1829
-//    func startAddCardFlowSkippingCongrats(accessToken: String) {
-//        guard let navController = self.navigationController else {
-//            return
-//        }
-//        self.addCardFlow = AddCardFlow(accessToken: accessToken, locale: "es", navigationController: navController, shouldSkipCongrats: true)
-//        self.addCardFlow?.delegate = self
-//        self.addCardFlow?.start()
-//    }
-    
+    func startAddCardFlowSkippingCongrats(accessToken: String) {
+        guard let navController = self.navigationController else {
+            return
+        }
+        self.addCardFlow = AddCardFlow(accessToken: accessToken, locale: "es", navigationController: navController, shouldSkipCongrats: true)
+        self.addCardFlow?.delegate = self
+        self.addCardFlow?.start()
+    }
+
     func addCardFlowSucceded(result: [String: Any]) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -319,11 +317,13 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             builder.setPrivateKey(key: privateKey)
         }
 
+        let language = configurations.preferenceContext.getLanguage()
+        builder.setLanguage(language)
         if localizedTexts {
             let texts: [PXCustomTranslationKey : String] = [.total_to_pay: "Total cambiado", .how_to_pay: "Como deseas pagar cambiado ?"]
-            builder.setLanguage("MLB", texts)
+            builder.setLanguage(language, texts)
         } else {
-            builder.setLanguage("MLA")
+            builder.setLanguage(language)
         }
             
         return builder
@@ -393,11 +393,13 @@ class PaymentPlugin: NSObject, PXPaymentProcessor {
     let isBusinessResult: Bool
     let showFullCustomization: Bool
     let businessResultStatus: PXBusinessResultStatus
+    let statusDetail: String
     
-    init(isBusinessResult: Bool, showFullCustomization: Bool, businessResultStatus: PXBusinessResultStatus) {
+    init(isBusinessResult: Bool, showFullCustomization: Bool, businessResultStatus: PXBusinessResultStatus, statusDetail: String) {
         self.isBusinessResult = isBusinessResult
         self.showFullCustomization = showFullCustomization
         self.businessResultStatus = businessResultStatus
+        self.statusDetail = statusDetail
     }
 
     func paymentProcessorViewController() -> UIViewController? {
@@ -425,7 +427,20 @@ class PaymentPlugin: NSObject, PXPaymentProcessor {
             let customDescription = self.showFullCustomization ? "Sample text" : nil
             successWithBusinessResult(PXBusinessResult(receiptId: nil, status: businessResultStatus, title: "Ejecutamos tu transacción custom", subtitle: "Subtitulo", icon: nil, mainAction: customAction, secondaryAction: customAction, helpMessage: customDescription, showPaymentMethod: true, statementDescription: customDescription, imageUrl: nil, topCustomView: topCustomView, bottomCustomView: bottomCustomView, paymentStatus: status, paymentStatusDetail: ""))
         } else {
-            successWithPaymentResult(PXGenericPayment(status: "rejected", statusDetail: "cc_rejected_call_for_authorize"))
+
+            var status: String
+            switch statusDetail {
+            case "pending_review_manual":
+                status = "in_process"
+            case "pending_contingency":
+                status = "in_process"
+            case "broken":
+                status = "broken"
+            default:
+                status = "rejected"
+            }
+
+            successWithPaymentResult(PXGenericPayment(status: status, statusDetail: self.statusDetail))
         }
     }
 }
@@ -436,11 +451,13 @@ class PaymentPluginViewController: NSObject, PXPaymentProcessor {
     let isBusinessResult: Bool
     let showFullCustomization: Bool
     let businessResultStatus: PXBusinessResultStatus
+    let statusDetail: String
     
-    init(isBusinessResult: Bool, showFullCustomization: Bool, businessResultStatus: PXBusinessResultStatus) {
+    init(isBusinessResult: Bool, showFullCustomization: Bool, businessResultStatus: PXBusinessResultStatus, statusDetail: String) {
         self.isBusinessResult = isBusinessResult
         self.showFullCustomization = showFullCustomization
         self.businessResultStatus = businessResultStatus
+        self.statusDetail = statusDetail
     }
 
     func paymentProcessorViewController() -> UIViewController? {
@@ -471,7 +488,18 @@ class PaymentPluginViewController: NSObject, PXPaymentProcessor {
             let customDescription = self.showFullCustomization ? "Sample text" : nil
             successWithBusinessResult(PXBusinessResult(receiptId: nil, status: businessResultStatus, title: "Ejecutamos tu transacción custom", subtitle: "Subtitulo", icon: nil, mainAction: customAction, secondaryAction: customAction, helpMessage: customDescription, showPaymentMethod: true, statementDescription: customDescription, imageUrl: nil, topCustomView: topCustomView, bottomCustomView: bottomCustomView, paymentStatus: status, paymentStatusDetail: ""))
         } else {
-            successWithPaymentResult(PXGenericPayment(status: "rejected", statusDetail: "cc_call_for_authorize"))
+            var status: String
+            switch statusDetail {
+            case "pending_review_manual":
+                status = "in_process"
+            case "pending_contingency":
+                status = "in_process"
+            case "broken":
+                status = "broken"
+            default:
+                status = "rejected"
+            }
+            successWithPaymentResult(PXGenericPayment(status: status, statusDetail: self.statusDetail))
         }
     }
 }

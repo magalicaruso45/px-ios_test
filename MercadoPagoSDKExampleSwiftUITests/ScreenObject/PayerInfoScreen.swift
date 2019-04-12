@@ -12,9 +12,9 @@ public class PayerInfoScreen: BaseScreen {
 
     private lazy var payerBoletoComponent = element("DADOS PARA VALIDAR O SEU PAGAMENTO")
     private lazy var numberTextField = textField("Número")
-    private lazy var nameTextField = textField("Nombre")
-    private lazy var lastNameTextField = textField("Apellido")
-    private lazy var businessName = textField("Razón Social")
+    private lazy var nameTextField = textField("Nome")
+    private lazy var lastNameTextField = textField("Sobrenome")
+    private lazy var businessName = textField("Razão Social")
     private lazy var continueButton = toolbarButton("Continuar")
     private lazy var pickerWheel = textField("Tipo")
     private lazy var backButton = getBackButton()

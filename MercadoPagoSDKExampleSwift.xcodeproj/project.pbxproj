@@ -28,6 +28,10 @@
 		4B12C7FF22454E0B00BF2339 /* OneTapScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B12C7FE22454E0B00BF2339 /* OneTapScreen.swift */; };
 		4BE78D3C20D818CA00F23CA5 /* PXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE78D3B20D818CA00F23CA5 /* PXUITests.swift */; };
 		63DC2BCE223B5CB100BFD1D0 /* ESCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DC2BCD223B5CB100BFD1D0 /* ESCTests.swift */; };
+		637C0209224A9A7C007E5A1D /* OneTapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637C0208224A9A7C007E5A1D /* OneTapTests.swift */; };
+		637C020B224A9A93007E5A1D /* OneTapScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637C020A224A9A93007E5A1D /* OneTapScreen.swift */; };
+		63DC2BCE223B5CB100BFD1D0 /* NewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DC2BCD223B5CB100BFD1D0 /* NewTests.swift */; };
+		63DC2BD0224673B400BFD1D0 /* RejectedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DC2BCF224673B400BFD1D0 /* RejectedTests.swift */; };
 		63FEA3FF22393C3A00C08DEF /* DiscountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FEA3FE22393C3A00C08DEF /* DiscountTests.swift */; };
 		6D995413CB999C9CB975C9C8 /* Pods_MercadoPagoSDKExampleSwift_MercadoPagoSDKExampleSwiftUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C7DDE8AEF4332C1A7BEB95 /* Pods_MercadoPagoSDKExampleSwift_MercadoPagoSDKExampleSwiftUITests.framework */; };
 		7399AE556578E2BEC4C58777 /* Pods_MercadoPagoSDKExampleSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90FBB9EF22A85BC2D079B8E8 /* Pods_MercadoPagoSDKExampleSwift.framework */; };
@@ -91,6 +95,11 @@
 		4B12C7FE22454E0B00BF2339 /* OneTapScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTapScreen.swift; sourceTree = "<group>"; };
 		4BE78D3B20D818CA00F23CA5 /* PXUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXUITests.swift; sourceTree = "<group>"; };
 		63DC2BCD223B5CB100BFD1D0 /* ESCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESCTests.swift; sourceTree = "<group>"; };
+		5419EEC20E78814A47779EC8 /* Pods-MercadoPagoSDKExampleSwiftUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MercadoPagoSDKExampleSwiftUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MercadoPagoSDKExampleSwiftUITests/Pods-MercadoPagoSDKExampleSwiftUITests.release.xcconfig"; sourceTree = "<group>"; };
+		637C0208224A9A7C007E5A1D /* OneTapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTapTests.swift; sourceTree = "<group>"; };
+		637C020A224A9A93007E5A1D /* OneTapScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTapScreen.swift; sourceTree = "<group>"; };
+		63DC2BCD223B5CB100BFD1D0 /* NewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTests.swift; sourceTree = "<group>"; };
+		63DC2BCF224673B400BFD1D0 /* RejectedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RejectedTests.swift; sourceTree = "<group>"; };
 		63FEA3FE22393C3A00C08DEF /* DiscountTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountTests.swift; sourceTree = "<group>"; };
 		90FBB9EF22A85BC2D079B8E8 /* Pods_MercadoPagoSDKExampleSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MercadoPagoSDKExampleSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99C7DDE8AEF4332C1A7BEB95 /* Pods_MercadoPagoSDKExampleSwift_MercadoPagoSDKExampleSwiftUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MercadoPagoSDKExampleSwift_MercadoPagoSDKExampleSwiftUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,8 +191,11 @@
 				15225CA120F6851F002CF168 /* ChargesTest.swift */,
 				1518B929215BFBA900799D38 /* PluginProcessorTest.swift */,
 				E136E9D82162C1F10038ABE4 /* AddCardTests.swift */,
+				637C0208224A9A7C007E5A1D /* OneTapTests.swift */,
 				63FEA3FE22393C3A00C08DEF /* DiscountTests.swift */,
 				63DC2BCD223B5CB100BFD1D0 /* ESCTests.swift */,
+				63DC2BCD223B5CB100BFD1D0 /* NewTests.swift */,
+				63DC2BCF224673B400BFD1D0 /* RejectedTests.swift */,
 			);
 			path = "Test Flow";
 			sourceTree = "<group>";
@@ -237,6 +249,7 @@
 				FC89F7522088F5540093B001 /* ReviewScreen.swift */,
 				FC7D2F5E20F649A3001C97CF /* DiscountDetailModalScreen.swift */,
 				152A6820215AD82A009F9B94 /* SecondFactorScreen.swift */,
+				637C020A224A9A93007E5A1D /* OneTapScreen.swift */,
 				1518B92B215BFC3E00799D38 /* PluginViewControllerScreen.swift */,
 				4B12C7FE22454E0B00BF2339 /* OneTapScreen.swift */,
 			);
@@ -638,6 +651,7 @@
 			files = (
 				FC89F7532088F5540093B001 /* MainGroupScreen.swift in Sources */,
 				63FEA3FF22393C3A00C08DEF /* DiscountTests.swift in Sources */,
+				637C0209224A9A7C007E5A1D /* OneTapTests.swift in Sources */,
 				0604D837211FE7F900D5C5D9 /* PXCardIdTest.swift in Sources */,
 				FC157D4A209A2386009A2C3A /* IssuersScreen.swift in Sources */,
 				FC7D2F5F20F649A3001C97CF /* DiscountDetailModalScreen.swift in Sources */,
@@ -646,8 +660,10 @@
 				06549719217E50CB00D88CE3 /* PXBoletoTest.swift in Sources */,
 				152A6821215AD82A009F9B94 /* SecondFactorScreen.swift in Sources */,
 				FC89F7592088F5540093B001 /* PayerCostScreen.swift in Sources */,
+				63DC2BD0224673B400BFD1D0 /* RejectedTests.swift in Sources */,
 				FC89F7542088F5540093B001 /* CongratsScreen.swift in Sources */,
 				FCB9B13120F6754F0097F746 /* ConfigurationScreen.swift in Sources */,
+				637C020B224A9A93007E5A1D /* OneTapScreen.swift in Sources */,
 				FC89F7562088F5540093B001 /* CardScreen.swift in Sources */,
 				1518B92A215BFBA900799D38 /* PluginProcessorTest.swift in Sources */,
 				63DC2BCE223B5CB100BFD1D0 /* ESCTests.swift in Sources */,
