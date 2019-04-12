@@ -9,7 +9,7 @@
 import UIKit
 import MercadoPagoSDKV4
 
-enum PreferenceContext {
+enum PreferenceContext : Int, CaseIterable {
     case mla
     case mlb
     case mlm

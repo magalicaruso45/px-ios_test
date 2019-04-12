@@ -299,13 +299,11 @@
                                         <segment title="Argentina"/>
                                         <segment title="Brasil"/>
                                         <segment title="México"/>
-                                        <segment title="Always On"/>
-                                        <segment title="Soldout"/>
-                                        <segment title="PM"/>
-                                        <segment title="Issuer"/>
-                                        <segment title="AM"/>
-                                        <segment title="Boleto"/>
+                                        <segment title="Otro preset"/>
                                     </segments>
+                                    <connections>
+                                        <action selector="countrySegmentPressed:" destination="-1" eventType="valueChanged" id="tCq-ZW-bJu"/>
+                                    </connections>
                                 </segmentedControl>
                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="uRY-9Y-Nzp">
                                     <rect key="frame" x="11" y="227" width="387" height="29"/>

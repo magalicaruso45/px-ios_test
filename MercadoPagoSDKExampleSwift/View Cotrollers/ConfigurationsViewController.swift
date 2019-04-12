@@ -41,6 +41,7 @@ class ConfigurationsViewController: UIViewController {
     var statusDetailText: String = "cc_rejected_call_for_authorize"
     
     var delegate: ConfigurationManager?
+    var currentPreferenceContext: PreferenceContext = .mla
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -201,6 +202,41 @@ class ConfigurationsViewController: UIViewController {
     @IBAction func businessSegmentPressed(_ sender: Any) {
         updateBusinessSegmentColor()
     }
+
+    @IBAction func countrySegmentPressed(_ sender: Any) {
+        if countrySegment.selectedSegmentIndex == 3 {
+            showAllOptions()
+        }
+    }
+
+    func showAllOptions() {
+        let alert = UIAlertController(title: "Otro preset", message: "Elige un preset de pref_id, public key y access token entre las opciones disponibles.", preferredStyle: .actionSheet)
+
+        var cases = PreferenceContext.allCases
+        cases.remove(at: 0)
+        cases.remove(at: 0)
+        cases.remove(at: 0)
+        for option in cases {
+            alert.addAction(UIAlertAction(title: option.getContextDescription(),
+                                          style: .default,
+                                          handler: { _ in
+                self.currentPreferenceContext = option
+            }))
+        }
+
+        alert.addAction(UIAlertAction(title: "Cancelar",
+                                      style: .cancel,
+                                      handler: { _ in
+                                        self.currentPreferenceContext = .mla
+                                        self.countrySegment.selectedSegmentIndex = 0
+        }))
+
+        self.present(alert, animated: true)
+    }
+
+    func action(action: UIAlertAction) {
+        print(action.title ?? "no action")
+    }
     
     @IBAction func applyAndConfirm(_ sender: Any) {
         let configs = Configurations(
@@ -240,20 +276,8 @@ class ConfigurationsViewController: UIViewController {
             return .mlb
         case 2:
             return .mlm
-        case 3:
-            return .discountAlwaysOn
-        case 4:
-            return .discountSoldOut
-        case 5:
-            return .discountByPaymentMethod
-        case 6:
-            return .discountByIssuer
-        case 7:
-            return .discountForAM
-        case 8:
-            return .boleto
         default:
-            return nil
+            return self.currentPreferenceContext
         }
     }
     
