@@ -22,8 +22,9 @@ class ESCTests: XCTestCase {
     }
 
     enum Cards: Int {
-        case debitCard = 2
-        case creditCard = 3
+        case cabal = 2
+        case visa = 3
+        case amex = 1
     }
 
     enum Status {
@@ -63,7 +64,7 @@ class ESCTests: XCTestCase {
         let _ = escCreditCardGroups(screen:secondCycle, escStep: true, paymentScreenProcessor: true)
     }
 
-    func test_esc_credit_paymentScreenProcessor_oneTap() { //perform cyclic flow
+    func test_esc_paymentScreenProcessor_oneTap() { //perform cyclic flow
         var configStep = configureFlow(screen: MainScreen(), status: .rejected, paymentScreenProcessor: true, oneTap: true, changeCredentials: true)
         let firstCycle = escOneTap(screen: configStep, escStep: nil, paymentScreenProcessor: true)
         configStep = changeBussinessResultStatus(screen: firstCycle, status: .approved, changeCredentials: true)
@@ -71,12 +72,20 @@ class ESCTests: XCTestCase {
         let _ = escOneTap(screen:secondCycle, escStep: true, paymentScreenProcessor: true)
     }
 
-    func test_esc_credit_oneTap() { //perform cyclic flow
+    func test_esc_oneTap() { //perform cyclic flow
         var configStep = configureFlow(screen: MainScreen(), status: .rejected, paymentScreenProcessor: false, oneTap: true, changeCredentials: true)
         let firstCycle =  escOneTap(screen: configStep, escStep: nil, paymentScreenProcessor: false)
         configStep = changeBussinessResultStatus(screen: firstCycle, status: .approved, changeCredentials: true)
         let secondCycle = escOneTap(screen: configStep, escStep: false, paymentScreenProcessor: false)
         let _ = escOneTap(screen:secondCycle, escStep: true, paymentScreenProcessor: false)
+    }
+
+    func test_esc_newCard() {
+        var configStep = configureFlow(screen: MainScreen(), status: .rejected, paymentScreenProcessor: false, oneTap: false, changeCredentials: true)
+        let firstCycle =  escCreditCardGroups(screen: configStep, escStep: nil, paymentScreenProcessor: false, creditCard: .amex)
+        configStep = changeBussinessResultStatus(screen: firstCycle, status: .approved, changeCredentials: true)
+        let secondCycle = escNewCard(screen: configStep)
+        let _ = escCreditCardGroups(screen:secondCycle, escStep: true, paymentScreenProcessor: false, creditCard: .amex)
     }
     
     func configureFlow(screen: MainScreen, status: Status, paymentScreenProcessor: Bool, oneTap: Bool, changeCredentials: Bool = false) -> MainScreen {
@@ -123,19 +132,17 @@ class ESCTests: XCTestCase {
         return configurations.tapApplyConfigurationsButton()
     }
 
-
-
     func escDebitCardGroups(screen: MainScreen, escStep: Bool?, paymentScreenProcessor: Bool) -> MainScreen {
         let finalScreen = screen
             .tapCheckoutOption()
         var nextStep: ReviewScreen
         if let escStep = escStep, !escStep {
-            nextStep = finalScreen.tapSavedCardWithoutESC(index: Cards.debitCard.rawValue)
+            nextStep = finalScreen.tapSavedCardWithoutESC(index: Cards.cabal.rawValue)
                 .completeCVVAndContinueToReview("123")
         } else if escStep != nil {
-            nextStep = finalScreen.tapSavedCardWithESC(index: Cards.debitCard.rawValue)
+            nextStep = finalScreen.tapSavedCardWithESC(index: Cards.cabal.rawValue)
         } else {
-            let securityCodeScreen = finalScreen.tapSavedCardWithoutESC(index: Cards.debitCard.rawValue)
+            let securityCodeScreen = finalScreen.tapSavedCardWithoutESC(index: Cards.cabal.rawValue)
             let hasESC = !securityCodeScreen.hasCVV()
             if !hasESC {
                 nextStep = securityCodeScreen.completeCVVAndContinueToReview("123")
@@ -156,20 +163,23 @@ class ESCTests: XCTestCase {
         return final
     }
     
-    func escCreditCardGroups(screen: MainScreen, escStep: Bool?, paymentScreenProcessor: Bool) -> MainScreen {
+    func escCreditCardGroups(screen: MainScreen, escStep: Bool?, paymentScreenProcessor: Bool, creditCard: Cards = .visa) -> MainScreen {
+        let securityCode = creditCard == .amex ? "1234" : "123"
         let finalScreen = screen
             .tapCheckoutOption()
         var nextStep: ReviewScreen
-        finalScreen.tapSavedCreditCard(index: Cards.creditCard.rawValue)
+        finalScreen.tapSavedCreditCard(index: creditCard.rawValue)
             .selectPayerCostOptionAtRowWithoutESC(1)
 
         if let escStep = escStep, !escStep {
-            nextStep = SecurityCodeScreen().completeCVVAndContinueToReview("123")
-        }  else {
+            nextStep = SecurityCodeScreen().completeCVVAndContinueToReview(securityCode)
+        } else if escStep != nil {
+            nextStep = ReviewScreen()
+        } else {
             let securityCodeScreen = SecurityCodeScreen()
             let hasESC = !securityCodeScreen.hasCVV()
             if !hasESC {
-                nextStep = securityCodeScreen.completeCVVAndContinueToReview("123")
+                nextStep = securityCodeScreen.completeCVVAndContinueToReview(securityCode)
             } else {
                 nextStep = ReviewScreen()
             }
@@ -208,6 +218,23 @@ class ESCTests: XCTestCase {
             .tapCloseButton()
 
         return finalScreen
+    }
+
+    func escNewCard(screen: MainScreen) -> MainScreen {
+        screen.tapCheckoutOption()
+        .tapCardOption()
+        .tapCreditCardOption()
+        .completeNumberAndContinue("371180303257522")
+        .completeNameAndContinue("APRO")
+        .completeExpirationDateAndContinue("1225")
+        .completeCVVAndContinue("1243")
+        .completeNumberAndContinueToPayerCost("30666777")
+        .selectPayerCostOptionAtRow(1)
+        .tapPayButtonForAnyCongrats()
+        .waitForAnyCongrats()
+        .tapCloseButton()
+
+        return screen
     }
 
 }

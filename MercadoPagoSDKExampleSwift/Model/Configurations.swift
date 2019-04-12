@@ -25,6 +25,8 @@ enum PreferenceContext {
         switch self {
         case .mla:
             return "MLA"
+        case .mlaOneCard:
+            return "MLA"
         case .mlb:
             return "MLB"
         case .mlm:
