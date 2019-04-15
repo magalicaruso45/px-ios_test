@@ -249,6 +249,8 @@ class ConfigurationsViewController: UIViewController {
             return .discountForAM
         case 8:
             return .boleto
+        case 9:
+            return .mlaOneCard
         default:
             return nil
         }

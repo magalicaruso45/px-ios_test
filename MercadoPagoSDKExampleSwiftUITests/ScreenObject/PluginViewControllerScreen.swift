@@ -12,6 +12,8 @@ public class PluginViewControllerScreen: BaseScreen {
     override open func waitForElements() {
         waitFor(element: continueButton)
     }
+
+    @discardableResult
     func continueCheckoutToAnyCongrats() -> CongratsScreen{
         continueButton.tap()
         return CongratsScreen()

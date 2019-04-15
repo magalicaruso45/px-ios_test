@@ -35,6 +35,7 @@ public class ConfigurationScreen: BaseScreen {
     private lazy var maxRedeemPerUserStepper = stepper("max_redeem_per_user_stepper")
     private lazy var applyConfigsButton = button("apply_configs_button")
     private lazy var mlaButton = button("Argentina")
+    private lazy var mlaOneCardButton = button("Argentina One Card")
     private lazy var mlbButton = button("Brasil")
     private lazy var mlmButton = button("México")
     private lazy var statusDetailButton = button("status_detail_button")
@@ -155,6 +156,11 @@ public class ConfigurationScreen: BaseScreen {
     
     func tapPreferenceSegmentMLA() -> ConfigurationScreen {
         mlaButton.tap()
+        return self
+    }
+
+    func tapPreferenceSegmentMLAOneCard() -> ConfigurationScreen {
+        mlaOneCardButton.tap()
         return self
     }
     

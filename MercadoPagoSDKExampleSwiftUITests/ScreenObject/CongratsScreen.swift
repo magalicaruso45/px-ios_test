@@ -16,7 +16,8 @@ public class CongratsScreen: BaseScreen {
     override open func waitForElements() {
         let _ = waitForAnyCongrats()
     }
-    
+
+    @discardableResult
     func waitForAnyCongrats() -> CongratsScreen {
         waitFor(element: closeButton)
         return self

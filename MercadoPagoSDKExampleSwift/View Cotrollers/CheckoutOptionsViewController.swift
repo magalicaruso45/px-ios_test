@@ -40,6 +40,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
     var preferenceIDField: UITextField!
     var accessTokenField: UITextField!
     var cardIdField: UITextField!
+    var configurationViewController = ConfigurationsViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,7 +85,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             button.translatesAutoresizingMaskIntoConstraints = false
             button.backgroundColor = .gray
             button.setTitle("Start Card Flow", for: .normal)
-            button.layer.cornerRadius = 20
+            button.layer.cornerRadius = 5
             button.setTitleColor(.white, for: .normal)
             button.add(for: .touchUpInside, {
                 if let accessToken = self.accessTokenField.text {
@@ -96,8 +97,8 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         self.view.addSubview(addCardFlowButton)
         PXLayout.put(view: addCardFlowButton, onBottomOf: cardIdField, withMargin: PXLayout.L_MARGIN).isActive = true
         PXLayout.centerHorizontally(view: addCardFlowButton).isActive = true
-        PXLayout.setHeight(owner: addCardFlowButton, height: 40).isActive = true
-        PXLayout.setWidth(owner: addCardFlowButton, width: 200).isActive = true
+        PXLayout.setHeight(owner: addCardFlowButton, height: 48).isActive = true
+        PXLayout.setWidth(owner: addCardFlowButton, width: 250).isActive = true
 
         //Start Button
         let startButton: UIButton = {
@@ -105,7 +106,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             button.translatesAutoresizingMaskIntoConstraints = false
             button.backgroundColor = .gray
             button.setTitle("Start Checkout", for: .normal)
-            button.layer.cornerRadius = 20
+            button.layer.cornerRadius = 5
             button.setTitleColor(.white, for: .normal)
             button.add(for: .touchUpInside, {
                 if let publicKey = self.publicKeyField.text, let prefId = self.preferenceIDField.text {
@@ -115,10 +116,10 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             return button
         }()
         self.view.addSubview(startButton)
-        PXLayout.put(view: startButton, onBottomOf: addCardFlowButton, withMargin: PXLayout.L_MARGIN).isActive = true
+        PXLayout.put(view: startButton, onBottomOf: addCardFlowButton, withMargin: PXLayout.S_MARGIN).isActive = true
         PXLayout.centerHorizontally(view: startButton).isActive = true
-        PXLayout.setHeight(owner: startButton, height: 40).isActive = true
-        PXLayout.setWidth(owner: startButton, width: 200).isActive = true
+        PXLayout.setHeight(owner: startButton, height: 48).isActive = true
+        PXLayout.setWidth(owner: startButton, width: 250).isActive = true
 
         //Clear Fields Button
         let clearFieldsButton: UIButton = {
@@ -126,7 +127,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             button.translatesAutoresizingMaskIntoConstraints = false
             button.backgroundColor = .red
             button.setTitle("Clear fields", for: .normal)
-            button.layer.cornerRadius = 20
+            button.layer.cornerRadius = 5
             button.setTitleColor(.white, for: .normal)
             button.add(for: .touchUpInside, {
                 self.publicKeyField.text = ""
@@ -138,8 +139,8 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         self.view.addSubview(clearFieldsButton)
         PXLayout.put(view: clearFieldsButton, onBottomOf: startButton, withMargin: PXLayout.M_MARGIN).isActive = true
         PXLayout.centerHorizontally(view: clearFieldsButton).isActive = true
-        PXLayout.setHeight(owner: clearFieldsButton, height: 40).isActive = true
-        PXLayout.setWidth(owner: clearFieldsButton, width: 200).isActive = true
+        PXLayout.setHeight(owner: clearFieldsButton, height: 48).isActive = true
+        PXLayout.setWidth(owner: clearFieldsButton, width: 250).isActive = true
 
         //Clear Fields Button
         let additionalConfigButton: UIButton = {
@@ -147,7 +148,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             button.translatesAutoresizingMaskIntoConstraints = false
             button.backgroundColor = .blue
             button.setTitle("Add Configutations", for: .normal)
-            button.layer.cornerRadius = 20
+            button.layer.cornerRadius = 5
             button.setTitleColor(.white, for: .normal)
             button.add(for: .touchUpInside, {
                 self.additionalConfigs()
@@ -155,14 +156,34 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             return button
         }()
         self.view.addSubview(additionalConfigButton)
-        PXLayout.put(view: additionalConfigButton, onBottomOf: clearFieldsButton, withMargin: PXLayout.M_MARGIN).isActive = true
+        PXLayout.put(view: additionalConfigButton, onBottomOf: clearFieldsButton, withMargin: PXLayout.S_MARGIN).isActive = true
         PXLayout.centerHorizontally(view: additionalConfigButton).isActive = true
-        PXLayout.setHeight(owner: additionalConfigButton, height: 40).isActive = true
-        PXLayout.setWidth(owner: additionalConfigButton, width: 200).isActive = true
+        PXLayout.setHeight(owner: additionalConfigButton, height: 48).isActive = true
+        PXLayout.setWidth(owner: additionalConfigButton, width: 250).isActive = true
+
+
+        //Clear Fields Button
+        let resetExtraConfigButton: UIButton = {
+            let button = UIButton()
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.backgroundColor = .red
+            button.setTitle("Reset extra configs", for: .normal)
+            button.layer.cornerRadius = 5
+            button.setTitleColor(.white, for: .normal)
+            button.add(for: .touchUpInside, {
+                self.configurationViewController = ConfigurationsViewController()
+            })
+            return button
+        }()
+        self.view.addSubview(resetExtraConfigButton)
+        PXLayout.put(view: resetExtraConfigButton, onBottomOf: additionalConfigButton, withMargin: PXLayout.S_MARGIN).isActive = true
+        PXLayout.centerHorizontally(view: resetExtraConfigButton).isActive = true
+        PXLayout.setHeight(owner: resetExtraConfigButton, height: 48).isActive = true
+        PXLayout.setWidth(owner: resetExtraConfigButton, width: 250).isActive = true
 
         publicKeyField.text = "APP_USR-ba2e6b8c-8b6d-4fc3-8a47-0ab241d0dba4"
         preferenceIDField.text = "384414502-d095679d-f7d9-4653-ad71-4fb5feda3494"
-        accessTokenField.text = "TEST-1458038826212807-062020-ff9273c67bc567320eae1a07d1c2d5b5-246046416"
+        accessTokenField.text = "APP_USR-6519316523937252-070516-964fafa7e2c91a2c740155fcb5474280__LA_LD__-261748045"
     }
     
     func createDescriptionLabel() -> UILabel {
@@ -190,16 +211,15 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             return textField
         }()
         self.view.addSubview(textField)
-        PXLayout.setHeight(owner: textField, height: 40).isActive = true
+        PXLayout.setHeight(owner: textField, height: 48).isActive = true
         PXLayout.matchWidth(ofView: textField, withPercentage: 80).isActive = true
         return textField
     }
 
     func additionalConfigs(){
-        let vc = ConfigurationsViewController()
-        vc.delegate = self
-        vc.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal
-        self.navigationController?.present(vc, animated: true, completion: nil)
+        configurationViewController.delegate = self
+        configurationViewController.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal
+        self.navigationController?.present(configurationViewController, animated: true, completion: nil)
     }
 
     func setConfigurations(configs: Configurations) {
@@ -451,6 +471,8 @@ class PaymentPluginViewController: NSObject, PXPaymentProcessor {
     func didReceive(navigationHandler: PXPaymentProcessorNavigationHandler){
         self.navigationHandler = navigationHandler
         viewController.handler = navigationHandler
+        viewController.status = self.getStringStatus(businessResultStatus)
+        viewController.businessResultStatus = businessResultStatus
     }
 
     func didReceive(checkoutStore: PXCheckoutStore){
@@ -485,7 +507,7 @@ class PaymentPluginViewController: NSObject, PXPaymentProcessor {
 extension PXPaymentProcessor {
     func getStringStatus(_ businessResultStatus : PXBusinessResultStatus) -> String {
         switch businessResultStatus {
-        case .APPROVED: return "APPROVED"
+        case .APPROVED: return "approved"
         case .REJECTED: return "REJECTED"
         case .PENDING: return "PENDING"
         case .IN_PROGRESS: return "IN PROGRESS"
