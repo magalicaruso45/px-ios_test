@@ -81,7 +81,7 @@ class ESCTests: XCTestCase {
     }
 
     func test_esc_newCard() {
-        var configStep = configureFlow(screen: MainScreen(), status: .rejected, paymentScreenProcessor: false, oneTap: false, changeCredentials: true)
+        var configStep = configureFlow(screen: MainScreen(), status: .approved, paymentScreenProcessor: false, oneTap: false, changeCredentials: true)
         let firstCycle =  escCreditCardGroups(screen: configStep, escStep: nil, paymentScreenProcessor: false, creditCard: .amex)
         configStep = changeBussinessResultStatus(screen: firstCycle, status: .approved, changeCredentials: true)
         let secondCycle = escNewCard(screen: configStep)
@@ -199,7 +199,7 @@ class ESCTests: XCTestCase {
 
     func escOneTap(screen: MainScreen, escStep: Bool?, paymentScreenProcessor: Bool) -> MainScreen {
         screen.tapOneTapOption()
-            .tapPayButton()
+            .tapPayButtonForCVV()
 
         if let escStep = escStep, !escStep {
             SecurityCodeScreen().completeCVVAndContinue("1234")
@@ -224,7 +224,7 @@ class ESCTests: XCTestCase {
         screen.tapCheckoutOption()
         .tapCardOption()
         .tapCreditCardOption()
-        .completeNumberAndContinue("371180303257522")
+        .completeNumberAndContinue("371180600257522")
         .completeNameAndContinue("APRO")
         .completeExpirationDateAndContinue("1225")
         .completeCVVAndContinue("1243")

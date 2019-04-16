@@ -125,7 +125,7 @@ enum PreferenceContext {
         //access token with many cards: APP_USR-6519316523937252-070516-964fafa7e2c91a2c740155fcb5474280__LA_LD__-261748045
         return InitConfiguration(preferenceID: "410973637-99bea7ae-abaa-4265-8d3f-a02c3e3205ab",
                           publicKey: "TEST-47638845-b0ff-469d-9700-1779a2e26e44",
-                          accessToken: "TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299",
+                          accessToken: "APP_USR-6519316523937252-070516-964fafa7e2c91a2c740155fcb5474280__LA_LD__-261748045",
                           payer: "TESTPJ7DMB1A",
                           collector: "TETE1898701")
         return InitConfiguration(preferenceID: "410973637-e2c78e50-d8a6-43b9-8af2-59fd7fa6ac21",

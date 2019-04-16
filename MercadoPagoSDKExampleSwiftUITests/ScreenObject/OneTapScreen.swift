@@ -33,7 +33,7 @@ class OneTapScreen: BaseScreen {
             return element("empty_card")
         }
     }
-    
+    @discardableResult
     func tapPayButtonForAnyCongrats() -> CongratsScreen {
         payButton.tap()
         return CongratsScreen()

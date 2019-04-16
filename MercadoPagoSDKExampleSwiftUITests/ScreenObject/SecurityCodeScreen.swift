@@ -14,7 +14,7 @@ public class SecurityCodeScreen: BaseScreen {
     private lazy var continueToolbarButton = toolbarButton("Continuar")
 
     override open func waitForElements() {
-        waitFor(element: securityCodeTextField)
+        //waitFor(element: securityCodeTextField)
     }
 
     func completeCVVAndContinueToReview(_ text: String) -> ReviewScreen {
