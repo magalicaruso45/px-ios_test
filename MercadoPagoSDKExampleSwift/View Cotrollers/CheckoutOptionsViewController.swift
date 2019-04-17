@@ -40,6 +40,8 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
     var preferenceIDField: UITextField!
     var accessTokenField: UITextField!
     var cardIdField: UITextField!
+    var scrollView: UIScrollView!
+    var containerView: UIView!
     var configurationViewController = ConfigurationsViewController()
 
     override func viewDidLoad() {
@@ -52,6 +54,10 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         self.title = "Checkout Configuration"
         self.view.backgroundColor = .white
         let topMargin = PXLayout.getSafeAreaTopInset() + 70
+
+        //General scrollview
+        self.scrollView = createScrollView()
+        self.containerView = createContainerView()
         
         //General description label
         self.descriptionLabel = createDescriptionLabel()
@@ -94,7 +100,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             })
             return button
         }()
-        self.view.addSubview(addCardFlowButton)
+        self.containerView.addSubview(addCardFlowButton)
         PXLayout.put(view: addCardFlowButton, onBottomOf: cardIdField, withMargin: PXLayout.L_MARGIN).isActive = true
         PXLayout.centerHorizontally(view: addCardFlowButton).isActive = true
         PXLayout.setHeight(owner: addCardFlowButton, height: 48).isActive = true
@@ -115,8 +121,8 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             })
             return button
         }()
-        self.view.addSubview(startButton)
-        PXLayout.put(view: startButton, onBottomOf: addCardFlowButton, withMargin: PXLayout.S_MARGIN).isActive = true
+        self.containerView.addSubview(startButton)
+        PXLayout.put(view: startButton, onBottomOf: addCardFlowButton, withMargin: PXLayout.L_MARGIN).isActive = true
         PXLayout.centerHorizontally(view: startButton).isActive = true
         PXLayout.setHeight(owner: startButton, height: 48).isActive = true
         PXLayout.setWidth(owner: startButton, width: 250).isActive = true
@@ -136,7 +142,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             })
             return button
         }()
-        self.view.addSubview(clearFieldsButton)
+        self.containerView.addSubview(clearFieldsButton)
         PXLayout.put(view: clearFieldsButton, onBottomOf: startButton, withMargin: PXLayout.M_MARGIN).isActive = true
         PXLayout.centerHorizontally(view: clearFieldsButton).isActive = true
         PXLayout.setHeight(owner: clearFieldsButton, height: 48).isActive = true
@@ -155,8 +161,8 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             })
             return button
         }()
-        self.view.addSubview(additionalConfigButton)
-        PXLayout.put(view: additionalConfigButton, onBottomOf: clearFieldsButton, withMargin: PXLayout.S_MARGIN).isActive = true
+        self.containerView.addSubview(additionalConfigButton)
+        PXLayout.put(view: additionalConfigButton, onBottomOf: clearFieldsButton, withMargin: PXLayout.M_MARGIN).isActive = true
         PXLayout.centerHorizontally(view: additionalConfigButton).isActive = true
         PXLayout.setHeight(owner: additionalConfigButton, height: 48).isActive = true
         PXLayout.setWidth(owner: additionalConfigButton, width: 250).isActive = true
@@ -185,6 +191,36 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         preferenceIDField.text = "384414502-d095679d-f7d9-4653-ad71-4fb5feda3494"
         accessTokenField.text = "APP_USR-6519316523937252-070516-964fafa7e2c91a2c740155fcb5474280__LA_LD__-261748045"
     }
+
+    func createScrollView() -> UIScrollView {
+        let scrollView: UIScrollView = {
+            let scrollView = UIScrollView()
+            scrollView.translatesAutoresizingMaskIntoConstraints = false
+            return scrollView
+        }()
+        self.view.addSubview(scrollView)
+        _ = PXLayout.pinTop(view: scrollView)
+        _ = PXLayout.pinLeft(view: scrollView)
+        _ = PXLayout.pinRight(view: scrollView)
+        _ = PXLayout.pinBottom(view: scrollView)
+        return scrollView
+    }
+
+    func createContainerView() -> UIView {
+        let containerView: UIView = {
+            let containerView = UIView()
+            containerView.translatesAutoresizingMaskIntoConstraints = false
+            return containerView
+        }()
+        self.scrollView.addSubview(containerView)
+        _ = PXLayout.pinTop(view: containerView)
+        _ = PXLayout.pinLeft(view: containerView)
+        _ = PXLayout.pinRight(view: containerView)
+        _ = PXLayout.pinBottom(view: containerView)
+        PXLayout.setHeight(owner: containerView, height: 700).isActive = true
+        PXLayout.matchWidth(ofView: containerView, withPercentage: 100).isActive = true
+        return containerView
+    }
     
     func createDescriptionLabel() -> UILabel {
         let label: UILabel = {
@@ -194,7 +230,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             label.numberOfLines = 0
             return label
         }()
-        self.view.addSubview(label)
+        self.containerView.addSubview(label)
         PXLayout.setHeight(owner: label, height: 90).isActive = true
         PXLayout.matchWidth(ofView: label, withPercentage: 80).isActive = true
         return label
@@ -210,8 +246,8 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             textField.layer.cornerRadius = 5
             return textField
         }()
-        self.view.addSubview(textField)
-        PXLayout.setHeight(owner: textField, height: 48).isActive = true
+        self.containerView.addSubview(textField)
+        PXLayout.setHeight(owner: textField, height: 40).isActive = true
         PXLayout.matchWidth(ofView: textField, withPercentage: 80).isActive = true
         return textField
     }
@@ -274,6 +310,8 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             return
         }
         self.addCardFlow = AddCardFlow(accessToken: accessToken, locale: "es", navigationController: navController)
+        let site = configurations.preferenceContext.getSite()
+        self.addCardFlow?.setSiteId(site)
         self.addCardFlow?.delegate = self
         self.addCardFlow?.start()
     }
@@ -283,16 +321,18 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             return
         }
         self.addCardFlow = AddCardFlow(accessToken: accessToken, locale: "es", navigationController: navController, shouldSkipCongrats: true)
+        let site = configurations.preferenceContext.getSite()
+        self.addCardFlow?.setSiteId(site)
         self.addCardFlow?.delegate = self
         self.addCardFlow?.start()
     }
 
     func addCardFlowSucceded(result: [String: Any]) {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     func addCardFlowFailed(shouldRestart: Bool) {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
 
     func getBuilder(publicKey: String, prefId: String, accessToken: String?,  cardId: String?, paymentConfig: PXPaymentConfiguration?, setPayer: Bool, localizedTexts: Bool) -> MercadoPagoCheckoutBuilder {

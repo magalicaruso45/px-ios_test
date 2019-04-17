@@ -14,26 +14,29 @@ protocol ConfigurationManager {
 }
 
 class ConfigurationsViewController: UIViewController {
-    @IBOutlet weak var comisionesSwitch: UISwitch!
-    @IBOutlet weak var customizationSwitch: UISwitch!
     @IBOutlet weak var paymentPluginSwitch: UISwitch!
-    @IBOutlet weak var businessSwitch: UISwitch!
-    @IBOutlet weak var maxRedeemPerUserStepper: UIStepper!
-    @IBOutlet weak var accessTokenSwitch: UISwitch!
     @IBOutlet weak var viewControllerSwitch: UISwitch!
-    @IBOutlet weak var payerInfoSwitch: UISwitch!
-    @IBOutlet weak var advancedConfigSwitch: UISwitch!
-    @IBOutlet weak var maxRedeemPerUserLabel: UILabel!
-    @IBOutlet weak var localizedTextsSwitch: UISwitch!
-    @IBOutlet weak var countrySegment: UISegmentedControl!
+    @IBOutlet weak var comisionesSwitch: UISwitch!
+    @IBOutlet weak var accessTokenSwitch: UISwitch!
+    @IBOutlet weak var businessSwitch: UISwitch!
+    @IBOutlet weak var statusDetailButton: UIButton!
+    @IBOutlet weak var customizationSwitch: UISwitch!
+    @IBOutlet weak var openPrefSwitch: UISwitch!
     @IBOutlet weak var businessSegment: UISegmentedControl!
+
+    @IBOutlet weak var maxRedeemPerUserLabel: UILabel!
+    @IBOutlet weak var maxRedeemPerUserStepper: UIStepper!
+
+    @IBOutlet weak var advancedConfigSwitch: UISwitch!
     @IBOutlet weak var oneTapSwitch: UISwitch!
     @IBOutlet weak var splitSwitch: UISwitch!
-    @IBOutlet weak var addCardFlowSkipCongrats: UISwitch!
     @IBOutlet weak var escSwitch: UISwitch!
     @IBOutlet weak var discountParamsSwitch: UISwitch!
-    @IBOutlet weak var openPrefSwitch: UISwitch!
-    @IBOutlet weak var statusDetailButton: UIButton!
+
+    @IBOutlet weak var payerInfoSwitch: UISwitch!
+    @IBOutlet weak var localizedTextsSwitch: UISwitch!
+    @IBOutlet weak var addCardFlowSkipCongrats: UISwitch!
+    @IBOutlet weak var countrySegment: UISegmentedControl!
 
     var statusDetailText: String = "cc_rejected_call_for_authorize"
     
