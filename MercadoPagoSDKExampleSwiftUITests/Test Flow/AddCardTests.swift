@@ -5,7 +5,6 @@
 //  Created by Diego Flores Domenech on 1/10/18.
 //  Copyright © 2018 Mercado Pago. All rights reserved.
 //
-
 import XCTest
 
 class AddCardTests: XCTestCase {
@@ -79,7 +78,7 @@ class AddCardTests: XCTestCase {
             .completeCVVAndContinue("123")
             .completeNumberAndContinueToCongrats("63538416397")
     }
-    
+
     func testAddCardSkippingCongrats() {
         _ = MainScreen()
             .tapConfigurationsButton()
@@ -95,3 +94,4 @@ class AddCardTests: XCTestCase {
             .completeNumberAndFinish("12345678")
     }
 }
+

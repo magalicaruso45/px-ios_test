@@ -25,7 +25,6 @@ class PluginProcessorTest: XCTestCase {
         let _ = MainScreen()
             .tapConfigurationsButton()
             .changePaymentProcessorSwitch()
-            .changePaymentVCSwitchSwitch()
             .tapApplyConfigurationsButton()
             .tapClearButton()
             .fillPublicKey("APP_USR-648a260d-6fd9-4ad7-9284-90f22262c18d")

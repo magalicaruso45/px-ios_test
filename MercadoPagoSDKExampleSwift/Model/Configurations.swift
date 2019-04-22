@@ -13,6 +13,7 @@ enum PreferenceContext : Int, CaseIterable {
     case mla
     case mlb
     case mlm
+    case mlaOneCard
     case discountAlwaysOn
     case discountSoldOut
     case discountByPaymentMethod
@@ -34,6 +35,8 @@ enum PreferenceContext : Int, CaseIterable {
     func getSite() -> String {
         switch self {
         case .mla:
+            return "MLA"
+        case .mlaOneCard:
             return "MLA"
         case .mlb:
             return "MLB"
@@ -74,6 +77,8 @@ enum PreferenceContext : Int, CaseIterable {
             return "Discount for Account Money"
         case .boleto:
             return "Boleto valid case"
+        case .mlaOneCard:
+            return "MLA One Saved Card"
         }
     }
     
@@ -97,7 +102,19 @@ enum PreferenceContext : Int, CaseIterable {
             return discountForAMConfig()
         case .boleto:
             return boletoConfig()
+        case .mlaOneCard:
+            return mlaConfigOneCard()
         }
+    }
+
+    func mlaConfigOneCard() -> InitConfiguration {
+        //collector: TETE1898701 / qatest4439
+        //payer: TESTPJ7DMB1A / qatest3404
+        return InitConfiguration(preferenceID: "410973637-e2c78e50-d8a6-43b9-8af2-59fd7fa6ac21",
+                                 publicKey: "TEST-47638845-b0ff-469d-9700-1779a2e26e44",
+                                 accessToken: "TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299",
+                                 payer: "TESTPJ7DMB1A",
+                                 collector: "TETE1898701")
     }
     
     func mlaConfig() -> InitConfiguration {
@@ -108,11 +125,16 @@ enum PreferenceContext : Int, CaseIterable {
         //access token with many cards: APP_USR-6519316523937252-070516-964fafa7e2c91a2c740155fcb5474280__LA_LD__-261748045
         return InitConfiguration(preferenceID: "410973637-99bea7ae-abaa-4265-8d3f-a02c3e3205ab",
                           publicKey: "TEST-47638845-b0ff-469d-9700-1779a2e26e44",
-                          accessToken: "TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299",
+                          accessToken: "APP_USR-6519316523937252-070516-964fafa7e2c91a2c740155fcb5474280__LA_LD__-261748045",
                           payer: "TESTPJ7DMB1A",
                           collector: "TETE1898701")
+        return InitConfiguration(preferenceID: "410973637-e2c78e50-d8a6-43b9-8af2-59fd7fa6ac21",
+                                 publicKey: "TEST-47638845-b0ff-469d-9700-1779a2e26e44",
+                                 accessToken: "TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299",
+                                 payer: "TESTPJ7DMB1A",
+                                 collector: "TETE1898701")
     }
-    
+
     func mlbConfig() -> InitConfiguration {
         //collector: TETE9478140 / qatest3151
         //payer: TETE636968 / qatest9197
@@ -122,7 +144,7 @@ enum PreferenceContext : Int, CaseIterable {
                                  payer: "TETE636968",
                                  collector: "TETE9478140")
     }
-    
+
     func mlmConfig() -> InitConfiguration {
         //collector: TESTYWDWDD2F / qatest32
         //payer: TETE5752063 / qatest7669
@@ -132,7 +154,7 @@ enum PreferenceContext : Int, CaseIterable {
                                  payer: "TETE5752063",
                                  collector: "TESTYWDWDD2F")
     }
-    
+
     func discountAlwaysOnConfig() -> InitConfiguration {
         return InitConfiguration(preferenceID: "384414502-d095679d-f7d9-4653-ad71-4fb5feda3494",
                                  publicKey: "APP_USR-ba2e6b8c-8b6d-4fc3-8a47-0ab241d0dba4",
@@ -140,7 +162,7 @@ enum PreferenceContext : Int, CaseIterable {
                                  payer: "unknown",
                                  collector: "unknown")
     }
-    
+
     func discountSoldOutConfig() -> InitConfiguration {
         return InitConfiguration(preferenceID: "380636546-1c7b7731-97eb-492b-a25b-2374e36f24c9",
                                  publicKey: "APP_USR-d1c95375-5137-4eb7-868e-da3ca8067d79",
@@ -148,7 +170,7 @@ enum PreferenceContext : Int, CaseIterable {
                                  payer: "unknown",
                                  collector: "unknown")
     }
-    
+
     func discountByPaymentMethodConfig() -> InitConfiguration {
         return InitConfiguration(preferenceID: "388462750-e44082ad-6246-4b8d-a1c0-25cae994b223",
                                  publicKey: "APP_USR-3300f176-307d-4600-9769-ad1d10d51a4a",
@@ -156,7 +178,7 @@ enum PreferenceContext : Int, CaseIterable {
                                  payer: "unknown",
                                  collector: "unknown")
     }
-    
+
     func discountByIssuerConfig() -> InitConfiguration {
         return InitConfiguration(preferenceID: "388466010-9b7f0eab-e1aa-4098-bb3c-c95244308274",
                                  publicKey: "APP_USR-013db0be-9f4a-494f-acc8-44bd3f3e75a2",
@@ -164,7 +186,7 @@ enum PreferenceContext : Int, CaseIterable {
                                  payer: "unknown",
                                  collector: "unknown")
     }
-    
+
     func discountForAMConfig() -> InitConfiguration {
         return InitConfiguration(preferenceID: "413655952-2a137fcf-2fbc-4926-be95-4d8077341e2f",
                                  publicKey: "APP_USR-6167c43b-8bfa-4eb5-b4b8-b66b15246f19",
@@ -172,7 +194,7 @@ enum PreferenceContext : Int, CaseIterable {
                                  payer: "unknown",
                                  collector: "unknown")
     }
-    
+
     func boletoConfig() -> InitConfiguration {
         return InitConfiguration(preferenceID: "245099733-8771f469-d68e-4863-b8cb-9402e22c6bb2",
                                  publicKey: "APP_USR-f3f035a2-d343-4a6f-bd3b-fc3c3cb72416",
@@ -180,6 +202,7 @@ enum PreferenceContext : Int, CaseIterable {
                                  payer: "unknown",
                                  collector: "unknown")
     }
+
 }
 
 struct InitConfiguration {

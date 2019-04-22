@@ -14,6 +14,7 @@ public class MainGroupScreen: BaseScreen {
     lazy var cardButton = cell("Nueva tarjeta")
     lazy var cashButton = cell("Pago en efectivo")
     lazy var boletoButton = cell("Boleto Bancário")
+    lazy var savedCard = cell("Terminada en 8020")
     lazy var boletoPecButton = cell("Pagamento na lotérica sem boleto")
     lazy var floatingRow = element("floating_row_main_value_label")
 
@@ -44,6 +45,21 @@ public class MainGroupScreen: BaseScreen {
     func tapAccountMoneyOptionForSecondFactor() -> SecondFactorScreen {
         cellNumber(1).tap()
         return SecondFactorScreen()
+    }
+
+    func tapSavedCardWithoutESC(index: Int) -> SecurityCodeScreen {
+        cellNumber(index).tap()
+        return SecurityCodeScreen()
+    }
+
+    func tapSavedCardWithESC(index: Int) -> ReviewScreen {
+        cellNumber(index).tap()
+        return ReviewScreen()
+    }
+
+    func tapSavedCreditCard(index: Int) -> PayerCostScreen {
+        cellNumber(index).tap()
+        return PayerCostScreen()
     }
 
     func tapAccountMoneyOptionForReview() -> ReviewScreen {
