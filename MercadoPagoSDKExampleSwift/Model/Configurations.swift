@@ -9,11 +9,11 @@
 import UIKit
 import MercadoPagoSDKV4
 
-enum PreferenceContext {
+enum PreferenceContext : Int, CaseIterable {
     case mla
-    case mlaOneCard
     case mlb
     case mlm
+    case mlaOneCard
     case discountAlwaysOn
     case discountSoldOut
     case discountByPaymentMethod
