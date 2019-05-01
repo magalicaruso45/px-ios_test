@@ -21,7 +21,7 @@ public class MainScreen: BaseScreen {
     private lazy var cardIdField = textField("Card Id (Optional)")
 
     func tapCheckoutOptionForOneTap() -> OneTapScreen {
-        checkoutButton.tap()
+        tap(checkoutButton)
         let onetapScreen = OneTapScreen()
         return onetapScreen
     }
@@ -92,10 +92,6 @@ public class MainScreen: BaseScreen {
     }
 
     override open func waitForElements() {
-       // waitFor(element: checkoutButton)
-        waitFor(element: configurationButton)
-       // waitFor(element: publicKeyField)
-       // waitFor(element: preferenceIdField)
-       // waitFor(element: accessTokenField)
+        waitFor(element: checkoutButton)
     }
 }

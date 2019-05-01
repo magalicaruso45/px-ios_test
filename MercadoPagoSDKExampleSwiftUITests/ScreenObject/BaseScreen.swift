@@ -14,7 +14,9 @@ public protocol BaseScreenProtocol {
 }
 
 open class BaseScreen : BaseScreenProtocol {
-    let TIME_OUT : Double = 10 // Seconds
+    let PREVENTIVE_WAIT: Double = 5
+    let SWIPE_INTERVAL : Double = 1
+    let SWIPE_ATTEMPTS : Int = 3
     public init() {
         waitForElements()
     }
@@ -38,47 +40,47 @@ public extension BaseScreen {
     @discardableResult
     func waitForElement(element:XCUIElement,
                             time: Double,
-                            safe: Bool = false) -> Bool {
-        let expect = expectation(for: element)
+                            safe: Bool = false,
+                            count: Int = 0,
+                            hittable: Bool = false) -> Bool {
+        let expect = expectations(for: element, hittable: hittable)
+        let waitingTime = count == 0 ? time : SWIPE_INTERVAL
         let result: XCTWaiter.Result =
-            XCTWaiter().wait(for: [expect],
-                             timeout: time)
+            XCTWaiter().wait(for: expect,
+                             timeout: waitingTime)
 
         print("attempt to get item")
-        if !safe && result != .completed {
-            print("first opportunity")
-            self.swipeUp()
-            return lastWaitForElement(element: element, time: time, safe: safe)
-        }
-        return result == .completed
-    }
-
-    func lastWaitForElement(element:XCUIElement,
-                            time: Double,
-                            safe: Bool = false) -> Bool {
-
-        print("attempt 2")
-        let expect = expectation(for: element)
-        let result: XCTWaiter.Result =
-            XCTWaiter().wait(for: [expect],
-                             timeout: time)
-        if !safe && result != .completed {
+        if count == SWIPE_ATTEMPTS {
             print("final error")
-            XCTFail("Attempt failed after \(time * 2) seconds")
+            let totalTimeElapsed = time + Double(SWIPE_ATTEMPTS) * SWIPE_INTERVAL
+            XCTFail("Attempt to retrive \(element.self.description) failed after \(totalTimeElapsed) seconds and \(SWIPE_ATTEMPTS) swipes")
         }
-        return result == .completed
+
+        if safe || (result == .completed && element.isHittable) {
+            return true
+        }
+
+        //try again
+        self.swipeUp()
+        return waitForElement(element: element, time: time, safe: safe, count: count + 1, hittable: hittable)
     }
 
     @discardableResult
-    func waitFor(element: XCUIElement, time: Double = 5, terminate: Bool = true) -> Bool {
-        return waitForElement(element: element, time: time, safe: !terminate)
+    func waitFor(element: XCUIElement, time: Double? = nil, terminate: Bool = true) -> Bool {
+        return waitForElement(element: element, time: time ?? PREVENTIVE_WAIT, safe: !terminate)
     }
 
-    private func expectation(for element: XCUIElement) -> XCTestExpectation {
+    private func expectations(for element: XCUIElement, hittable: Bool) -> [XCTestExpectation] {
         let exists = NSPredicate(format: "exists = 1")
-        return XCTNSPredicateExpectation(predicate: exists, object: element)
+        let isHittable = NSPredicate(format: "hittable == true")
+        let predicate1 = XCTNSPredicateExpectation(predicate: exists, object: element)
+        let predicate2 = XCTNSPredicateExpectation(predicate: isHittable, object: element)
+        var expectations = [predicate1]
+        if hittable {
+            expectations.append(predicate2)
+        }
+        return expectations
     }
-
 }
 
 // MARK: Take elements from screen
@@ -135,6 +137,17 @@ public extension BaseScreen {
 
 // MARK: UI Controls
 public extension BaseScreen {
+
+    func tap(_ element: XCUIElement) {
+        if element.isHittable {
+            element.tap()
+        } else {
+            waitForElement(element: element, time: 0, safe: false, hittable: false)
+            print("element tap")
+            element.tap()
+        }
+    }
+
     @discardableResult
     func swipeUp<T: BaseScreen>(class: T? = nil) -> T {
         print("swiping up")

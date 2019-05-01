@@ -23,7 +23,6 @@ class OneTapTests: XCTestCase {
     
     func onetapPreSet() -> OneTapScreen {
         return MainScreen()
-            .swipeUp(class: MainScreen())
             .tapConfigurationsButton()
             .changePaymentProcessorSwitch()
             .changeAccessTokenSwitch()
