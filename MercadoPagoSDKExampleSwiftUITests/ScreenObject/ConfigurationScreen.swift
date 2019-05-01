@@ -38,7 +38,7 @@ public class ConfigurationScreen: BaseScreen {
     private lazy var mlbButton = button("Brasil")
     private lazy var mlmButton = button("México")
     private lazy var statusDetailButton = button("status_detail_button")
-    private lazy var otherButton = button("Otro preset")
+    private lazy var otherButton = button("Otro")
     private lazy var approvedButton = button("Approved")
     private lazy var pendingButton = button("Pending")
     private lazy var rejectedButton = button("Rejected")
