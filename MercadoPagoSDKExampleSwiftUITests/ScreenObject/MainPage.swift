@@ -27,7 +27,7 @@ public class MainScreen: BaseScreen {
     }
     
     func tapCheckoutOption() -> MainGroupScreen {
-        checkoutButton.tap()
+        tap(checkoutButton)
         let mainGroupScreen = MainGroupScreen()
         return mainGroupScreen
     }

@@ -153,7 +153,7 @@ public extension BaseScreen {
         print("swiping up")
         let scrollViewsQuery = XCUIApplication().scrollViews
         let elementQuery = scrollViewsQuery.otherElements.firstMatch
-        elementQuery.swipeUp()
+        elementQuery.gentleSwipe(.up)
         return self as! T
     }
 
@@ -162,7 +162,7 @@ public extension BaseScreen {
         print("swiping down")
         let scrollViewsQuery = XCUIApplication().scrollViews
         let elementQuery = scrollViewsQuery.otherElements.firstMatch
-        elementQuery.swipeDown()
+        elementQuery.gentleSwipe(.down)
         return self as! T
     }
     

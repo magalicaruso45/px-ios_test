@@ -70,7 +70,7 @@ public class ReviewScreen: BaseScreen {
     }
 
     func tapChangePayerInfo() -> PayerInfoScreen {
-        changePayerInfoButton.tap()
+        tap(changePayerInfoButton)
         return PayerInfoScreen()
     }
 
