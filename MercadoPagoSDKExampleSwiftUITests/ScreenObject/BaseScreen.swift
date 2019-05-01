@@ -36,24 +36,49 @@ open class BaseScreen : BaseScreenProtocol {
 // MARK: Loading screen helpers
 public extension BaseScreen {
     @discardableResult
-    func waitForExpectation(expectation:XCTestExpectation,
+    func waitForElement(element:XCUIElement,
                             time: Double,
                             safe: Bool = false) -> Bool {
+        let expect = expectation(for: element)
         let result: XCTWaiter.Result =
-            XCTWaiter().wait(for: [expectation],
+            XCTWaiter().wait(for: [expect],
+                             timeout: time)
+
+        print("attempt to get item")
+        if !safe && result != .completed {
+            print("first opportunity")
+            self.swipeUp()
+            return lastWaitForElement(element: element, time: time, safe: safe)
+        }
+        return result == .completed
+    }
+
+    func lastWaitForElement(element:XCUIElement,
+                            time: Double,
+                            safe: Bool = false) -> Bool {
+
+        print("attempt 2")
+        let expect = expectation(for: element)
+        let result: XCTWaiter.Result =
+            XCTWaiter().wait(for: [expect],
                              timeout: time)
         if !safe && result != .completed {
-            XCTFail("Condition was not satisfied during \(time) seconds")
+            print("final error")
+            XCTFail("Attempt failed after \(time * 2) seconds")
         }
-
         return result == .completed
     }
 
     @discardableResult
-    func waitFor(element: XCUIElement, time: Double = 10, terminate: Bool = true) -> Bool {
-        let exists = NSPredicate(format: "exists = 1")
-        return waitForExpectation(expectation: XCTNSPredicateExpectation(predicate: exists, object: element), time: time, safe: !terminate)
+    func waitFor(element: XCUIElement, time: Double = 5, terminate: Bool = true) -> Bool {
+        return waitForElement(element: element, time: time, safe: !terminate)
     }
+
+    private func expectation(for element: XCUIElement) -> XCTestExpectation {
+        let exists = NSPredicate(format: "exists = 1")
+        return XCTNSPredicateExpectation(predicate: exists, object: element)
+    }
+
 }
 
 // MARK: Take elements from screen
@@ -110,16 +135,22 @@ public extension BaseScreen {
 
 // MARK: UI Controls
 public extension BaseScreen {
-    func swipeUp() {
+    @discardableResult
+    func swipeUp<T: BaseScreen>(class: T? = nil) -> T {
+        print("swiping up")
         let scrollViewsQuery = XCUIApplication().scrollViews
         let elementQuery = scrollViewsQuery.otherElements.firstMatch
         elementQuery.swipeUp()
+        return self as! T
     }
 
-    func swipeDown() {
+    @discardableResult
+    func swipeDown<T: BaseScreen>(class: T? = nil) -> T {
+        print("swiping down")
         let scrollViewsQuery = XCUIApplication().scrollViews
         let elementQuery = scrollViewsQuery.otherElements.firstMatch
         elementQuery.swipeDown()
+        return self as! T
     }
     
     func swipeRight() {

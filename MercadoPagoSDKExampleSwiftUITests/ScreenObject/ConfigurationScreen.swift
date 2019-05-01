@@ -14,7 +14,7 @@ public class ConfigurationScreen: BaseScreen {
     private lazy var paymentProcessorSwitch = switchElement("payment_processor_switch")
     private lazy var paymentVCSwitch = switchElement("payment_vc_switch")
     private lazy var chargeSwitch = switchElement("charge_switch")
-    private lazy var accessTokenSwitch = switchElement("access_token_switch")
+    private lazy var accessTokenSwitch = switchElement("access_token_switch333")
     private lazy var businessSwitch = switchElement("business_switch")
     private lazy var fullCustomizationSwitch = switchElement("full_customization_switch")
     private lazy var addCardFlowSkipCongratsSwitch = switchElement("skip_congrats_switch")
@@ -35,16 +35,10 @@ public class ConfigurationScreen: BaseScreen {
     private lazy var maxRedeemPerUserStepper = stepper("max_redeem_per_user_stepper")
     private lazy var applyConfigsButton = button("apply_configs_button")
     private lazy var mlaButton = button("Argentina")
-    private lazy var mlaOneCardButton = button("Argentina One Card")
     private lazy var mlbButton = button("Brasil")
     private lazy var mlmButton = button("México")
     private lazy var statusDetailButton = button("status_detail_button")
-    private lazy var discountAlwaysOnButton = button("Always On")
-    private lazy var discountSoldoutButton = button("Soldout")
-    private lazy var discountByPaymentMethodButton = button("PM")
-    private lazy var discountByIssuerButton = button("Issuer")
-    private lazy var discountForAMButton = button("AM")
-    private lazy var boletoButton = button("Boleto")
+    private lazy var otherButton = button("Otro preset")
     private lazy var approvedButton = button("Approved")
     private lazy var pendingButton = button("Pending")
     private lazy var rejectedButton = button("Rejected")
@@ -159,11 +153,6 @@ public class ConfigurationScreen: BaseScreen {
         return self
     }
 
-    func tapPreferenceSegmentMLAOneCard() -> ConfigurationScreen {
-        mlaOneCardButton.tap()
-        return self
-    }
-    
     func tapPreferenceSegmentMLB() -> ConfigurationScreen {
         mlbButton.tap()
         return self
@@ -173,35 +162,12 @@ public class ConfigurationScreen: BaseScreen {
         mlmButton.tap()
         return self
     }
-    
-    func tapPreferenceSegmentDiscountAlwaysOn() -> ConfigurationScreen {
-        discountAlwaysOnButton.tap()
-        return self
-    }
-    
-    func tapPreferenceSegmentDiscountSoldout() -> ConfigurationScreen {
-        discountSoldoutButton.tap()
-        return self
-    }
-    
-    func tapPreferenceSegmentDiscountByPaymentMethod() -> ConfigurationScreen {
-        discountByPaymentMethodButton.tap()
-        return self
-    }
-    
-    
-    func tapPreferenceSegmentDiscountByIssuer() -> ConfigurationScreen {
-        discountByIssuerButton.tap()
-        return self
-    }
-    
-    func tapPreferenceSegmentDiscountForAM() -> ConfigurationScreen {
-        discountForAMButton.tap()
-        return self
-    }
-    
-    func tapPreferenceSegmentBoleto() -> ConfigurationScreen {
-        boletoButton.tap()
+
+    func tapOtherPreferenceSegment(_ preferenceContext: PreferenceContext) -> ConfigurationScreen {
+        otherButton.tap()
+        let identifier = preferenceContext.getContextDescription()
+        let item = button(identifier)
+        item.tap()
         return self
     }
     
@@ -220,6 +186,6 @@ public class ConfigurationScreen: BaseScreen {
     }
 
     override open func waitForElements() {
-        waitFor(element: paymentProcessorSwitch)
+        waitFor(element: accessTokenSwitch)
     }
 }

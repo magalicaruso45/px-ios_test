@@ -17,12 +17,13 @@ class OneTapTests: XCTestCase {
     }
     
     override func tearDown() {
-        sleep(2)
+        sleep(1)
         super.tearDown()
     }
     
     func onetapPreSet() -> OneTapScreen {
         return MainScreen()
+            .swipeUp(class: MainScreen())
             .tapConfigurationsButton()
             .changePaymentProcessorSwitch()
             .changeAccessTokenSwitch()
