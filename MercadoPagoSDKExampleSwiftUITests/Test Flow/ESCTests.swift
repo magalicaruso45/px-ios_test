@@ -111,7 +111,7 @@ class ESCTests: XCTestCase {
             configurations = configurations.changeOneTapSwitch()
         }
         if changeCredentials {
-            configurations = configurations.tapOtherPreferenceSegment(.mlaOneCard)
+            configurations = configurations.tapOtherPreferenceSegment(.escOneCard)
         }
         return configurations.tapApplyConfigurationsButton()
     }
@@ -126,7 +126,7 @@ class ESCTests: XCTestCase {
         }
 
         if changeCredentials {
-            configurations = configurations.tapOtherPreferenceSegment(.mlaOneCard)
+            configurations = configurations.tapOtherPreferenceSegment(.escOneCard)
         }
 
         return configurations.tapApplyConfigurationsButton()

@@ -55,15 +55,6 @@
 		<key>language</key>
 		<string>es</string>
 	</dict>
-	<key>boleto</key>
-	<dict>
-		<key>public_key</key>
-		<string>APP_USR-f3f035a2-d343-4a6f-bd3b-fc3c3cb72416</string>
-		<key>pref_id</key>
-		<string>245099733-8771f469-d68e-4863-b8cb-9402e22c6bb2</string>
-		<key>title</key>
-		<string>Boleto valid case</string>
-	</dict>
 	<key>mla50</key>
 	<dict>
 		<key>title</key>
@@ -178,6 +169,19 @@
 		<string>TESTPJ7DMB1A / qatest3404</string>
 		<key>collector</key>
 		<string>TETE1898701 / qatest4439</string>
+	</dict>
+	<key>boleto</key>
+	<dict>
+		<key>public_key</key>
+		<string>APP_USR-f3f035a2-d343-4a6f-bd3b-fc3c3cb72416</string>
+		<key>pref_id</key>
+		<string>245099733-8771f469-d68e-4863-b8cb-9402e22c6bb2</string>
+		<key>title</key>
+		<string>Boleto valid case</string>
+		<key>language</key>
+		<string>pt</string>
+		<key>site</key>
+		<string>MLB</string>
 	</dict>
 </dict>
 </plist>

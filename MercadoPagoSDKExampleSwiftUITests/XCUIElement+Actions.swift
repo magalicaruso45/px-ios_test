@@ -1,13 +1,13 @@
 import Foundation
 import XCTest
 
+public enum SwipeDirection : Int {
+    case up, down, left, right
+}
+
 extension XCUIElement
 {
-    enum Direction : Int {
-        case up, down, left, right
-    }
-
-    func gentleSwipe(_ direction : Direction, half : CGFloat = 0.5, adjustment : CGFloat = 0.25, offset : CGFloat = -0.1, pressDuration : TimeInterval = 0.05) {
+    func gentleSwipe(_ direction : SwipeDirection = .up, half : CGFloat = 0.5, adjustment : CGFloat = 0.5, offset : CGFloat = -0.1, pressDuration : TimeInterval = 0.1) {
 
 
         let lessThanHalf = half - adjustment

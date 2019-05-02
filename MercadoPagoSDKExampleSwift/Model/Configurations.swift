@@ -33,7 +33,7 @@ enum PreferenceContext : String, CaseIterable {
     }
     
     func getContextDescription() -> String {
-        return self.getInitConfiguration().title
+        return self.rawValue
     }
 
     func getInitConfiguration() -> InitConfiguration {

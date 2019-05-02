@@ -25,6 +25,7 @@ class OneTapTests: XCTestCase {
         return MainScreen()
             .tapConfigurationsButton()
             .changePaymentProcessorSwitch()
+            .swipe(type: ConfigurationScreen(), direction: .up)
             .changeAccessTokenSwitch()
             .changeAdvancedSwitch()
             .changeOneTapSwitch()

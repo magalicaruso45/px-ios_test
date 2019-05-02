@@ -165,6 +165,8 @@ public class ConfigurationScreen: BaseScreen {
 
     func tapOtherPreferenceSegment(_ preferenceContext: PreferenceContext) -> ConfigurationScreen {
         tap(otherButton)
+        sleep(1)
+
         let identifier = preferenceContext.getContextDescription()
         let item = button(identifier)
         tap(item)
