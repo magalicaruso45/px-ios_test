@@ -16,12 +16,12 @@ public class DiscountDetailModalScreen: BaseScreen {
     override open func waitForElements() {}
 
     func tapCloseButtonToGroupsScreen() -> MainGroupScreen {
-        closeButton.tap()
+        tap(closeButton)
         return MainGroupScreen()
     }
 
     func tapCloseButtonToPayerCostScreen() -> PayerCostScreen {
-        closeButton.tap()
+        tap(closeButton)
         return PayerCostScreen()
     }
 }

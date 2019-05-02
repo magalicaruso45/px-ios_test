@@ -35,15 +35,15 @@ class OneTapScreen: BaseScreen {
     }
     @discardableResult
     func tapPayButtonForAnyCongrats() -> CongratsScreen {
-        payButton.tap()
+        tap(payButton)
         return CongratsScreen()
     }
     func tapPayButtonForCVV() -> SecurityCodeScreen {
-        payButton.tap()
+        tap(payButton)
         return SecurityCodeScreen()
     }
     func tapInstallmentButton() -> OneTapScreen {
-        installmentButton.tap()
+        tap(installmentButton)
         return self
     }
     func swipeCardLeft() -> OneTapScreen {

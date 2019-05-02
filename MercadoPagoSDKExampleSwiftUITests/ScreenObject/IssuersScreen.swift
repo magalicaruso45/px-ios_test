@@ -30,11 +30,11 @@ public class IssuersScreen: BaseScreen {
 
     func tapRow(number: Int) {
         let issuerCell = cellNumber(headerCellCount + number)
-        issuerCell.tap()
+        tap(issuerCell)
     }
 
     func tapBackButtonToIdentificationScreen() -> IdentificationScreen {
-        backButton.tap()
+        tap(backButton)
         return IdentificationScreen()
     }
 }

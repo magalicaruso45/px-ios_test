@@ -19,18 +19,18 @@ public class SecurityCodeScreen: BaseScreen {
 
     func completeCVVAndContinueToReview(_ text: String) -> ReviewScreen {
         waitFor(element: securityCodeTextField)
-        securityCodeTextField.tap()
+        tap(securityCodeTextField)
         securityCodeTextField.typeText(text)
-        continueToolbarButton.tap()
+        tap(continueToolbarButton)
         return ReviewScreen()
     }
 
     @discardableResult
     func completeCVVAndContinue(_ text: String) -> BaseScreen {
         waitFor(element: securityCodeTextField)
-        securityCodeTextField.tap()
+        tap(securityCodeTextField)
         securityCodeTextField.typeText(text)
-        continueToolbarButton.tap()
+        tap(continueToolbarButton)
         return BaseScreen()
     }
 
@@ -41,9 +41,9 @@ public class SecurityCodeScreen: BaseScreen {
     
     func completeCVVAndContinueToAnyCongrats(_ text: String) -> CongratsScreen {
         waitFor(element: securityCodeTextField)
-        securityCodeTextField.tap()
+        tap(securityCodeTextField)
         securityCodeTextField.typeText(text)
-        continueToolbarButton.tap()
+        tap(continueToolbarButton)
         return CongratsScreen()
     }
 }

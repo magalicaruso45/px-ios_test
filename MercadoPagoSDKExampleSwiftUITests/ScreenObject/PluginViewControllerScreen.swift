@@ -15,7 +15,7 @@ public class PluginViewControllerScreen: BaseScreen {
 
     @discardableResult
     func continueCheckoutToAnyCongrats() -> CongratsScreen{
-        continueButton.tap()
+        tap(continueButton)
         return CongratsScreen()
     }
 }

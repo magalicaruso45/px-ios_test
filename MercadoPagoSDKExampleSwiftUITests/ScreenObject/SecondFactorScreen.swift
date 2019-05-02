@@ -20,7 +20,7 @@ public class SecondFactorScreen: BaseScreen {
         return self
     }
     func continueToReview() -> ReviewScreen {
-        confirmButton.tap()
+        tap(confirmButton)
         return ReviewScreen()
     }
 }

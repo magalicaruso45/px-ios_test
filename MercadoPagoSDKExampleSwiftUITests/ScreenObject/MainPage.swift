@@ -33,61 +33,61 @@ public class MainScreen: BaseScreen {
     }
 
     func tapOneTapOption() -> OneTapScreen {
-        checkoutButton.tap()
+        tap(checkoutButton)
         return OneTapScreen()
     }
 
     func tapCheckoutOptionOnlyCard() -> CardScreen {
-        checkoutButton.tap()
+        tap(checkoutButton)
         return CardScreen()
     }
 
     func tapCheckoutOptionWithCardSelected() -> SecurityCodeScreen {
-        checkoutButton.tap()
+        tap(checkoutButton)
         return SecurityCodeScreen()
     }
 
     func tapClearButton() -> MainScreen {
-        clearButton.tap()
+        tap(clearButton)
         return self
     }
 
     func fillPublicKey(_ text: String) -> MainScreen {
-        publicKeyField.tap()
+        tap(publicKeyField)
         publicKeyField.typeText(text)
         return self
     }
 
     func fillPreferenceId(_ text: String) -> MainScreen {
-        preferenceIdField.tap()
+        tap(preferenceIdField)
         preferenceIdField.typeText(text)
         return self
     }
 
     func fillAccessToken(_ text: String) -> MainScreen {
-        accessTokenField.tap()
+        tap(accessTokenField)
         accessTokenField.typeText(text)
         return self
     }
 
     func fillCardId(_ text: String) -> MainScreen {
-        cardIdField.tap()
+        tap(cardIdField)
         cardIdField.typeText(text)
         return self
     }
 
     func tapConfigurationsButton() -> ConfigurationScreen {
-        configurationButton.tap()
+        tap(configurationButton)
         return ConfigurationScreen()
     }
 
     func resetExtraConfigurations() -> MainScreen {
-        resetExtraConfigsButton.tap()
+        tap(resetExtraConfigsButton)
         return self
     }
     
     func tapAddCardButton() -> CardScreen{
-        addCardButton.tap()
+        tap(addCardButton)
         return CardScreen()
     }
 

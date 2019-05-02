@@ -23,67 +23,67 @@ public class MainGroupScreen: BaseScreen {
     }
 
     func tapFloatingRowToDiscountDetail() -> DiscountDetailModalScreen {
-        floatingRow.tap()
+        tap(floatingRow)
         return DiscountDetailModalScreen()
     }
 
     func tapFloatingRowToGroupsScreen() -> MainGroupScreen {
-        floatingRow.tap()
+        tap(floatingRow)
         return self
     }
 
     func tapCardOption() -> CardsOptionsScreen {
-        cardButton.tap()
+        tap(cardButton)
         return CardsOptionsScreen()
     }
 
     func tapCashOption() -> CashOptionsScreen {
-        cashButton.tap()
+        tap(cashButton)
         return CashOptionsScreen()
     }
 
     func tapAccountMoneyOptionForSecondFactor() -> SecondFactorScreen {
-        cellNumber(1).tap()
+        tap(cellNumber(1))
         return SecondFactorScreen()
     }
 
     func tapSavedCardWithoutESC(index: Int) -> SecurityCodeScreen {
-        cellNumber(index).tap()
+        tap(cellNumber(index))
         return SecurityCodeScreen()
     }
 
     func tapSavedCardWithESC(index: Int) -> ReviewScreen {
-        cellNumber(index).tap()
+        tap(cellNumber(index))
         return ReviewScreen()
     }
 
     func tapSavedCreditCard(index: Int) -> PayerCostScreen {
-        cellNumber(index).tap()
+        tap(cellNumber(index))
         return PayerCostScreen()
     }
 
     func tapAccountMoneyOptionForReview() -> ReviewScreen {
-        cellNumber(1).tap()
+        tap(cellNumber(1))
         return ReviewScreen()
     }
 
     func tapBoletoOption() -> PayerInfoScreen {
-        boletoButton.tap()
+        tap(boletoButton)
         return PayerInfoScreen()
     }
 
     func tapBoletoOptionForReview() -> ReviewScreen {
-        boletoButton.tap()
+        tap(boletoButton)
         return ReviewScreen()
     }
 
     func tapBoletoPec() -> PayerInfoScreen {
-        boletoPecButton.tap()
+        tap(boletoPecButton)
         return PayerInfoScreen()
     }
 
     func tapBoletoPecForReview() -> ReviewScreen {
-        boletoPecButton.tap()
+        tap(boletoPecButton)
         return ReviewScreen()
     }
 
@@ -111,12 +111,12 @@ class CardsOptionsScreen: BaseScreen {
     private lazy var debitCardButton = cell("Nueva tarjeta de \ndébito")
 
     func tapCreditCardOption() -> CardScreen {
-        creditCardButton.tap()
+        tap(creditCardButton)
         return CardScreen()
     }
 
     func tapDebitCardOption() -> CardScreen {
-        debitCardButton.tap()
+        tap(debitCardButton)
         return CardScreen()
     }
 
@@ -129,7 +129,7 @@ class CashOptionsScreen: BaseScreen {
     private lazy var rapipagoButton = cell("Rapipago")
 
     func tapRapipagoOption() -> ReviewScreen {
-        rapipagoButton.tap()
+        tap(rapipagoButton)
         return ReviewScreen()
     }
 
