@@ -17,7 +17,7 @@ class OneTapTests: XCTestCase {
     }
     
     override func tearDown() {
-        sleep(2)
+        sleep(1)
         super.tearDown()
     }
     
@@ -25,6 +25,7 @@ class OneTapTests: XCTestCase {
         return MainScreen()
             .tapConfigurationsButton()
             .changePaymentProcessorSwitch()
+            .swipe(type: ConfigurationScreen(), direction: .up)
             .changeAccessTokenSwitch()
             .changeAdvancedSwitch()
             .changeOneTapSwitch()

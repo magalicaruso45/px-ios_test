@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>mla</key>
+	<dict>
+		<key>title</key>
+		<string>MLA Default</string>
+		<key>public_key</key>
+		<string>TEST-47638845-b0ff-469d-9700-1779a2e26e44</string>
+		<key>pref_id</key>
+		<string>410973637-e2c78e50-d8a6-43b9-8af2-59fd7fa6ac21</string>
+		<key>access_token</key>
+		<string>TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299</string>
+		<key>collector</key>
+		<string>TETE1898701 / qatest4439</string>
+		<key>payer</key>
+		<string>TESTPJ7DMB1A / qatest3404</string>
+	</dict>
+	<key>mlb</key>
+	<dict>
+		<key>title</key>
+		<string>MLB Default</string>
+		<key>public_key</key>
+		<string>TEST-f8dbbe4e-e63e-48b1-b17f-5da486d61547</string>
+		<key>pref_id</key>
+		<string>411544354-b3318624-9f4c-4d3c-839a-3e716c8a383f</string>
+		<key>access_token</key>
+		<string>TEST-7182822688046193-022812-1fc2bafbe7ce8a723231331c8b383aee-411549390</string>
+		<key>payer</key>
+		<string>TETE636968 / qatest9197</string>
+		<key>collector</key>
+		<string>TETE9478140 / qatest3151</string>
+		<key>site</key>
+		<string>MLB</string>
+		<key>language</key>
+		<string>pt</string>
+	</dict>
+	<key>mlm</key>
+	<dict>
+		<key>title</key>
+		<string>MLM Default</string>
+		<key>public_key</key>
+		<string>TEST-d79fd045-dc90-436e-8bd0-3aef25834ead</string>
+		<key>pref_id</key>
+		<string>411553753-b7dce9dc-bf46-4545-91a5-bdb904b90cb8</string>
+		<key>access_token</key>
+		<string>TEST-1178809857150049-022812-1b795ddd0f07c85489b50d6f827b0600-411553753</string>
+		<key>payer</key>
+		<string>TETE5752063 / qatest7669</string>
+		<key>collector</key>
+		<string>TESTYWDWDD2F / qatest32</string>
+		<key>site</key>
+		<string>MLM</string>
+		<key>language</key>
+		<string>es</string>
+	</dict>
+	<key>mla50</key>
+	<dict>
+		<key>title</key>
+		<string>Item $50</string>
+		<key>public_key</key>
+		<string>TEST-47638845-b0ff-469d-9700-1779a2e26e44</string>
+		<key>pref_id</key>
+		<string>410973637-99bea7ae-abaa-4265-8d3f-a02c3e3205ab</string>
+		<key>access_token</key>
+		<string>TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299</string>
+		<key>payer</key>
+		<string>TESTPJ7DMB1A / qatest3404</string>
+		<key>collector</key>
+		<string>TETE1898701 / qatest4439</string>
+	</dict>
+	<key>mla100</key>
+	<dict>
+		<key>title</key>
+		<string>Item $100</string>
+		<key>public_key</key>
+		<string>TEST-47638845-b0ff-469d-9700-1779a2e26e44</string>
+		<key>pref_id</key>
+		<string>410973637-e2c78e50-d8a6-43b9-8af2-59fd7fa6ac21</string>
+		<key>access_token</key>
+		<string>TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299</string>
+		<key>payer</key>
+		<string>TESTPJ7DMB1A / qatest3404</string>
+		<key>collector</key>
+		<string>TETE1898701 / qatest4439</string>
+	</dict>
+	<key>manyCards</key>
+	<dict>
+		<key>title</key>
+		<string>MLA Many Cards</string>
+		<key>public_key</key>
+		<string>TEST-47638845-b0ff-469d-9700-1779a2e26e44</string>
+		<key>pref_id</key>
+		<string>410973637-e2c78e50-d8a6-43b9-8af2-59fd7fa6ac21</string>
+		<key>access_token</key>
+		<string>APP_USR-6519316523937252-070516-964fafa7e2c91a2c740155fcb5474280__LA_LD__-261748045</string>
+		<key>payer</key>
+		<string>TESTPJ7DMB1A / qatest3404</string>
+		<key>collector</key>
+		<string>TETE1898701 / qatest4439</string>
+	</dict>
+	<key>discountAlwaysOn</key>
+	<dict>
+		<key>title</key>
+		<string>Always ON discount</string>
+		<key>public_key</key>
+		<string>APP_USR-ba2e6b8c-8b6d-4fc3-8a47-0ab241d0dba4</string>
+		<key>pref_id</key>
+		<string>384414502-d095679d-f7d9-4653-ad71-4fb5feda3494</string>
+		<key>access_token</key>
+		<string>TEST-1458038826212807-062020-ff9273c67bc567320eae1a07d1c2d5b5-246046416</string>
+	</dict>
+	<key>discountSoldOut</key>
+	<dict>
+		<key>title</key>
+		<string>Sold out discount</string>
+		<key>public_key</key>
+		<string>APP_USR-d1c95375-5137-4eb7-868e-da3ca8067d79</string>
+		<key>pref_id</key>
+		<string>380636546-1c7b7731-97eb-492b-a25b-2374e36f24c9</string>
+		<key>access_token</key>
+		<string>APP_USR-6094765363333165-122815-204eeee0a1ad662e7a977b2e7596a7c4-368735296</string>
+	</dict>
+	<key>discountByPaymentMethod</key>
+	<dict>
+		<key>title</key>
+		<string>Discount by Payment method</string>
+		<key>public_key</key>
+		<string>APP_USR-3300f176-307d-4600-9769-ad1d10d51a4a</string>
+		<key>pref_id</key>
+		<string>388462750-e44082ad-6246-4b8d-a1c0-25cae994b223</string>
+		<key>access_token</key>
+		<string>TEST-1458038826212807-062020-ff9273c67bc567320eae1a07d1c2d5b5-246046416</string>
+	</dict>
+	<key>discountByIssuer</key>
+	<dict>
+		<key>title</key>
+		<string>Discount by issuer</string>
+		<key>public_key</key>
+		<string>APP_USR-013db0be-9f4a-494f-acc8-44bd3f3e75a2</string>
+		<key>pref_id</key>
+		<string>388466010-9b7f0eab-e1aa-4098-bb3c-c95244308274</string>
+		<key>access_token</key>
+		<string>TEST-1458038826212807-062020-ff9273c67bc567320eae1a07d1c2d5b5-246046416</string>
+	</dict>
+	<key>discountForAM</key>
+	<dict>
+		<key>title</key>
+		<string>Discount for Account Money</string>
+		<key>public_key</key>
+		<string>APP_USR-6167c43b-8bfa-4eb5-b4b8-b66b15246f19</string>
+		<key>pref_id</key>
+		<string>413655952-2a137fcf-2fbc-4926-be95-4d8077341e2f</string>
+		<key>access_token</key>
+		<string>TEST-5511028488113173-010314-a0d3138592c4e0281dda29f840baa4f5-384294267</string>
+	</dict>
+	<key>escOneCard</key>
+	<dict>
+		<key>title</key>
+		<string>ESC One Saved Card</string>
+		<key>public_key</key>
+		<string>TEST-47638845-b0ff-469d-9700-1779a2e26e44</string>
+		<key>pref_id</key>
+		<string>410973637-e2c78e50-d8a6-43b9-8af2-59fd7fa6ac21</string>
+		<key>access_token</key>
+		<string>TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299</string>
+		<key>payer</key>
+		<string>TESTPJ7DMB1A / qatest3404</string>
+		<key>collector</key>
+		<string>TETE1898701 / qatest4439</string>
+	</dict>
+	<key>boleto</key>
+	<dict>
+		<key>public_key</key>
+		<string>APP_USR-f3f035a2-d343-4a6f-bd3b-fc3c3cb72416</string>
+		<key>pref_id</key>
+		<string>245099733-8771f469-d68e-4863-b8cb-9402e22c6bb2</string>
+		<key>title</key>
+		<string>Boleto valid case</string>
+		<key>language</key>
+		<string>pt</string>
+		<key>site</key>
+		<string>MLB</string>
+	</dict>
+</dict>
+</plist>

@@ -13,7 +13,7 @@ public class MainScreen: BaseScreen {
     private lazy var checkoutButton = button("Start Checkout")
     private lazy var addCardButton = button("Start Card Flow")
     private lazy var clearButton = button("Clear fields")
-    private lazy var configurationButton = button("Add Configutations")
+    private lazy var configurationButton = button("Add Configurations")
     private lazy var resetExtraConfigsButton = button("Reset extra configs")
     private lazy var publicKeyField = textField("Public Key")
     private lazy var preferenceIdField = textField("Pref ID")
@@ -21,81 +21,77 @@ public class MainScreen: BaseScreen {
     private lazy var cardIdField = textField("Card Id (Optional)")
 
     func tapCheckoutOptionForOneTap() -> OneTapScreen {
-        checkoutButton.tap()
+        tap(checkoutButton)
         let onetapScreen = OneTapScreen()
         return onetapScreen
     }
     
     func tapCheckoutOption() -> MainGroupScreen {
-        checkoutButton.tap()
+        tap(checkoutButton)
         let mainGroupScreen = MainGroupScreen()
         return mainGroupScreen
     }
 
     func tapOneTapOption() -> OneTapScreen {
-        checkoutButton.tap()
+        tap(checkoutButton)
         return OneTapScreen()
     }
 
     func tapCheckoutOptionOnlyCard() -> CardScreen {
-        checkoutButton.tap()
+        tap(checkoutButton)
         return CardScreen()
     }
 
     func tapCheckoutOptionWithCardSelected() -> SecurityCodeScreen {
-        checkoutButton.tap()
+        tap(checkoutButton)
         return SecurityCodeScreen()
     }
 
     func tapClearButton() -> MainScreen {
-        clearButton.tap()
+        tap(clearButton)
         return self
     }
 
     func fillPublicKey(_ text: String) -> MainScreen {
-        publicKeyField.tap()
+        tap(publicKeyField)
         publicKeyField.typeText(text)
         return self
     }
 
     func fillPreferenceId(_ text: String) -> MainScreen {
-        preferenceIdField.tap()
+        tap(preferenceIdField)
         preferenceIdField.typeText(text)
         return self
     }
 
     func fillAccessToken(_ text: String) -> MainScreen {
-        accessTokenField.tap()
+        tap(accessTokenField)
         accessTokenField.typeText(text)
         return self
     }
 
     func fillCardId(_ text: String) -> MainScreen {
-        cardIdField.tap()
+        tap(cardIdField)
         cardIdField.typeText(text)
         return self
     }
 
     func tapConfigurationsButton() -> ConfigurationScreen {
-        configurationButton.tap()
+        tap(configurationButton)
         return ConfigurationScreen()
     }
 
     func resetExtraConfigurations() -> MainScreen {
-        resetExtraConfigsButton.tap()
+        tap(resetExtraConfigsButton)
         return self
     }
     
     func tapAddCardButton() -> CardScreen{
-        addCardButton.tap()
+        tap(addCardButton)
         return CardScreen()
     }
 
     override open func waitForElements() {
-       // waitFor(element: checkoutButton)
-      //  waitFor(element: configurationButton)
-       // waitFor(element: publicKeyField)
-       // waitFor(element: preferenceIdField)
-       // waitFor(element: accessTokenField)
+        waitFor(element: checkoutButton)
     }
 }

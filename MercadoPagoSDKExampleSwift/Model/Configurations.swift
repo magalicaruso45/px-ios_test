@@ -9,198 +9,39 @@
 import UIKit
 import MercadoPagoSDKV4
 
-enum PreferenceContext : Int, CaseIterable {
+enum PreferenceContext : String, CaseIterable {
     case mla
     case mlb
     case mlm
-    case mlaOneCard
+    case escOneCard
     case discountAlwaysOn
     case discountSoldOut
     case discountByPaymentMethod
     case discountByIssuer
     case discountForAM
+    case mla50
+    case mla100
+    case manyCards
     case boleto
 
     func getLanguage() -> String {
-        switch self {
-        case .mlb:
-            return "pt"
-        case .boleto:
-            return "pt"
-        default:
-            return "es"
-        }
+        return self.getInitConfiguration().language
     }
 
     func getSite() -> String {
-        switch self {
-        case .mla:
-            return "MLA"
-        case .mlaOneCard:
-            return "MLA"
-        case .mlb:
-            return "MLB"
-        case .mlm:
-            return "MLM"
-        case .discountAlwaysOn:
-            return "MLA"
-        case .discountSoldOut:
-            return "MLA"
-        case .discountByPaymentMethod:
-            return "MLA"
-        case .discountByIssuer:
-            return "MLA"
-        case .discountForAM:
-            return "MLA"
-        case .boleto:
-            return "MLB"
-        }
+        return self.getInitConfiguration().site
     }
     
     func getContextDescription() -> String {
-        switch self {
-        case .mla:
-            return "MLA Default"
-        case .mlb:
-            return "MLB Default"
-        case .mlm:
-            return "MLM Default"
-        case .discountAlwaysOn:
-            return "Always ON discount"
-        case .discountSoldOut:
-            return "Sold out discount"
-        case .discountByPaymentMethod:
-            return "Discount by Payment method"
-        case .discountByIssuer:
-            return "Discount by issuer"
-        case .discountForAM:
-            return "Discount for Account Money"
-        case .boleto:
-            return "Boleto valid case"
-        case .mlaOneCard:
-            return "MLA One Saved Card"
-        }
+        return self.rawValue
     }
-    
+
     func getInitConfiguration() -> InitConfiguration {
-        switch self {
-        case .mla:
-            return mlaConfig()
-        case .mlb:
-            return mlbConfig()
-        case .mlm:
-            return mlmConfig()
-        case .discountAlwaysOn:
-            return discountAlwaysOnConfig()
-        case .discountSoldOut:
-            return discountSoldOutConfig()
-        case .discountByPaymentMethod:
-            return discountByPaymentMethodConfig()
-        case .discountByIssuer:
-            return discountByIssuerConfig()
-        case .discountForAM:
-            return discountForAMConfig()
-        case .boleto:
-            return boletoConfig()
-        case .mlaOneCard:
-            return mlaConfigOneCard()
-        }
-    }
-
-    func mlaConfigOneCard() -> InitConfiguration {
-        //collector: TETE1898701 / qatest4439
-        //payer: TESTPJ7DMB1A / qatest3404
-        return InitConfiguration(preferenceID: "410973637-e2c78e50-d8a6-43b9-8af2-59fd7fa6ac21",
-                                 publicKey: "TEST-47638845-b0ff-469d-9700-1779a2e26e44",
-                                 accessToken: "TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299",
-                                 payer: "TESTPJ7DMB1A",
-                                 collector: "TETE1898701")
-    }
-    
-    func mlaConfig() -> InitConfiguration {
-        //collector: TETE1898701 / qatest4439
-        //payer: TESTPJ7DMB1A / qatest3404
-        //$100 410973637-9929a5c5-ece9-47fe-8a5a-7610b8942f5d
-        //$50 410973637-99bea7ae-abaa-4265-8d3f-a02c3e3205ab
-        //access token with many cards: APP_USR-6519316523937252-070516-964fafa7e2c91a2c740155fcb5474280__LA_LD__-261748045
-        return InitConfiguration(preferenceID: "410973637-99bea7ae-abaa-4265-8d3f-a02c3e3205ab",
-                          publicKey: "TEST-47638845-b0ff-469d-9700-1779a2e26e44",
-                          accessToken: "APP_USR-6519316523937252-070516-964fafa7e2c91a2c740155fcb5474280__LA_LD__-261748045",
-                          payer: "TESTPJ7DMB1A",
-                          collector: "TETE1898701")
-        return InitConfiguration(preferenceID: "410973637-e2c78e50-d8a6-43b9-8af2-59fd7fa6ac21",
-                                 publicKey: "TEST-47638845-b0ff-469d-9700-1779a2e26e44",
-                                 accessToken: "TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299",
-                                 payer: "TESTPJ7DMB1A",
-                                 collector: "TETE1898701")
-    }
-
-    func mlbConfig() -> InitConfiguration {
-        //collector: TETE9478140 / qatest3151
-        //payer: TETE636968 / qatest9197
-        return InitConfiguration(preferenceID: "411544354-b3318624-9f4c-4d3c-839a-3e716c8a383f",
-                                 publicKey: "TEST-f8dbbe4e-e63e-48b1-b17f-5da486d61547",
-                                 accessToken: "TEST-7182822688046193-022812-1fc2bafbe7ce8a723231331c8b383aee-411549390",
-                                 payer: "TETE636968",
-                                 collector: "TETE9478140")
-    }
-
-    func mlmConfig() -> InitConfiguration {
-        //collector: TESTYWDWDD2F / qatest32
-        //payer: TETE5752063 / qatest7669
-        return InitConfiguration(preferenceID: "411553753-b7dce9dc-bf46-4545-91a5-bdb904b90cb8",
-                                 publicKey: "TEST-d79fd045-dc90-436e-8bd0-3aef25834ead",
-                                 accessToken: "TEST-1178809857150049-022812-1b795ddd0f07c85489b50d6f827b0600-411553753",
-                                 payer: "TETE5752063",
-                                 collector: "TESTYWDWDD2F")
-    }
-
-    func discountAlwaysOnConfig() -> InitConfiguration {
-        return InitConfiguration(preferenceID: "384414502-d095679d-f7d9-4653-ad71-4fb5feda3494",
-                                 publicKey: "APP_USR-ba2e6b8c-8b6d-4fc3-8a47-0ab241d0dba4",
-                                 accessToken: "TEST-1458038826212807-062020-ff9273c67bc567320eae1a07d1c2d5b5-246046416",
-                                 payer: "unknown",
-                                 collector: "unknown")
-    }
-
-    func discountSoldOutConfig() -> InitConfiguration {
-        return InitConfiguration(preferenceID: "380636546-1c7b7731-97eb-492b-a25b-2374e36f24c9",
-                                 publicKey: "APP_USR-d1c95375-5137-4eb7-868e-da3ca8067d79",
-                                 accessToken: "APP_USR-6094765363333165-122815-204eeee0a1ad662e7a977b2e7596a7c4-368735296",
-                                 payer: "unknown",
-                                 collector: "unknown")
-    }
-
-    func discountByPaymentMethodConfig() -> InitConfiguration {
-        return InitConfiguration(preferenceID: "388462750-e44082ad-6246-4b8d-a1c0-25cae994b223",
-                                 publicKey: "APP_USR-3300f176-307d-4600-9769-ad1d10d51a4a",
-                                 accessToken: "TEST-1458038826212807-062020-ff9273c67bc567320eae1a07d1c2d5b5-246046416",
-                                 payer: "unknown",
-                                 collector: "unknown")
-    }
-
-    func discountByIssuerConfig() -> InitConfiguration {
-        return InitConfiguration(preferenceID: "388466010-9b7f0eab-e1aa-4098-bb3c-c95244308274",
-                                 publicKey: "APP_USR-013db0be-9f4a-494f-acc8-44bd3f3e75a2",
-                                 accessToken: "TEST-1458038826212807-062020-ff9273c67bc567320eae1a07d1c2d5b5-246046416",
-                                 payer: "unknown",
-                                 collector: "unknown")
-    }
-
-    func discountForAMConfig() -> InitConfiguration {
-        return InitConfiguration(preferenceID: "413655952-2a137fcf-2fbc-4926-be95-4d8077341e2f",
-                                 publicKey: "APP_USR-6167c43b-8bfa-4eb5-b4b8-b66b15246f19",
-                                 accessToken: "TEST-5511028488113173-010314-a0d3138592c4e0281dda29f840baa4f5-384294267",
-                                 payer: "unknown",
-                                 collector: "unknown")
-    }
-
-    func boletoConfig() -> InitConfiguration {
-        return InitConfiguration(preferenceID: "245099733-8771f469-d68e-4863-b8cb-9402e22c6bb2",
-                                 publicKey: "APP_USR-f3f035a2-d343-4a6f-bd3b-fc3c3cb72416",
-                                 accessToken: "",
-                                 payer: "unknown",
-                                 collector: "unknown")
+        let path = Bundle.main.path(forResource: "Configurations", ofType: "plist")
+        let map = NSDictionary(contentsOfFile: path ?? "") as? [String: Any]
+        let currentData = map?[self.rawValue] as? [String:String]
+        let initConfig = InitConfiguration(map: currentData)
+        return initConfig
     }
 
 }
@@ -208,9 +49,34 @@ enum PreferenceContext : Int, CaseIterable {
 struct InitConfiguration {
     var preferenceID: String
     var publicKey: String
-    var accessToken: String
-    var payer: String
-    var collector: String
+    var accessToken: String?
+    var payer: String?
+    var collector: String?
+    var title: String = "Untitled case"
+    var site: String = "MLA"
+    var language: String = "es"
+
+    init(preferenceID: String, publicKey: String, accessToken: String? = nil, payer: String? = nil, collector: String? = nil, title: String? = nil, site: String? = nil, language: String? = nil) {
+        self.preferenceID = preferenceID
+        self.publicKey = publicKey
+        self.accessToken = accessToken
+        self.payer = payer
+        self.collector = collector
+        self.title = title ?? self.title
+        self.site = title ?? self.site
+        self.language = title ?? self.language
+    }
+
+    init(map: [String:String]?) {
+        self.preferenceID = map?["pref_id"] ?? "unknown pref id"
+        self.publicKey = map?["public_key"] ?? "unknown public key"
+        self.accessToken = map?["access_token"]
+        self.payer = map?["payer"]
+        self.collector = map?["collector"]
+        self.title = map?["title"] ?? self.title
+        self.site = map?["site"] ?? self.site
+        self.language = map?["language"] ?? self.language
+    }
 }
 
 struct Configurations {

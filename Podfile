@@ -9,7 +9,7 @@ target 'MercadoPagoSDKExampleSwift' do
 
   # //:git => 'git@github.com:mercadopago/px-ios.git', :branch => 'add_card_flow'
   # Pods for MercadoPagoSDKExampleSwift
-  pod 'MercadoPagoSDKV4/ESC', :git => 'git@github.com:mercadopago/px-ios.git', :branch => 'develop'
+  pod 'MercadoPagoSDKV4/ESC', :path => '../px-ios'
   pod 'MLESCManager'
   pod 'PureLayout'
 
@@ -22,7 +22,7 @@ target 'MercadoPagoSDKExampleSwift' do
   target 'MercadoPagoSDKExampleSwiftUITests' do
     inherit! :search_paths
     pod 'MLReachability'
-    pod 'MercadoPagoSDKV4/ESC', :git => 'git@github.com:mercadopago/px-ios.git', :branch => 'develop'
+  pod 'MercadoPagoSDKV4/ESC', :path => '../px-ios'
     pod 'MLESCManager'
     pod 'PureLayout'
     pod 'FXBlurView'

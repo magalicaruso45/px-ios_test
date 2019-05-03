@@ -24,9 +24,9 @@ public class PayerInfoScreen: BaseScreen {
     }
 
     func swapToCNPJ() -> PayerInfoScreen {
-        pickerWheel.tap()
+        tap(pickerWheel)
         let app = XCUIApplication()
-        app.textFields["Tipo"].tap()
+        tap(app.textFields["Tipo"])
         sleep(1)
         app.pickerWheels["CPF"].adjust(toPickerWheelValue: "CNPJ")
         return PayerInfoScreen()
@@ -35,31 +35,31 @@ public class PayerInfoScreen: BaseScreen {
 
     func completeNumberAndContinueToPayer(_ text: String) -> PayerInfoScreen {
         numberTextField.typeText(text)
-        continueButton.tap()
+        tap(continueButton)
         return PayerInfoScreen()
     }
 
     func completeNameAndContinueToPayer(_ text: String) -> PayerInfoScreen {
         nameTextField.typeText(text)
-        continueButton.tap()
+        tap(continueButton)
         return PayerInfoScreen()
     }
 
     func completeLastNameAndContinueToReview(_ text: String) -> ReviewScreen {
         lastNameTextField.typeText(text)
-        continueButton.tap()
+        tap(continueButton)
         return ReviewScreen()
     }
 
     func completeBusinessNameAndContinueToPayer(_ text: String) -> PayerInfoScreen {
         businessName.typeText(text)
-        continueButton.tap()
+        tap(continueButton)
         return PayerInfoScreen()
     }
 
     func completeBusinessNameAndContinueToReview(_ text: String) -> ReviewScreen {
         businessName.typeText(text)
-        continueButton.tap()
+        tap(continueButton)
         return ReviewScreen()
     }
 
