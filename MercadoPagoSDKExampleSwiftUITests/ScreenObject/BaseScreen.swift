@@ -56,7 +56,7 @@ public extension BaseScreen {
             XCTFail("Attempt to retrive \(element.self.description) failed after \(totalTimeElapsed) seconds and \(SWIPE_ATTEMPTS) swipes")
         }
 
-        if safe || (element.exists && element.isHittable) {
+        if (safe && result == .completed) || (element.exists && element.isHittable) {
             return true
         }
 
