@@ -164,6 +164,7 @@ public class ConfigurationScreen: BaseScreen {
     }
 
     func tapOtherPreferenceSegment(_ preferenceContext: PreferenceContext) -> ConfigurationScreen {
+        tap(mlaButton)
         tap(otherButton)
         sleep(1)
 

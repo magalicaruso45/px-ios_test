@@ -12,6 +12,7 @@ public class CongratsScreen: BaseScreen {
     
     
     private lazy var closeButton = button("result_close_button")
+    private lazy var otherPaymentMethodButton = button("Pagar con otro medio")
     
     override open func waitForElements() {
         let _ = waitForAnyCongrats()
@@ -23,6 +24,11 @@ public class CongratsScreen: BaseScreen {
         return self
     }
     
+    func tapOtherPaymentMethodButton() -> OneTapScreen {
+        tap(otherPaymentMethodButton)
+        return OneTapScreen()
+    }
+
     func tapCloseButton() -> MainScreen {
         tap(closeButton)
         return MainScreen()
