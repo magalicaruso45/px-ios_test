@@ -183,5 +183,114 @@
 		<key>site</key>
 		<string>MLB</string>
 	</dict>
+	<key>cardIdStandard</key>
+	<dict>
+		<key>public_key</key>
+		<string>APP_USR-04c0e3ac-d6f5-415a-8db1-5d555469d42e</string>
+		<key>pref_id</key>
+		<string>APP_USR-6519316523937252-070516-964fafa7e2c91a2c740155fcb5474280__LA_LD__-261748045</string>
+		<key>title</key>
+		<string>Card id standard case</string>
+	</dict>
+	<key>cardIdAlternative</key>
+	<dict>
+		<key>public_key</key>
+		<string>TEST-47638845-b0ff-469d-9700-1779a2e26e44</string>
+		<key>pref_id</key>
+		<string>APP_USR-6519316523937252-070516-964fafa7e2c91a2c740155fcb5474280__LA_LD__-261748045</string>
+		<key>title</key>
+		<string>Card id alternative case</string>
+	</dict>
+	<key>charges</key>
+	<dict>
+		<key>public_key</key>
+		<string>APP_USR-648a260d-6fd9-4ad7-9284-90f22262c18d</string>
+		<key>pref_id</key>
+		<string>243966003-d0be0be0-6fd8-4769-bf2f-7f2d979655f5</string>
+		<key>title</key>
+		<string>Charges preset</string>
+	</dict>
+	<key>pluginProcessor</key>
+	<dict>
+		<key>public_key</key>
+		<string>APP_USR-648a260d-6fd9-4ad7-9284-90f22262c18d</string>
+		<key>pref_id</key>
+		<string>243966003-d0be0be0-6fd8-4769-bf2f-7f2d979655f5</string>
+		<key>title</key>
+		<string>Plugin processor test</string>
+	</dict>
+	<key>addCardMLM</key>
+	<dict>
+		<key>access_token</key>
+		<string>TEST-1178809857150049-022812-1b795ddd0f07c85489b50d6f827b0600-411553753</string>
+		<key>title</key>
+		<string>Add Card MLM</string>
+		<key>site</key>
+		<string>MLM</string>
+	</dict>
+	<key>addCardMLB</key>
+	<dict>
+		<key>access_token</key>
+		<string>TEST-7182822688046193-022812-1fc2bafbe7ce8a723231331c8b383aee-411549390</string>
+		<key>title</key>
+		<string>Add Card MLB</string>
+		<key>site</key>
+		<string>MLB</string>
+		<key>language</key>
+		<string>pt</string>
+	</dict>
+	<key>addCardMLA</key>
+	<dict>
+		<key>access_token</key>
+		<string>TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299</string>
+		<key>title</key>
+		<string>Add Card MLA</string>
+		<key>site</key>
+		<string>MLA</string>
+	</dict>
+	<key>addCardNoDNI</key>
+	<dict>
+		<key>access_token</key>
+		<string>TEST-1178809857150049-022812-1b795ddd0f07c85489b50d6f827b0600-411553753</string>
+		<key>title</key>
+		<string>Add Card MLA Sin DNI</string>
+	</dict>
+	<key>oneTap</key>
+	<dict>
+		<key>public_key</key>
+		<string>TEST-4763b824-93d7-4ca2-a7f7-93539c3ee5bd</string>
+		<key>pref_id</key>
+		<string>242624092-2a26fccd-14dd-4456-9161-5f2c44532f1d</string>
+		<key>access_token</key>
+		<string>TEST-1458038826212807-062020-ff9273c67bc567320eae1a07d1c2d5b5-246046416</string>
+		<key>title</key>
+		<string>One Tap Tests</string>
+	</dict>
+	<key>template - 5</key>
+	<dict>
+		<key>public_key</key>
+		<string></string>
+		<key>pref_id</key>
+		<string></string>
+		<key>title</key>
+		<string></string>
+		<key>language</key>
+		<string></string>
+		<key>site</key>
+		<string></string>
+	</dict>
+	<key>template - 6</key>
+	<dict>
+		<key>public_key</key>
+		<string></string>
+		<key>pref_id</key>
+		<string></string>
+		<key>title</key>
+		<string></string>
+		<key>language</key>
+		<string></string>
+		<key>site</key>
+		<string></string>
+	</dict>
 </dict>
 </plist>
