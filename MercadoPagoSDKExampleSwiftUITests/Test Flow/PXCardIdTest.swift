@@ -21,14 +21,17 @@ class PXCardIdTest: XCTestCase {
         super.tearDown()
     }
 
-    func test_nueva_tarjeta_debito() {
+    func test_nueva_tarjeta_debito_approved() {
         let _ = MainScreen()
             .tapConfigurationsButton()
             .changePaymentProcessorSwitch()
+            .changeAccessTokenSwitch()
             .changeOpenPrefSwitch()
-            .tapOtherPreferenceSegment(.cardIdStandard)
+            .changeExclusionsSwitch()
+            .configurePaymentStatusDetail("accredited")
+            .tapOtherPreferenceSegment(.manyCards)
             .tapApplyConfigurationsButton()
-            .swipeUp(type: MainScreen())
+            .swipeDown(type: MainScreen())
             .fillCardId("debit_card")
             .tapCheckoutOptionOnlyCard()
             .completeNumberAndContinue("6042 0130 7660 8231")
@@ -44,10 +47,13 @@ class PXCardIdTest: XCTestCase {
         let _ = MainScreen()
             .tapConfigurationsButton()
             .changePaymentProcessorSwitch()
+            .changeAccessTokenSwitch()
             .changeOpenPrefSwitch()
-            .tapOtherPreferenceSegment(.cardIdAlternative)
+            .configurePaymentStatusDetail("cc_rejected_high_risk")
+            .changeExclusionsSwitch()
+            .tapOtherPreferenceSegment(.manyCards)
             .tapApplyConfigurationsButton()
-            .swipeUp(type: MainScreen())
+            .swipeDown(type: MainScreen())
             .fillCardId("debit_card")
             .tapCheckoutOptionOnlyCard()
             .completeNumberAndContinue("6042 0130 7660 8231")
@@ -63,14 +69,29 @@ class PXCardIdTest: XCTestCase {
         let _ = MainScreen()
             .tapConfigurationsButton()
             .changePaymentProcessorSwitch()
+            .changeAccessTokenSwitch()
             .changeOpenPrefSwitch()
-            .tapOtherPreferenceSegment(.cardIdStandard)
+            .changeExclusionsSwitch()
+            .tapOtherPreferenceSegment(.manyCards)
             .tapApplyConfigurationsButton()
-            .swipeUp(type: MainScreen())
+            .swipeDown(type: MainScreen())
             .fillCardId("8620515887")
             .tapCheckoutOptionWithCardSelected()
             .completeCVVAndContinueToReview("123")
             .tapPayButtonForApproved()
             .waitForAnyCongrats()
+    }
+
+    func test_no_card_id() {
+        let _ = MainScreen()
+            .tapConfigurationsButton()
+            .changePaymentProcessorSwitch()
+            .changeAccessTokenSwitch()
+            .changeOpenPrefSwitch()
+            .changeExclusionsSwitch()
+            .tapOtherPreferenceSegment(.manyCards)
+            .tapApplyConfigurationsButton()
+            .tapCheckoutOption()
+        //check that one saved debit card and only new debit card options are available
     }
 }

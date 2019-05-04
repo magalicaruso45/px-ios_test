@@ -183,24 +183,6 @@
 		<key>site</key>
 		<string>MLB</string>
 	</dict>
-	<key>cardIdStandard</key>
-	<dict>
-		<key>public_key</key>
-		<string>APP_USR-04c0e3ac-d6f5-415a-8db1-5d555469d42e</string>
-		<key>pref_id</key>
-		<string>APP_USR-6519316523937252-070516-964fafa7e2c91a2c740155fcb5474280__LA_LD__-261748045</string>
-		<key>title</key>
-		<string>Card id standard case</string>
-	</dict>
-	<key>cardIdAlternative</key>
-	<dict>
-		<key>public_key</key>
-		<string>TEST-47638845-b0ff-469d-9700-1779a2e26e44</string>
-		<key>pref_id</key>
-		<string>APP_USR-6519316523937252-070516-964fafa7e2c91a2c740155fcb5474280__LA_LD__-261748045</string>
-		<key>title</key>
-		<string>Card id alternative case</string>
-	</dict>
 	<key>charges</key>
 	<dict>
 		<key>public_key</key>
