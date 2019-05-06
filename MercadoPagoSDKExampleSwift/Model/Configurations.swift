@@ -23,6 +23,13 @@ enum PreferenceContext : String, CaseIterable {
     case mla100
     case manyCards
     case boleto
+    case oneTap
+    case charges
+    case pluginProcessor
+    case addCardMLA
+    case addCardMLB
+    case addCardMLM
+    case addCardNoDNI
 
     func getLanguage() -> String {
         return self.getInitConfiguration().language
@@ -93,6 +100,9 @@ struct Configurations {
     var advancedConfiguration: Bool
     var splitPayment: Bool
     var payerInfo: Bool
+    var exclusions: Bool
+    var maxInstallments: Bool
+    var defaultInstallments: Bool
     var localizedTexts: Bool
     var openPreference: Bool
     var escEnabled: Bool

@@ -24,9 +24,6 @@ class ConfigurationsViewController: UIViewController {
     @IBOutlet weak var openPrefSwitch: UISwitch!
     @IBOutlet weak var businessSegment: UISegmentedControl!
 
-    @IBOutlet weak var maxRedeemPerUserLabel: UILabel!
-    @IBOutlet weak var maxRedeemPerUserStepper: UIStepper!
-
     @IBOutlet weak var advancedConfigSwitch: UISwitch!
     @IBOutlet weak var oneTapSwitch: UISwitch!
     @IBOutlet weak var splitSwitch: UISwitch!
@@ -34,6 +31,9 @@ class ConfigurationsViewController: UIViewController {
     @IBOutlet weak var discountParamsSwitch: UISwitch!
 
     @IBOutlet weak var payerInfoSwitch: UISwitch!
+    @IBOutlet weak var exclusionsSwitch: UISwitch!
+    @IBOutlet weak var maxInstallmentsSwitch: UISwitch!
+    @IBOutlet weak var defaultInstallmentsSwitch: UISwitch!
     @IBOutlet weak var localizedTextsSwitch: UISwitch!
     @IBOutlet weak var addCardFlowSkipCongrats: UISwitch!
     @IBOutlet weak var countrySegment: UISegmentedControl!
@@ -45,14 +45,9 @@ class ConfigurationsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        maxRedeemPerUserStepper.accessibilityIdentifier = "max_redeem_per_user_stepper"
         countrySegment.accessibilityIdentifier = "country_segment"
         businessSegment.accessibilityIdentifier = "business_segment"
-        
-        let frame = CGRect(x: -maxRedeemPerUserStepper.frame.midX, y: maxRedeemPerUserStepper.frame.midY, width: 2, height: 2)
-        let view = UIView(frame: frame)
-        view.backgroundColor = .red
-        self.view.addSubview(view)
+
         self.businessSegment.isEnabled = false
         self.customizationSwitch.isEnabled = false
         self.validatePaymentPluginSwitches()
@@ -91,7 +86,6 @@ class ConfigurationsViewController: UIViewController {
         customizationSwitch.transform = newScale
         paymentPluginSwitch.transform = newScale
         businessSwitch.transform = newScale
-        maxRedeemPerUserStepper.transform = newScale
         accessTokenSwitch.transform = newScale
         viewControllerSwitch.transform = newScale
         payerInfoSwitch.transform = newScale
@@ -103,11 +97,11 @@ class ConfigurationsViewController: UIViewController {
         escSwitch.transform = newScale
         discountParamsSwitch.transform = newScale
         openPrefSwitch.transform = newScale
+        exclusionsSwitch.transform = newScale
+        maxInstallmentsSwitch.transform = newScale
+        defaultInstallmentsSwitch.transform = newScale
     }
 
-    @IBAction func stepperValueChanges(_ sender: Any) {
-        maxRedeemPerUserLabel.text = String(describing: Int(exactly: maxRedeemPerUserStepper.value))
-    }
     @IBAction func paymentPluginChanged(_ sender: Any) {
         self.validatePaymentPluginSwitches()
     }
@@ -246,13 +240,16 @@ class ConfigurationsViewController: UIViewController {
             paymentPlugin: paymentPluginSwitch.isOn,
             paymentPluginViewController: viewControllerSwitch.isOn,
             businessResult: businessSwitch.isOn,
-            maxRedeemPerUser: maxRedeemPerUserStepper.value,
+            maxRedeemPerUser: 0,
             skipCongrats: addCardFlowSkipCongrats.isOn,
             accessToken: accessTokenSwitch.isOn,
             oneTap: oneTapSwitch.isOn,
             advancedConfiguration: advancedConfigSwitch.isOn,
             splitPayment: splitSwitch.isOn,
             payerInfo: payerInfoSwitch.isOn,
+            exclusions: exclusionsSwitch.isOn,
+            maxInstallments: maxInstallmentsSwitch.isOn,
+            defaultInstallments: defaultInstallmentsSwitch.isOn,
             localizedTexts: localizedTextsSwitch.isOn,
             openPreference: openPrefSwitch.isOn,
             escEnabled: escSwitch.isOn,

@@ -15,6 +15,9 @@ public class ConfigurationScreen: BaseScreen {
     private lazy var paymentVCSwitch = switchElement("payment_vc_switch")
     private lazy var chargeSwitch = switchElement("charge_switch")
     private lazy var accessTokenSwitch = switchElement("access_token_switch")
+    private lazy var exclusionsSwitch = switchElement("exclusions_switch")
+    private lazy var maxInstallmentsSwitch = switchElement("max_installments_switch")
+    private lazy var defaultInstallmentsSwitch = switchElement("default_installments_switch")
     private lazy var businessSwitch = switchElement("business_switch")
     private lazy var fullCustomizationSwitch = switchElement("full_customization_switch")
     private lazy var addCardFlowSkipCongratsSwitch = switchElement("skip_congrats_switch")
@@ -110,6 +113,21 @@ public class ConfigurationScreen: BaseScreen {
     
     func changePayerInfoSwitch() -> ConfigurationScreen {
         tap(payerInfoSwitch)
+        return self
+    }
+
+    func changeMaxInstallmentsSwitch() -> ConfigurationScreen {
+        tap(maxInstallmentsSwitch)
+        return self
+    }
+
+    func changeDefaultInstallmentsSwitch() -> ConfigurationScreen {
+        tap(defaultInstallmentsSwitch)
+        return self
+    }
+
+    func changeExclusionsSwitch() -> ConfigurationScreen {
+        tap(exclusionsSwitch)
         return self
     }
 
