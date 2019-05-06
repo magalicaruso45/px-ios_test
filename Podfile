@@ -1,7 +1,6 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 source 'https://github.com/CocoaPods/Specs.git'
-source 'git@github.com:mercadolibre/mobile-ios_specs.git'
 
 target 'MercadoPagoSDKExampleSwift' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -9,21 +8,17 @@ target 'MercadoPagoSDKExampleSwift' do
 
   # //:git => 'git@github.com:mercadopago/px-ios.git', :branch => 'add_card_flow'
   # Pods for MercadoPagoSDKExampleSwift
-  pod 'MercadoPagoSDKV4/ESC', :git => 'git@github.com:mercadopago/px-ios.git', :branch => 'develop'
-  pod 'MLESCManager'
+  pod 'MercadoPagoSDKV4', :path => '../px-ios'
   pod 'PureLayout'
 
   target 'MercadoPagoSDKExampleSwiftTests' do
     inherit! :search_paths
-    pod 'MLReachability'
     # Pods for testing
   end
 
   target 'MercadoPagoSDKExampleSwiftUITests' do
     inherit! :search_paths
-    pod 'MLReachability'
-    pod 'MercadoPagoSDKV4/ESC', :git => 'git@github.com:mercadopago/px-ios.git', :branch => 'develop'
-    pod 'MLESCManager'
+    pod 'MercadoPagoSDKV4', :path => '../px-ios'
     pod 'PureLayout'
     pod 'FXBlurView'
     pod 'JRSwizzle'

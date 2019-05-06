@@ -10,9 +10,8 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '9.0'
   s.requires_arc = true
   s.source_files = ['MercadoPagoSDKExampleSwiftUITests/ScreenObject/*.swift','MercadoPagoSDKExampleSwiftUITests/ScreenObject/PXFlows/*.swift']
-  s.dependency 'MercadoPagoSDK', '4.0.0.beta.23'
+  s.dependency 'MercadoPagoSDK'
   s.dependency 'FXBlurView', '1.6.2'
-  s.dependency 'MLESCManager'
 
   s.swift_version = '4.0'
   s.frameworks = 'XCTest'
