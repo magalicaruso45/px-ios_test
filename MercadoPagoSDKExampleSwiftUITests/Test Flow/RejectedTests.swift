@@ -17,7 +17,7 @@ class RejectedTests: XCTestCase {
     }
 
     override func tearDown() {
-        sleep(500)
+        sleep(5)
         super.tearDown()
     }
 
@@ -166,6 +166,7 @@ class RejectedTests: XCTestCase {
             .tapCheckoutOptionForOneTap()
             .tapPayButtonForAnyCongrats()
             .waitForAnyCongrats()
+            .tapOtherPaymentMethodButton()
     }
 
     func test_disable_card_id() {
@@ -175,6 +176,8 @@ class RejectedTests: XCTestCase {
             .tapPayButtonForCVV()
             .completeCVVAndContinueToAnyCongrats("1234")
             .waitForAnyCongrats()
+            .tapOtherPaymentMethodButton()
+            .swipeCardLeft()
     }
 
     func execute_payment_error_flow(_ statusDetail: String, isMLA: Bool = true) {
@@ -193,7 +196,7 @@ class RejectedTests: XCTestCase {
             .changeAdvancedSwitch()
             .changeOneTapSwitch()
             .configurePaymentStatusDetail(statusDetail)
-            .tapPreferenceSegmentMLA()
+            .tapOtherPreferenceSegment(.manyCards)
             .tapApplyConfigurationsButton()
         return main
     }
