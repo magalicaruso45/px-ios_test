@@ -22,8 +22,11 @@ class AddCardTests: XCTestCase {
 
     func testAddVisaCard() {
         _ = MainScreen()
-            .tapClearButton()
-            .fillAccessToken("TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299")
+            .tapConfigurationsButton()
+            .changePaymentProcessorSwitch()
+            .changeAccessTokenSwitch()
+            .tapOtherPreferenceSegment(.addCardMLA)
+            .tapApplyConfigurationsButton()
             .tapAddCardButton()
             .completeNumberAndContinue("4111111111111111")
             .completeNameAndContinue("JUAN PEREZ")
@@ -34,8 +37,11 @@ class AddCardTests: XCTestCase {
 
     func testAddAmexCard() {
         _ = MainScreen()
-            .tapClearButton()
-            .fillAccessToken("TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299")
+            .tapConfigurationsButton()
+            .changePaymentProcessorSwitch()
+            .changeAccessTokenSwitch()
+            .tapOtherPreferenceSegment(.addCardMLA)
+            .tapApplyConfigurationsButton()
             .tapAddCardButton()
             .completeNumberAndContinue("371180303257522")
             .completeNameAndContinue("JUAN PEREZ")
@@ -46,8 +52,12 @@ class AddCardTests: XCTestCase {
 
     func testMasterDebitCard() {
         _ = MainScreen()
-            .tapClearButton()
-            .fillAccessToken("TEST-1178809857150049-022812-1b795ddd0f07c85489b50d6f827b0600-411553753")
+            .tapConfigurationsButton()
+            .changePaymentProcessorSwitch()
+            .changeSkipCongratsSwitch()
+            .changeAccessTokenSwitch()
+            .tapOtherPreferenceSegment(.addCardNoDNI)
+            .tapApplyConfigurationsButton()
             .tapAddCardButton()
             .completeNumberAndContinue("5579078521025680")
             .completeNameAndContinue("JUAN PEREZ")
@@ -55,11 +65,13 @@ class AddCardTests: XCTestCase {
             .completeCVVAndContinueToCongrats("123")
     }
 
-    func testAddAmexNoID() {
-        //AT de MLM
+    func testAddAmexNoIDMLM() {
         _ = MainScreen()
-            .tapClearButton()
-            .fillAccessToken("TEST-1178809857150049-022812-1b795ddd0f07c85489b50d6f827b0600-411553753")
+            .tapConfigurationsButton()
+            .changePaymentProcessorSwitch()
+            .changeAccessTokenSwitch()
+            .tapOtherPreferenceSegment(.addCardMLM)
+            .tapApplyConfigurationsButton()
             .tapAddCardButton()
             .completeNumberAndContinue("371180303257522")
             .completeNameAndContinue("JUAN PEREZ")
@@ -69,8 +81,11 @@ class AddCardTests: XCTestCase {
 
     func testAddHipercardMLB() {
         _ = MainScreen()
-            .tapClearButton()
-            .fillAccessToken("TEST-7182822688046193-022812-1fc2bafbe7ce8a723231331c8b383aee-411549390")
+            .tapConfigurationsButton()
+            .changePaymentProcessorSwitch()
+            .changeAccessTokenSwitch()
+            .tapOtherPreferenceSegment(.addCardMLB)
+            .tapApplyConfigurationsButton()
             .tapAddCardButton()
             .completeNumberAndContinue("6062826786276634")
             .completeNameAndContinue("JUAN PEREZ")
@@ -82,10 +97,11 @@ class AddCardTests: XCTestCase {
     func testAddCardSkippingCongrats() {
         _ = MainScreen()
             .tapConfigurationsButton()
+            .changePaymentProcessorSwitch()
             .changeSkipCongratsSwitch()
+            .changeAccessTokenSwitch()
+            .tapOtherPreferenceSegment(.addCardMLA)
             .tapApplyConfigurationsButton()
-            .tapClearButton()
-            .fillAccessToken("TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299")
             .tapAddCardButton()
             .completeNumberAndContinue("4111111111111111")
             .completeNameAndContinue("JUAN PEREZ")
