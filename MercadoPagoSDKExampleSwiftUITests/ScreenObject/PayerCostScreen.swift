@@ -32,27 +32,27 @@ public class PayerCostScreen: BaseScreen {
     }
     
     func tapFloatingRowToPayerCost() -> PayerCostScreen {
-        floatingRow.tap()
+        tap(floatingRow)
         return self
     }
 
     func tapFloatingRowToDiscountDetail() -> DiscountDetailModalScreen {
-        floatingRow.tap()
+        tap(floatingRow)
         return DiscountDetailModalScreen()
     }
 
     func tapRow(number: Int) {
         let payerCostCell = cellNumber(headerCellCount + number)
-        payerCostCell.tap()
+        tap(payerCostCell)
     }
 
     func tapBackButtonToIssuersScreen() -> IssuersScreen {
-        backButton.tap()
+        tap(backButton)
         return IssuersScreen()
     }
 
     func tapBackButtonToIdentificationScreen() -> IdentificationScreen {
-        backButton.tap()
+        tap(backButton)
         return IdentificationScreen()
     }
 }

@@ -24,7 +24,7 @@ public class CongratsScreen: BaseScreen {
     }
     
     func tapCloseButton() -> MainScreen {
-        closeButton.tap()
+        tap(closeButton)
         return MainScreen()
     }
 

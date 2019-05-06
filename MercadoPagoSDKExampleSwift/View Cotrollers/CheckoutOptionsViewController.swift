@@ -10,7 +10,19 @@ import UIKit
 import MercadoPagoSDKV4
 import PureLayout
 
-class CheckoutOptionsViewController: UIViewController, ConfigurationManager, AddCardFlowProtocol {
+class CheckoutOptionsViewController: UIViewController, ConfigurationManager, AddCardFlowProtocol, PXLifeCycleProtocol {
+    func cancelCheckout() -> (() -> Void)? {
+        return {
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+    }
+
+    func finishCheckout() -> ((PXResult?) -> Void)? {
+        return { _ in
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+    }
+
 
     var configurations: Configurations =
         Configurations(comisiones: false,
@@ -148,12 +160,12 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         PXLayout.setHeight(owner: clearFieldsButton, height: 48).isActive = true
         PXLayout.setWidth(owner: clearFieldsButton, width: 250).isActive = true
 
-        //Clear Fields Button
+        //Add configurations
         let additionalConfigButton: UIButton = {
             let button = UIButton()
             button.translatesAutoresizingMaskIntoConstraints = false
             button.backgroundColor = .blue
-            button.setTitle("Add Configutations", for: .normal)
+            button.setTitle("Add Configurations", for: .normal)
             button.layer.cornerRadius = 5
             button.setTitleColor(.white, for: .normal)
             button.add(for: .touchUpInside, {
@@ -217,7 +229,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         _ = PXLayout.pinLeft(view: containerView)
         _ = PXLayout.pinRight(view: containerView)
         _ = PXLayout.pinBottom(view: containerView)
-        PXLayout.setHeight(owner: containerView, height: 700).isActive = true
+        PXLayout.setHeight(owner: containerView, height: 900).isActive = true
         PXLayout.matchWidth(ofView: containerView, withPercentage: 100).isActive = true
         return containerView
     }
@@ -302,7 +314,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             builder.setAdvancedConfiguration(config: advancedConfig)
         }
         
-        MercadoPagoCheckout.init(builder:builder).start(navigationController: self.navigationController!)
+        MercadoPagoCheckout.init(builder:builder).start(navigationController: self.navigationController!, lifeCycleProtocol: self)
     }
 
     func startAddCardFlow(accessToken: String) {
@@ -377,6 +389,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         let site = configurations.preferenceContext.getSite()
         let checkoutPreference = PXCheckoutPreference(siteId: site, payerEmail: "sadsd@asd.com", items: [item])
 
+        checkoutPreference.setMaxInstallments(3)
         if setPayer {
             let type = PXIdentificationType(id: "CNPJ", name: "CNPJ", minLength: 1, maxLength: 1, type: "CNPJ")
             let payer = PXPayer(id: "", accessToken: "", identification: PXIdentification(identificationType: type, identificationNumber: "66493851238"), type: nil, entityType: nil, email: "sadsd@asd.com", firstName: "Pepe", lastName: "Hongo", legalName: "RAZAO")

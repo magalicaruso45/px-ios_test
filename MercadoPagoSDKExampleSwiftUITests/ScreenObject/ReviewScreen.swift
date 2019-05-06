@@ -20,41 +20,41 @@ public class ReviewScreen: BaseScreen {
     }
 
     func tapPayButtonForApproved() -> ApprovedScreen {
-        payButton.tap()
+        tap(payButton)
         return ApprovedScreen()
     }
 
     func tapPayButtonForRejected() -> RejectedScreen {
-        payButton.tap()
+        tap(payButton)
         return RejectedScreen()
     }
 
     func tapPayButtonForPending() -> PendingScreen {
-        payButton.tap()
+        tap(payButton)
         return PendingScreen()
     }
 
     func tapPayButtonForInstructions() -> InstructionsScreen {
-        payButton.tap()
+        tap(payButton)
         return InstructionsScreen()
     }
 
     func tapPayButtonForAnyCongrats() -> CongratsScreen {
         swipeUp()
-        payButton.tap()
+        tap(payButton)
         return CongratsScreen()
     }
 
     func tapPayButtonForPluginProcessorViewController() -> PluginViewControllerScreen {
         swipeUp()
-        payButton.tap()
+        tap(payButton)
         return PluginViewControllerScreen()
     }
 
     func tapChangePaymentMethod() -> MainGroupScreen {
         swipeUp()
         let button = XCUIApplication().scrollViews.otherElements.staticTexts["Cambiar medio de pago"].firstMatch
-        button.tap()
+        tap(button)
         return MainGroupScreen()
     }
 
@@ -65,12 +65,12 @@ public class ReviewScreen: BaseScreen {
     }
 
     func tapBackButtonToPayerCostScreen() -> PayerCostScreen {
-        backButton.tap()
+        tap(backButton)
         return PayerCostScreen()
     }
 
     func tapChangePayerInfo() -> PayerInfoScreen {
-        changePayerInfoButton.tap()
+        tap(changePayerInfoButton)
         return PayerInfoScreen()
     }
 

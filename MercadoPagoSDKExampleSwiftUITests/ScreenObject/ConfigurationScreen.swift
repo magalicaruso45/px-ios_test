@@ -35,191 +35,159 @@ public class ConfigurationScreen: BaseScreen {
     private lazy var maxRedeemPerUserStepper = stepper("max_redeem_per_user_stepper")
     private lazy var applyConfigsButton = button("apply_configs_button")
     private lazy var mlaButton = button("Argentina")
-    private lazy var mlaOneCardButton = button("Argentina One Card")
     private lazy var mlbButton = button("Brasil")
     private lazy var mlmButton = button("México")
     private lazy var statusDetailButton = button("status_detail_button")
-    private lazy var discountAlwaysOnButton = button("Always On")
-    private lazy var discountSoldoutButton = button("Soldout")
-    private lazy var discountByPaymentMethodButton = button("PM")
-    private lazy var discountByIssuerButton = button("Issuer")
-    private lazy var discountForAMButton = button("AM")
-    private lazy var boletoButton = button("Boleto")
+    private lazy var otherButton = button("Otro")
     private lazy var approvedButton = button("Approved")
     private lazy var pendingButton = button("Pending")
     private lazy var rejectedButton = button("Rejected")
 
     func configurePaymentStatusDetail(_ statusDetail: String) -> ConfigurationScreen {
-        statusDetailButton.tap()
+        tap(statusDetailButton)
         let app = XCUIApplication()
         let textfield = app.alerts["Status detail"].textFields.firstMatch
         textfield.typeText(statusDetail)
         let okButton = app.alerts["Status detail"].buttons["Ok"]
-        okButton.tap()
+        tap(okButton)
         return ConfigurationScreen()
     }
 
     func tapApplyConfigurationsButton() -> MainScreen {
-        applyConfigsButton.tap()
+        tap(applyConfigsButton)
         return MainScreen()
     }
     
     func changePaymentProcessorSwitch() -> ConfigurationScreen {
-        paymentProcessorSwitch.tap()
+        tap(paymentProcessorSwitch)
         return self
     }
 
     func changePaymentVCSwitchSwitch() -> ConfigurationScreen {
-        paymentVCSwitch.tap()
+        tap(paymentVCSwitch)
         return self
     }
 
     func changeChargeSwitch() -> ConfigurationScreen {
-        chargeSwitch.tap()
+        tap(chargeSwitch)
         return self
     }
 
     func changeAccessTokenSwitch() -> ConfigurationScreen {
-        accessTokenSwitch.tap()
+        tap(accessTokenSwitch)
         return self
     }
 
     func changeBusinessSwitch() -> ConfigurationScreen {
-        businessSwitch.tap()
+        tap(businessSwitch)
         return self
     }
     
     func changeFullCustomizationSwitch() -> ConfigurationScreen {
-        fullCustomizationSwitch.tap()
+        tap(fullCustomizationSwitch)
         return self
     }
     
     func changeSkipCongratsSwitch() -> ConfigurationScreen {
-        addCardFlowSkipCongratsSwitch.tap()
+        tap(addCardFlowSkipCongratsSwitch)
         return self
     }
 
     func changeAdvancedSwitch() -> ConfigurationScreen {
-        advancedSwitch.tap()
+        tap(advancedSwitch)
         return self
     }
 
     func changeOneTapSwitch() -> ConfigurationScreen {
-        oneTapSwitch.tap()
+        tap(oneTapSwitch)
         return self
     }
 
     func changeSplitSwitch() -> ConfigurationScreen {
-        splitSwitch.tap()
+        tap(splitSwitch)
         return self
     }
     
     func changePayerInfoSwitch() -> ConfigurationScreen {
-        payerInfoSwitch.tap()
+        tap(payerInfoSwitch)
         return self
     }
 
     func changeLocalizedTextsSwitch() -> ConfigurationScreen {
-        localizedSwitch.tap()
+        tap(localizedSwitch)
         return self
     }
     
     func changeESCSwitch() -> ConfigurationScreen {
-        escSwitch.tap()
+        tap(escSwitch)
         return self
     }
     
     func changeOpenPrefSwitch() -> ConfigurationScreen {
-        openPrefSwitch.tap()
+        tap(openPrefSwitch)
         return self
     }
     
     func changeDiscountParamsSwitch() -> ConfigurationScreen {
-        discountParamsSwitch.tap()
+        tap(discountParamsSwitch)
         return self
     }
     
     func tapBusinessSegmentApproved() -> ConfigurationScreen {
-        approvedButton.tap()
+        tap(approvedButton)
         return self
     }
     
     func tapBusinessSegmentPending() -> ConfigurationScreen {
-        pendingButton.tap()
+        tap(pendingButton)
         return self
     }
     
     func tapBusinessSegmentRejected() -> ConfigurationScreen {
-        rejectedButton.tap()
+        tap(rejectedButton)
         return self
     }
     
     func tapPreferenceSegmentMLA() -> ConfigurationScreen {
-        mlaButton.tap()
+        tap(mlaButton)
         return self
     }
 
-    func tapPreferenceSegmentMLAOneCard() -> ConfigurationScreen {
-        mlaOneCardButton.tap()
-        return self
-    }
-    
     func tapPreferenceSegmentMLB() -> ConfigurationScreen {
-        mlbButton.tap()
+        tap(mlbButton)
         return self
     }
     
     func tapPreferenceSegmentMLM() -> ConfigurationScreen {
-        mlmButton.tap()
+        tap(mlmButton)
         return self
     }
-    
-    func tapPreferenceSegmentDiscountAlwaysOn() -> ConfigurationScreen {
-        discountAlwaysOnButton.tap()
-        return self
-    }
-    
-    func tapPreferenceSegmentDiscountSoldout() -> ConfigurationScreen {
-        discountSoldoutButton.tap()
-        return self
-    }
-    
-    func tapPreferenceSegmentDiscountByPaymentMethod() -> ConfigurationScreen {
-        discountByPaymentMethodButton.tap()
-        return self
-    }
-    
-    
-    func tapPreferenceSegmentDiscountByIssuer() -> ConfigurationScreen {
-        discountByIssuerButton.tap()
-        return self
-    }
-    
-    func tapPreferenceSegmentDiscountForAM() -> ConfigurationScreen {
-        discountForAMButton.tap()
-        return self
-    }
-    
-    func tapPreferenceSegmentBoleto() -> ConfigurationScreen {
-        boletoButton.tap()
+
+    func tapOtherPreferenceSegment(_ preferenceContext: PreferenceContext) -> ConfigurationScreen {
+        tap(otherButton)
+        sleep(1)
+
+        let identifier = preferenceContext.getContextDescription()
+        let item = button(identifier)
+        tap(item)
         return self
     }
     
     func incrementMaxRedeemPerUserStepperBy(_ int: Int) -> ConfigurationScreen {
         for _ in 1...int {
-            maxRedeemPerUserStepper.buttons["Increment"].tap()
+            tap(maxRedeemPerUserStepper.buttons["Increment"])
         }
         return self
     }
 
     func decrementMaxRedeemPerUserStepperBy(_ int: Int) -> ConfigurationScreen {
         for _ in 1...int {
-            maxRedeemPerUserStepper.buttons["Decrement"].tap()
+            tap(maxRedeemPerUserStepper.buttons["Decrement"])
         }
         return self
     }
 
     override open func waitForElements() {
-        waitFor(element: paymentProcessorSwitch)
+        waitFor(element: accessTokenSwitch)
     }
 }

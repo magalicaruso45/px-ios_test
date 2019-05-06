@@ -31,6 +31,8 @@
 		4BE78D3C20D818CA00F23CA5 /* PXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE78D3B20D818CA00F23CA5 /* PXUITests.swift */; };
 		4FF591D02AE44F7AD4580619 /* Pods_MercadoPagoSDKExampleSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3398598A1250B7854C662F26 /* Pods_MercadoPagoSDKExampleSwift.framework */; };
 		637C0209224A9A7C007E5A1D /* OneTapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637C0208224A9A7C007E5A1D /* OneTapTests.swift */; };
+		63B0F15D2279DED400F569C4 /* Configurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63B0F15C2279DED400F569C4 /* Configurations.plist */; };
+		63B0F15F2279E11E00F569C4 /* XCUIElement+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B0F15E2279E11E00F569C4 /* XCUIElement+Actions.swift */; };
 		63DC2BCE223B5CB100BFD1D0 /* NewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DC2BCD223B5CB100BFD1D0 /* NewTests.swift */; };
 		63DC2BD0224673B400BFD1D0 /* RejectedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DC2BCF224673B400BFD1D0 /* RejectedTests.swift */; };
 		63FEA3FF22393C3A00C08DEF /* DiscountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FEA3FE22393C3A00C08DEF /* DiscountTests.swift */; };
@@ -95,6 +97,8 @@
 		4B90FF212264B46D00623519 /* ESCTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESCTests.swift; sourceTree = "<group>"; };
 		4BE78D3B20D818CA00F23CA5 /* PXUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXUITests.swift; sourceTree = "<group>"; };
 		637C0208224A9A7C007E5A1D /* OneTapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTapTests.swift; sourceTree = "<group>"; };
+		63B0F15C2279DED400F569C4 /* Configurations.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Configurations.plist; sourceTree = "<group>"; };
+		63B0F15E2279E11E00F569C4 /* XCUIElement+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Actions.swift"; sourceTree = "<group>"; };
 		63DC2BCD223B5CB100BFD1D0 /* NewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTests.swift; sourceTree = "<group>"; };
 		63DC2BCF224673B400BFD1D0 /* RejectedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RejectedTests.swift; sourceTree = "<group>"; };
 		63FEA3FE22393C3A00C08DEF /* DiscountTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountTests.swift; sourceTree = "<group>"; };
@@ -283,6 +287,7 @@
 				FCCA0D8D2088DE42009F77D4 /* Assets.xcassets */,
 				FCCA0D8F2088DE42009F77D4 /* LaunchScreen.storyboard */,
 				FCCA0D922088DE42009F77D4 /* Info.plist */,
+				63B0F15C2279DED400F569C4 /* Configurations.plist */,
 				157E0A1220AC9D3B00049905 /* PXFile.swift */,
 			);
 			path = MercadoPagoSDKExampleSwift;
@@ -303,6 +308,7 @@
 				15225CA020F68458002CF168 /* Test Flow */,
 				FC89F7452088F4A90093B001 /* ScreenObject */,
 				FCCA0DA62088DE42009F77D4 /* MercadoPagoSDKExampleSwiftUITests.swift */,
+				63B0F15E2279E11E00F569C4 /* XCUIElement+Actions.swift */,
 				FCCA0DA82088DE42009F77D4 /* Info.plist */,
 			);
 			path = MercadoPagoSDKExampleSwiftUITests;
@@ -419,6 +425,7 @@
 			files = (
 				FCCA0D912088DE42009F77D4 /* LaunchScreen.storyboard in Resources */,
 				FCCA0D8E2088DE42009F77D4 /* Assets.xcassets in Resources */,
+				63B0F15D2279DED400F569C4 /* Configurations.plist in Resources */,
 				15225C9020F66B9A002CF168 /* ConfigurationsViewController.xib in Resources */,
 				152A6827215BD922009F9B94 /* ExamplePaymentProcessorViewController.xib in Resources */,
 			);
@@ -604,6 +611,7 @@
 				0604D837211FE7F900D5C5D9 /* PXCardIdTest.swift in Sources */,
 				FC157D4A209A2386009A2C3A /* IssuersScreen.swift in Sources */,
 				FC7D2F5F20F649A3001C97CF /* DiscountDetailModalScreen.swift in Sources */,
+				63B0F15F2279E11E00F569C4 /* XCUIElement+Actions.swift in Sources */,
 				FC89F7572088F5540093B001 /* IdentificationScreen.swift in Sources */,
 				4BE78D3C20D818CA00F23CA5 /* PXUITests.swift in Sources */,
 				06549719217E50CB00D88CE3 /* PXBoletoTest.swift in Sources */,

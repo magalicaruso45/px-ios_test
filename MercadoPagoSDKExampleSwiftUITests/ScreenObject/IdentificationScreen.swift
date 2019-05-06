@@ -20,36 +20,36 @@ public class IdentificationScreen: BaseScreen {
 
     func completeNumberAndContinueToPayerCost(_ text: String) -> PayerCostScreen {
         numberTextField.typeText(text)
-        continueButton.tap()
+        tap(continueButton)
         return PayerCostScreen()
     }
 
     func completeNumberAndContinueToIssuers(_ text: String) -> IssuersScreen {
         numberTextField.typeText(text)
-        continueButton.tap()
+        tap(continueButton)
         return IssuersScreen()
     }
 
     func completeNumberAndContinueToReview(_ text: String) -> ReviewScreen {
         numberTextField.typeText(text)
-        continueButton.tap()
+        tap(continueButton)
         return ReviewScreen()
     }
 
     func tapBackButtonToCardScreen() -> CardScreen {
-        backButton.tap()
+        tap(backButton)
         return CardScreen()
     }
     
     func completeNumberAndContinueToCongrats(_ text: String) -> CongratsScreen {
         numberTextField.typeText(text)
-        continueButton.tap()
+        tap(continueButton)
         return CongratsScreen()
     }
     
     func completeNumberAndFinish(_ text: String) {
         numberTextField.typeText(text)
-        continueButton.tap()
+        tap(continueButton)
     }
     
 }

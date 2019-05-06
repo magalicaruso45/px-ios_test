@@ -23,7 +23,7 @@ public class CardScreen: BaseScreen {
     
     func completeNumberAndContinue(_ text: String) -> CardScreen{
         cardFormTextField.typeText(text)
-        continueToolbarButton.tap()
+        tap(continueToolbarButton)
         return self
     }
     
@@ -35,38 +35,38 @@ public class CardScreen: BaseScreen {
 
     func tapAvailableCardsButton() -> CardScreen{
         waitFor(element: availableCardsButton)
-         availableCardsButton.tap()
+         tap(availableCardsButton)
         return self
     }
 
     func completeNameAndContinue(_ text: String) -> CardScreen{
         cardFormTextField.typeText(text)
-        continueToolbarButton.tap()
+        tap(continueToolbarButton)
         return self
     }
 
     func completeExpirationDateAndContinue(_ text: String) -> CardScreen{
         cardFormTextField.typeText(text)
-        continueToolbarButton.tap()
+        tap(continueToolbarButton)
         return self
     }
     
     func completeCVVAndContinue(_ text: String) -> IdentificationScreen{
         waitFor(element: cardFormTextField)
         cardFormTextField.typeText(text)
-        continueToolbarButton.tap()
+        tap(continueToolbarButton)
         return IdentificationScreen()
     }
     
     func completeCVVAndContinueToCongrats(_ text: String) -> CongratsScreen{
         waitFor(element: cardFormTextField)
         cardFormTextField.typeText(text)
-        continueToolbarButton.tap()
+        tap(continueToolbarButton)
         return CongratsScreen()
     }
 
     func pressPreviousButton() -> CardScreen {
-        backToolbarButton.tap()
+        tap(backToolbarButton)
         return self
     }
 

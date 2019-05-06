@@ -14,7 +14,9 @@ public protocol BaseScreenProtocol {
 }
 
 open class BaseScreen : BaseScreenProtocol {
-    let TIME_OUT : Double = 10 // Seconds
+    let PREVENTIVE_WAIT: Double = 3
+    let SWIPE_INTERVAL : Double = 1
+    let SWIPE_ATTEMPTS : Int = 3
     public init() {
         waitForElements()
     }
@@ -36,23 +38,48 @@ open class BaseScreen : BaseScreenProtocol {
 // MARK: Loading screen helpers
 public extension BaseScreen {
     @discardableResult
-    func waitForExpectation(expectation:XCTestExpectation,
+    func waitForElement(element:XCUIElement,
                             time: Double,
-                            safe: Bool = false) -> Bool {
+                            safe: Bool = false,
+                            count: Int = 0,
+                            hittable: Bool = false) -> Bool {
+        let expect = expectations(for: element, hittable: hittable)
+        let waitingTime = count == 0 ? time : SWIPE_INTERVAL
         let result: XCTWaiter.Result =
-            XCTWaiter().wait(for: [expectation],
-                             timeout: time)
-        if !safe && result != .completed {
-            XCTFail("Condition was not satisfied during \(time) seconds")
+            XCTWaiter().wait(for: expect,
+                             timeout: waitingTime)
+
+        print("attempt to get item")
+        if count >= SWIPE_ATTEMPTS {
+            print("final error")
+            let totalTimeElapsed = time + Double(SWIPE_ATTEMPTS) * SWIPE_INTERVAL
+            XCTFail("Attempt to retrive \(element.self.description) failed after \(totalTimeElapsed) seconds and \(SWIPE_ATTEMPTS) swipes")
         }
 
-        return result == .completed
+        if safe || (element.exists && element.isHittable) {
+            return true
+        }
+
+        //try again
+        self.swipeUp()
+        return waitForElement(element: element, time: time, safe: safe, count: count + 1, hittable: hittable)
     }
 
     @discardableResult
-    func waitFor(element: XCUIElement, time: Double = 10, terminate: Bool = true) -> Bool {
+    func waitFor(element: XCUIElement, time: Double? = nil, terminate: Bool = true) -> Bool {
+        return waitForElement(element: element, time: time ?? PREVENTIVE_WAIT, safe: !terminate)
+    }
+
+    private func expectations(for element: XCUIElement, hittable: Bool) -> [XCTestExpectation] {
         let exists = NSPredicate(format: "exists = 1")
-        return waitForExpectation(expectation: XCTNSPredicateExpectation(predicate: exists, object: element), time: time, safe: !terminate)
+        let isHittable = NSPredicate(format: "hittable = true")
+        let predicate1 = XCTNSPredicateExpectation(predicate: exists, object: element)
+        let predicate2 = XCTNSPredicateExpectation(predicate: isHittable, object: element)
+        var expectations = [predicate1]
+        if hittable {
+            expectations.append(predicate2)
+        }
+        return expectations
     }
 }
 
@@ -110,16 +137,39 @@ public extension BaseScreen {
 
 // MARK: UI Controls
 public extension BaseScreen {
-    func swipeUp() {
-        let scrollViewsQuery = XCUIApplication().scrollViews
-        let elementQuery = scrollViewsQuery.otherElements.firstMatch
-        elementQuery.swipeUp()
+
+    func tap(_ element: XCUIElement) {
+        if  !element.exists || !element.isHittable  {
+            waitForElement(element: element, time: 0, safe: false, hittable: false)
+        }
+        element.tap()
     }
 
-    func swipeDown() {
-        let scrollViewsQuery = XCUIApplication().scrollViews
-        let elementQuery = scrollViewsQuery.otherElements.firstMatch
-        elementQuery.swipeDown()
+    @discardableResult
+    func swipeUp<T: BaseScreen>(type: T? = nil) -> T {
+        print("swiping up")
+        return swipe(type: type, direction: .up)
+    }
+
+    @discardableResult
+    func swipeDown<T: BaseScreen>(type: T? = nil) -> T {
+        print("swiping down")
+        return swipe(type: type, direction: .down)
+    }
+
+    @discardableResult
+    func swipe<T: BaseScreen>(type: T? = nil, direction : SwipeDirection) -> T {
+        let app = XCUIApplication()
+        let allElements = app.descendants(matching: .other)
+        var allHittableElements = [XCUIElement]()
+        for i in 0..<allElements.count {
+            let element = allElements.element(boundBy: i)
+            if element.isHittable {
+                allHittableElements.append(element)
+            }
+        }
+        allHittableElements.first?.gentleSwipe(direction)
+        return self as! T
     }
     
     func swipeRight() {
