@@ -38,6 +38,9 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
                        advancedConfiguration: false,
                        splitPayment: false,
                        payerInfo: false,
+                       exclusions: false,
+                       maxInstallments: false,
+                       defaultInstallments: false,
                        localizedTexts: false,
                        openPreference: false,
                        escEnabled: false,
@@ -387,17 +390,27 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         let item = PXItem(title: "id", quantity: 1, unitPrice: 123)
 
         let site = configurations.preferenceContext.getSite()
-        let checkoutPreference = PXCheckoutPreference(siteId: site, payerEmail: "sadsd@asd.com", items: [item])
+        let checkoutPreference = PXCheckoutPreference(siteId: site, payerEmail: "patito@patito.com", items: [item])
 
-        checkoutPreference.setMaxInstallments(3)
+        if configurations.exclusions {
+            checkoutPreference.setExcludedPaymentMethods(["visa"])
+            checkoutPreference.setExcludedPaymentTypes(["atm", "credit_card"])
+        }
+
+        if configurations.maxInstallments {
+            checkoutPreference.setMaxInstallments(3)
+        }
+
+        if configurations.defaultInstallments {
+            checkoutPreference.setMaxInstallments(1)
+        }
+
         if setPayer {
             let type = PXIdentificationType(id: "CNPJ", name: "CNPJ", minLength: 1, maxLength: 1, type: "CNPJ")
             let payer = PXPayer(id: "", accessToken: "", identification: PXIdentification(identificationType: type, identificationNumber: "66493851238"), type: nil, entityType: nil, email: "sadsd@asd.com", firstName: "Pepe", lastName: "Hongo", legalName: "RAZAO")
             checkoutPreference.setPayer(payer: payer)
         }
         if cardId != nil && cardId != "" {
-            checkoutPreference.setExcludedPaymentMethods(["visa"])
-            checkoutPreference.setExcludedPaymentTypes(["debit_card", "atm"])
             checkoutPreference.setCardId(cardId: cardId!)
             return checkoutPreference
         }
@@ -487,6 +500,8 @@ class PaymentPlugin: NSObject, PXPaymentProcessor {
                 status = "in_process"
             case "pending_contingency":
                 status = "in_process"
+            case "accredited":
+                status = "approved"
             case "broken":
                 status = "broken"
             default:
@@ -549,6 +564,8 @@ class PaymentPluginViewController: NSObject, PXPaymentProcessor {
                 status = "in_process"
             case "broken":
                 status = "broken"
+            case "accredited":
+                status = "approved"
             default:
                 status = "rejected"
             }

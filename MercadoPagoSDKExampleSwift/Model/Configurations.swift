@@ -24,8 +24,6 @@ enum PreferenceContext : String, CaseIterable {
     case manyCards
     case boleto
     case oneTap
-    case cardIdStandard
-    case cardIdAlternative
     case charges
     case pluginProcessor
     case addCardMLA
@@ -102,6 +100,9 @@ struct Configurations {
     var advancedConfiguration: Bool
     var splitPayment: Bool
     var payerInfo: Bool
+    var exclusions: Bool
+    var maxInstallments: Bool
+    var defaultInstallments: Bool
     var localizedTexts: Bool
     var openPreference: Bool
     var escEnabled: Bool
