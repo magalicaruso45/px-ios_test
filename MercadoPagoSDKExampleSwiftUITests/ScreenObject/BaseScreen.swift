@@ -66,6 +66,13 @@ public extension BaseScreen {
     }
 
     @discardableResult
+    func checkFor(element: XCUIElement) -> Bool {
+        let expect = expectations(for: element, hittable: false)
+        let result: XCTWaiter.Result = XCTWaiter().wait(for: expect,timeout: PREVENTIVE_WAIT)
+        return result == .completed
+    }
+
+    @discardableResult
     func waitFor(element: XCUIElement, time: Double? = nil, terminate: Bool = true) -> Bool {
         return waitForElement(element: element, time: time ?? PREVENTIVE_WAIT, safe: !terminate)
     }

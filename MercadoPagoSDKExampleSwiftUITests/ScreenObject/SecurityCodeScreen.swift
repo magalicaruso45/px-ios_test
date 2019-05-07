@@ -35,7 +35,7 @@ public class SecurityCodeScreen: BaseScreen {
     }
 
     func hasCVV() -> Bool{
-        return waitFor(element: securityCodeTextField, time: 3, terminate: false)
+        return checkFor(element: securityCodeTextField)
     }
 
     
