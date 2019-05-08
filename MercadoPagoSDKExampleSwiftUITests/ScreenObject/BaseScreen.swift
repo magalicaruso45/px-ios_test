@@ -56,13 +56,20 @@ public extension BaseScreen {
             XCTFail("Attempt to retrive \(element.self.description) failed after \(totalTimeElapsed) seconds and \(SWIPE_ATTEMPTS) swipes")
         }
 
-        if safe || (element.exists && element.isHittable) {
+        if (safe && result == .completed) || (element.exists && element.isHittable) {
             return true
         }
 
         //try again
         self.swipeUp()
         return waitForElement(element: element, time: time, safe: safe, count: count + 1, hittable: hittable)
+    }
+
+    @discardableResult
+    func checkFor(element: XCUIElement) -> Bool {
+        let expect = expectations(for: element, hittable: false)
+        let result: XCTWaiter.Result = XCTWaiter().wait(for: expect,timeout: PREVENTIVE_WAIT)
+        return result == .completed
     }
 
     @discardableResult

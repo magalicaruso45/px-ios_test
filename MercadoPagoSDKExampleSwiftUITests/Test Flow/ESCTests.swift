@@ -22,8 +22,8 @@ class ESCTests: XCTestCase {
     }
 
     enum Cards: Int {
-        case cabal = 2
-        case visa = 3
+        case cabal = 6
+        case visa = 5
         case amex = 1
     }
 
@@ -110,9 +110,9 @@ class ESCTests: XCTestCase {
         if oneTap {
             configurations = configurations.changeOneTapSwitch()
         }
-        if changeCredentials {
-            configurations = configurations.tapOtherPreferenceSegment(.escOneCard)
-        }
+        let preset : PreferenceContext = changeCredentials ? .escOneCard : .manyCards
+        configurations = configurations.tapOtherPreferenceSegment(preset)
+
         return configurations.tapApplyConfigurationsButton()
     }
 
