@@ -31,6 +31,17 @@ class ESCTests: XCTestCase {
         case approved
         case rejected
     }
+
+    func test_infinite_cycle() { //perform infinite cyclic flow
+
+        var configStep = configureFlow(screen: MainScreen(), status: .approved, paymentScreenProcessor: false, oneTap: true)
+        let secondCycle = escOneTap(screen: configStep, escStep: nil, paymentScreenProcessor: false)
+        for i in 0..<100 {
+            let repeatingCycle = escOneTap(screen:secondCycle, escStep: nil, paymentScreenProcessor: false)
+        }
+        let a = 1
+
+    }
     
     func test_esc_debit() { //perform cyclic flow
         var configStep = configureFlow(screen: MainScreen(), status: .rejected, paymentScreenProcessor: false, oneTap: false)
