@@ -21,64 +21,46 @@ class NewTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_business_pending() { //custom pending screen
+    func test_one_tap_only_charges() {
         let _ = MainScreen()
             .tapClearButton()
             .tapConfigurationsButton()
             .changePaymentProcessorSwitch()
-            .configurePaymentStatusDetail("cc_rejected_bad_filled")
+            .changeAccessTokenSwitch()
+            .changeChargeSwitch()
+            .changeAdvancedSwitch()
+            .changeOneTapSwitch()
+            .tapOtherPreferenceSegment(.mla50)
             .tapApplyConfigurationsButton()
             .tapCheckoutOption()
-            .tapCardOption()
-            .tapCreditCardOption()
-            .completeNumberAndContinue("5323 7937 3550 6106")
-            .completeNameAndContinue("APRO")
-            .completeExpirationDateAndContinue("1225")
-            .completeCVVAndContinue("123")
-            .completeNumberAndContinueToIssuers("30666777")
-            .selectIssuerOptionToPayerCostScreenAtRow(1)
-            .selectPayerCostOptionAtRow(2)
-            .tapPayButtonForAnyCongrats()
-            .waitForAnyCongrats()
     }
-    
-    func test_esc() { //perform cyclic flow
-        let configStep = configureFlow(screen: MainScreen())
-        let firstCycle = cycleTest(screen: configStep)
-        let secondCycle = cycleTest(screen:firstCycle)
-        let _ = cycleTest(screen:secondCycle)
-    }
-    
-    func configureFlow(screen: MainScreen) -> MainScreen {
-        let mainScreen = screen
+
+    func test_one_tap_charges_and_discount() {
+        let _ = MainScreen()
             .tapClearButton()
             .tapConfigurationsButton()
             .changePaymentProcessorSwitch()
-            .changeBusinessSwitch()
-            .tapBusinessSegmentApproved()
+            .changeAccessTokenSwitch()
+            .changeChargeSwitch()
             .changeAdvancedSwitch()
-            .changeESCSwitch()
+            .changeOneTapSwitch()
+            .tapOtherPreferenceSegment(.discountAlwaysOn)
             .tapApplyConfigurationsButton()
-        return mainScreen
-    }
-    
-    func cycleTest(screen: MainScreen) -> MainScreen {
-        let finalScreen = screen
             .tapCheckoutOption()
-            .tapCardOption()
-            .tapCreditCardOption()
-            .completeNumberAndContinue("5323 7937 3550 6106")
-            .completeNameAndContinue("APRO")
-            .completeExpirationDateAndContinue("1225")
-            .completeCVVAndContinue("123")
-            .completeNumberAndContinueToIssuers("30666777")
-            .selectIssuerOptionToPayerCostScreenAtRow(1)
-            .selectPayerCostOptionAtRow(2)
-            .tapPayButtonForAnyCongrats()
-            .waitForAnyCongrats()
-            .tapCloseButton()
-        return finalScreen
     }
 
+    func test_one_tap_charges_and_soldout() {
+        let _ = MainScreen()
+            .tapClearButton()
+            .tapConfigurationsButton()
+            .changePaymentProcessorSwitch()
+            .changeAccessTokenSwitch()
+            .changeChargeSwitch()
+            .changeAdvancedSwitch()
+            .changeOneTapSwitch()
+            .tapOtherPreferenceSegment(.discountSoldOut)
+            .tapApplyConfigurationsButton()
+            .tapCheckoutOption()
+    }
 }
  
