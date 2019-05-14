@@ -42,4 +42,46 @@ class ChargesTest: XCTestCase {
             .tapPayButtonForAnyCongrats()
             .waitForAnyCongrats()
     }
+
+    func test_one_tap_only_charges() {
+        let _ = MainScreen()
+            .tapClearButton()
+            .tapConfigurationsButton()
+            .changePaymentProcessorSwitch()
+            .changeAccessTokenSwitch()
+            .changeChargeSwitch()
+            .changeAdvancedSwitch()
+            .changeOneTapSwitch()
+            .tapOtherPreferenceSegment(.mla50)
+            .tapApplyConfigurationsButton()
+            .tapCheckoutOption()
+    }
+
+    func test_one_tap_charges_and_discount() {
+        let _ = MainScreen()
+            .tapClearButton()
+            .tapConfigurationsButton()
+            .changePaymentProcessorSwitch()
+            .changeAccessTokenSwitch()
+            .changeChargeSwitch()
+            .changeAdvancedSwitch()
+            .changeOneTapSwitch()
+            .tapOtherPreferenceSegment(.discountAlwaysOn)
+            .tapApplyConfigurationsButton()
+            .tapCheckoutOption()
+    }
+
+    func test_one_tap_charges_and_soldout() {
+        let _ = MainScreen()
+            .tapClearButton()
+            .tapConfigurationsButton()
+            .changePaymentProcessorSwitch()
+            .changeAccessTokenSwitch()
+            .changeChargeSwitch()
+            .changeAdvancedSwitch()
+            .changeOneTapSwitch()
+            .tapOtherPreferenceSegment(.discountSoldOut)
+            .tapApplyConfigurationsButton()
+            .tapCheckoutOption()
+    }
 }
