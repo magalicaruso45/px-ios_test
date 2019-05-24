@@ -68,7 +68,7 @@ class ChargesTest: XCTestCase {
             .changeAdvancedSwitch()
             .changeOneTapSwitch()
             .changeOpenPrefSwitch()
-            .tapOtherPreferenceSegment(.discountAlwaysOn)
+            .tapOtherPreferenceSegment(.discountByPaymentMethod)
             .tapApplyConfigurationsButton()
             .tapCheckoutOption()
     }
@@ -100,7 +100,7 @@ class ChargesTest: XCTestCase {
             .changeOneTapSwitch()
             .changeSplitSwitch()
             .changeOpenPrefSwitch()
-            .tapOtherPreferenceSegment(.discountAlwaysOn)
+            .tapOtherPreferenceSegment(.discountByPaymentMethod)
             .tapApplyConfigurationsButton()
             .tapCheckoutOption()
     }

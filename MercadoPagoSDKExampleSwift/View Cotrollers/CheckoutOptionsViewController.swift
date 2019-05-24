@@ -57,6 +57,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
     var cardIdField: UITextField!
     var scrollView: UIScrollView!
     var containerView: UIView!
+    let dynamicPlugin = DynamicPlugin()
     var configurationViewController = ConfigurationsViewController()
 
     override func viewDidLoad() {
@@ -314,6 +315,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             if configurations.escEnabled {
                 advancedConfig.escEnabled = true
             }
+            advancedConfig.dynamicViewControllersConfiguration = [dynamicPlugin]
             builder.setAdvancedConfiguration(config: advancedConfig)
         }
 
@@ -408,7 +410,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         }
 
         checkoutPreference.additionalInfo = """
-{"px_summary":{"title":"Recarga Claro","image_url":"https://www.rondachile.cl/wordpress/wp-content/uploads/2018/03/Logo-Claro-1.jpg","purpose":"Tu recarga"}}
+{"px_summary":{"title":"Recarga Claro","image_url":"https://www.rondachile.cl/wordpress/wp-content/uploads/2018/03/Logo-Claro-1.jpg","subtitle":"Celular 1159199234","purpose":"Tu recarga","charges":"Comisión por mora"}}
 """
 
         if setPayer {
@@ -431,6 +433,7 @@ extension CheckoutOptionsViewController {
         let vc = UIViewController()
         vc.view.autoSetDimensions(to: CGSize(width: 200, height: 400))
         vc.view.backgroundColor = .red
+        vc.title = "Título de la mora"
         let comision = PXPaymentTypeChargeRule(paymentTypeId: "credit_card", amountCharge: 10.0, detailModal: vc)
         var chargesArray = [PXPaymentTypeChargeRule]()
         chargesArray.append(comision)
@@ -624,5 +627,19 @@ extension PXPaymentProcessor {
         }
         return action
     }
+}
+
+class DynamicPlugin: NSObject, PXDynamicViewControllerProtocol {
+    func viewController(store: PXCheckoutStore) -> UIViewController? {
+        let vc = UIViewController()
+        vc.view.autoSetDimensions(to: CGSize(width: 200, height: 400))
+        vc.view.backgroundColor = .blue
+        return vc
+    }
+
+    func position(store: PXCheckoutStore) -> PXDynamicViewControllerPosition {
+        return .DID_TAP_ONETAP_HEADER
+    }
+
 }
 
