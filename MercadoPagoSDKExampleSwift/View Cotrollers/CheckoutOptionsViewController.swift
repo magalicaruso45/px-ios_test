@@ -316,7 +316,9 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             }
             builder.setAdvancedConfiguration(config: advancedConfig)
         }
-        
+
+        PXTracker.setListener(self, flowName: "test_app", flowDetails: nil)
+
         MercadoPagoCheckout.init(builder:builder).start(navigationController: self.navigationController!, lifeCycleProtocol: self)
     }
 
@@ -387,7 +389,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
 
     func createPreference(prefId: String, cardId: String? = nil, setPayer: Bool) -> PXCheckoutPreference {
 
-        let item = PXItem(title: "id", quantity: 1, unitPrice: 123)
+        let item = PXItem(title: "id", quantity: 1, unitPrice: 12300)
 
         let site = configurations.preferenceContext.getSite()
         let checkoutPreference = PXCheckoutPreference(siteId: site, payerEmail: "patito@patito.com", items: [item])
@@ -404,6 +406,10 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         if configurations.defaultInstallments {
             checkoutPreference.setMaxInstallments(1)
         }
+
+        checkoutPreference.additionalInfo = """
+{"px_summary":{"title":"Recarga Claro","image_url":"https://www.rondachile.cl/wordpress/wp-content/uploads/2018/03/Logo-Claro-1.jpg","purpose":"Tu recarga"}}
+"""
 
         if setPayer {
             let type = PXIdentificationType(id: "CNPJ", name: "CNPJ", minLength: 1, maxLength: 1, type: "CNPJ")
@@ -422,7 +428,10 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
 extension CheckoutOptionsViewController {
 
     func getComisions() ->  [PXPaymentTypeChargeRule] {
-        let comision = PXPaymentTypeChargeRule(paymentMethdodId: "credit_card", amountCharge: 10.0)
+        let vc = UIViewController()
+        vc.view.autoSetDimensions(to: CGSize(width: 200, height: 400))
+        vc.view.backgroundColor = .red
+        let comision = PXPaymentTypeChargeRule(paymentTypeId: "credit_card", amountCharge: 10.0, detailModal: vc)
         var chargesArray = [PXPaymentTypeChargeRule]()
         chargesArray.append(comision)
         return chargesArray
@@ -572,6 +581,19 @@ class PaymentPluginViewController: NSObject, PXPaymentProcessor {
             successWithPaymentResult(PXGenericPayment(status: status, statusDetail: self.statusDetail))
         }
     }
+}
+
+
+extension CheckoutOptionsViewController: PXTrackerListener {
+    public func trackScreen(screenName: String, extraParams: [String : Any]?) {
+
+    }
+
+    public func trackEvent(screenName: String?, action: String!, result: String?, extraParams: [String : Any]?) {
+
+    }
+
+
 }
 
 extension PXPaymentProcessor {

@@ -52,6 +52,7 @@ class ChargesTest: XCTestCase {
             .changeChargeSwitch()
             .changeAdvancedSwitch()
             .changeOneTapSwitch()
+            .changeOpenPrefSwitch()
             .tapOtherPreferenceSegment(.mla50)
             .tapApplyConfigurationsButton()
             .tapCheckoutOption()
@@ -66,6 +67,7 @@ class ChargesTest: XCTestCase {
             .changeChargeSwitch()
             .changeAdvancedSwitch()
             .changeOneTapSwitch()
+            .changeOpenPrefSwitch()
             .tapOtherPreferenceSegment(.discountAlwaysOn)
             .tapApplyConfigurationsButton()
             .tapCheckoutOption()
@@ -79,8 +81,26 @@ class ChargesTest: XCTestCase {
             .changeAccessTokenSwitch()
             .changeChargeSwitch()
             .changeAdvancedSwitch()
+            .changeOpenPrefSwitch()
             .changeOneTapSwitch()
             .tapOtherPreferenceSegment(.discountSoldOut)
+            .tapApplyConfigurationsButton()
+            .tapCheckoutOption()
+    }
+
+
+    func test_one_tap_charges_and_discount_and_split() {
+        let _ = MainScreen()
+            .tapClearButton()
+            .tapConfigurationsButton()
+            .changePaymentProcessorSwitch()
+            .changeAccessTokenSwitch()
+            .changeChargeSwitch()
+            .changeAdvancedSwitch()
+            .changeOneTapSwitch()
+            .changeSplitSwitch()
+            .changeOpenPrefSwitch()
+            .tapOtherPreferenceSegment(.discountAlwaysOn)
             .tapApplyConfigurationsButton()
             .tapCheckoutOption()
     }
