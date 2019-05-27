@@ -57,6 +57,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
     var cardIdField: UITextField!
     var scrollView: UIScrollView!
     var containerView: UIView!
+    let dynamicPlugin = DynamicPlugin()
     var configurationViewController = ConfigurationsViewController()
 
     override func viewDidLoad() {
@@ -314,9 +315,12 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             if configurations.escEnabled {
                 advancedConfig.escEnabled = true
             }
+            advancedConfig.dynamicViewControllersConfiguration = [dynamicPlugin]
             builder.setAdvancedConfiguration(config: advancedConfig)
         }
-        
+
+        PXTracker.setListener(self, flowName: "test_app", flowDetails: nil)
+
         MercadoPagoCheckout.init(builder:builder).start(navigationController: self.navigationController!, lifeCycleProtocol: self)
     }
 
@@ -387,7 +391,7 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
 
     func createPreference(prefId: String, cardId: String? = nil, setPayer: Bool) -> PXCheckoutPreference {
 
-        let item = PXItem(title: "id", quantity: 1, unitPrice: 123)
+        let item = PXItem(title: "id", quantity: 1, unitPrice: 12300)
 
         let site = configurations.preferenceContext.getSite()
         let checkoutPreference = PXCheckoutPreference(siteId: site, payerEmail: "patito@patito.com", items: [item])
@@ -404,6 +408,10 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         if configurations.defaultInstallments {
             checkoutPreference.setMaxInstallments(1)
         }
+
+        checkoutPreference.additionalInfo = """
+{"px_summary":{"title":"Recarga Claro","image_url":"https://www.rondachile.cl/wordpress/wp-content/uploads/2018/03/Logo-Claro-1.jpg","subtitle":"Celular 1159199234","purpose":"Tu recarga","charges":"Comisión por mora"}}
+"""
 
         if setPayer {
             let type = PXIdentificationType(id: "CNPJ", name: "CNPJ", minLength: 1, maxLength: 1, type: "CNPJ")
@@ -422,7 +430,11 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
 extension CheckoutOptionsViewController {
 
     func getComisions() ->  [PXPaymentTypeChargeRule] {
-        let comision = PXPaymentTypeChargeRule(paymentMethdodId: "credit_card", amountCharge: 10.0)
+        let vc = UIViewController()
+        vc.view.autoSetDimensions(to: CGSize(width: 200, height: 400))
+        vc.view.backgroundColor = .red
+        vc.title = "Título de la mora"
+        let comision = PXPaymentTypeChargeRule(paymentTypeId: "credit_card", amountCharge: 10.0, detailModal: vc)
         var chargesArray = [PXPaymentTypeChargeRule]()
         chargesArray.append(comision)
         return chargesArray
@@ -574,6 +586,19 @@ class PaymentPluginViewController: NSObject, PXPaymentProcessor {
     }
 }
 
+
+extension CheckoutOptionsViewController: PXTrackerListener {
+    public func trackScreen(screenName: String, extraParams: [String : Any]?) {
+
+    }
+
+    public func trackEvent(screenName: String?, action: String!, result: String?, extraParams: [String : Any]?) {
+
+    }
+
+
+}
+
 extension PXPaymentProcessor {
     func getStringStatus(_ businessResultStatus : PXBusinessResultStatus) -> String {
         switch businessResultStatus {
@@ -602,5 +627,19 @@ extension PXPaymentProcessor {
         }
         return action
     }
+}
+
+class DynamicPlugin: NSObject, PXDynamicViewControllerProtocol {
+    func viewController(store: PXCheckoutStore) -> UIViewController? {
+        let vc = UIViewController()
+        vc.view.autoSetDimensions(to: CGSize(width: 200, height: 400))
+        vc.view.backgroundColor = .blue
+        return vc
+    }
+
+    func position(store: PXCheckoutStore) -> PXDynamicViewControllerPosition {
+        return .DID_TAP_ONETAP_HEADER
+    }
+
 }
 
