@@ -248,7 +248,84 @@
 		<key>title</key>
 		<string>One Tap Tests</string>
 	</dict>
-	<key>template - 5</key>
+	<key>gatewayMode1</key>
+	<dict>
+		<key>public_key</key>
+		<string>APP_USR-e9f2d885-7b9c-4e1d-912a-d2aa2bf3f908</string>
+		<key>pref_id</key>
+		<string>413582331-07de9455-e4a6-4973-9a74-cd37ea269c0f</string>
+		<key>access_token</key>
+		<string>APP_USR-6519316523937252-070516-964fafa7e2c91a2c740155fcb5474280__LA_LD__-261748045</string>
+		<key>title</key>
+		<string>PM aggregator puro</string>
+	</dict>
+	<key>gatewayMode2</key>
+	<dict>
+		<key>public_key</key>
+		<string>APP_USR-e9f2d885-7b9c-4e1d-912a-d2aa2bf3f908</string>
+		<key>pref_id</key>
+		<string>413582331-dc509218-13e3-4e8d-928d-1921956ccced</string>
+		<key>access_token</key>
+		<string>APP_USR-6519316523937252-070516-964fafa7e2c91a2c740155fcb5474280__LA_LD__-261748045</string>
+		<key>title</key>
+		<string>PM gateway puro</string>
+	</dict>
+	<key>gatewayMode3</key>
+	<dict>
+		<key>public_key</key>
+		<string>APP_USR-e9f2d885-7b9c-4e1d-912a-d2aa2bf3f908</string>
+		<key>pref_id</key>
+		<string>413582331-317ac8ab-a09b-4c74-8b39-5139817ba497</string>
+		<key>access_token</key>
+		<string>APP_USR-6519316523937252-070516-964fafa7e2c91a2c740155fcb5474280__LA_LD__-261748045</string>
+		<key>title</key>
+		<string>PM gateway + branch id</string>
+	</dict>
+	<key>gatewayMode4</key>
+	<dict>
+		<key>public_key</key>
+		<string>APP_USR-e9f2d885-7b9c-4e1d-912a-d2aa2bf3f908</string>
+		<key>pref_id</key>
+		<string>413582331-d88bd7e9-fca5-4d3d-8a0e-53aabbdefc9c</string>
+		<key>access_token</key>
+		<string>APP_USR-6519316523937252-070516-964fafa7e2c91a2c740155fcb5474280__LA_LD__-261748045</string>
+		<key>title</key>
+		<string>PM no agg no gw</string>
+	</dict>
+	<key>gatewayMode5</key>
+	<dict>
+		<key>public_key</key>
+		<string>APP_USR-e9f2d885-7b9c-4e1d-912a-d2aa2bf3f908</string>
+		<key>pref_id</key>
+		<string>413582331-dc509218-13e3-4e8d-928d-1921956ccced</string>
+		<key>access_token</key>
+		<string>TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299</string>
+		<key>title</key>
+		<string>PM gateway puro + safe</string>
+	</dict>
+	<key>gatewayMode6</key>
+	<dict>
+		<key>public_key</key>
+		<string>APP_USR-e9f2d885-7b9c-4e1d-912a-d2aa2bf3f908</string>
+		<key>pref_id</key>
+		<string>413582331-1571e96c-680d-48f9-a5ee-e91315134d88</string>
+		<key>access_token</key>
+		<string>TEST-2339206676136732-022711-66711b94df7125aff837f84ca14210df-410998299</string>
+		<key>title</key>
+		<string>PM hibrido</string>
+	</dict>
+	<key>marcio</key>
+	<dict>
+		<key>public_key</key>
+		<string>APP_USR-43bf87a0-34ea-420b-a2b2-8937e9ef0373</string>
+		<key>pref_id</key>
+		<string>377847855-bf9ee760-b700-419f-8e04-a6b35c2a3206</string>
+		<key>access_token</key>
+		<string>APP_USR-1945000207238192-060610-69133bac75ffc2d90288306aa029e2bd-357306639</string>
+		<key>title</key>
+		<string>Marcio Case</string>
+	</dict>
+	<key>template - 5 - 3 - 2</key>
 	<dict>
 		<key>public_key</key>
 		<string></string>

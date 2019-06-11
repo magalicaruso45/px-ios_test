@@ -30,10 +30,10 @@
 		4B90FF222264B46D00623519 /* ESCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B90FF212264B46D00623519 /* ESCTests.swift */; };
 		4BE78D3C20D818CA00F23CA5 /* PXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE78D3B20D818CA00F23CA5 /* PXUITests.swift */; };
 		4FF591D02AE44F7AD4580619 /* Pods_MercadoPagoSDKExampleSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3398598A1250B7854C662F26 /* Pods_MercadoPagoSDKExampleSwift.framework */; };
+		635780A922AE9F2100910C65 /* GatewayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635780A822AE9F2100910C65 /* GatewayTests.swift */; };
 		637C0209224A9A7C007E5A1D /* OneTapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637C0208224A9A7C007E5A1D /* OneTapTests.swift */; };
 		63B0F15D2279DED400F569C4 /* Configurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63B0F15C2279DED400F569C4 /* Configurations.plist */; };
 		63B0F15F2279E11E00F569C4 /* XCUIElement+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B0F15E2279E11E00F569C4 /* XCUIElement+Actions.swift */; };
-		63DC2BCE223B5CB100BFD1D0 /* NewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DC2BCD223B5CB100BFD1D0 /* NewTests.swift */; };
 		63DC2BD0224673B400BFD1D0 /* RejectedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DC2BCF224673B400BFD1D0 /* RejectedTests.swift */; };
 		63FEA3FF22393C3A00C08DEF /* DiscountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FEA3FE22393C3A00C08DEF /* DiscountTests.swift */; };
 		A03D93AC119B39498564F49A /* Pods_MercadoPagoSDKExampleSwiftUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13ADC2E52A6487A88404FCAE /* Pods_MercadoPagoSDKExampleSwiftUITests.framework */; };
@@ -96,10 +96,10 @@
 		4B12C7FE22454E0B00BF2339 /* OneTapScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTapScreen.swift; sourceTree = "<group>"; };
 		4B90FF212264B46D00623519 /* ESCTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESCTests.swift; sourceTree = "<group>"; };
 		4BE78D3B20D818CA00F23CA5 /* PXUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXUITests.swift; sourceTree = "<group>"; };
+		635780A822AE9F2100910C65 /* GatewayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayTests.swift; sourceTree = "<group>"; };
 		637C0208224A9A7C007E5A1D /* OneTapTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTapTests.swift; sourceTree = "<group>"; };
 		63B0F15C2279DED400F569C4 /* Configurations.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Configurations.plist; sourceTree = "<group>"; };
 		63B0F15E2279E11E00F569C4 /* XCUIElement+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Actions.swift"; sourceTree = "<group>"; };
-		63DC2BCD223B5CB100BFD1D0 /* NewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTests.swift; sourceTree = "<group>"; };
 		63DC2BCF224673B400BFD1D0 /* RejectedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RejectedTests.swift; sourceTree = "<group>"; };
 		63FEA3FE22393C3A00C08DEF /* DiscountTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountTests.swift; sourceTree = "<group>"; };
 		7896C792752F9E86313958CF /* Pods-MercadoPagoSDKExampleSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MercadoPagoSDKExampleSwiftTests.release.xcconfig"; path = "Target Support Files/Pods-MercadoPagoSDKExampleSwiftTests/Pods-MercadoPagoSDKExampleSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -195,8 +195,8 @@
 				E136E9D82162C1F10038ABE4 /* AddCardTests.swift */,
 				637C0208224A9A7C007E5A1D /* OneTapTests.swift */,
 				63FEA3FE22393C3A00C08DEF /* DiscountTests.swift */,
-				63DC2BCD223B5CB100BFD1D0 /* NewTests.swift */,
 				63DC2BCF224673B400BFD1D0 /* RejectedTests.swift */,
+				635780A822AE9F2100910C65 /* GatewayTests.swift */,
 			);
 			path = "Test Flow";
 			sourceTree = "<group>";
@@ -482,22 +482,44 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MercadoPagoSDKExampleSwift/Pods-MercadoPagoSDKExampleSwift-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bugsnag/Bugsnag.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
 				"${BUILT_PRODUCTS_DIR}/FXBlurView/FXBlurView.framework",
 				"${BUILT_PRODUCTS_DIR}/JRSwizzle/JRSwizzle.framework",
+				"${BUILT_PRODUCTS_DIR}/MLAuthentication/MLAuthentication.framework",
+				"${BUILT_PRODUCTS_DIR}/MLCardDrawer/MLCardDrawer.framework",
+				"${BUILT_PRODUCTS_DIR}/MLCommons/MLCommons.framework",
 				"${BUILT_PRODUCTS_DIR}/MLESCManager/MLESCManager.framework",
+				"${BUILT_PRODUCTS_DIR}/MLGodzippa/MLGodzippa.framework",
+				"${BUILT_PRODUCTS_DIR}/MLMelidata/MLMelidata.framework",
+				"${BUILT_PRODUCTS_DIR}/MLNetworking/MLNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/MLReachability/MLReachability.framework",
 				"${BUILT_PRODUCTS_DIR}/MLUI/MLUI.framework",
 				"${BUILT_PRODUCTS_DIR}/MercadoPagoSDKV4/MercadoPagoSDKV4.framework",
+				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
+				"${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework",
 				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bugsnag.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FXBlurView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JRSwizzle.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLAuthentication.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLCardDrawer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLCommons.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLESCManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLGodzippa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLMelidata.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLReachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLUI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MercadoPagoSDKV4.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINRemoteImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -558,25 +580,45 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MercadoPagoSDKExampleSwiftUITests/Pods-MercadoPagoSDKExampleSwiftUITests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bugsnag/Bugsnag.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
 				"${BUILT_PRODUCTS_DIR}/FXBlurView/FXBlurView.framework",
 				"${BUILT_PRODUCTS_DIR}/JRSwizzle/JRSwizzle.framework",
+				"${BUILT_PRODUCTS_DIR}/MLAuthentication/MLAuthentication.framework",
+				"${BUILT_PRODUCTS_DIR}/MLCardDrawer/MLCardDrawer.framework",
+				"${BUILT_PRODUCTS_DIR}/MLCommons/MLCommons.framework",
 				"${BUILT_PRODUCTS_DIR}/MLESCManager/MLESCManager.framework",
+				"${BUILT_PRODUCTS_DIR}/MLGodzippa/MLGodzippa.framework",
+				"${BUILT_PRODUCTS_DIR}/MLMelidata/MLMelidata.framework",
+				"${BUILT_PRODUCTS_DIR}/MLNetworking/MLNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/MLReachability/MLReachability.framework",
 				"${BUILT_PRODUCTS_DIR}/MLUI/MLUI.framework",
 				"${BUILT_PRODUCTS_DIR}/MercadoPagoSDKV4/MercadoPagoSDKV4.framework",
+				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
+				"${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework",
 				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
-				"${BUILT_PRODUCTS_DIR}/MLReachability/MLReachability.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bugsnag.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FXBlurView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JRSwizzle.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLAuthentication.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLCardDrawer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLCommons.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLESCManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLGodzippa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLMelidata.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLReachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLUI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MercadoPagoSDKV4.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINRemoteImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLReachability.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -651,11 +693,11 @@
 				FCB9B13120F6754F0097F746 /* ConfigurationScreen.swift in Sources */,
 				FC89F7562088F5540093B001 /* CardScreen.swift in Sources */,
 				1518B92A215BFBA900799D38 /* PluginProcessorTest.swift in Sources */,
-				63DC2BCE223B5CB100BFD1D0 /* NewTests.swift in Sources */,
 				15225CA220F6851F002CF168 /* ChargesTest.swift in Sources */,
 				0604D835211FE0EA00D5C5D9 /* SecurityCodeScreen.swift in Sources */,
 				1518B92C215BFC3E00799D38 /* PluginViewControllerScreen.swift in Sources */,
 				FC1C5FE620ACB21F007AAE48 /* PXFlows.swift in Sources */,
+				635780A922AE9F2100910C65 /* GatewayTests.swift in Sources */,
 				FC89F7552088F5540093B001 /* BaseScreen.swift in Sources */,
 				E136E9D92162C1F10038ABE4 /* AddCardTests.swift in Sources */,
 				15225C9620F66C98002CF168 /* Configurations.swift in Sources */,
