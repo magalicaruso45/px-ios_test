@@ -30,6 +30,13 @@ enum PreferenceContext : String, CaseIterable {
     case addCardMLB
     case addCardMLM
     case addCardNoDNI
+    case gatewayMode1
+    case gatewayMode2
+    case gatewayMode3
+    case gatewayMode4
+    case gatewayMode5
+    case gatewayMode6
+    case marcio
 
     func getLanguage() -> String {
         return self.getInitConfiguration().language

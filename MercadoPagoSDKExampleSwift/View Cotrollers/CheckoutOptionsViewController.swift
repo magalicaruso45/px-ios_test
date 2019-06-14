@@ -409,6 +409,8 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
             checkoutPreference.setMaxInstallments(1)
         }
 
+        checkoutPreference.setGatewayProcessingModes(["aggregator"])
+        checkoutPreference.setGatewayBranchId("13123")
         checkoutPreference.additionalInfo = """
 {"px_summary":{"title":"Recarga Claro","image_url":"https://www.rondachile.cl/wordpress/wp-content/uploads/2018/03/Logo-Claro-1.jpg","subtitle":"Celular 1159199234","purpose":"Tu recarga","charges":"Comisión por mora"}}
 """

@@ -10,7 +10,7 @@ import XCTest
 import UIKit
 
 public class ReviewScreen: BaseScreen {
-    private lazy var payButton = button("Confirmar")
+    private lazy var payButton = button("Pagar")
     private lazy var changePaymentMethodButton = otherElement("Cambiar medio de pago")
     private lazy var changePayerInfoButton = otherElement("review_change_payer_action")
     private lazy var backButton = getBackButton()
