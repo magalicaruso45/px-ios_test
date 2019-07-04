@@ -306,6 +306,9 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         
         if configurations.advancedConfiguration {
             let advancedConfig = PXAdvancedConfiguration()
+
+            advancedConfig.reviewConfirmConfiguration = reviewConfig()
+
             if configurations.oneTap {
                 advancedConfig.expressEnabled = true
             }
@@ -322,6 +325,20 @@ class CheckoutOptionsViewController: UIViewController, ConfigurationManager, Add
         PXTracker.setListener(self, flowName: "test_app", flowDetails: nil)
 
         MercadoPagoCheckout.init(builder:builder).start(navigationController: self.navigationController!, lifeCycleProtocol: self)
+    }
+
+    func reviewConfig() -> PXReviewConfirmConfiguration {
+        let review = PXReviewConfirmConfiguration(itemsEnabled: true, topView: buildCustomView(color: UIColor.red), bottomView: buildCustomView(color: UIColor.green))
+        return review
+    }
+
+    func buildCustomView(color: UIColor? = UIColor.red) -> UIView {
+        let height = CGFloat(90)
+        let frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: height)
+        let containerView = UIView(frame: frame)
+        containerView.backgroundColor = color
+        containerView.autoSetDimension(ALDimension.height, toSize: 240)
+        return containerView
     }
 
     func startAddCardFlow(accessToken: String) {
